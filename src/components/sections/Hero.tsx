@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { PillCTA } from '@/components/ui/PillCTA'
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -162,40 +163,8 @@ export function Hero() {
             </em>
           </p>
 
-          <div ref={ctaRef} className="flex items-center gap-4">
-            <Link
-              href="#work"
-              className="inline-flex items-center gap-3 text-sm font-semibold arrow-btn"
-              style={{
-                backgroundColor: 'transparent',
-                color: 'var(--color-ink)',
-                borderRadius: 'var(--radius-xl)',
-                border: '1.5px solid var(--color-ink)',
-                padding: '14px 28px',
-                transition: 'padding var(--t-std) var(--ease), background-color var(--t-std) var(--ease), color var(--t-std) var(--ease)',
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.padding = '16px 36px'
-                el.style.backgroundColor = 'var(--color-ink)'
-                el.style.color = 'var(--color-bg)'
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.padding = '14px 28px'
-                el.style.backgroundColor = 'transparent'
-                el.style.color = 'var(--color-ink)'
-              }}
-            >
-              See Our Work
-              <svg className="arrow-out" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <svg className="arrow-in" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-
+          <div ref={ctaRef} className="flex items-center gap-6">
+            <PillCTA href="#work" label="See Our Work" />
             <Link
               href="/contact"
               className="text-sm font-semibold link-underline"

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { MegaDropdown } from './MegaDropdown'
+import { PillCTA } from '@/components/ui/PillCTA'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -110,26 +111,9 @@ export function Navbar() {
         </nav>
 
         {/* CTA */}
-        <Link
-          href="/contact"
-          className="hidden md:inline-flex items-center gap-2 font-semibold rounded-full arrow-btn"
-          style={{
-            backgroundColor: 'var(--color-accent)',
-            color: 'var(--color-ink)',
-            borderRadius: 'var(--radius-xl)',
-            fontSize: '0.95rem',
-            padding: '12px 28px',
-            transition: `box-shadow var(--t-fast) var(--ease)`,
-          }}
-        >
-          Start a Project
-          <svg className="arrow-out" width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <svg className="arrow-in" width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </Link>
+        <div className="hidden md:block">
+          <PillCTA href="/contact" label="Start a Project" />
+        </div>
 
         {/* Mobile hamburger */}
         <button
