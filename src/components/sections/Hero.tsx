@@ -140,10 +140,20 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row sm:items-end gap-10 sm:gap-20">
           <p
             ref={subRef}
-            className="max-w-sm text-base leading-relaxed"
-            style={{ color: 'var(--color-ink-muted)' }}
+            className="max-w-md leading-relaxed"
+            style={{
+              color: 'var(--color-ink)',
+              fontSize: '1.05rem',
+              fontWeight: 400,
+              letterSpacing: '-0.01em',
+              lineHeight: 1.7,
+            }}
           >
-            We transform ambitious ideas and needs into visual presence, specialized services, and digital solutions — built to last, impossible to ignore.
+            We transform ambitious ideas and needs into visual presence,
+            specialized services, and digital solutions —{' '}
+            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic' }}>
+              built to last, impossible to ignore.
+            </em>
           </p>
 
           <div ref={ctaRef} className="flex items-center gap-6">
