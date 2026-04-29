@@ -93,8 +93,8 @@ const COLUMNS = [
   {
     label: 'Creative design services',
     href: '/capabilities/creative-design',
-    bg: '#D8FF85',
-    color: '#0A211F',
+    bg: '#0A211F',
+    color: '#F7F9F2',
     services: [
       { name: 'Ad creative', desc: 'Eye-catching designs that perform', icon: <IconTarget /> },
       { name: 'Social media creative', desc: 'Engaging assets for all platforms', icon: <IconGraph /> },
@@ -108,7 +108,7 @@ const COLUMNS = [
   {
     label: 'Specialized production services',
     href: '/capabilities/production',
-    bg: '#0A211F',
+    bg: '#1A4A40',
     color: '#F7F9F2',
     services: [
       { name: 'Motion design', desc: 'For websites, ads, and presentations', icon: <IconBolt /> },
@@ -122,8 +122,8 @@ const COLUMNS = [
   {
     label: 'AI services',
     href: '/capabilities/ai',
-    bg: '#12211D',
-    color: '#D8FF85',
+    bg: '#8FCCA8',
+    color: '#0A211F',
     services: [
       { name: 'AI-powered creative', desc: 'Human brilliance powered by AI', icon: <IconStar /> },
       { name: 'AI consulting', desc: 'Transform your team with AI', icon: <IconChat /> },
@@ -134,7 +134,7 @@ const COLUMNS = [
   {
     label: 'Marketing services',
     href: '/capabilities/marketing',
-    bg: '#EDE8DC',
+    bg: '#D8FF85',
     color: '#0A211F',
     services: [
       { name: 'Campaign strategy', desc: 'Connect creative ambition to results', icon: <IconTarget /> },
