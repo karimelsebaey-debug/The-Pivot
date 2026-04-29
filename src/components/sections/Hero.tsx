@@ -181,28 +181,10 @@ export function Hero() {
 
             <Link
               href="/contact"
-              className="text-sm font-semibold"
-              style={{
-                color: 'var(--color-ink)',
-                padding: '14px 20px',
-                borderRadius: 'var(--radius-xl)',
-                border: '1.5px solid var(--color-ink)',
-                transition: 'padding var(--t-std) var(--ease), background-color var(--t-std) var(--ease), color var(--t-std) var(--ease)',
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.padding = '16px 28px'
-                el.style.backgroundColor = 'var(--color-ink)'
-                el.style.color = 'var(--color-bg)'
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.padding = '14px 20px'
-                el.style.backgroundColor = 'transparent'
-                el.style.color = 'var(--color-ink)'
-              }}
+              className="text-sm font-semibold link-underline"
+              style={{ color: 'var(--color-ink)' }}
             >
-              Start a Project
+              Start a Project →
             </Link>
           </div>
         </div>
