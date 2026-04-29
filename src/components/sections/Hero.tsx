@@ -151,7 +151,7 @@ export function Hero() {
           >
             We transform ambitious ideas and needs into visual presence,
             specialized services, and digital solutions —{' '}
-            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic' }}>
+            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700 }}>
               built to last, impossible to ignore.
             </em>
           </p>
