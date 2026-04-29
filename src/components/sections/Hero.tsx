@@ -143,8 +143,7 @@ export function Hero() {
             className="max-w-sm text-base leading-relaxed"
             style={{ color: 'var(--color-ink-muted)' }}
           >
-            We transform ambitious ideas into visual identity, content,
-            and digital presence that cannot be ignored.
+            We transform ambitious ideas and needs into visual presence, specialized services, and digital solutions — built to last, impossible to ignore.
           </p>
 
           <div ref={ctaRef} className="flex items-center gap-6">
