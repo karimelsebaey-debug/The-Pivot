@@ -156,15 +156,19 @@ export function Hero() {
             </em>
           </p>
 
-          <div ref={ctaRef} className="flex items-center gap-6">
+          <div ref={ctaRef} className="flex items-center gap-4">
             <Link
               href="#work"
-              className="inline-flex items-center gap-3 text-sm font-semibold px-7 py-4 arrow-btn"
+              className="inline-flex items-center gap-3 text-sm font-semibold arrow-btn"
               style={{
                 backgroundColor: 'var(--color-ink)',
                 color: 'var(--color-bg)',
                 borderRadius: 'var(--radius-xl)',
+                padding: '14px 28px',
+                transition: 'padding var(--t-std) var(--ease)',
               }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.padding = '16px 36px' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.padding = '14px 28px' }}
             >
               See Our Work
               <svg className="arrow-out" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -177,27 +181,30 @@ export function Hero() {
 
             <Link
               href="/contact"
-              className="text-sm font-semibold link-underline"
-              style={{ color: 'var(--color-ink)' }}
+              className="text-sm font-semibold"
+              style={{
+                color: 'var(--color-ink)',
+                padding: '14px 20px',
+                borderRadius: 'var(--radius-xl)',
+                border: '1.5px solid var(--color-ink)',
+                transition: 'padding var(--t-std) var(--ease), background-color var(--t-std) var(--ease), color var(--t-std) var(--ease)',
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.padding = '16px 28px'
+                el.style.backgroundColor = 'var(--color-ink)'
+                el.style.color = 'var(--color-bg)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.padding = '14px 20px'
+                el.style.backgroundColor = 'transparent'
+                el.style.color = 'var(--color-ink)'
+              }}
             >
               Start a Project
             </Link>
           </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          style={{ color: 'var(--color-ink-muted)' }}
-        >
-          <span className="text-xs uppercase tracking-widest" style={{ letterSpacing: '0.15em' }}>Scroll</span>
-          <div
-            className="w-px h-12"
-            style={{
-              background: 'linear-gradient(to bottom, var(--color-ink-muted), transparent)',
-              animation: 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite',
-            }}
-          />
         </div>
       </div>
     </section>
