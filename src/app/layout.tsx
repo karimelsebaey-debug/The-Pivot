@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Instrument_Serif, Inter_Tight } from 'next/font/google'
+import { Instrument_Serif, Inter_Tight, Plus_Jakarta_Sans } from 'next/font/google'
 import { LenisProvider } from '@/lib/lenis'
 import './globals.css'
 
@@ -15,6 +15,13 @@ const interTight = Inter_Tight({
   weight: ['300', '400', '500', '600'],
   subsets: ['latin'],
   variable: '--font-body',
+  display: 'swap',
+})
+
+const plusJakarta = Plus_Jakarta_Sans({
+  weight: ['800'],
+  subsets: ['latin'],
+  variable: '--font-logo',
   display: 'swap',
 })
 
@@ -37,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${interTight.variable}`}
+      className={`${instrumentSerif.variable} ${interTight.variable} ${plusJakarta.variable}`}
     >
       <body>
         <LenisProvider>{children}</LenisProvider>

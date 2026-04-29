@@ -45,10 +45,10 @@ export function Navbar() {
         <Link
           href="/"
           style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '1.25rem',
+            fontFamily: 'var(--font-logo)',
+            fontSize: '1.3rem',
             fontWeight: 800,
-            letterSpacing: '-0.03em',
+            letterSpacing: '-0.04em',
             lineHeight: 1,
             whiteSpace: 'nowrap',
             color: 'var(--color-ink)',
