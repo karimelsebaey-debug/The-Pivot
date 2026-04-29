@@ -185,14 +185,15 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
               {/* Category header pill — superside style */}
               <Link
                 href={col.href}
-                className="inline-flex items-center gap-2 font-semibold mb-6 px-5 py-3 rounded-full group"
+                className="inline-flex items-center gap-3 font-semibold mb-6 rounded-full group"
                 style={{
                   backgroundColor: col.bg,
                   color: col.color,
-                  fontSize: '1rem',
+                  fontSize: '1.1rem',
                   letterSpacing: '-0.02em',
                   fontFamily: 'var(--font-display)',
                   fontStyle: 'italic',
+                  padding: '10px 22px',
                   transition: 'opacity 0.15s var(--ease)',
                 }}
               >
