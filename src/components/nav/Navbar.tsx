@@ -44,10 +44,17 @@ export function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="text-sm font-semibold tracking-widest uppercase"
-          style={{ fontFamily: 'var(--font-body)', letterSpacing: '0.15em' }}
+          style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: '1.25rem',
+            fontWeight: 800,
+            letterSpacing: '-0.03em',
+            lineHeight: 1,
+            whiteSpace: 'nowrap',
+            color: 'var(--color-ink)',
+          }}
         >
-          THE PIVOT
+          The Pivot
         </Link>
 
         {/* Desktop nav */}
