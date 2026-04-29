@@ -69,8 +69,8 @@ export function Hero() {
       ref={sectionRef}
       className="relative min-h-screen flex flex-col justify-start overflow-hidden"
       style={{
-        paddingTop: 'calc(var(--header-height) + 60px)',
-        paddingBottom: '100px',
+        paddingTop: 'calc(var(--header-height) + 40px)',
+        paddingBottom: '60px',
         backgroundColor: 'var(--color-bg)',
       }}
     >
@@ -88,7 +88,7 @@ export function Hero() {
 
         {/* Eyebrow */}
         <p
-          className="mb-8"
+          className="mb-5"
           style={{
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
@@ -108,7 +108,7 @@ export function Hero() {
             fontSize: 'clamp(3rem, 8vw, 7.5rem)',
             lineHeight: 1.05,
             letterSpacing: '-0.02em',
-            marginBottom: '2.5rem',
+            marginBottom: '1.5rem',
           }}
         >
           <span className="block overflow-hidden">
