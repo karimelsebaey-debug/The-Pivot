@@ -168,9 +168,9 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
         <div
           className="grid grid-cols-4"
           style={{
-            maxWidth: 'var(--container-max)',
+            maxWidth: '1440px',
             margin: '0 auto',
-            padding: '0 var(--container-px)',
+            padding: '0 40px',
           }}
         >
           {COLUMNS.map((col) => (
@@ -185,15 +185,16 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
               {/* Category header pill — superside style */}
               <Link
                 href={col.href}
-                className="inline-flex items-center gap-3 font-semibold mb-6 rounded-full group"
+                className="inline-flex items-center gap-2 font-semibold mb-6 rounded-full group"
                 style={{
                   backgroundColor: col.bg,
                   color: col.color,
-                  fontSize: '1.1rem',
-                  letterSpacing: '-0.02em',
+                  fontSize: '0.95rem',
+                  letterSpacing: '-0.01em',
                   fontFamily: 'var(--font-display)',
                   fontStyle: 'italic',
-                  padding: '10px 22px',
+                  padding: '10px 20px',
+                  whiteSpace: 'nowrap',
                   transition: 'opacity 0.15s var(--ease)',
                 }}
               >
