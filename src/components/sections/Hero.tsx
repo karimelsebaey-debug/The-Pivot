@@ -67,10 +67,10 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-start overflow-hidden"
       style={{
-        paddingTop: 'calc(var(--header-height) + 80px)',
-        paddingBottom: '80px',
+        paddingTop: 'calc(var(--header-height) + 60px)',
+        paddingBottom: '100px',
         backgroundColor: 'var(--color-bg)',
       }}
     >
@@ -88,10 +88,16 @@ export function Hero() {
 
         {/* Eyebrow */}
         <p
-          className="text-xs font-semibold uppercase tracking-widest mb-10"
-          style={{ color: 'var(--color-ink-muted)', letterSpacing: '0.15em' }}
+          className="mb-8"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontSize: '1.15rem',
+            color: 'var(--color-ink-muted)',
+            letterSpacing: '-0.01em',
+          }}
         >
-          Creative Platform
+          Creative Collective
         </p>
 
         {/* Headline */}
@@ -151,7 +157,7 @@ export function Hero() {
           >
             We transform ambitious ideas and needs into visual presence,
             specialized services, and digital solutions —{' '}
-            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700 }}>
+            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.2rem' }}>
               built to last, impossible to ignore.
             </em>
           </p>
@@ -161,14 +167,25 @@ export function Hero() {
               href="#work"
               className="inline-flex items-center gap-3 text-sm font-semibold arrow-btn"
               style={{
-                backgroundColor: 'var(--color-ink)',
-                color: 'var(--color-bg)',
+                backgroundColor: 'transparent',
+                color: 'var(--color-ink)',
                 borderRadius: 'var(--radius-xl)',
+                border: '1.5px solid var(--color-ink)',
                 padding: '14px 28px',
-                transition: 'padding var(--t-std) var(--ease)',
+                transition: 'padding var(--t-std) var(--ease), background-color var(--t-std) var(--ease), color var(--t-std) var(--ease)',
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.padding = '16px 36px' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.padding = '14px 28px' }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.padding = '16px 36px'
+                el.style.backgroundColor = 'var(--color-ink)'
+                el.style.color = 'var(--color-bg)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.padding = '14px 28px'
+                el.style.backgroundColor = 'transparent'
+                el.style.color = 'var(--color-ink)'
+              }}
             >
               See Our Work
               <svg className="arrow-out" width="14" height="14" viewBox="0 0 14 14" fill="none">
