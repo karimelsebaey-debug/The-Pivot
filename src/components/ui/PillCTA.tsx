@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -11,41 +12,21 @@ interface PillCTAProps {
 
 export function PillCTA({ href, label, className = "" }: PillCTAProps) {
   return (
-    <Link
-      href={href}
-      className={`group inline-flex cursor-pointer items-center justify-center gap-0 rounded-full ${className}`}
-      style={{ textDecoration: "none" }}
+    <Button
+      className={`group not-disabled:inset-shadow-none mx-auto flex cursor-pointer items-center justify-center gap-0 rounded-full border-none bg-transparent px-0 py-5 font-normal shadow-none hover:bg-transparent ${className}`}
+      render={<Link href={href} />}
     >
-      {/* Text pill */}
-      <span
-        className="rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-500 ease-in-out group-hover:bg-[--color-ink] group-hover:text-[--color-bg]"
-        style={{
-          backgroundColor: "var(--color-accent)",
-          color: "var(--color-ink)",
-        }}
+      <span className="rounded-full bg-primary px-6 py-3 text-sm font-semibold duration-500 ease-in-out group-hover:bg-secondary group-hover:text-primary group-hover:transition-colors"
+        style={{ color: 'var(--primary-foreground)' }}
       >
         {label}
       </span>
-
-      {/* Arrow circle */}
-      <div
-        className="relative flex h-fit cursor-pointer items-center overflow-hidden rounded-full p-3.5 transition-colors duration-500 ease-in-out group-hover:bg-[--color-ink] group-hover:text-[--color-bg]"
-        style={{
-          backgroundColor: "var(--color-accent)",
-          color: "var(--color-ink)",
-        }}
+      <div className="relative flex h-fit cursor-pointer items-center overflow-hidden rounded-full bg-primary p-3.5 duration-500 ease-in-out group-hover:bg-secondary group-hover:text-primary group-hover:transition-colors"
+        style={{ color: 'var(--primary-foreground)' }}
       >
-        {/* Arrow exits right on hover */}
-        <ArrowUpRight
-          className="absolute h-4 w-4 -translate-x-1/2 transition-all duration-500 ease-in-out group-hover:translate-x-10"
-          aria-hidden
-        />
-        {/* Arrow enters from left on hover */}
-        <ArrowUpRight
-          className="absolute h-4 w-4 -translate-x-10 transition-all duration-500 ease-in-out group-hover:-translate-x-1/2"
-          aria-hidden
-        />
+        <ArrowUpRight className="absolute h-4 w-4 -translate-x-1/2 transition-all duration-500 ease-in-out group-hover:translate-x-10" />
+        <ArrowUpRight className="absolute h-4 w-4 -translate-x-10 transition-all duration-500 ease-in-out group-hover:-translate-x-1/2" />
       </div>
-    </Link>
+    </Button>
   );
 }

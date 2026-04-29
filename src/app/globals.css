@@ -1,4 +1,37 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+}
+
+:root {
+  --background: #F7F9F2;
+  --foreground: #0A211F;
+  --card: #F7F9F2;
+  --card-foreground: #0A211F;
+  --popover: #F7F9F2;
+  --popover-foreground: #0A211F;
+  --primary: oklch(0.953 0.1051 123.71);
+  --primary-foreground: #0A211F;
+  --secondary: oklch(0.2322 0.0201 212.57);
+  --secondary-foreground: #F7F9F2;
+  --muted: rgba(0,0,0,0.04);
+  --muted-foreground: #4a7a76;
+  --accent: rgba(0,0,0,0.04);
+  --accent-foreground: #0A211F;
+  --destructive: #ef4444;
+  --destructive-foreground: #b91c1c;
+  --border: rgba(10,33,31,0.12);
+  --input: rgba(10,33,31,0.12);
+  --ring: #4a7a76;
+}
 
 /* ─────────────────────────────────────────
    DESIGN TOKENS — superside.com reference

@@ -16,22 +16,31 @@ const buttonVariants = cva(
     },
     variants: {
       size: {
-        default: "h-10 px-5",
-        sm: "h-8 gap-1.5 px-4 text-sm",
-        lg: "h-12 px-7 text-base",
-        xl: "h-14 px-8 text-lg",
-        icon: "size-10",
+        default: "h-9 px-4 sm:h-8",
+        icon: "size-9 sm:size-8",
+        "icon-lg": "size-10 sm:size-9",
+        "icon-sm": "size-8 sm:size-7",
+        "icon-xl": "size-11 sm:size-10",
+        "icon-xs": "size-7 rounded-md sm:size-6",
+        lg: "h-10 px-5 sm:h-9",
+        sm: "h-8 gap-1.5 px-3 sm:h-7",
+        xl: "h-11 px-6 text-lg sm:h-10 sm:text-base",
+        xs: "h-7 gap-1 rounded-md px-2.5 text-sm sm:h-6 sm:text-xs",
       },
       variant: {
         default:
-          "border-transparent bg-[--color-ink] text-[--color-bg] hover:opacity-90",
-        primary:
-          "border-transparent bg-[--color-accent] text-[--color-ink] hover:opacity-90",
-        outline:
-          "border-[--color-ink] bg-transparent text-[--color-ink] hover:bg-[--color-ink] hover:text-[--color-bg]",
+          "border-primary bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "border-destructive bg-destructive text-white hover:bg-destructive/90",
+        "destructive-outline":
+          "border-input bg-transparent text-destructive-foreground hover:border-destructive/32 hover:bg-destructive/4",
         ghost:
-          "border-transparent bg-transparent text-[--color-ink] hover:bg-[--color-ink]/8",
-        link: "border-transparent bg-transparent text-[--color-ink] underline-offset-4 hover:underline",
+          "border-transparent text-foreground hover:bg-accent",
+        link: "border-transparent underline-offset-4 hover:underline",
+        outline:
+          "border-input bg-background text-foreground hover:bg-accent/50",
+        secondary:
+          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/90",
       },
     },
   },
