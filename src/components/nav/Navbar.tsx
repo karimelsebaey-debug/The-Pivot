@@ -63,7 +63,7 @@ export function Navbar() {
               style={{ transition: `color var(--t-fast) var(--ease)` }}
               aria-expanded={dropdownOpen}
             >
-              Services
+              Capabilities
               <svg
                 width="12"
                 height="12"
@@ -86,14 +86,18 @@ export function Navbar() {
             )}
           </div>
 
-          {['Work', 'Process', 'About'].map((item) => (
+          {[
+            { label: 'Selected Work', href: '/selected-work' },
+            { label: 'Perspectives', href: '/perspectives' },
+            { label: "Let's Talk", href: '/contact' },
+          ].map((item) => (
             <Link
-              key={item}
-              href={`/${item.toLowerCase()}`}
+              key={item.label}
+              href={item.href}
               className="text-sm link-underline"
               style={{ transition: `color var(--t-fast) var(--ease)` }}
             >
-              {item}
+              {item.label}
             </Link>
           ))}
         </nav>
@@ -155,14 +159,19 @@ export function Navbar() {
           className="absolute top-full left-0 right-0 section-dark px-6 py-8 flex flex-col gap-6 md:hidden"
           style={{ animation: 'fade-in 0.2s var(--ease) forwards' }}
         >
-          {['Services', 'Work', 'Process', 'About'].map((item) => (
+          {[
+            { label: 'Capabilities', href: '/capabilities' },
+            { label: 'Selected Work', href: '/selected-work' },
+            { label: 'Perspectives', href: '/perspectives' },
+            { label: "Let's Talk", href: '/contact' },
+          ].map((item) => (
             <Link
-              key={item}
-              href={`/${item.toLowerCase()}`}
+              key={item.label}
+              href={item.href}
               className="text-2xl font-display"
               onClick={() => setMenuOpen(false)}
             >
-              {item}
+              {item.label}
             </Link>
           ))}
           <Link
