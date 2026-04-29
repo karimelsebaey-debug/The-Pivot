@@ -88,35 +88,35 @@ function IconCursor() {
   )
 }
 
-/* ─── Column Data ─── */
+/* ─── Column Data — order & sub-services from services_table.xlsx ─── */
 const COLUMNS = [
   {
-    label: 'Creative design services',
-    href: '/capabilities/creative-design',
+    label: 'Specialized production',
+    href: '/capabilities/production',
     bg: '#0A211F',
     color: '#F7F9F2',
     services: [
-      { name: 'Ad creative', desc: 'Eye-catching designs that perform', icon: <IconTarget /> },
-      { name: 'Social media creative', desc: 'Engaging assets for all platforms', icon: <IconGraph /> },
-      { name: 'Presentation design', desc: 'Captivating slides that tell your story', icon: <IconGrid /> },
-      { name: 'Illustration design', desc: 'Visual storytelling for your brand', icon: <IconPen /> },
-      { name: 'Branding services', desc: 'Expertise & custom design services', icon: <IconStar /> },
-      { name: 'eBooks & report design', desc: 'Your digital content supercharged', icon: <IconLayers /> },
-      { name: 'Concept creation', desc: 'Big ideas brought to life', icon: <IconBolt /> },
+      { name: 'Motion Design',    desc: 'Animated social ads · Explainer animations · UI micro-animations', icon: <IconBolt /> },
+      { name: 'Email Creation',   desc: 'Email templates · Sequences · Newsletter design', icon: <IconMail /> },
+      { name: 'Web Design',       desc: 'Portfolio · Landing page · E-commerce design', icon: <IconCursor /> },
+      { name: 'Copywriting',      desc: 'Ad copy · Web & landing page copy · SEO blog articles', icon: <IconPen /> },
+      { name: 'Design Systems',   desc: 'Design token system · Component library · UI kit', icon: <IconGrid /> },
+      { name: 'Product Design',   desc: 'UX/UI design · Prototypes · MVP design', icon: <IconPhone /> },
     ],
   },
   {
-    label: 'Specialized production services',
-    href: '/capabilities/production',
+    label: 'Creative design',
+    href: '/capabilities/creative-design',
     bg: '#1A4A40',
     color: '#F7F9F2',
     services: [
-      { name: 'Motion design', desc: 'For websites, ads, and presentations', icon: <IconBolt /> },
-      { name: 'Email creation', desc: 'Click-worthy emails that drive engagement', icon: <IconMail /> },
-      { name: 'Web design', desc: 'Stunning websites built to engage', icon: <IconCursor /> },
-      { name: 'Copywriting', desc: 'Words that move people to act', icon: <IconPen /> },
-      { name: 'Design systems', desc: 'Robust systems that drive consistency', icon: <IconGrid /> },
-      { name: 'Product design', desc: 'Engaging & intuitive experiences', icon: <IconPhone /> },
+      { name: 'Ad Creative',            desc: 'Static ads · Motion ads · Ad copy & hooks', icon: <IconTarget /> },
+      { name: 'Social Media Creative',  desc: 'Organic content · Paid social ads · Campaign concepts', icon: <IconGraph /> },
+      { name: 'Presentation Design',    desc: 'Custom decks · Templates · Infographics', icon: <IconGrid /> },
+      { name: 'Illustration Design',    desc: 'Brand illustrations · Iconography · Storyboarding', icon: <IconPen /> },
+      { name: 'Branding Services',      desc: 'Logo design · Brand identity kit · Guidelines', icon: <IconStar /> },
+      { name: 'eBooks & Report Design', desc: 'Long-form layout · Editorial design · Content formatting', icon: <IconLayers /> },
+      { name: 'Concept Creation',       desc: 'Campaign concepts · Big ideas · Creative briefs', icon: <IconBolt /> },
     ],
   },
   {
@@ -125,19 +125,24 @@ const COLUMNS = [
     bg: '#8FCCA8',
     color: '#0A211F',
     services: [
-      { name: 'AI-powered creative', desc: 'Human brilliance powered by AI', icon: <IconStar /> },
-      { name: 'AI consulting', desc: 'Transform your team with AI', icon: <IconChat /> },
-      { name: 'Automation', desc: 'Move fast without compromising craft', icon: <IconBolt /> },
-      { name: 'Data services', desc: 'Train your AI with creative data', icon: <IconGraph /> },
+      { name: 'AI-Powered Creative', desc: 'Brand image library · AI character development · Key art', icon: <IconStar /> },
+      { name: 'AI Consulting',       desc: 'AI tool stack audit · Workflow redesign · Team training', icon: <IconChat /> },
+      { name: 'Automation',          desc: 'Content automation · Reporting pipelines · Repurposing', icon: <IconBolt /> },
+      { name: 'Data Services',       desc: 'Data visualization · AI data analysis · Performance reports', icon: <IconGraph /> },
     ],
   },
   {
-    label: 'Marketing services',
-    href: '/capabilities/marketing',
+    label: 'Consultant',
+    href: '/capabilities/consultant',
     bg: '#D8FF85',
     color: '#0A211F',
     services: [
-      { name: 'Campaign strategy', desc: 'Connect creative ambition to results', icon: <IconTarget /> },
+      { name: 'Campaign Strategy',    desc: 'Creative strategy · Campaign concepts · Multi-channel', icon: <IconTarget /> },
+      { name: 'Finance Expert',       desc: 'P&L analysis · Cash flow · Financial health assessment', icon: <IconGraph /> },
+      { name: 'Business Strategist',  desc: 'Growth strategy · Investment readiness · Cost optimization', icon: <IconBolt /> },
+      { name: 'P&L Expert',           desc: 'Revenue stream analysis · Margin optimization', icon: <IconLayers /> },
+      { name: 'Early Stage Recovery', desc: 'Pre-legal collection · Payment negotiation strategy', icon: <IconChat /> },
+      { name: 'Write-off Recovery',   desc: 'Vintage portfolio management · Written-off account strategy', icon: <IconStar /> },
     ],
   },
 ]
