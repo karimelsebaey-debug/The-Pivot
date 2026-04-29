@@ -29,13 +29,13 @@ export function Navbar() {
     <header
       style={{
         height: 'var(--header-height)',
+        backgroundColor: scrolled ? 'var(--color-bg)' : 'rgba(247, 249, 242, 0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
         transition: `background-color var(--t-std) var(--ease), border-color var(--t-std) var(--ease)`,
       }}
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center ${
-        scrolled
-          ? 'bg-[--color-bg] border-b border-[--color-border]'
-          : 'bg-transparent border-b border-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 flex items-center"
     >
       <div
         className="container flex items-center justify-between"
