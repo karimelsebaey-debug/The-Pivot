@@ -105,11 +105,13 @@ export function Navbar() {
         {/* CTA */}
         <Link
           href="/contact"
-          className="hidden md:inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full arrow-btn"
+          className="hidden md:inline-flex items-center gap-2 font-semibold rounded-full arrow-btn"
           style={{
-            backgroundColor: 'var(--color-ink)',
-            color: 'var(--color-bg)',
+            backgroundColor: 'var(--color-accent)',
+            color: 'var(--color-ink)',
             borderRadius: 'var(--radius-xl)',
+            fontSize: '0.95rem',
+            padding: '12px 28px',
             transition: `box-shadow var(--t-fast) var(--ease)`,
           }}
         >
