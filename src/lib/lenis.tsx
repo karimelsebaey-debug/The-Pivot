@@ -2,6 +2,8 @@
 
 import { createContext, useContext, useEffect, useRef, ReactNode } from 'react'
 import Lenis from 'lenis'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const LenisContext = createContext<Lenis | null>(null)
 
@@ -21,13 +23,17 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
     lenisRef.current = lenis
 
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
+    // Sync Lenis with GSAP ticker so ScrollTrigger pin works correctly
+    lenis.on('scroll', ScrollTrigger.update)
 
-    return () => lenis.destroy()
+    const rafCb = (time: number) => lenis.raf(time * 1000)
+    gsap.ticker.add(rafCb)
+    gsap.ticker.lagSmoothing(0)
+
+    return () => {
+      lenis.destroy()
+      gsap.ticker.remove(rafCb)
+    }
   }, [])
 
   return (

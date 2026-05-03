@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
 
 const SERVICES = [
@@ -123,24 +124,12 @@ export function Services() {
                   <li key={item}>
                     <Link
                       href={`/services/${item.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
-                      className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2.5"
-                      style={{
-                        border: `1px solid ${i % 2 === 0 ? 'var(--color-border)' : 'rgba(247,249,242,0.2)'}`,
-                        borderRadius: 'var(--radius-xl)',
-                        transition: `background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease)`,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.backgroundColor = service.accent
-                        ;(e.currentTarget as HTMLElement).style.color = i % 2 === 0 ? 'var(--color-ink)' : 'var(--color-dark-bg)'
-                        ;(e.currentTarget as HTMLElement).style.borderColor = service.accent
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
-                        ;(e.currentTarget as HTMLElement).style.color = ''
-                        ;(e.currentTarget as HTMLElement).style.borderColor = ''
-                      }}
+                      className={`pill-tag ${i % 2 === 0 ? 'pill-tag-light' : 'pill-tag-dark'}`}
                     >
                       {item}
+                      <span className="pill-arrow">
+                        <ArrowUpRight size={13} />
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -148,22 +137,20 @@ export function Services() {
 
               {/* CTA */}
               <div className="mt-16">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-3 text-sm font-semibold px-7 py-4 arrow-btn"
-                  style={{
+                <Link href="/contact" className="cta-pill">
+                  <span className="cta-pill-label" style={{
                     backgroundColor: service.accent,
                     color: i % 2 === 0 ? 'var(--color-ink)' : 'var(--color-dark-bg)',
-                    borderRadius: 'var(--radius-xl)',
-                  }}
-                >
-                  Get Started
-                  <svg className="arrow-out" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <svg className="arrow-in" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  }}>
+                    Get Started
+                  </span>
+                  <div className="cta-pill-icon" style={{
+                    backgroundColor: service.accent,
+                    color: i % 2 === 0 ? 'var(--color-ink)' : 'var(--color-dark-bg)',
+                  }}>
+                    <ArrowUpRight className="arr-out" size={15} />
+                    <ArrowUpRight className="arr-in"  size={15} />
+                  </div>
                 </Link>
               </div>
             </div>

@@ -30,7 +30,7 @@ export function Navbar() {
     <header
       style={{
         height: 'var(--header-height)',
-        backgroundColor: scrolled ? 'var(--color-bg)' : 'rgba(247, 249, 242, 0.85)',
+        backgroundColor: scrolled ? '#F2F4E7' : 'rgba(242, 244, 231, 0.88)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
@@ -167,13 +167,12 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 text-sm font-semibold px-5 py-3 rounded-full self-start"
-            style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-ink)' }}
-            onClick={() => setMenuOpen(false)}
-          >
-            Start a Project →
+          <Link href="/contact" className="cta-pill self-start" onClick={() => setMenuOpen(false)}>
+            <span className="cta-pill-label">Start a Project</span>
+            <div className="cta-pill-icon">
+              <svg className="arr-out" width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 12L12 3M12 3H5M12 3V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <svg className="arr-in"  width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 12L12 3M12 3H5M12 3V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            </div>
           </Link>
         </div>
       )}

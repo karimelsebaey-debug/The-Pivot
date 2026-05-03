@@ -21,16 +21,16 @@
 }
 
 :root {
-  --background: #F7F9F2;
+  --background: #F2F4E7;
   --foreground: #0A211F;
-  --card: #F7F9F2;
+  --card: #F2F4E7;
   --card-foreground: #0A211F;
-  --popover: #F7F9F2;
+  --popover: #F2F4E7;
   --popover-foreground: #0A211F;
   --primary: oklch(0.953 0.1051 123.71);
   --primary-foreground: #0A211F;
   --secondary: oklch(0.2322 0.0201 212.57);
-  --secondary-foreground: #F7F9F2;
+  --secondary-foreground: #F2F4E7;
   --muted: rgba(0,0,0,0.04);
   --muted-foreground: #4a7a76;
   --accent: rgba(0,0,0,0.04);
@@ -46,7 +46,7 @@
    DESIGN TOKENS — superside.com reference
 ───────────────────────────────────────── */
 :root {
-  --color-bg:        #F7F9F2;
+  --color-bg:        #F2F4E7;
   --color-ink:       #0A211F;
   --color-accent:    #D8FF85;
   --color-dark-bg:   #12211D;
@@ -175,3 +175,160 @@ html.lenis, html.lenis body { height: auto; }
 
 .text-accent { color: var(--color-accent); }
 .bg-accent   { background-color: var(--color-accent); }
+
+/* ─────────────────────────────────────────
+   DROPDOWN ROW — MegaDropdown service items
+───────────────────────────────────────── */
+.dropdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.18s var(--ease), transform 0.18s var(--ease);
+  will-change: transform;
+}
+.dropdown-row:hover {
+  background-color: rgba(10,33,31,0.05);
+  transform: translateX(3px);
+}
+.dropdown-row-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-bottom: 2px;
+  color: var(--color-ink);
+}
+.dropdown-row-desc {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--color-ink-muted);
+}
+.dropdown-row-icon {
+  flex-shrink: 0;
+  color: var(--color-ink);
+  opacity: 0.28;
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.dropdown-row:hover .dropdown-row-icon {
+  opacity: 0.85;
+  transform: translate(2px, -2px);
+}
+
+/* ─────────────────────────────────────────
+   WORK CARD image hover
+───────────────────────────────────────── */
+.work-img {
+  transition: transform 0.5s var(--ease);
+  will-change: transform;
+}
+.group:hover .work-img {
+  transform: scale(1.04) translate(3px, -3px);
+}
+
+/* ─────────────────────────────────────────
+   PILL TAG — service items (superside style)
+───────────────────────────────────────── */
+.pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.22s var(--ease),
+    color            0.22s var(--ease),
+    border-color     0.22s var(--ease),
+    transform        0.18s var(--ease);
+  will-change: transform;
+  cursor: pointer;
+}
+.pill-tag:hover { transform: translateY(-1px); }
+
+.pill-tag .pill-arrow {
+  display: inline-flex;
+  transition: transform 0.22s var(--ease);
+}
+.pill-tag:hover .pill-arrow { transform: translate(2px, -2px); }
+
+/* Light variant (on --color-bg backgrounds) */
+.pill-tag-light {
+  border-color: var(--color-border);
+  color: var(--color-ink);
+  background-color: transparent;
+}
+.pill-tag-light:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* Dark variant (on --color-dark-bg backgrounds) */
+.pill-tag-dark {
+  border-color: rgba(247,249,242,0.18);
+  color: var(--color-bg);
+  background-color: transparent;
+}
+.pill-tag-dark:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* ─────────────────────────────────────────
+   CTA PILL — primary action button
+───────────────────────────────────────── */
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cta-pill-label {
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background-color: var(--color-accent);
+  color: var(--color-ink);
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.cta-pill:hover .cta-pill-label {
+  background-color: var(--color-ink);
+  color: var(--color-accent);
+}
+.cta-pill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background-color: var(--color-accent);
+  color: var(--color-ink);
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.cta-pill:hover .cta-pill-icon {
+  background-color: var(--color-ink);
+  color: var(--color-accent);
+}
+.cta-pill-icon .arr-out,
+.cta-pill-icon .arr-in {
+  position: absolute;
+  transition: transform 0.28s var(--ease), opacity 0.28s var(--ease);
+}
+.cta-pill-icon .arr-out { transform: translate(0, 0); opacity: 1; }
+.cta-pill-icon .arr-in  { transform: translate(-14px, 14px); opacity: 0; }
+.cta-pill:hover .cta-pill-icon .arr-out { transform: translate(14px, -14px); opacity: 0; }
+.cta-pill:hover .cta-pill-icon .arr-in  { transform: translate(0, 0); opacity: 1; }

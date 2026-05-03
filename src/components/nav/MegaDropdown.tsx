@@ -187,29 +187,27 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
               }}
               className="last:border-r-0"
             >
-              {/* Category header pill — superside style */}
+              {/* Category header pill */}
               <Link
                 href={col.href}
-                className="inline-flex items-center gap-2 font-semibold mb-6 rounded-full group"
+                className="pill-tag mb-6"
                 style={{
                   backgroundColor: col.bg,
                   color: col.color,
-                  fontSize: '0.95rem',
-                  letterSpacing: '-0.01em',
+                  borderColor: 'transparent',
                   fontFamily: 'var(--font-display)',
                   fontStyle: 'italic',
+                  fontSize: '0.95rem',
                   padding: '10px 20px',
                   whiteSpace: 'nowrap',
-                  transition: 'opacity 0.15s var(--ease)',
                 }}
               >
                 {col.label}
-                <svg
-                  width="12" height="12" viewBox="0 0 12 12" fill="none"
-                  style={{ flexShrink: 0 }}
-                >
-                  <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <span className="pill-arrow">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
+                    <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </Link>
 
               {/* Service list */}
@@ -218,38 +216,14 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
                   <li key={service.name}>
                     <Link
                       href={`/capabilities/${service.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
-                      className="flex items-center justify-between gap-3 py-3 group/item"
-                      style={{
-                        borderTop: i === 0 ? 'none' : '1px solid var(--color-border)',
-                        transition: 'color 0.15s var(--ease)',
-                      }}
+                      className="dropdown-row"
+                      style={{ borderTop: i === 0 ? 'none' : '1px solid var(--color-border)' }}
                     >
                       <div>
-                        <p
-                          className="text-sm font-medium leading-tight mb-0.5"
-                          style={{
-                            color: 'var(--color-ink)',
-                            transition: 'color 0.15s var(--ease)',
-                          }}
-                        >
-                          {service.name}
-                        </p>
-                        <p
-                          className="text-xs leading-snug"
-                          style={{ color: 'var(--color-ink-muted)' }}
-                        >
-                          {service.desc}
-                        </p>
+                        <p className="dropdown-row-title">{service.name}</p>
+                        <p className="dropdown-row-desc">{service.desc}</p>
                       </div>
-                      <span
-                        className="flex-shrink-0 opacity-30 group-hover/item:opacity-80"
-                        style={{
-                          color: 'var(--color-ink)',
-                          transition: 'opacity 0.15s var(--ease)',
-                        }}
-                      >
-                        {service.icon}
-                      </span>
+                      <span className="dropdown-row-icon">{service.icon}</span>
                     </Link>
                   </li>
                 ))}

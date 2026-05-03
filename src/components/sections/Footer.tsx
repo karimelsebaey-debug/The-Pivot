@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -32,22 +33,14 @@ export function Footer() {
             </h2>
           </div>
 
-          <Link
-            href="/contact"
-            className="self-start inline-flex items-center gap-3 text-sm font-semibold px-7 py-4 arrow-btn"
-            style={{
-              backgroundColor: 'var(--color-accent)',
-              color: 'var(--color-ink)',
-              borderRadius: 'var(--radius-xl)',
-            }}
-          >
-            Get in Touch
-            <svg className="arrow-out" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <svg className="arrow-in" width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+          <Link href="/contact" className="cta-pill self-start">
+            <span className="cta-pill-label" style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-ink)' }}>
+              Get in Touch
+            </span>
+            <div className="cta-pill-icon" style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-ink)' }}>
+              <ArrowUpRight className="arr-out" size={15} />
+              <ArrowUpRight className="arr-in"  size={15} />
+            </div>
           </Link>
         </div>
 

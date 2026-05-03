@@ -105,16 +105,7 @@ export function WorkGrid() {
                 <img
                   src={item.placeholder}
                   alt={item.title}
-                  className="w-full h-full object-cover"
-                  style={{
-                    transition: `transform var(--t-slow) var(--ease), filter var(--t-slow) var(--ease)`,
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.transform = 'scale(1.04) translate(4px, -4px)'
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.transform = ''
-                  }}
+                  className="w-full h-full object-cover work-img"
                 />
 
                 {/* Category tag */}
