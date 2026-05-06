@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Instrument_Serif, Inter_Tight, Plus_Jakarta_Sans } from 'next/font/google'
 import { LenisProvider } from '@/lib/lenis'
-import { PageLoader } from '@/components/ui/PageLoader'
+import { Preloader } from '@/components/ui/Preloader'
 import './globals.css'
 
 const instrumentSerif = Instrument_Serif({
@@ -48,7 +48,7 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${interTight.variable} ${plusJakarta.variable}`}
     >
       <body>
-        <PageLoader />
+        <Preloader />
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>

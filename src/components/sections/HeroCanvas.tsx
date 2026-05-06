@@ -152,24 +152,23 @@ export function HeroCanvas() {
               style={{
                 fontFamily: 'var(--font-display)',
                 fontStyle: 'italic',
-                fontSize: '1.05rem',
+                fontSize: '1.15rem',
                 color: 'var(--color-ink-muted)',
                 letterSpacing: '-0.01em',
-                marginBottom: '0.75rem',
+                marginBottom: '1.25rem',
               }}
             >
               Creative Collective
             </p>
 
-            {/* Heading — editorial spec: clamp(48px,6vw,80px), Regular 400, tight */}
+            {/* Heading — matches old Hero: 8vw full-width → ~5.6vw in 45% col */}
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(3rem, 6vw, 5rem)',
-                fontWeight: 400,
-                lineHeight: 1.07,
-                letterSpacing: '-0.025em',
-                color: '#1A1A1A',
+                fontSize: 'clamp(3rem, 5.6vw, 7rem)',
+                lineHeight: 1.05,
+                letterSpacing: '-0.02em',
+                color: 'var(--color-ink)',
                 marginBottom: '1.5rem',
               }}
             >
@@ -180,29 +179,29 @@ export function HeroCanvas() {
                 <span ref={line2Ref} className="block">Point For Your</span>
               </span>
               <span className="block overflow-hidden">
-                <span ref={line3Ref} className="block" style={{ fontStyle: 'italic' }}>
+                <span ref={line3Ref} className="block italic">
                   Creative Ambition.
                 </span>
               </span>
             </h1>
 
-            {/* Body — sans-serif 15-16px, #3A3A3A, lh 1.6, max 480px */}
+            {/* Body — matches old Hero: 1.05rem, lh 1.7, display-italic emphasis */}
             <p
               ref={subRef}
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '1rem',
+                fontSize: '1.05rem',
                 fontWeight: 400,
-                lineHeight: 1.6,
-                color: '#3A3A3A',
+                lineHeight: 1.7,
+                letterSpacing: '-0.01em',
+                color: 'var(--color-ink)',
                 maxWidth: '480px',
               }}
             >
               We transform ambitious ideas and needs into visual presence,
               specialized services, and digital solutions —{' '}
-              <em style={{ fontStyle: 'italic' }}>built to last,</em>{' '}
-              <em style={{ fontStyle: 'italic' }}>
-                impossible to ignore.
+              <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.2rem' }}>
+                built to last, impossible to ignore.
               </em>
             </p>
 
