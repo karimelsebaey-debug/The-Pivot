@@ -273,7 +273,7 @@ export function TowerScroll() {
     <section
       ref={sectionRef}
       className="scroll-animation relative"
-      style={{ backgroundColor: "#0A211F" }}
+      style={{ backgroundColor: "#0A211F", height: "600vh" }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
