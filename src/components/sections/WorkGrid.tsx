@@ -64,7 +64,7 @@ export function WorkGrid() {
         <div className="flex items-end justify-between mb-16">
           <div>
             <p
-              className="text-xs font-semibold uppercase tracking-widest mb-4"
+              className="text-sm font-semibold uppercase tracking-widest mb-4"
               style={{ color: 'var(--color-ink-muted)', letterSpacing: '0.15em' }}
             >
               Selected Work
@@ -110,7 +110,7 @@ export function WorkGrid() {
 
                 {/* Category tag */}
                 <span
-                  className="absolute top-5 left-5 text-xs font-semibold uppercase tracking-widest px-3 py-1.5"
+                  className="absolute top-5 left-5 text-sm font-semibold uppercase tracking-widest px-3 py-2"
                   style={{
                     backgroundColor: 'var(--color-accent)',
                     color: 'var(--color-ink)',
@@ -131,7 +131,7 @@ export function WorkGrid() {
                 }}
               >
                 <p
-                  className="text-xs font-semibold uppercase tracking-widest mb-4"
+                  className="text-sm font-semibold uppercase tracking-widest mb-4"
                   style={{ opacity: 0.6, letterSpacing: '0.12em' }}
                 >
                   {item.client} — {item.role}

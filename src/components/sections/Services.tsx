@@ -84,13 +84,13 @@ export function Services() {
               {/* Number + category */}
               <div className="flex items-start justify-between mb-16">
                 <span
-                  className="text-xs font-semibold uppercase tracking-widest"
+                  className="text-sm font-semibold uppercase tracking-widest"
                   style={{ letterSpacing: '0.15em', opacity: 0.5 }}
                 >
                   {service.number} / {String(SERVICES.length).padStart(2, '0')}
                 </span>
                 <span
-                  className="text-xs font-semibold uppercase tracking-widest"
+                  className="text-sm font-semibold uppercase tracking-widest"
                   style={{ letterSpacing: '0.15em', opacity: 0.5 }}
                 >
                   Services
@@ -112,7 +112,7 @@ export function Services() {
 
               {/* Description */}
               <p
-                className="max-w-lg text-lg leading-relaxed mb-16"
+                className="max-w-lg text-xl leading-relaxed mb-16"
                 style={{ opacity: 0.7 }}
               >
                 {service.description}

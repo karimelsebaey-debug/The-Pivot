@@ -1,77 +1,183 @@
+'use client'
+
+import { useRef } from 'react'
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import { useGSAP } from '@gsap/react'
+import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { PillCTA } from '@/components/ui/PillCTA'
 
 export function Footer() {
+  const footerRef = useRef<HTMLElement>(null)
+  const headRef   = useRef<HTMLDivElement>(null)
+  const ctaRef    = useRef<HTMLDivElement>(null)
+  const barRef    = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const lines = headRef.current!.querySelectorAll('.line-inner')
+
+    gsap.from(lines, {
+      scrollTrigger: {
+        trigger: headRef.current,
+        start: 'top 82%',
+        toggleActions: 'play none none none',
+      },
+      yPercent: 110,
+      opacity: 0,
+      stagger: 0.13,
+      duration: 1.15,
+      ease: 'power4.out',
+    })
+
+    gsap.from(ctaRef.current, {
+      scrollTrigger: {
+        trigger: ctaRef.current,
+        start: 'top 88%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 0,
+      y: 22,
+      duration: 0.9,
+      ease: 'power3.out',
+    })
+
+    gsap.from(barRef.current, {
+      scrollTrigger: {
+        trigger: barRef.current,
+        start: 'top 98%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 0,
+      y: 12,
+      duration: 0.7,
+      ease: 'power2.out',
+    })
+
+    return () => ScrollTrigger.getAll().forEach(t => t.kill())
+  }, { scope: footerRef })
+
   return (
     <footer
-      className="section-py"
-      style={{ backgroundColor: 'var(--color-dark-bg)', color: 'var(--color-bg)' }}
+      ref={footerRef}
+      style={{
+        backgroundColor: 'var(--color-bg)',
+        color: 'var(--color-ink)',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: 'clamp(80px,12vh,140px) clamp(24px,5vw,88px) clamp(40px,5vh,56px)',
+      }}
     >
-      <div
-        className="container"
-        style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: '0 var(--container-px)' }}
-      >
-        {/* Top row */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-12 mb-20">
-          <div>
-            <p
-              className="text-xs font-semibold uppercase tracking-widest mb-6"
-              style={{ color: 'rgba(247,249,242,0.4)', letterSpacing: '0.15em' }}
-            >
-              Ready?
-            </p>
-            <h2
+      {/* ── Main ─────────────────────────────────────────────────────────── */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+
+        <p
+          style={{
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '0.63rem',
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color: 'var(--color-ink)',
+            marginBottom: 'clamp(20px,3.5vh,44px)',
+          }}
+        >
+          Ready to pivot?
+        </p>
+
+        <div ref={headRef} style={{ marginBottom: 'clamp(48px,7vh,80px)' }}>
+          <div style={{ overflow: 'hidden', paddingBottom: '0.22em', marginBottom: '-0.22em' }}>
+            <div
+              className="line-inner"
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.02em',
+                fontSize: 'clamp(3.2rem,8vw,10.5rem)',
+                lineHeight: 1.0,
+                letterSpacing: '-0.03em',
+                color: 'var(--color-ink)',
               }}
             >
-              Start your<br />
-              <em>turning point.</em>
-            </h2>
-          </div>
-
-          <Link href="/contact" className="cta-pill self-start">
-            <span className="cta-pill-label" style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-ink)' }}>
-              Get in Touch
-            </span>
-            <div className="cta-pill-icon" style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-ink)' }}>
-              <ArrowUpRight className="arr-out" size={15} />
-              <ArrowUpRight className="arr-in"  size={15} />
+              Start your
             </div>
-          </Link>
-        </div>
+          </div>
 
-        {/* Divider */}
-        <div style={{ borderTop: '1px solid rgba(247,249,242,0.1)', paddingTop: '2rem' }}>
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <span
-              className="text-sm font-semibold tracking-widest uppercase"
-              style={{ letterSpacing: '0.15em' }}
+          <div style={{ overflow: 'hidden', paddingBottom: '0.28em', marginBottom: '-0.28em' }}>
+            <div
+              className="line-inner"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(3.2rem,8vw,10.5rem)',
+                lineHeight: 1.0,
+                letterSpacing: '-0.03em',
+                fontStyle: 'italic',
+                color: 'var(--color-ink)',
+              }}
             >
-              THE PIVOT
-            </span>
-
-            <nav className="flex flex-wrap gap-6">
-              {['Services', 'Work', 'Process', 'About', 'Contact'].map((item) => (
-                <Link
-                  key={item}
-                  href={`/${item.toLowerCase()}`}
-                  className="text-sm link-underline"
-                  style={{ color: 'rgba(247,249,242,0.6)' }}
-                >
-                  {item}
-                </Link>
-              ))}
-            </nav>
-
-            <p className="text-xs" style={{ color: 'rgba(247,249,242,0.3)' }}>
-              © {new Date().getFullYear()} The Pivot. All rights reserved.
-            </p>
+              turning point.
+            </div>
           </div>
         </div>
+
+        <div ref={ctaRef}>
+          <PillCTA href="/contact" label="Get in Touch" />
+        </div>
+      </div>
+
+      {/* ── Bottom bar ───────────────────────────────────────────────────── */}
+      <div
+        ref={barRef}
+        style={{
+          borderTop: '1px solid rgba(10,33,31,0.12)',
+          paddingTop: 28,
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 20,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '0.68rem',
+            fontWeight: 700,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: 'var(--color-ink)',
+          }}
+        >
+          THE PIVOT
+        </span>
+
+        <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
+          {['Services', 'Work', 'Process', 'About', 'Contact'].map((item) => (
+            <Link
+              key={item}
+              href={`/${item.toLowerCase()}`}
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.78rem',
+                color: 'rgba(10,33,31,0.45)',
+                textDecoration: 'none',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-ink)' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(10,33,31,0.45)' }}
+            >
+              {item}
+            </Link>
+          ))}
+        </nav>
+
+        <p
+          style={{
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '0.62rem',
+            color: 'rgba(10,33,31,0.65)',
+            letterSpacing: '0.04em',
+          }}
+        >
+          © {new Date().getFullYear()} The Pivot. All rights reserved.
+        </p>
       </div>
     </footer>
   )

@@ -195,9 +195,10 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
                   backgroundColor: col.bg,
                   color: col.color,
                   borderColor: 'transparent',
-                  fontFamily: 'var(--font-display)',
-                  fontStyle: 'italic',
-                  fontSize: '0.95rem',
+                  fontFamily: 'var(--font-body)',
+                  fontStyle: 'normal',
+                  fontWeight: 600,
+                  fontSize: '1rem',
                   padding: '10px 20px',
                   whiteSpace: 'nowrap',
                 }}

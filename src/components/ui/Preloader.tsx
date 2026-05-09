@@ -1,259 +1,239 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import styles from './Preloader.module.css'
 
 gsap.registerPlugin(useGSAP)
 
-/* ─── Tokens ──────────────────────────── */
-const BG    = '#0A1510'
-const CREAM = '#F2F4E7'
-const LIME  = '#C8D96F'
+/* 8-tooth gear polygon */
+const GEAR_PTS =
+  '37,20 32,25 32,32 25,32 20,37 15,32 8,32 8,25 3,20 8,15 8,8 15,8 20,3 25,8 32,8 32,15'
 
-/* ─── Grain ──────────────────────────── */
-const GRAIN =
-  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
-
-/* ─── Timing ──────────────────────────── */
-const T_FILL       = 2.0    // left→right fill sweep
-const T_HOLD       = 0.4    // hold at full text
-const T_SWITCH     = 0.22   // cream → window cross-fade
-const T_ZOOM       = 1.65   // zoom duration
-const T_FADE       = 0.22   // opacity-out at the very end
-
-const T_ZOOM_START = T_FILL + T_HOLD                        // 2.40
-const T_FADE_START = T_ZOOM_START + T_ZOOM - T_FADE         // 3.83
-
-/* ── Shared text style (keeps all three layers pixel-identical) */
-const TEXT: React.CSSProperties = {
-  fontFamily:    'var(--font-display)',
-  fontStyle:     'italic',
-  fontWeight:    400,
-  fontSize:      'clamp(80px, 11vw, 136px)',
-  letterSpacing: '0.04em',
-  lineHeight:    1,
-  whiteSpace:    'nowrap',
-}
+/* Phase messages — specific to The Pivot creative agency */
+const PHASES = [
+  'Initializing',
+  'Calibrating pivot',
+  'Clearing the path',
+  'Aligning axis',
+  'Locking vector',
+  'Ready',
+]
 
 export function Preloader() {
   const [done, setDone] = useState(false)
 
-  const wrapRef   = useRef<HTMLDivElement>(null)  // isolated compositor
-  const bgRef     = useRef<HTMLDivElement>(null)  // dark-green layer (gets punched)
-  const textRef   = useRef<HTMLDivElement>(null)  // zoom target
-  const revealRef = useRef<HTMLDivElement>(null)  // cream clip-path layer
-  const cutoutRef = useRef<HTMLDivElement>(null)  // destination-out window
-  const scanRef   = useRef<HTMLDivElement>(null)  // scanline
+  const wrapRef     = useRef<HTMLDivElement>(null)
+  const phaseRef    = useRef<HTMLDivElement>(null)
+  const pctRef      = useRef<HTMLDivElement>(null)
+  const timeRef     = useRef<HTMLDivElement>(null)
+  const gearOrbitRef = useRef<HTMLDivElement>(null)
 
+  /* Phase label cycling */
+  useEffect(() => {
+    let idx = 0
+    const phaseId = setInterval(() => {
+      idx = (idx + 1) % PHASES.length
+      if (phaseRef.current)
+        phaseRef.current.innerHTML = PHASES[idx] + '<span>_</span>'
+    }, 580)
+    const phaseStop = setTimeout(() => clearInterval(phaseId), 2900)
+    return () => { clearInterval(phaseId); clearTimeout(phaseStop) }
+  }, [])
+
+  /* Percentage counter */
+  useEffect(() => {
+    let pct = 0
+    const id = setInterval(() => {
+      pct = Math.min(100, pct + Math.floor(Math.random() * 4) + 1)
+      if (pctRef.current) pctRef.current.textContent = pct + '%'
+      if (pct >= 100) clearInterval(id)
+    }, 38)
+    return () => clearInterval(id)
+  }, [])
+
+  /* Clock timer */
+  useEffect(() => {
+    const start = Date.now()
+    const id = setInterval(() => {
+      const elapsed = Date.now() - start
+      const s  = String(Math.floor(elapsed / 1000) % 60).padStart(2, '0')
+      const ms = String(Math.floor((elapsed % 1000) / 10)).padStart(2, '0')
+      if (timeRef.current) timeRef.current.textContent = s + ':' + ms
+    }, 16)
+    const stop = setTimeout(() => clearInterval(id), 3700)
+    return () => { clearInterval(id); clearTimeout(stop) }
+  }, [])
+
+  /* Gear orbit — trigonometry RAF, starts at 9-o'clock (left of PIVOT) */
+  useEffect(() => {
+    const el = gearOrbitRef.current
+    if (!el) return
+
+    const CX = 240, CY = 100, RX = 210, RY = 72
+    const PERIOD = 8000 // ms — matches textGlow period
+    const HALF_SIZE = 11 // 22px gear → center offset
+    let startTime: number | null = null
+    let rafId: number
+
+    const tick = (ts: number) => {
+      if (startTime === null) startTime = ts
+      const elapsed = ts - startTime
+      // π = 9-o'clock (leftmost point); increases clockwise on screen
+      const theta = Math.PI + (elapsed / PERIOD) * Math.PI * 2
+      const x = CX + Math.cos(theta) * RX
+      const y = CY + Math.sin(theta) * RY
+      el.style.transform = `translate(${x - HALF_SIZE}px, ${y - HALF_SIZE}px)`
+      rafId = requestAnimationFrame(tick)
+    }
+
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [])
+
+  /* GSAP exit — starts at 3.0s, fades 0.55s → total 3.55s */
   useGSAP(() => {
-    /* ── Initial states ───────────────── */
-    gsap.set(revealRef.current, { clipPath: 'inset(0 100% 0 0)' })
-    gsap.set(cutoutRef.current, { opacity: 0 })
-    gsap.set(scanRef.current,   { y: '-110%', opacity: 0 })
-
     const tl = gsap.timeline({
+      delay: 3.0,
       onComplete: () => {
         gsap.set(wrapRef.current, { display: 'none' })
         setDone(true)
       },
     })
-
-    /* ── 1. Fill sweep left → right ──── */
-    tl.to(revealRef.current, {
-      clipPath: 'inset(0 0% 0 0)',
-      duration: T_FILL,
-      ease: 'power2.inOut',
-    }, 0)
-
-    /* Scanline down during fill */
-    tl.to(scanRef.current, {
-      y: '110%',
-      opacity: 0.065,
-      duration: T_FILL * 0.88,
-      ease: 'power1.inOut',
-    }, 0.12)
-
-    /* ── 2. Hold ─────────────────────── (implicit gap) */
-
-    /* ── 3a. Cream fades → window appears (crossfade) ── */
-    tl.to(revealRef.current, {
-      opacity: 0,
-      duration: T_SWITCH,
-      ease: 'power1.in',
-    }, T_ZOOM_START)
-
-    tl.to(cutoutRef.current, {
-      opacity: 1,
-      duration: T_SWITCH,
-      ease: 'power1.out',
-    }, T_ZOOM_START)
-
-    /* ── 3b. Zoom rush — text grows until it fills viewport ── */
-    tl.to(textRef.current, {
-      scale: 24,
-      duration: T_ZOOM,
-      ease: 'expo.in',
-      force3D: true,
-    }, T_ZOOM_START)
-
-    /* ── 4. Snap whole wrapper to invisible ── */
     tl.to(wrapRef.current, {
       opacity: 0,
-      duration: T_FADE,
-      ease: 'none',
-    }, T_FADE_START)
-
+      scale: 1.04,
+      duration: 0.55,
+      ease: 'power2.in',
+    })
   }, { scope: wrapRef })
 
   if (done) return null
 
   return (
-    /*
-     * isolation: 'isolate' is the key ingredient.
-     * It creates an offscreen compositing group so that
-     * mix-blend-mode: destination-out on the cutout text
-     * punches THROUGH the dark-green bgRef, making those
-     * pixels fully transparent → the real page shows through.
-     */
-    <div
-      ref={wrapRef}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9999,
-        isolation: 'isolate',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        userSelect: 'none',
-      }}
-    >
+    <div ref={wrapRef} className={styles.root}>
 
-      {/* ── Dark green background ─────────────────────────────
-          This layer is what gets "punched through" by the
-          destination-out text during the zoom phase.         */}
-      <div
-        ref={bgRef}
-        style={{ position: 'absolute', inset: 0, backgroundColor: BG }}
-      />
+      {/* Grain + vignette + starlight */}
+      <div className={styles.grain}     aria-hidden />
+      <div className={styles.vignette}  aria-hidden />
+      <div className={styles.starlight} aria-hidden />
+      <div className={styles.scanline}  aria-hidden />
 
-      {/* ── Film grain ──────────────────────────────────────── */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          opacity: 0.042,
-          backgroundImage: GRAIN,
-          backgroundSize: '200px',
-        }}
-      />
+      {/* HUD corners */}
+      <div className={`${styles.hud} ${styles.hudTl}`}>The Pivot</div>
+      <div className={`${styles.hud} ${styles.hudTr}`} ref={timeRef}>00:00</div>
+      <div className={`${styles.hud} ${styles.hudBl}`}>v 1.0.0</div>
+      <div className={`${styles.hud} ${styles.hudBr}`} ref={pctRef}>0%</div>
 
-      {/* ── Vignette ────────────────────────────────────────── */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          background:
-            'radial-gradient(ellipse 85% 75% at 50% 50%, transparent 35%, rgba(0,0,0,0.62) 100%)',
-        }}
-      />
+      {/* ── Center composition ── */}
+      <div className={styles.center}>
+        <div className={styles.cosmosWrapper}>
 
-      {/* ── Scanline ────────────────────────────────────────── */}
-      <div
-        ref={scanRef}
-        aria-hidden
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          height: '1px',
-          pointerEvents: 'none',
-          zIndex: 2,
-          background: `linear-gradient(to right,
-            transparent 0%,
-            ${LIME}55 28%,
-            ${CREAM}99 50%,
-            ${LIME}55 72%,
-            transparent 100%)`,
-        }}
-      />
+          {/* THE — eyebrow above orbit */}
+          <div className={styles.eyebrow}>THE</div>
 
-      {/*
-       * ── Text wrapper ────────────────────────────────────────
-       * This is the zoom target (scale 1 → 24).
-       * will-change + backfaceVisibility = GPU compositing layer.
-       */}
-      <div
-        ref={textRef}
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          display: 'inline-block',
-          lineHeight: 1,
-          willChange: 'transform',
-          WebkitBackfaceVisibility: 'hidden',
-          backfaceVisibility: 'hidden',
-        }}
-      >
+          {/* Cosmos — 480×200 orbit stage */}
+          <div className={styles.cosmos}>
 
-        {/* Ghost base — letter outlines only (no fill), always visible */}
-        <div
-          aria-hidden
-          style={{
-            ...TEXT,
-            color: 'transparent',
-            WebkitTextStroke: '1px rgba(200,217,111,0.15)',
-          }}
-        >
-          THE PIVOT
+            {/* Layer 1 — full ellipse, dim (orbit back) */}
+            <svg
+              className={`${styles.orbitSvg} ${styles.orbitBack}`}
+              viewBox="0 0 480 200"
+              aria-hidden
+            >
+              <ellipse
+                cx="240" cy="100" rx="210" ry="72"
+                fill="none"
+                stroke="rgba(200,245,66,0.13)"
+                strokeWidth="1"
+                strokeDasharray="3 9"
+              />
+            </svg>
+
+            {/* Layer 2 — PIVOT wordmark */}
+            <div className={styles.wordmark}>
+              <div className={styles.pivot}>PIVOT</div>
+            </div>
+
+            {/* Layer 3 — top-half arc, brighter (depth: orbit passes behind PIVOT) */}
+            <svg
+              className={`${styles.orbitSvg} ${styles.orbitFront}`}
+              viewBox="0 0 480 200"
+              aria-hidden
+            >
+              <defs>
+                <clipPath id="pl-top-half">
+                  <rect x="0" y="0" width="480" height="100" />
+                </clipPath>
+              </defs>
+              <ellipse
+                cx="240" cy="100" rx="210" ry="72"
+                fill="none"
+                stroke="rgba(200,245,66,0.38)"
+                strokeWidth="1"
+                strokeDasharray="3 9"
+                clipPath="url(#pl-top-half)"
+              />
+            </svg>
+
+            {/* Layer 4 — gear on JS orbit path */}
+            <div className={styles.gearOrbit} ref={gearOrbitRef}>
+              <div className={styles.corona} aria-hidden />
+              <svg
+                className={styles.gearSvg}
+                viewBox="0 0 40 40"
+                width="22"
+                height="22"
+                aria-hidden
+              >
+                <defs>
+                  <filter id="pl-gg" x="-80%" y="-80%" width="260%" height="260%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                <circle
+                  cx="20" cy="20" r="14"
+                  fill="rgba(200,245,66,0.06)"
+                  filter="url(#pl-gg)"
+                />
+                <polygon
+                  points={GEAR_PTS}
+                  fill="none"
+                  stroke="#c8f542"
+                  strokeWidth="1.3"
+                  strokeLinejoin="round"
+                  filter="url(#pl-gg)"
+                />
+                <circle
+                  cx="20" cy="20" r="6"
+                  fill="none"
+                  stroke="#c8f542"
+                  strokeWidth="1"
+                  filter="url(#pl-gg)"
+                />
+                <circle cx="20" cy="20" r="2.2" fill="#c8f542" />
+              </svg>
+            </div>
+
+          </div>
         </div>
 
-        {/* Cream fill — clip-path sweeps left→right (fill phase) */}
-        <div
-          ref={revealRef}
-          style={{
-            ...TEXT,
-            position: 'absolute',
-            inset: 0,
-            color: CREAM,
-            textShadow: `0 0 22px rgba(200,217,111,0.2)`,
-          }}
-        >
-          THE PIVOT
+        {/* Phase label */}
+        <div className={styles.phase} ref={phaseRef}>
+          Initializing<span>_</span>
         </div>
-
-        {/*
-         * Destination-out window ─────────────────────────────
-         * opacity:0 during fill phase (no effect).
-         * At T_ZOOM_START fades to opacity:1 → text shape
-         * subtracts alpha from bgRef, punching a transparent
-         * window through the dark overlay.
-         * The real page content beneath shows through the letters.
-         * As scale reaches ~24, letters fill entire viewport →
-         * full page is revealed, seamlessly.
-         */}
-        <div
-          ref={cutoutRef}
-          aria-hidden
-          style={{
-            ...TEXT,
-            position: 'absolute',
-            inset: 0,
-            color: 'black',            // must be opaque — alpha is what cuts
-            mixBlendMode: 'destination-out' as React.CSSProperties['mixBlendMode'],
-            opacity: 0,
-          }}
-        >
-          THE PIVOT
-        </div>
-
       </div>
+
+      {/* Progress bar */}
+      <div className={styles.bar}>
+        <div className={styles.barFill} />
+      </div>
+
     </div>
   )
 }

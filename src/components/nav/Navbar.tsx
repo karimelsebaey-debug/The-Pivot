@@ -46,16 +46,41 @@ export function Navbar() {
         <Link
           href="/"
           style={{
-            fontFamily: 'var(--font-logo)',
-            fontSize: '1.3rem',
-            fontWeight: 800,
-            letterSpacing: '-0.04em',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            gap: '0.08em',
             lineHeight: 1,
-            whiteSpace: 'nowrap',
-            color: 'var(--color-ink)',
+            textDecoration: 'none',
+            userSelect: 'none',
           }}
         >
-          The Pivot
+          <span
+            style={{
+              fontFamily: 'var(--font-cormorant)',
+              fontSize: '0.875rem',
+              fontWeight: 300,
+              letterSpacing: '0.22em',
+              color: 'rgba(10, 33, 31, 0.42)',
+              textTransform: 'uppercase',
+              lineHeight: 1,
+            }}
+          >
+            The
+          </span>
+          <span
+            style={{
+              fontFamily: 'var(--font-cormorant)',
+              fontSize: '1.5rem',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              color: 'var(--color-ink)',
+              textTransform: 'uppercase',
+              lineHeight: 1,
+            }}
+          >
+            Pivot
+          </span>
         </Link>
 
         {/* Desktop nav */}

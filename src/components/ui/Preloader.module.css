@@ -1,0 +1,327 @@
+/* ── Root ────────────────────────────────────── */
+.root {
+  position: fixed;
+  inset: 0;
+  background: #06060a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  isolation: isolate;
+  overflow: hidden;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+/* ── Atmosphere layers ───────────────────────── */
+.grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 75% 75% at 50% 50%, transparent 32%, rgba(6,6,10,0.82) 100%);
+  pointer-events: none;
+}
+
+/* Soft starlight from upper-right */
+.starlight {
+  position: absolute;
+  top: -12%; right: -6%;
+  width: 62%; height: 62%;
+  background: radial-gradient(ellipse at 80% 18%, rgba(245,252,230,0.034) 0%, transparent 58%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Scanline ────────────────────────────────── */
+.scanline {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(200,245,66,0.07) 38%,
+    rgba(200,245,66,0.15) 50%,
+    rgba(200,245,66,0.07) 62%,
+    transparent 100%
+  );
+  animation: scan 2.8s ease-in-out 0.9s infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+@keyframes scan {
+  0%   { top: 7%;  opacity: 0; }
+  7%   { opacity: 1; }
+  93%  { opacity: 1; }
+  100% { top: 93%; opacity: 0; }
+}
+
+/* ── HUD corners ─────────────────────────────── */
+.hud {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.15);
+  z-index: 5;
+  animation: appear 0.5s ease 0.35s both;
+}
+.hudTl { top: 32px; left: 40px; }
+.hudTr { top: 32px; right: 40px; text-align: right; }
+.hudBl { bottom: 28px; left: 40px; }
+.hudBr { bottom: 28px; right: 40px; text-align: right; }
+
+/* Corner bracket marks */
+.hudTl::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: -6px;
+  width: 12px; height: 12px;
+  border-top: 1px solid rgba(200,245,66,0.22);
+  border-left: 1px solid rgba(200,245,66,0.22);
+}
+.hudTr::after {
+  content: '';
+  position: absolute;
+  top: -6px; right: -6px;
+  width: 12px; height: 12px;
+  border-top: 1px solid rgba(200,245,66,0.22);
+  border-right: 1px solid rgba(200,245,66,0.22);
+}
+.hudBl::before {
+  content: '';
+  position: absolute;
+  bottom: -6px; left: -6px;
+  width: 12px; height: 12px;
+  border-bottom: 1px solid rgba(200,245,66,0.22);
+  border-left: 1px solid rgba(200,245,66,0.22);
+}
+.hudBr::after {
+  content: '';
+  position: absolute;
+  bottom: -6px; right: -6px;
+  width: 12px; height: 12px;
+  border-bottom: 1px solid rgba(200,245,66,0.22);
+  border-right: 1px solid rgba(200,245,66,0.22);
+}
+
+/* ── Center composition ──────────────────────── */
+.center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  animation: appear 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.cosmosWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* THE eyebrow */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.9em;
+  text-transform: uppercase;
+  color: rgba(240,237,230,0.35);
+  margin-bottom: 0px;
+  padding-left: 0.9em;
+}
+
+/* ── Cosmos orbit stage ──────────────────────── */
+.cosmos {
+  position: relative;
+  width: 480px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Orbit SVG layers */
+.orbitSvg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.orbitBack  { z-index: 1; }
+.orbitFront { z-index: 3; }
+
+/* ── PIVOT wordmark ──────────────────────────── */
+.wordmark {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  user-select: none;
+}
+
+.pivot {
+  font-family: var(--font-cormorant);
+  font-size: clamp(74px, 10.5vw, 110px);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 0.86;
+  color: #f0ede6;
+  font-style: italic;
+  animation: textGlow 8s ease-in-out 1s infinite;
+}
+
+/* Green glow reflection synced to 8s orbit — sweeps left→top→right→bottom */
+@keyframes textGlow {
+  0%   { text-shadow: -16px 0 48px rgba(200,245,66,0.13); }
+  25%  { text-shadow:   0px 12px 40px rgba(200,245,66,0.06); }
+  50%  { text-shadow:  16px 0 48px rgba(200,245,66,0.13); }
+  75%  { text-shadow:   0px -12px 40px rgba(200,245,66,0.06); }
+  100% { text-shadow: -16px 0 48px rgba(200,245,66,0.13); }
+}
+
+/* ── Gear on orbit path ──────────────────────── */
+.gearOrbit {
+  position: absolute;
+  top: 0; left: 0;
+  width: 22px;
+  height: 22px;
+  z-index: 4;
+  /* transform driven by JS RAF orbit — works in all browsers */
+}
+
+/* Atmospheric corona haze */
+.corona {
+  position: absolute;
+  top: -19px; left: -19px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(200,245,66,0.30) 0%,
+    rgba(200,245,66,0.10) 38%,
+    transparent 72%
+  );
+  filter: blur(7px);
+  animation: coronaPulse 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes coronaPulse {
+  0%, 100% { transform: scale(1.0); opacity: 0.72; }
+  50%       { transform: scale(1.55); opacity: 1.0; }
+}
+
+/* Gear SVG — triple drop-shadow for glow depth */
+.gearSvg {
+  display: block;
+  position: relative;
+  filter:
+    drop-shadow(0 0 3px rgba(200,245,66,1.0))
+    drop-shadow(0 0 9px rgba(200,245,66,0.55))
+    drop-shadow(0 0 22px rgba(200,245,66,0.22));
+  animation: gearSpin 4s linear infinite;
+  transform-origin: 11px 11px;
+}
+
+@keyframes gearSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Phase label ─────────────────────────────── */
+.phase {
+  margin-top: 44px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(240,237,230,0.42);
+  height: 14px;
+  animation: appear 0.5s ease 0.9s both;
+}
+
+.phase span {
+  display: inline-block;
+  animation: blink 1.1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Progress bar ────────────────────────────── */
+.bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.03);
+  z-index: 5;
+  animation: appear 0.4s ease 0.15s both;
+}
+
+.barFill {
+  height: 100%;
+  width: 0%;
+  background: #c8f542;
+  animation: progress 3.0s cubic-bezier(0.77, 0, 0.175, 1) 0.25s forwards;
+  position: relative;
+}
+
+.barFill::after {
+  content: '';
+  position: absolute;
+  right: 0; top: -2px;
+  width: 40px; height: 5px;
+  background: linear-gradient(90deg, transparent, #c8f542);
+  filter: blur(2px);
+}
+
+@keyframes progress {
+  0%   { width: 0%; }
+  22%  { width: 40%; }
+  52%  { width: 66%; }
+  78%  { width: 87%; }
+  100% { width: 100%; }
+}
+
+/* ── Shared appear keyframe ──────────────────── */
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (max-width: 540px) {
+  .cosmosWrapper {
+    transform: scale(0.64);
+    transform-origin: center center;
+  }
+  .hudTl, .hudBl { left: 20px; }
+  .hudTr, .hudBr { right: 20px; }
+}
+
+/* ── Reduced motion ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .gearOrbit, .gearSvg, .corona { animation: none; }
+  .scanline { display: none; }
+  .pivot { animation: none; }
+  .barFill { animation: none; width: 100%; }
+  .phase span { animation: none; }
+  .center, .hud, .bar { animation: none; opacity: 1; transform: none; }
+}

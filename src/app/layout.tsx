@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Instrument_Serif, Inter_Tight, Plus_Jakarta_Sans } from 'next/font/google'
+import { Instrument_Serif, Inter_Tight, Plus_Jakarta_Sans, Cormorant_Garamond, DM_Mono } from 'next/font/google'
 import { LenisProvider } from '@/lib/lenis'
 import { Preloader } from '@/components/ui/Preloader'
 import './globals.css'
@@ -26,6 +26,21 @@ const plusJakarta = Plus_Jakarta_Sans({
   display: 'swap',
 })
 
+const cormorant = Cormorant_Garamond({
+  weight: ['300', '600'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const dmMono = DM_Mono({
+  weight: ['300', '400'],
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'THE PIVOT — The Turning Point For Your Creative Ambition',
   description:
@@ -45,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${interTight.variable} ${plusJakarta.variable}`}
+      className={`${instrumentSerif.variable} ${interTight.variable} ${plusJakarta.variable} ${cormorant.variable} ${dmMono.variable}`}
     >
       <body>
         <Preloader />

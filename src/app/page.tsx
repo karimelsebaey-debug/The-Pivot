@@ -1,7 +1,6 @@
 import { Navbar } from '@/components/nav/Navbar'
+import { VerticalLoopHero } from '@/components/sections/VerticalLoopHero'
 import { HeroCanvas } from '@/components/sections/HeroCanvas'
-import { Services } from '@/components/sections/Services'
-import { WorkGrid } from '@/components/sections/WorkGrid'
 import { Footer } from '@/components/sections/Footer'
 
 export default function Home() {
@@ -10,8 +9,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroCanvas />
-        <Services />
-        <WorkGrid />
+        <VerticalLoopHero />
       </main>
       <Footer />
     </>

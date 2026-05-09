@@ -149,7 +149,7 @@ export function HeroCanvas() {
               style={{
                 fontFamily: 'var(--font-display)',
                 fontStyle: 'italic',
-                fontSize: '1.15rem',
+                fontSize: '1.35rem',
                 color: 'var(--color-ink-muted)',
                 letterSpacing: '-0.01em',
                 marginBottom: '1.25rem',
@@ -182,12 +182,12 @@ export function HeroCanvas() {
               </span>
             </h1>
 
-            {/* Body — matches old Hero: 1.05rem, lh 1.7, display-italic emphasis */}
+            {/* Body — matches old Hero: 1.25rem, lh 1.7, display-italic emphasis */}
             <p
               ref={subRef}
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '1.05rem',
+                fontSize: '1.25rem',
                 fontWeight: 400,
                 lineHeight: 1.7,
                 letterSpacing: '-0.01em',
@@ -197,7 +197,7 @@ export function HeroCanvas() {
             >
               We transform ambitious ideas and needs into visual presence,
               specialized services, and digital solutions —{' '}
-              <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.2rem' }}>
+              <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.35rem' }}>
                 built to last, impossible to ignore.
               </em>
             </p>
