@@ -1,5 +1,6 @@
 import { ContactPage } from '@/components/sections/ContactPage'
 import { Navbar } from '@/components/nav/Navbar'
+import { Footer } from '@/components/sections/Footer'
 
 export const metadata = {
   title: 'Contact — THE PIVOT',
@@ -10,7 +11,10 @@ export default function Contact() {
   return (
     <>
       <Navbar />
-      <ContactPage />
+      <main>
+        <ContactPage />
+      </main>
+      <Footer />
     </>
   )
 }

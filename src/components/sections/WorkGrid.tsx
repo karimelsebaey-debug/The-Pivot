@@ -1,7 +1,9 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { useRef } from 'react'
+import Image from 'next/image'
+import { useGSAP } from '@gsap/react'
+import { gsap } from '@/lib/gsap'
 
 const WORK = [
   {
@@ -30,26 +32,22 @@ export function WorkGrid() {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card) => {
-        if (!card) return
-        gsap.from(card, {
-          opacity: 0,
-          y: 60,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        })
+  useGSAP(() => {
+    cardsRef.current.forEach((card) => {
+      if (!card) return
+      gsap.from(card, {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
       })
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+    })
+  }, { scope: sectionRef })
 
   return (
     <section
@@ -102,9 +100,11 @@ export function WorkGrid() {
                 className="relative overflow-hidden"
                 style={{ aspectRatio: '1 / 1' }}
               >
-                <img
+                <Image
                   src={item.placeholder}
                   alt={item.title}
+                  width={720}
+                  height={720}
                   className="w-full h-full object-cover work-img"
                 />
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Instrument_Serif, Inter_Tight, Plus_Jakarta_Sans, Cormorant_Garamond, DM_Mono } from 'next/font/google'
 import { LenisProvider } from '@/lib/lenis'
 import { Preloader } from '@/components/ui/Preloader'
+import { PageTransition } from '@/components/ui/PageTransition'
 import './globals.css'
 
 const instrumentSerif = Instrument_Serif({
@@ -64,7 +65,9 @@ export default function RootLayout({
     >
       <body>
         <Preloader />
-        <LenisProvider>{children}</LenisProvider>
+        <LenisProvider>
+          <PageTransition>{children}</PageTransition>
+        </LenisProvider>
       </body>
     </html>
   )

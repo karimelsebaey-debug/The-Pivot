@@ -1,20 +1,28 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { MegaDropdown } from './MegaDropdown'
 import { PillCTA } from '@/components/ui/PillCTA'
 
 export function Navbar() {
+  const pathname  = usePathname()
+  const isHome    = pathname === '/'
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
+    // Hero is pinned for ~280% scroll travel; stay transparent until past it
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 3.2)
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (closeTimer.current) clearTimeout(closeTimer.current)
+    }
   }, [])
 
   function openDropdown() {
@@ -30,10 +38,11 @@ export function Navbar() {
     <header
       style={{
         height: 'var(--header-height)',
-        backgroundColor: scrolled ? '#F2F4E7' : 'rgba(242, 244, 231, 0.88)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
+        backgroundColor: '#0A211F',
+        backdropFilter: 'none',
+        WebkitBackdropFilter: 'none',
+        borderBottom: scrolled ? '1px solid rgba(246,249,240,0.12)' : '1px solid transparent',
+        color: '#f6f9f0',
         transition: `background-color var(--t-std) var(--ease), border-color var(--t-std) var(--ease)`,
       }}
       className="fixed top-0 left-0 right-0 z-50 flex items-center"
@@ -43,44 +52,15 @@ export function Navbar() {
         style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: '0 var(--container-px)' }}
       >
         {/* Logo */}
-        <Link
-          href="/"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            gap: '0.08em',
-            lineHeight: 1,
-            textDecoration: 'none',
-            userSelect: 'none',
-          }}
-        >
-          <span
-            style={{
-              fontFamily: 'var(--font-cormorant)',
-              fontSize: '0.875rem',
-              fontWeight: 300,
-              letterSpacing: '0.22em',
-              color: 'rgba(10, 33, 31, 0.42)',
-              textTransform: 'uppercase',
-              lineHeight: 1,
-            }}
-          >
-            The
-          </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-cormorant)',
-              fontSize: '1.5rem',
-              fontWeight: 600,
-              letterSpacing: '-0.02em',
-              color: 'var(--color-ink)',
-              textTransform: 'uppercase',
-              lineHeight: 1,
-            }}
-          >
-            Pivot
-          </span>
+        <Link href="/" style={{ display: 'flex', textDecoration: 'none', userSelect: 'none' }}>
+          <Image
+            src="/logo.png"
+            alt="The Pivot"
+            width={80}
+            height={80}
+            style={{ filter: 'brightness(0) invert(1)', opacity: 0.9 }}
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}

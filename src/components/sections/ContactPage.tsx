@@ -9,9 +9,9 @@ import { gsap } from '@/lib/gsap'
 type Intent = 'project' | 'demo' | 'touch'
 
 const INTENTS: { key: Intent; label: string; sub: string }[] = [
-  { key: 'project', label: 'Start a Project',  sub: 'Brand, motion, digital'    },
-  { key: 'demo',    label: 'Book a Demo',       sub: 'See how we work'           },
-  { key: 'touch',   label: 'Get in Touch',      sub: 'Questions & partnerships'  },
+  { key: 'project', label: 'Start a Project',  sub: 'Brand, motion, digital'   },
+  { key: 'demo',    label: 'Book a Demo',       sub: 'See how we work'          },
+  { key: 'touch',   label: 'Get in Touch',      sub: 'Questions & partnerships' },
 ]
 
 // ─── Field ────────────────────────────────────────────────────────────────────
@@ -35,10 +35,10 @@ function Field({
   const [filled,  setFilled]  = useState(false)
 
   const borderColor = focused
-    ? 'var(--color-bg)'
+    ? 'var(--color-ink)'
     : filled
-    ? 'rgba(247,249,242,0.5)'
-    : 'rgba(247,249,242,0.22)'
+    ? 'rgba(10,33,31,0.5)'
+    : 'rgba(10,33,31,0.2)'
 
   const base: React.CSSProperties = {
     width: '100%',
@@ -49,7 +49,7 @@ function Field({
     fontFamily: 'var(--font-body)',
     fontSize: '1rem',
     fontWeight: 400,
-    color: 'var(--color-bg)',
+    color: 'var(--color-ink)',
     paddingBottom: '0.875rem',
     paddingTop: '0.25rem',
     transition: 'border-color 0.2s ease',
@@ -66,11 +66,11 @@ function Field({
           fontWeight: 600,
           letterSpacing: '0.22em',
           textTransform: 'uppercase',
-          color: 'var(--color-bg)',
+          color: 'var(--color-ink)',
           transition: 'color 0.2s ease',
         }}
       >
-        {label}{required && <span style={{ color: 'var(--color-accent)', marginLeft: 3 }}>*</span>}
+        {label}{required && <span style={{ color: 'var(--color-ink)', marginLeft: 3 }}>*</span>}
       </label>
 
       {multiline ? (
@@ -125,12 +125,36 @@ export function ContactPage() {
       }, '-=0.6')
   }, { scope: sectionRef })
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSending(true)
-    await new Promise(r => setTimeout(r, 1200))
-    setSending(false)
-    setSubmitted(true)
+
+    const form = e.currentTarget
+    const data = {
+      intent,
+      name:    (form.elements.namedItem('name')    as HTMLInputElement).value,
+      email:   (form.elements.namedItem('email')   as HTMLInputElement).value,
+      company: (form.elements.namedItem('company') as HTMLInputElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) {
+        const { error } = await res.json()
+        alert(error || 'Something went wrong. Please try again.')
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      alert('Network error. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -138,8 +162,8 @@ export function ContactPage() {
       ref={sectionRef}
       style={{
         minHeight: '100dvh',
-        background: 'var(--color-dark-bg)',
-        color: 'var(--color-bg)',
+        background: '#F2F4E7',
+        color: 'var(--color-ink)',
         display: 'flex',
         alignItems: 'stretch',
       }}
@@ -170,14 +194,14 @@ export function ContactPage() {
               fontSize: 'clamp(2.75rem, 5.5vw, 6rem)',
               lineHeight: 1.03,
               letterSpacing: '-0.025em',
-              color: 'var(--color-bg)',
+              color: 'var(--color-ink)',
             }}
           >
             <span className="block overflow-hidden">
               <span className="block">Let&apos;s build</span>
             </span>
             <span className="block" style={{ overflow: 'hidden', paddingBottom: '0.18em', marginBottom: '-0.18em' }}>
-              <span className="block italic" style={{ color: 'var(--color-accent)' }}>
+              <span className="block italic" style={{ color: 'var(--color-dark-bg)' }}>
                 something real.
               </span>
             </span>
@@ -191,7 +215,7 @@ export function ContactPage() {
                 fontSize: '0.65rem',
                 letterSpacing: '0.25em',
                 textTransform: 'uppercase',
-                color: 'rgba(247,249,242,0.45)',
+                color: 'rgba(10,33,31,0.45)',
                 marginBottom: 4,
               }}
             >
@@ -211,8 +235,8 @@ export function ContactPage() {
                     justifyContent: 'space-between',
                     padding: '18px 22px',
                     borderRadius: 14,
-                    border: `1px solid ${active ? 'rgba(247,249,242,0.55)' : 'rgba(247,249,242,0.1)'}`,
-                    background: active ? 'rgba(247,249,242,0.07)' : 'transparent',
+                    border: `1px solid ${active ? 'rgba(10,33,31,0.45)' : 'rgba(10,33,31,0.12)'}`,
+                    background: active ? 'rgba(10,33,31,0.05)' : 'transparent',
                     cursor: 'pointer',
                     textAlign: 'left',
                     transition: 'border-color 0.2s ease, background 0.2s ease',
@@ -223,7 +247,7 @@ export function ContactPage() {
                       style={{
                         fontFamily: 'var(--font-display)',
                         fontSize: 'clamp(1.1rem, 1.6vw, 1.35rem)',
-                        color: 'var(--color-bg)',
+                        color: 'var(--color-ink)',
                         letterSpacing: '-0.01em',
                         transition: 'color 0.2s ease',
                       }}
@@ -234,7 +258,7 @@ export function ContactPage() {
                       style={{
                         fontFamily: 'var(--font-body)',
                         fontSize: '0.8rem',
-                        color: 'rgba(247,249,242,0.45)',
+                        color: 'rgba(10,33,31,0.45)',
                         marginTop: 3,
                       }}
                     >
@@ -248,7 +272,7 @@ export function ContactPage() {
                       width: 8,
                       height: 8,
                       borderRadius: '50%',
-                      background: active ? 'var(--color-accent)' : 'rgba(247,249,242,0.2)',
+                      background: active ? 'var(--color-ink)' : 'rgba(10,33,31,0.18)',
                       flexShrink: 0,
                       transition: 'background 0.2s ease',
                     }}
@@ -261,7 +285,7 @@ export function ContactPage() {
           {/* Info */}
           <div
             style={{
-              borderTop: '1px solid rgba(247,249,242,0.1)',
+              borderTop: '1px solid rgba(10,33,31,0.1)',
               paddingTop: 32,
               display: 'flex',
               flexDirection: 'column',
@@ -279,7 +303,7 @@ export function ContactPage() {
                     fontSize: '0.62rem',
                     letterSpacing: '0.22em',
                     textTransform: 'uppercase',
-                    color: 'rgba(247,249,242,0.4)',
+                    color: 'rgba(10,33,31,0.4)',
                   }}
                 >
                   {label}
@@ -288,7 +312,7 @@ export function ContactPage() {
                   style={{
                     fontFamily: 'var(--font-body)',
                     fontSize: '0.95rem',
-                    color: 'var(--color-bg)',
+                    color: 'var(--color-ink)',
                   }}
                 >
                   {value}
@@ -339,7 +363,7 @@ export function ContactPage() {
                   fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
                   lineHeight: 1.1,
                   letterSpacing: '-0.02em',
-                  color: 'var(--color-bg)',
+                  color: 'var(--color-ink)',
                 }}
               >
                 Message received.<br />
@@ -349,7 +373,7 @@ export function ContactPage() {
                 style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: '0.95rem',
-                  color: 'rgba(247,249,242,0.6)',
+                  color: 'rgba(10,33,31,0.6)',
                   lineHeight: 1.7,
                 }}
               >
@@ -395,22 +419,32 @@ export function ContactPage() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 12,
-                    padding: '16px 32px',
+                    padding: '14px 28px',
                     borderRadius: 999,
-                    background: sending ? 'rgba(216,255,133,0.4)' : 'var(--color-accent)',
+                    background: sending ? 'rgba(216,255,133,0.5)' : 'var(--color-accent)',
                     color: 'var(--color-ink)',
                     fontFamily: 'var(--font-body)',
-                    fontSize: '0.9rem',
+                    fontSize: '0.875rem',
                     fontWeight: 600,
                     border: 'none',
                     cursor: sending ? 'not-allowed' : 'pointer',
-                    transition: 'opacity 0.2s ease, transform 0.15s ease',
+                    transition: 'background 0.25s ease, color 0.25s ease, transform 0.15s ease',
                     letterSpacing: '-0.01em',
                   }}
-                  onMouseEnter={e => { if (!sending) (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)' }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)' }}
-                  onMouseDown={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(0.98)' }}
-                  onMouseUp={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)' }}
+                  onMouseEnter={e => {
+                    if (!sending) {
+                      const el = e.currentTarget as HTMLElement
+                      el.style.background = 'var(--color-ink)'
+                      el.style.color = 'var(--color-accent)'
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.background = sending ? 'rgba(216,255,133,0.5)' : 'var(--color-accent)'
+                    el.style.color = 'var(--color-ink)'
+                  }}
+                  onMouseDown={e => { if (!sending) (e.currentTarget as HTMLElement).style.transform = 'scale(0.97)' }}
+                  onMouseUp={e => { if (!sending) (e.currentTarget as HTMLElement).style.transform = 'scale(1)' }}
                 >
                   {sending ? (
                     <>
@@ -418,8 +452,8 @@ export function ContactPage() {
                         style={{
                           width: 16,
                           height: 16,
-                          border: '2px solid rgba(10,33,31,0.3)',
-                          borderTopColor: 'var(--color-ink)',
+                          border: '2px solid rgba(242,244,231,0.3)',
+                          borderTopColor: '#F2F4E7',
                           borderRadius: '50%',
                           animation: 'spin 0.7s linear infinite',
                           display: 'inline-block',
@@ -448,7 +482,7 @@ export function ContactPage() {
 
         .contact-grid input::placeholder,
         .contact-grid textarea::placeholder {
-          color: rgba(247,249,242,0.28);
+          color: rgba(10,33,31,0.3);
         }
 
         @media (max-width: 768px) {

@@ -92,16 +92,16 @@ function IconCursor() {
 const COLUMNS = [
   {
     label: 'Specialized production',
-    href: '/capabilities/production',
+    href: '/capabilities/specialized-production',
     bg: '#0A211F',
     color: '#F7F9F2',
     services: [
-      { name: 'Motion Design',    desc: 'Animated social ads · Explainer animations · UI micro-animations', icon: <IconBolt /> },
-      { name: 'Email Creation',   desc: 'Email templates · Sequences · Newsletter design', icon: <IconMail /> },
-      { name: 'Web Design',       desc: 'Portfolio · Landing page · E-commerce design', icon: <IconCursor /> },
-      { name: 'Copywriting',      desc: 'Ad copy · Web & landing page copy · SEO blog articles', icon: <IconPen /> },
-      { name: 'Design Systems',   desc: 'Design token system · Component library · UI kit', icon: <IconGrid /> },
-      { name: 'Product Design',   desc: 'UX/UI design · Prototypes · MVP design', icon: <IconPhone /> },
+      { slug: 'motion-design',    name: 'Motion Design',    desc: 'Animated social ads · Explainer animations · UI micro-animations', icon: <IconBolt /> },
+      { slug: 'email-creation',   name: 'Email Creation',   desc: 'Email templates · Sequences · Newsletter design', icon: <IconMail /> },
+      { slug: 'web-design',       name: 'Web Design',       desc: 'Portfolio · Landing page · E-commerce design', icon: <IconCursor /> },
+      { slug: 'copywriting',      name: 'Copywriting',      desc: 'Ad copy · Web & landing page copy · SEO blog articles', icon: <IconPen /> },
+      { slug: 'design-systems',   name: 'Design Systems',   desc: 'Design token system · Component library · UI kit', icon: <IconGrid /> },
+      { slug: 'product-design',   name: 'Product Design',   desc: 'UX/UI design · Prototypes · MVP design', icon: <IconPhone /> },
     ],
   },
   {
@@ -110,25 +110,24 @@ const COLUMNS = [
     bg: '#1A4A40',
     color: '#F7F9F2',
     services: [
-      { name: 'Ad Creative',            desc: 'Static ads · Motion ads · Ad copy & hooks', icon: <IconTarget /> },
-      { name: 'Social Media Creative',  desc: 'Organic content · Paid social ads · Campaign concepts', icon: <IconGraph /> },
-      { name: 'Presentation Design',    desc: 'Custom decks · Templates · Infographics', icon: <IconGrid /> },
-      { name: 'Illustration Design',    desc: 'Brand illustrations · Iconography · Storyboarding', icon: <IconPen /> },
-      { name: 'Branding Services',      desc: 'Logo design · Brand identity kit · Guidelines', icon: <IconStar /> },
-      { name: 'eBooks & Report Design', desc: 'Long-form layout · Editorial design · Content formatting', icon: <IconLayers /> },
-      { name: 'Concept Creation',       desc: 'Campaign concepts · Big ideas · Creative briefs', icon: <IconBolt /> },
+      { slug: 'ad-creative',            name: 'Ad Creative',            desc: 'Static ads · Motion ads · Ad copy & hooks', icon: <IconTarget /> },
+      { slug: 'social-media-creative',  name: 'Social Media Creative',  desc: 'Organic content · Paid social ads · Campaign concepts', icon: <IconGraph /> },
+      { slug: 'presentation-design',    name: 'Presentation Design',    desc: 'Custom decks · Templates · Infographics', icon: <IconGrid /> },
+      { slug: 'illustration-design',    name: 'Illustration Design',    desc: 'Brand illustrations · Iconography · Storyboarding', icon: <IconPen /> },
+      { slug: 'branding-services',      name: 'Branding Services',      desc: 'Logo design · Brand identity kit · Guidelines', icon: <IconStar /> },
+      { slug: 'concept-creation',       name: 'Concept Creation',       desc: 'Campaign concepts · Big ideas · Creative briefs', icon: <IconBolt /> },
     ],
   },
   {
     label: 'AI services',
-    href: '/capabilities/ai',
+    href: '/capabilities/ai-services',
     bg: '#8FCCA8',
     color: '#0A211F',
     services: [
-      { name: 'AI-Powered Creative', desc: 'Brand image library · AI character development · Key art', icon: <IconStar /> },
-      { name: 'AI Consulting',       desc: 'AI tool stack audit · Workflow redesign · Team training', icon: <IconChat /> },
-      { name: 'Automation',          desc: 'Content automation · Reporting pipelines · Repurposing', icon: <IconBolt /> },
-      { name: 'Data Services',       desc: 'Data visualization · AI data analysis · Performance reports', icon: <IconGraph /> },
+      { slug: 'ai-powered-creative', name: 'AI-Powered Creative', desc: 'Brand image library · AI character development · Key art', icon: <IconStar /> },
+      { slug: 'ai-consulting',       name: 'AI Consulting',       desc: 'AI tool stack audit · Workflow redesign · Team training', icon: <IconChat /> },
+      { slug: 'automation',          name: 'Automation',          desc: 'Content automation · Reporting pipelines · Repurposing', icon: <IconBolt /> },
+      { slug: 'data-services',       name: 'Data Services',       desc: 'Data visualization · AI data analysis · Performance reports', icon: <IconGraph /> },
     ],
   },
   {
@@ -137,12 +136,12 @@ const COLUMNS = [
     bg: '#D8FF85',
     color: '#0A211F',
     services: [
-      { name: 'Campaign Strategy',    desc: 'Creative strategy · Campaign concepts · Multi-channel', icon: <IconTarget /> },
-      { name: 'Finance Expert',       desc: 'P&L analysis · Cash flow · Financial health assessment', icon: <IconGraph /> },
-      { name: 'Business Strategist',  desc: 'Growth strategy · Investment readiness · Cost optimization', icon: <IconBolt /> },
-      { name: 'P&L Expert',           desc: 'Revenue stream analysis · Margin optimization', icon: <IconLayers /> },
-      { name: 'Early Stage Recovery', desc: 'Pre-legal collection · Payment negotiation strategy', icon: <IconChat /> },
-      { name: 'Write-off Recovery',   desc: 'Vintage portfolio management · Written-off account strategy', icon: <IconStar /> },
+      { slug: 'campaign-strategy',    name: 'Campaign Strategy',    desc: 'Creative strategy · Campaign concepts · Multi-channel', icon: <IconTarget /> },
+      { slug: 'finance-expert',       name: 'Finance Expert',       desc: 'P&L analysis · Cash flow · Financial health assessment', icon: <IconGraph /> },
+      { slug: 'business-strategist',  name: 'Business Strategist',  desc: 'Growth strategy · Investment readiness · Cost optimization', icon: <IconBolt /> },
+      { slug: 'pl-expert',            name: 'P&L Expert',           desc: 'Revenue stream analysis · Margin optimization', icon: <IconLayers /> },
+      { slug: 'early-stage-recovery', name: 'Early Stage Recovery', desc: 'Pre-legal collection · Payment negotiation strategy', icon: <IconChat /> },
+      { slug: 'write-off-recovery',   name: 'Write-off Recovery',   desc: 'Vintage portfolio management · Written-off account strategy', icon: <IconStar /> },
     ],
   },
 ]
@@ -168,6 +167,8 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
           backgroundColor: 'var(--color-bg)',
           borderBottom: '1px solid var(--color-border)',
           boxShadow: '0 32px 64px rgba(10,33,31,0.10)',
+          maxHeight: 'calc(100vh - var(--header-height))',
+          overflowY: 'auto',
         }}
       >
         <div
@@ -182,7 +183,7 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
             <div
               key={col.label}
               style={{
-                padding: '28px 24px 32px',
+                padding: '4px 16px 12px',
                 borderRight: '1px solid var(--color-border)',
               }}
               className="last:border-r-0"
@@ -190,7 +191,7 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
               {/* Category header pill */}
               <Link
                 href={col.href}
-                className="pill-tag mb-6"
+                className="pill-tag mb-3"
                 style={{
                   backgroundColor: col.bg,
                   color: col.color,
@@ -198,14 +199,14 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
                   fontFamily: 'var(--font-body)',
                   fontStyle: 'normal',
                   fontWeight: 600,
-                  fontSize: '1rem',
-                  padding: '10px 20px',
+                  fontSize: '0.8rem',
+                  padding: '6px 14px',
                   whiteSpace: 'nowrap',
                 }}
               >
                 {col.label}
                 <span className="pill-arrow">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
                     <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
@@ -216,7 +217,7 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
                 {col.services.map((service, i) => (
                   <li key={service.name}>
                     <Link
-                      href={`/capabilities/${service.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+                      href={`/services/${service.slug}`}
                       className="dropdown-row"
                       style={{ borderTop: i === 0 ? 'none' : '1px solid var(--color-border)' }}
                     >
@@ -224,7 +225,7 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
                         <p className="dropdown-row-title">{service.name}</p>
                         <p className="dropdown-row-desc">{service.desc}</p>
                       </div>
-                      <span className="dropdown-row-icon">{service.icon}</span>
+                      <span className="dropdown-row-icon" style={{ width: 16, height: 16 }}>{service.icon}</span>
                     </Link>
                   </li>
                 ))}

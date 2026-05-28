@@ -23,13 +23,14 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
     setLenis(instance)
 
-    instance.on('scroll', ScrollTrigger.update)
+    instance.on('scroll', ScrollTrigger.update as () => void)
 
     const rafCb = (time: number) => instance.raf(time * 1000)
     gsap.ticker.add(rafCb)
     gsap.ticker.lagSmoothing(0)
 
     return () => {
+      instance.off('scroll', ScrollTrigger.update as () => void)
       instance.destroy()
       gsap.ticker.remove(rafCb)
     }

@@ -21,16 +21,16 @@
 }
 
 :root {
-  --background: #F2F4E7;
+  --background: #DADECF;
   --foreground: #0A211F;
-  --card: #F2F4E7;
+  --card: #DADECF;
   --card-foreground: #0A211F;
-  --popover: #F2F4E7;
+  --popover: #DADECF;
   --popover-foreground: #0A211F;
   --primary: oklch(0.953 0.1051 123.71);
   --primary-foreground: #0A211F;
   --secondary: oklch(0.2322 0.0201 212.57);
-  --secondary-foreground: #F2F4E7;
+  --secondary-foreground: #DADECF;
   --muted: rgba(0,0,0,0.04);
   --muted-foreground: #4a7a76;
   --accent: rgba(0,0,0,0.04);
@@ -46,7 +46,7 @@
    DESIGN TOKENS — superside.com reference
 ───────────────────────────────────────── */
 :root {
-  --color-bg:        #F2F4E7;
+  --color-bg:        #DADECF;
   --color-ink:       #0A211F;
   --color-accent:    #D8FF85;
   --color-dark-bg:   #12211D;
@@ -56,7 +56,7 @@
   --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
   --font-body:    'Inter Tight', Inter, system-ui, sans-serif;
 
-  --header-height: 56px;
+  --header-height: 80px;
   --container-max: 1216px;
   --layout-max:    1920px;
   --section-py:    88px;
@@ -140,6 +140,19 @@ html.lenis, html.lenis body { height: auto; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 @keyframes pulse { 50% { opacity: 0.5; } }
 
+@keyframes mouse-dot-scroll {
+  0%   { transform: translateY(0);    opacity: 0.7; }
+  50%  { transform: translateY(13px); opacity: 0; }
+  51%  { transform: translateY(0);    opacity: 0; }
+  80%  { transform: translateY(0);    opacity: 0.7; }
+  100% { transform: translateY(0);    opacity: 0.7; }
+}
+@keyframes scroll-line-draw {
+  0%   { transform: scaleY(0); opacity: 0; }
+  40%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+
 /* ─────────────────────────────────────────
    UTILITIES
 ───────────────────────────────────────── */
@@ -184,9 +197,9 @@ html.lenis, html.lenis body { height: auto; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 12px 8px;
-  border-radius: 8px;
+  gap: 8px;
+  padding: 7px 6px;
+  border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.18s var(--ease), transform 0.18s var(--ease);
   will-change: transform;
@@ -196,15 +209,15 @@ html.lenis, html.lenis body { height: auto; }
   transform: translateX(3px);
 }
 .dropdown-row-title {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.25;
-  margin-bottom: 2px;
+  line-height: 1.2;
+  margin-bottom: 1px;
   color: var(--color-ink);
 }
 .dropdown-row-desc {
-  font-size: 0.875rem;
-  line-height: 1.4;
+  font-size: 0.75rem;
+  line-height: 1.35;
   color: var(--color-ink-muted);
 }
 .dropdown-row-icon {
@@ -333,3 +346,50 @@ html.lenis, html.lenis body { height: auto; }
 .cta-pill-icon .arr-in  { transform: translate(-14px, 14px); opacity: 0; }
 .cta-pill:hover .cta-pill-icon .arr-out { transform: translate(14px, -14px); opacity: 0; }
 .cta-pill:hover .cta-pill-icon .arr-in  { transform: translate(0, 0); opacity: 1; }
+
+/* ─────────────────────────────────────────
+   TEXT-COLOR — 21st.dev cycling gradient (hero h1 only)
+───────────────────────────────────────── */
+
+@keyframes gradient-foreground-1 {
+  from, 16.667%, to { opacity: 1; }
+  33.333%, 83.333% { opacity: 0; }
+}
+@keyframes gradient-foreground-2 {
+  from, to         { opacity: 0; }
+  33.333%, 50%     { opacity: 1; }
+  16.667%, 66.667% { opacity: 0; }
+}
+@keyframes gradient-foreground-3 {
+  from, 50%, to    { opacity: 0; }
+  66.667%, 83.333% { opacity: 1; }
+}
+@keyframes gradient-background-1 {
+  from, 16.667%, to { opacity: 0; }
+  25%, 91.667%      { opacity: 1; }
+}
+@keyframes gradient-background-2 {
+  from, to         { opacity: 1; }
+  33.333%, 50%     { opacity: 0; }
+  25%, 58.333%     { opacity: 1; }
+}
+@keyframes gradient-background-3 {
+  from, 58.333%, 91.667%, to { opacity: 1; }
+  66.667%, 83.333%           { opacity: 0; }
+}
+
+.hero-text-fg-1 { animation: gradient-foreground-1 8s infinite; }
+.hero-text-fg-2 { animation: gradient-foreground-2 8s infinite; animation-delay: 0.8s; }
+.hero-text-fg-3 { animation: gradient-foreground-3 8s infinite; animation-delay: 1.6s; }
+
+.hero-text-bg-1::before,
+.hero-text-bg-2::before,
+.hero-text-bg-3::before {
+  content: attr(data-content);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-text-bg-1::before { animation: gradient-background-1 8s infinite; }
+.hero-text-bg-2::before { animation: gradient-background-2 8s infinite; animation-delay: 0.8s; }
+.hero-text-bg-3::before { animation: gradient-background-3 8s infinite; animation-delay: 1.6s; }

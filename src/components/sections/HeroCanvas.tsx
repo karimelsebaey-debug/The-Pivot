@@ -1,16 +1,15 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useGSAP } from '@gsap/react'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
 import { PillCTA } from '@/components/ui/PillCTA'
+import { TextColor } from '@/components/ui/text-color'
 
-/* Use frames 0-38 only — exclude 039 & 040 (final cinematic frames) */
-const TOTAL    = 39
+const TOTAL    = 60
 const HEADER_H = 56
-/* Sampled from frames_veo3 — matches sketch paper exactly */
-const BG       = '#F2F4E7'
+const BG       = '#DADECF'
 
 const frameSrc = (i: number) =>
   `/frames-hero/frame_${String(i).padStart(3, '0')}.jpg`
@@ -18,28 +17,38 @@ const frameSrc = (i: number) =>
 export function HeroCanvas() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef  = useRef<HTMLCanvasElement>(null)
-  const line1Ref   = useRef<HTMLSpanElement>(null)
-  const line2Ref   = useRef<HTMLSpanElement>(null)
-  const line3Ref   = useRef<HTMLSpanElement>(null)
+  const line1Ref   = useRef<HTMLHeadingElement>(null)
   const subRef     = useRef<HTMLParagraphElement>(null)
-  const ctaRef     = useRef<HTMLDivElement>(null)
-  const eyebrowRef = useRef<HTMLParagraphElement>(null)
+  const ctaRef          = useRef<HTMLDivElement>(null)
+  const eyebrowRef      = useRef<HTMLParagraphElement>(null)
+  const scrollIndRef    = useRef<HTMLDivElement>(null)
 
   const imgs     = useRef<HTMLImageElement[]>([])
   const frameIdx = useRef(0)
   const logical  = useRef({ w: 0, h: 0 })
 
-  /* ── Preload frames ───────────────────────────────────── */
+  const [loadProgress, setLoadProgress] = useState(0)
+  const [loaded, setLoaded] = useState(false)
+
+  /* ── Preload all frames with progress ── */
   useEffect(() => {
-    imgs.current = Array.from({ length: TOTAL }, (_, i) => {
+    let loadedCount = 0
+    const images: HTMLImageElement[] = Array.from({ length: TOTAL }, (_, i) => {
       const img = new Image()
       img.src = frameSrc(i)
-      if (i === 0) img.onload = () => drawFrame(0)
+      const onDone = () => {
+        loadedCount++
+        setLoadProgress(loadedCount / TOTAL)
+        if (loadedCount === TOTAL) setLoaded(true)
+        if (i === 0 && img.complete && img.naturalWidth > 0) drawFrame(0)
+      }
+      img.onload = onDone
+      img.onerror = onDone
       return img
     })
+    imgs.current = images
   }, [])
 
-  /* ── Draw ─────────────────────────────────────────────── */
   function drawFrame(idx: number) {
     const canvas = canvasRef.current
     const img    = imgs.current[idx]
@@ -52,18 +61,16 @@ export function HeroCanvas() {
     ctx.fillStyle = BG
     ctx.fillRect(0, 0, w, h)
 
-    /* object-fit: contain — full frame, slight right bias for editorial composition */
-    const ia = img.naturalWidth / (img.naturalHeight || 1)
-    const ca = w / h
-    let dw: number, dh: number, dx: number, dy: number
-    if (ia > ca) {
-      dw = w; dh = w / ia; dx = 0; dy = (h - dh) / 2
-    } else {
-      dh = h; dw = h * ia
-      /* Push tower toward right (editorial weight) — 65% from left center */
-      dx = (w - dw) * 0.62
-      dy = 0
-    }
+    /* Contain: full building visible, no clipping. BG fill blends with sky color. */
+    const availH = h - HEADER_H
+    const scaleW = w / img.naturalWidth
+    const scaleH = availH / img.naturalHeight
+    const scale  = Math.min(scaleW, scaleH)
+
+    const dw = Math.round(img.naturalWidth  * scale)
+    const dh = Math.round(img.naturalHeight * scale)
+    const dx = Math.round((w - dw) / 2)
+    const dy = Math.round(HEADER_H + (availH - dh) / 2)
 
     ctx.drawImage(img, dx, dy, dw, dh)
   }
@@ -80,20 +87,20 @@ export function HeroCanvas() {
     drawFrame(frameIdx.current)
   }
 
-  /* ── GSAP ─────────────────────────────────────────────── */
   useGSAP(() => {
     resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
+    window.addEventListener('resize', resizeCanvas, { passive: true })
 
+    /* Entry animation */
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
     tl.from(eyebrowRef.current, { opacity: 0, y: 12, duration: 0.8 })
-      .from([line1Ref.current, line2Ref.current, line3Ref.current], {
-        yPercent: 110, opacity: 0, stagger: 0.1, duration: 1.1,
-      }, '-=0.5')
-      .from(subRef.current,    { opacity: 0, y: 16, duration: 0.8 }, '-=0.5')
-      .from(ctaRef.current,    { opacity: 0, y: 16, duration: 0.7 }, '-=0.4')
-      .from(canvasRef.current, { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
+      .from(line1Ref.current,   { opacity: 0, y: 30, duration: 1.1 }, '-=0.5')
+      .from(subRef.current,     { opacity: 0, y: 16, duration: 0.8 }, '-=0.5')
+      .from(ctaRef.current,       { opacity: 0, y: 16, duration: 0.7 }, '-=0.4')
+      .from(scrollIndRef.current, { opacity: 0, y: 12, duration: 0.8 }, '-=0.2')
+      .from(canvasRef.current,    { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
 
+    /* Scroll-driven frame scrub */
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top top',
@@ -114,212 +121,235 @@ export function HeroCanvas() {
     return () => window.removeEventListener('resize', resizeCanvas)
   }, { scope: sectionRef })
 
-  /* ── Render ───────────────────────────────────────────── */
   return (
     <section
       ref={sectionRef}
-      style={{
-        height: '100vh',
-        overflow: 'hidden',
-        backgroundColor: BG,
-      }}
+      style={{ position: 'relative', height: '100vh', overflow: 'hidden', backgroundColor: BG }}
     >
-      {/* ── Desktop ──────────────────────────────────────── */}
+      {/* ── Loading bar ── */}
+      {!loaded && (
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          height: '3px',
+          width: `${loadProgress * 100}%`,
+          backgroundColor: 'var(--color-accent)',
+          zIndex: 10,
+          transition: 'width 0.1s linear',
+          pointerEvents: 'none',
+        }} />
+      )}
+
+      {/* ── Canvas — scroll-driven 000→119 ── */}
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          display: 'block',
+        }}
+      />
+
+      {/* Left gradient — text readability on desktop */}
+      <div aria-hidden className="hidden md:block" style={{
+        position: 'absolute',
+        inset: 0,
+        background: `linear-gradient(to right, ${BG} 0%, ${BG} 32%, rgba(218,222,207,0.88) 46%, rgba(218,222,207,0.4) 58%, transparent 70%)`,
+        pointerEvents: 'none',
+        zIndex: 1,
+      }} />
+
+      {/* Right gradient — blends frame sky into page BG */}
+      <div aria-hidden style={{
+        position: 'absolute',
+        inset: 0,
+        background: `linear-gradient(to left, ${BG} 0%, rgba(218,222,207,0.7) 15%, transparent 35%)`,
+        pointerEvents: 'none',
+        zIndex: 1,
+      }} />
+
+      {/* ── Desktop text overlay ── */}
       <div
-        className="hidden md:grid h-full"
-        style={{ gridTemplateColumns: '45% 55%' }}
+        className="hidden md:flex flex-col"
+        style={{
+          position: 'absolute',
+          top: 0, left: 0, bottom: 0,
+          width: '48%',
+          padding: `${HEADER_H + 8}px clamp(24px, 3vw, 48px) clamp(36px, 5vh, 52px) clamp(32px, 4vw, 64px)`,
+          zIndex: 3,
+        }}
       >
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
-        {/* LEFT — text column */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            padding: `${HEADER_H + 8}px clamp(24px, 3vw, 48px) clamp(36px, 5vh, 52px) clamp(32px, 4vw, 64px)`,
-            minHeight: 0,
-          }}
-        >
+          <p ref={eyebrowRef} style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontSize: '1.35rem',
+            color: 'var(--color-ink)',
+            opacity: 0.55,
+            letterSpacing: '-0.01em',
+            marginBottom: '1.25rem',
+          }}>
+            Creative Collective
+          </p>
 
-          {/* ── Text block — fills remaining height, centres content ── */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h1 ref={line1Ref} style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(3rem, 5.6vw, 7rem)',
+            lineHeight: 1.05,
+            letterSpacing: '-0.02em',
+            color: 'var(--color-ink)',
+            marginBottom: '1.5rem',
+          }}>
+            <TextColor words={['The Turning', 'Point For Your', 'Creative Ambition.']} />
+          </h1>
 
-            {/* Eyebrow */}
-            <p
-              ref={eyebrowRef}
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontStyle: 'italic',
-                fontSize: '1.35rem',
-                color: 'var(--color-ink-muted)',
-                letterSpacing: '-0.01em',
-                marginBottom: '1.25rem',
-              }}
-            >
-              Creative Collective
-            </p>
-
-            {/* Heading — matches old Hero: 8vw full-width → ~5.6vw in 45% col */}
-            <h1
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(3rem, 5.6vw, 7rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.02em',
-                color: 'var(--color-ink)',
-                marginBottom: '1.5rem',
-              }}
-            >
-              <span className="block overflow-hidden">
-                <span ref={line1Ref} className="block">The Turning</span>
-              </span>
-              <span className="block overflow-hidden">
-                <span ref={line2Ref} className="block">Point For Your</span>
-              </span>
-              <span className="block overflow-hidden">
-                <span ref={line3Ref} className="block italic">
-                  Creative Ambition.
-                </span>
-              </span>
-            </h1>
-
-            {/* Body — matches old Hero: 1.25rem, lh 1.7, display-italic emphasis */}
-            <p
-              ref={subRef}
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '1.25rem',
-                fontWeight: 400,
-                lineHeight: 1.7,
-                letterSpacing: '-0.01em',
-                color: 'var(--color-ink)',
-                maxWidth: '480px',
-              }}
-            >
-              We transform ambitious ideas and needs into visual presence,
-              specialized services, and digital solutions —{' '}
-              <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.35rem' }}>
-                built to last, impossible to ignore.
-              </em>
-            </p>
-
-          </div>
-
-          {/* ── CTAs — always anchored at column bottom ── */}
-          <div
-            ref={ctaRef}
-            style={{ display: 'flex', alignItems: 'center', gap: '28px', flexShrink: 0 }}
-          >
-            <PillCTA href="#work" label="See Our Work" />
-            <Link
-              href="/contact"
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.9rem',
-                fontWeight: 600,
-                color: 'var(--color-ink)',
-                letterSpacing: '-0.01em',
-                textDecoration: 'none',
-                opacity: 0.8,
-              }}
-              className="link-underline"
-            >
-              Start a Project →
-            </Link>
-          </div>
+          <p ref={subRef} style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: '1.15rem',
+            fontWeight: 400,
+            lineHeight: 1.7,
+            letterSpacing: '-0.01em',
+            maxWidth: '480px',
+            background: 'linear-gradient(to right, #082010 0%, #173F35 50%, #546D5D 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>
+            We transform ambitious ideas and needs into visual presence,
+            specialized services, and digital solutions —{' '}
+            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.3rem' }}>
+              built to last, impossible to ignore.
+            </em>
+          </p>
 
         </div>
 
-        {/* RIGHT — canvas column */}
-        <div
-          style={{
-            position: 'relative',
-            overflow: 'hidden',
-            backgroundColor: BG,
-          }}
-        >
-          {/* Canvas — full column height, no top offset so tower reaches top */}
-          <canvas
-            ref={canvasRef}
+        <div ref={ctaRef} style={{ display: 'flex', alignItems: 'center', gap: '28px', flexShrink: 0 }}>
+          <PillCTA href="#work" label="See Our Work" />
+          <Link
+            href="/contact"
             style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              display: 'block',
-              /* CSS mask: smooth fade left edge into page background */
-              WebkitMaskImage:
-                'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 8%, black 22%)',
-              maskImage:
-                'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 8%, black 22%)',
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              color: 'var(--color-ink)',
+              letterSpacing: '-0.01em',
+              textDecoration: 'none',
+              opacity: 0.8,
             }}
-          />
-
-          {/* Top fade — covers area behind the fixed navbar */}
-          <div
-            aria-hidden
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: `${HEADER_H + 40}px`,
-              background: `linear-gradient(to bottom, ${BG} 0%, transparent 100%)`,
-              pointerEvents: 'none',
-              zIndex: 2,
-            }}
-          />
+            className="link-underline"
+          >
+            Start a Project →
+          </Link>
         </div>
       </div>
 
-      {/* ── Mobile ───────────────────────────────────────── */}
+      {/* ── Mobile text overlay ── */}
       <div
         className="md:hidden flex flex-col justify-center h-full"
         style={{
+          position: 'relative',
           padding: `${HEADER_H + 24}px clamp(20px, 5vw, 40px) 48px`,
-          backgroundColor: BG,
+          zIndex: 3,
+          background: `linear-gradient(to bottom, ${BG} 0%, rgba(218,222,207,0.75) 60%, rgba(218,222,207,0.4) 100%)`,
         }}
       >
-        <p
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontStyle: 'italic',
-            fontSize: '1rem',
-            color: 'var(--color-ink-muted)',
-            marginBottom: '0.875rem',
-          }}
-        >
+        <p style={{
+          fontFamily: 'var(--font-display)',
+          fontStyle: 'italic',
+          fontSize: '1rem',
+          color: 'var(--color-ink)',
+          opacity: 0.55,
+          marginBottom: '0.875rem',
+        }}>
           Creative Collective
         </p>
-        <h1
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2.4rem, 9vw, 3.5rem)',
-            lineHeight: 1.06,
-            letterSpacing: '-0.025em',
-            color: 'var(--color-ink)',
-            marginBottom: '1.25rem',
-          }}
-        >
+        <h1 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(2.4rem, 9vw, 3.5rem)',
+          lineHeight: 1.06,
+          letterSpacing: '-0.025em',
+          color: 'var(--color-ink)',
+          marginBottom: '1.25rem',
+        }}>
           The Turning Point For Your{' '}
           <em style={{ fontStyle: 'italic' }}>Creative Ambition.</em>
         </h1>
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: '0.95rem',
-            lineHeight: 1.75,
-            opacity: 0.65,
-            marginBottom: '1.75rem',
-            maxWidth: '420px',
-          }}
-        >
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: '0.95rem',
+          lineHeight: 1.75,
+          color: 'var(--color-ink)',
+          opacity: 0.7,
+          marginBottom: '1.75rem',
+          maxWidth: '420px',
+        }}>
           We transform ambitious ideas into visual presence and digital
           solutions —{' '}
-          <em style={{ fontStyle: 'italic', fontWeight: 600 }}>built to last,</em>{' '}
-          <em style={{ fontStyle: 'italic', fontWeight: 700 }}>impossible to ignore.</em>
+          <em style={{ fontStyle: 'italic', fontWeight: 700 }}>built to last, impossible to ignore.</em>
         </p>
         <PillCTA href="#work" label="See Our Work" />
       </div>
+
+      {/* ── Scroll indicator — desktop only ── */}
+      <div
+        ref={scrollIndRef}
+        aria-hidden
+        className="hidden md:flex"
+        style={{
+          position: 'absolute',
+          left: 'calc(44% + 16px)',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 4,
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        {/* Vertical label */}
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: '0.58rem',
+          fontWeight: 600,
+          letterSpacing: '0.24em',
+          textTransform: 'uppercase',
+          color: 'var(--color-ink)',
+          opacity: 0.45,
+          writingMode: 'vertical-rl',
+          transform: 'rotate(180deg)',
+          marginBottom: '14px',
+          lineHeight: 1,
+        }}>
+          Scroll Down to Pivot
+        </p>
+
+        {/* Animated line */}
+        <div style={{
+          width: '1px',
+          height: '52px',
+          background: `linear-gradient(to bottom, var(--color-ink), transparent)`,
+          opacity: 0.3,
+          transformOrigin: 'top',
+          animation: 'scroll-line-draw 1.2s ease-out forwards',
+          marginBottom: '6px',
+        }} />
+
+        {/* Mouse scroll icon */}
+        <svg width="22" height="36" viewBox="0 0 22 36" fill="none">
+          <rect x="0.7" y="0.7" width="20.6" height="34.6" rx="10.3"
+            stroke="var(--color-ink)" strokeWidth="1.1" opacity="0.35"/>
+          <circle cx="11" cy="10" r="2.2"
+            fill="var(--color-ink)"
+            style={{ animation: 'mouse-dot-scroll 2s ease-in-out infinite' }}/>
+        </svg>
+      </div>
+
     </section>
   )
 }

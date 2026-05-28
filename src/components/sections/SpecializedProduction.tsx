@@ -1,7 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import type { CSSProperties } from 'react'
+
+function ArrowUpRight({ size = 15, style, className }: { size?: number; style?: CSSProperties; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 15 15" fill="none" style={style} className={className}>
+      <path d="M3 12L12 3M12 3H5M12 3V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
 
 export function SpecializedProduction() {
   return (
@@ -57,10 +65,10 @@ export function SpecializedProduction() {
 
         <div>
           <Link href="/contact" className="cta-pill">
-            <span className="cta-pill-label" style={{ backgroundColor: '#0A211F', color: 'var(--color-dark-bg)' }}>
+            <span className="cta-pill-label" style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-ink)' }}>
               Get Started
             </span>
-            <div className="cta-pill-icon" style={{ backgroundColor: '#0A211F', color: 'var(--color-dark-bg)' }}>
+            <div className="cta-pill-icon" style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-ink)' }}>
               <ArrowUpRight className="arr-out" size={15} />
               <ArrowUpRight className="arr-in" size={15} />
             </div>

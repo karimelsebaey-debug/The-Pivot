@@ -3,53 +3,33 @@
 import { useEffect, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
+import { useLenis } from '@/lib/lenis'
 import { PillCTA } from '@/components/ui/PillCTA'
 
-// ─── Card data ────────────────────────────────────────────────────────────────
+// ─── Video card data ───────────────────────────────────────────────────────────
 
 const CARDS = [
-  { id: '1', bg: '#1E3A34', accent: '#D8FF85', label: 'Brand Identity' },
-  { id: '2', bg: '#2A1F3D', accent: '#A78BFA', label: 'Motion Design' },
-  { id: '3', bg: '#3A2010', accent: '#FB923C', label: 'Ad Creative' },
-  { id: '4', bg: '#0F2D2A', accent: '#34D399', label: 'UI / UX' },
-  { id: '5', bg: '#1A1A2E', accent: '#60A5FA', label: 'Social Media' },
-  { id: '6', bg: '#2D1A1A', accent: '#F87171', label: 'Print & OOH' },
-  { id: '7', bg: '#1A2D1A', accent: '#86EFAC', label: 'Video Editing' },
+  { id: '1',  src: '/videos/loop/app-ad.mp4',       label: 'App Ad' },
+  { id: '2',  src: '/videos/loop/fast-food-ad.mp4', label: 'Fast Food Ad' },
+  { id: '3',  src: '/videos/loop/gourmet-ad.mp4',   label: 'Gourmet Ad' },
+  { id: '4',  src: '/videos/loop/dashboard-ad.mp4', label: 'Dashboard Ad' },
+  { id: '5',  src: '/videos/loop/jewelry-ad.mp4',   label: 'Jewelry Ad' },
+  { id: '6',  src: '/videos/loop/saas-ad.mp4',      label: 'SaaS Ad' },
+  { id: '7',  src: '/videos/loop/sneakers-ad.mp4',  label: 'Sneakers Ad' },
+  { id: '8',  src: '/videos/loop/eyeliner-ad.mp4',  label: 'UGC Eyeliner' },
+  { id: '9',  src: '/videos/loop/fashion-ad.mp4',   label: 'Fashion Ad' },
+  { id: '10', src: '/videos/loop/makeup-ad.mp4',    label: 'Unboxing Ad' },
+  { id: '11', src: '/videos/loop/website-ad.mp4',   label: 'Website Ad' },
+  { id: '12', src: '/videos/loop/redesign-ad.mp4',  label: 'Redesign Ad' },
+  { id: '13', src: '/videos/loop/eyeliner-ad-2.mp4',label: 'UGC Ad' },
+  { id: '14', src: '/videos/loop/website-ad-2.mp4', label: 'Website Ad' },
 ]
 
-const CARD_H = 210
-const GAP    = 14
+const CARD_H = 280
+const GAP    = 12
 const ITEM_H = CARD_H + GAP
 
 const TOTAL = (cards: typeof CARDS) => cards.length * ITEM_H
-
-// ─── Decorative SVG shape ─────────────────────────────────────────────────────
-
-function CardDecor({ accent, index }: { accent: string; index: number }) {
-  const n = index % 3
-  if (n === 0)
-    return (
-      <svg className="absolute inset-0 m-auto" width="72" height="72" fill="none">
-        <circle cx="36" cy="36" r="28" stroke={accent} strokeWidth="1.5" opacity=".35" />
-        <circle cx="36" cy="36" r="14" fill={accent} opacity=".12" />
-      </svg>
-    )
-  if (n === 1)
-    return (
-      <svg className="absolute inset-0 m-auto" width="72" height="72" fill="none">
-        <rect x="12" y="12" width="48" height="48" rx="4"
-          stroke={accent} strokeWidth="1.5" opacity=".35"
-          transform="rotate(15 36 36)" />
-      </svg>
-    )
-  return (
-    <svg className="absolute inset-0 m-auto" width="72" height="72" fill="none">
-      <polygon points="36,6 66,58 6,58"
-        stroke={accent} strokeWidth="1.5" opacity=".35"
-        fill={accent} fillOpacity=".08" />
-    </svg>
-  )
-}
 
 // ─── Infinite column ──────────────────────────────────────────────────────────
 
@@ -98,13 +78,28 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity }: ColumnPr
         {repeated.map((card, i) => (
           <div
             key={`${card.id}-${i}`}
-            className="relative w-full overflow-hidden rounded-2xl"
-            style={{ height: CARD_H, marginBottom: GAP, background: card.bg }}
+            className="relative w-full overflow-hidden rounded-2xl group"
+            style={{ height: CARD_H, marginBottom: GAP, background: '#0A211F' }}
           >
-            <CardDecor accent={card.accent} index={i} />
+            <video
+              src={card.src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            {/* Bottom label overlay */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: 'linear-gradient(to top, rgba(10,33,31,0.7) 0%, transparent 50%)',
+              }}
+            />
             <span
               className="absolute bottom-3 left-3 font-mono uppercase"
-              style={{ fontSize: 10, letterSpacing: '0.22em', color: card.accent, opacity: 0.7 }}
+              style={{ fontSize: 9, letterSpacing: '0.22em', color: '#D8FF85', opacity: 0.8 }}
             >
               {card.label}
             </span>
@@ -115,13 +110,15 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity }: ColumnPr
   )
 }
 
-// ─── VerticalLoopHero ─────────────────────────────────────────────────────────
+// ─── Column splits ─────────────────────────────────────────────────────────────
+
+const COL_1 = CARDS.slice(0,  5)
+const COL_2 = CARDS.slice(5,  9)
+const COL_3 = CARDS.slice(9, 14)
 
 const MASK = 'linear-gradient(to bottom, transparent 0%, black 13%, black 87%, transparent 100%)'
 
-const COL_1 = CARDS.slice(0, 5)
-const COL_2 = [...CARDS.slice(3), ...CARDS.slice(0, 2)]
-const COL_3 = [...CARDS.slice(2)]
+// ─── VerticalLoopHero ─────────────────────────────────────────────────────────
 
 export function VerticalLoopHero() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -129,20 +126,19 @@ export function VerticalLoopHero() {
   const bodyRef    = useRef<HTMLParagraphElement>(null)
   const ctaRef     = useRef<HTMLDivElement>(null)
 
-  const velRef      = useRef(0)
-  const prevScrollY = useRef(0)
+  const velRef = useRef(0)
+  const lenis  = useLenis()
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY
-      velRef.current = y - prevScrollY.current
-      prevScrollY.current = y
+    if (!lenis) return
+    const onScroll = ({ velocity }: { velocity: number }) => {
+      velRef.current = velocity
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    lenis.on('scroll', onScroll)
+    return () => lenis.off('scroll', onScroll)
+  }, [lenis])
 
-  const getScrollVelocity = () => velRef.current
+  const getScrollVelocity = () => velRef.current * 60
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
@@ -239,7 +235,7 @@ export function VerticalLoopHero() {
         </div>
       </div>
 
-      {/* Edge fade */}
+      {/* Edge fade left */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0"

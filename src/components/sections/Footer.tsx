@@ -2,8 +2,9 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useGSAP } from '@gsap/react'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
 import { PillCTA } from '@/components/ui/PillCTA'
 
 export function Footer() {
@@ -52,7 +53,6 @@ export function Footer() {
       ease: 'power2.out',
     })
 
-    return () => ScrollTrigger.getAll().forEach(t => t.kill())
   }, { scope: footerRef })
 
   return (
@@ -135,24 +135,24 @@ export function Footer() {
           gap: 20,
         }}
       >
-        <span
-          style={{
-            fontFamily: 'var(--font-mono, monospace)',
-            fontSize: '0.68rem',
-            fontWeight: 700,
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            color: 'var(--color-ink)',
-          }}
-        >
-          THE PIVOT
-        </span>
+        <Image
+          src="/logo.png"
+          alt="The Pivot"
+          width={64}
+          height={64}
+          style={{ mixBlendMode: 'multiply' }}
+        />
 
         <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
-          {['Services', 'Work', 'Process', 'About', 'Contact'].map((item) => (
+          {[
+            { label: 'Capabilities', href: '/capabilities/specialized-production' },
+            { label: 'Selected Work', href: '/selected-work' },
+            { label: 'Perspectives', href: '/perspectives' },
+            { label: 'Contact', href: '/contact' },
+          ].map((item) => (
             <Link
-              key={item}
-              href={`/${item.toLowerCase()}`}
+              key={item.label}
+              href={item.href}
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: '0.78rem',
@@ -163,7 +163,7 @@ export function Footer() {
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-ink)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(10,33,31,0.45)' }}
             >
-              {item}
+              {item.label}
             </Link>
           ))}
         </nav>
