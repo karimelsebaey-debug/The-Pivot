@@ -1,6 +1,6 @@
-'use client'
+﻿'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import { useLenis } from '@/lib/lenis'
@@ -9,20 +9,20 @@ import { PillCTA } from '@/components/ui/PillCTA'
 // ─── Video card data ───────────────────────────────────────────────────────────
 
 const CARDS = [
-  { id: '1',  src: '/videos/loop/app-ad.mp4',       label: 'App Ad' },
-  { id: '2',  src: '/videos/loop/fast-food-ad.mp4', label: 'Fast Food Ad' },
-  { id: '3',  src: '/videos/loop/gourmet-ad.mp4',   label: 'Gourmet Ad' },
-  { id: '4',  src: '/videos/loop/dashboard-ad.mp4', label: 'Dashboard Ad' },
-  { id: '5',  src: '/videos/loop/jewelry-ad.mp4',   label: 'Jewelry Ad' },
-  { id: '6',  src: '/videos/loop/saas-ad.mp4',      label: 'SaaS Ad' },
-  { id: '7',  src: '/videos/loop/sneakers-ad.mp4',  label: 'Sneakers Ad' },
-  { id: '8',  src: '/videos/loop/eyeliner-ad.mp4',  label: 'UGC Eyeliner' },
-  { id: '9',  src: '/videos/loop/fashion-ad.mp4',   label: 'Fashion Ad' },
-  { id: '10', src: '/videos/loop/makeup-ad.mp4',    label: 'Unboxing Ad' },
-  { id: '11', src: '/videos/loop/website-ad.mp4',   label: 'Website Ad' },
-  { id: '12', src: '/videos/loop/redesign-ad.mp4',  label: 'Redesign Ad' },
-  { id: '13', src: '/videos/loop/eyeliner-ad-2.mp4',label: 'UGC Ad' },
-  { id: '14', src: '/videos/loop/website-ad-2.mp4', label: 'Website Ad' },
+  { id: '1',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/app-ad.mp4',       label: 'App Ad' },
+  { id: '2',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/fast-food-ad.mp4', label: 'Fast Food Ad' },
+  { id: '3',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/gourmet-ad.mp4',   label: 'Gourmet Ad' },
+  { id: '4',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/dashboard-ad.mp4', label: 'Dashboard Ad' },
+  { id: '5',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/jewelry-ad.mp4',   label: 'Jewelry Ad' },
+  { id: '6',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/saas-ad.mp4',      label: 'SaaS Ad' },
+  { id: '7',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/sneakers-ad.mp4',  label: 'Sneakers Ad' },
+  { id: '8',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/eyeliner-ad.mp4',  label: 'UGC Eyeliner' },
+  { id: '9',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/fashion-ad.mp4',   label: 'Fashion Ad' },
+  { id: '10', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/makeup-ad.mp4',    label: 'Unboxing Ad' },
+  { id: '11', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/website-ad.mp4',   label: 'Website Ad' },
+  { id: '12', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/redesign-ad.mp4',  label: 'Redesign Ad' },
+  { id: '13', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/eyeliner-ad-2.mp4',label: 'UGC Ad' },
+  { id: '14', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/website-ad-2.mp4', label: 'Website Ad' },
 ]
 
 const CARD_H = 280
@@ -31,6 +31,13 @@ const ITEM_H = CARD_H + GAP
 
 const TOTAL = (cards: typeof CARDS) => cards.length * ITEM_H
 
+const CARD_W  = 130
+const H_GAP   = 10
+const ITEM_W  = CARD_W + H_GAP
+const H_TOTAL = (cards: typeof CARDS) => cards.length * ITEM_W
+
+const H_MASK = 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)'
+
 // ─── Infinite column ──────────────────────────────────────────────────────────
 
 interface ColumnProps {
@@ -38,9 +45,10 @@ interface ColumnProps {
   direction: 'up' | 'down'
   speed: number
   getScrollVelocity: () => number
+  className?: string
 }
 
-function InfiniteColumn({ cards, direction, speed, getScrollVelocity }: ColumnProps) {
+function InfiniteColumn({ cards, direction, speed, getScrollVelocity, className = '' }: ColumnProps) {
   const wrapRef   = useRef<HTMLDivElement>(null)
   const offsetRef = useRef(direction === 'down' ? -TOTAL(cards) : 0)
   const rafRef    = useRef<number>(0)
@@ -73,7 +81,7 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity }: ColumnPr
   const repeated = [...cards, ...cards]
 
   return (
-    <div className="relative min-w-0 flex-1 overflow-hidden" aria-hidden>
+    <div className={`relative min-w-0 flex-1 overflow-hidden ${className}`} aria-hidden>
       <div ref={wrapRef} className="absolute inset-x-0 top-0 will-change-transform">
         {repeated.map((card, i) => (
           <div
@@ -110,6 +118,59 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity }: ColumnPr
   )
 }
 
+// ─── Horizontal loop (mobile) ─────────────────────────────────────────────────
+
+function HorizontalLoop({ cards, speed, direction = 'left', getScrollVelocity }: {
+  cards: typeof CARDS
+  speed: number
+  direction?: 'left' | 'right'
+  getScrollVelocity: () => number
+}) {
+  const wrapRef   = useRef<HTMLDivElement>(null)
+  const offsetRef = useRef(direction === 'right' ? -H_TOTAL(cards) : 0)
+  const rafRef    = useRef<number>(0)
+  const lastRef   = useRef<number | null>(null)
+
+  useEffect(() => {
+    const T = H_TOTAL(cards)
+    const sign = direction === 'left' ? -1 : 1
+    function tick(now: number) {
+      const delta = lastRef.current == null ? 16 : now - lastRef.current
+      lastRef.current = now
+      const boost = Math.abs(getScrollVelocity()) * 0.001
+      let next = offsetRef.current + sign * (speed + boost) * (delta / 1000)
+      if (next < -T) next += T
+      if (next > 0)  next -= T
+      offsetRef.current = next
+      if (wrapRef.current) wrapRef.current.style.transform = `translateX(${next}px)`
+      rafRef.current = requestAnimationFrame(tick)
+    }
+    rafRef.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [cards, speed, direction, getScrollVelocity])
+
+  const repeated = [...cards, ...cards]
+
+  return (
+    <div style={{ overflow: 'hidden', width: '100%', height: '100%', maskImage: H_MASK, WebkitMaskImage: H_MASK }}>
+      <div ref={wrapRef} style={{ display: 'flex', gap: H_GAP, height: '100%', willChange: 'transform' }}>
+        {repeated.map((card, i) => (
+          <div
+            key={`h-${card.id}-${i}`}
+            style={{ flexShrink: 0, width: CARD_W, height: '100%', borderRadius: 12, overflow: 'hidden', background: '#0A211F', position: 'relative' }}
+          >
+            <video
+              src={card.src}
+              autoPlay muted loop playsInline preload="none"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ─── Column splits ─────────────────────────────────────────────────────────────
 
 const COL_1 = CARDS.slice(0,  5)
@@ -128,6 +189,14 @@ export function VerticalLoopHero() {
 
   const velRef = useRef(0)
   const lenis  = useLenis()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check, { passive: true })
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     if (!lenis) return
@@ -152,18 +221,11 @@ export function VerticalLoopHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex overflow-hidden"
-      style={{ minHeight: '100vh', background: 'var(--color-dark-bg)' }}
+      className="relative flex flex-col md:flex-row overflow-hidden"
+      style={{ minHeight: '100dvh', background: 'var(--color-dark-bg)' }}
     >
       {/* Left: copy */}
-      <div
-        className="relative z-10 flex flex-col justify-center"
-        style={{
-          width: '50%',
-          padding: 'clamp(48px,7vh,96px) clamp(32px,5vw,80px)',
-          minHeight: '100vh',
-        }}
-      >
+      <div className="vlh-copy relative z-10 flex flex-col justify-center">
         <h1
           ref={headRef}
           style={{
@@ -213,39 +275,44 @@ export function VerticalLoopHero() {
         </div>
       </div>
 
-      {/* Right: vertical looping carousel */}
-      <div
-        className="absolute inset-y-0 right-0"
-        style={{ width: '50%', overflow: 'hidden' }}
-        aria-hidden
-      >
-        <div
-          style={{
-            display: 'flex',
-            height: '100%',
-            gap: 12,
-            padding: '0 24px',
-            maskImage: MASK,
-            WebkitMaskImage: MASK,
-          }}
-        >
-          <InfiniteColumn cards={COL_1} direction="up"   speed={46} getScrollVelocity={getScrollVelocity} />
-          <InfiniteColumn cards={COL_2} direction="down" speed={34} getScrollVelocity={getScrollVelocity} />
-          <InfiniteColumn cards={COL_3} direction="up"   speed={56} getScrollVelocity={getScrollVelocity} />
-        </div>
+      {/* Right: carousel — dual horizontal rows on mobile, vertical columns on desktop */}
+      <div className="vlh-carousel" aria-hidden>
+        {isMobile ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, height: '100%', justifyContent: 'center' }}>
+            <HorizontalLoop cards={CARDS}                 speed={55} direction="left"  getScrollVelocity={getScrollVelocity} />
+            <HorizontalLoop cards={[...CARDS].reverse()}  speed={45} direction="right" getScrollVelocity={getScrollVelocity} />
+          </div>
+        ) : (
+          <div
+            className="vlh-columns"
+            style={{
+              display: 'flex',
+              height: '100%',
+              gap: 12,
+              maskImage: MASK,
+              WebkitMaskImage: MASK,
+            }}
+          >
+            <InfiniteColumn cards={COL_1} direction="up"   speed={46} getScrollVelocity={getScrollVelocity} />
+            <InfiniteColumn cards={COL_2} direction="down" speed={34} getScrollVelocity={getScrollVelocity} />
+            <InfiniteColumn cards={COL_3} direction="up"   speed={56} getScrollVelocity={getScrollVelocity} />
+          </div>
+        )}
       </div>
 
-      {/* Edge fade left */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0"
-        style={{
-          right: '50%',
-          width: 120,
-          background: 'linear-gradient(to right, var(--color-dark-bg), transparent)',
-          zIndex: 5,
-        }}
-      />
+      {/* Edge fade left — desktop only */}
+      {!isMobile && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0"
+          style={{
+            right: '50%',
+            width: 120,
+            background: 'linear-gradient(to right, var(--color-dark-bg), transparent)',
+            zIndex: 5,
+          }}
+        />
+      )}
     </section>
   )
 }

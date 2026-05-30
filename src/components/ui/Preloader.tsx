@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useRef, useState, useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
@@ -88,11 +88,12 @@ export function Preloader() {
       }}>
         <video
           ref={videoRef}
-          src="/videos/preloader.mp4"
+          src="https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/preloader/preloader.mp4"
           preload="auto"
           autoPlay
           muted
           playsInline
+          className="preloader-video"
           style={{
             width: '100%',
             height: '100%',

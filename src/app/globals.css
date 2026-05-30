@@ -441,3 +441,40 @@ html.lenis, html.lenis body { height: auto; }
 .hero-cycle-1 { animation: hero-cycle 7.5s ease-in-out infinite; animation-delay: 0s; }
 .hero-cycle-2 { animation: hero-cycle 7.5s ease-in-out infinite; animation-delay: -2.5s; }
 .hero-cycle-3 { animation: hero-cycle 7.5s ease-in-out infinite; animation-delay: -5s; }
+
+/* ─────────────────────────────────────────
+   VERTICALLOOPHERO — responsive layout
+───────────────────────────────────────── */
+.vlh-copy {
+  width: 50%;
+  padding: clamp(48px, 7vh, 96px) clamp(32px, 5vw, 80px);
+  min-height: 100vh;
+}
+.vlh-carousel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  overflow: hidden;
+}
+.vlh-columns { padding-inline: 24px; }
+
+@media (max-width: 767px) {
+  .preloader-video { object-position: center bottom; }
+
+  .vlh-copy {
+    width: 100%;
+    min-height: auto;
+    padding: clamp(88px, 11dvh, 104px) clamp(20px, 5vw, 32px) clamp(16px, 2dvh, 28px);
+  }
+  .vlh-carousel {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    width: 100%;
+    height: 296px;
+    padding-bottom: 20px;
+  }
+}
