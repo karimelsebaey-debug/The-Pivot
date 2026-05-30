@@ -7,7 +7,7 @@ import { gsap, ScrollTrigger } from '@/lib/gsap'
 import { PillCTA } from '@/components/ui/PillCTA'
 import { TextColor } from '@/components/ui/text-color'
 
-const TOTAL    = 60
+const TOTAL    = 30
 const HEADER_H = 56
 const BG       = '#DADECF'
 
@@ -184,17 +184,7 @@ export function HeroCanvas() {
       >
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
-          <p ref={eyebrowRef} style={{
-            fontFamily: 'var(--font-display)',
-            fontStyle: 'italic',
-            fontSize: '1.35rem',
-            color: 'var(--color-ink)',
-            opacity: 0.55,
-            letterSpacing: '-0.01em',
-            marginBottom: '1.25rem',
-          }}>
-            Creative Collective
-          </p>
+
 
           <h1 ref={line1Ref} style={{
             fontFamily: 'var(--font-display)',
@@ -220,7 +210,8 @@ export function HeroCanvas() {
             backgroundClip: 'text',
           }}>
             We transform ambitious ideas and needs into visual presence,
-            specialized services, and digital solutions —{' '}
+            specialized services, and digital solutions —
+            <br />
             <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.3rem' }}>
               built to last, impossible to ignore.
             </em>
@@ -236,10 +227,9 @@ export function HeroCanvas() {
               fontFamily: 'var(--font-body)',
               fontSize: '0.9rem',
               fontWeight: 600,
-              color: 'var(--color-ink)',
+              color: '#A8885A',
               letterSpacing: '-0.01em',
               textDecoration: 'none',
-              opacity: 0.8,
             }}
             className="link-underline"
           >
@@ -258,16 +248,6 @@ export function HeroCanvas() {
           background: `linear-gradient(to bottom, ${BG} 0%, rgba(218,222,207,0.75) 60%, rgba(218,222,207,0.4) 100%)`,
         }}
       >
-        <p style={{
-          fontFamily: 'var(--font-display)',
-          fontStyle: 'italic',
-          fontSize: '1rem',
-          color: 'var(--color-ink)',
-          opacity: 0.55,
-          marginBottom: '0.875rem',
-        }}>
-          Creative Collective
-        </p>
         <h1 style={{
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(2.4rem, 9vw, 3.5rem)',
@@ -289,7 +269,8 @@ export function HeroCanvas() {
           maxWidth: '420px',
         }}>
           We transform ambitious ideas into visual presence and digital
-          solutions —{' '}
+          solutions —
+          <br />
           <em style={{ fontStyle: 'italic', fontWeight: 700 }}>built to last, impossible to ignore.</em>
         </p>
         <PillCTA href="#work" label="See Our Work" />
@@ -340,13 +321,69 @@ export function HeroCanvas() {
           marginBottom: '6px',
         }} />
 
-        {/* Mouse scroll icon */}
-        <svg width="22" height="36" viewBox="0 0 22 36" fill="none">
-          <rect x="0.7" y="0.7" width="20.6" height="34.6" rx="10.3"
-            stroke="var(--color-ink)" strokeWidth="1.1" opacity="0.35"/>
-          <circle cx="11" cy="10" r="2.2"
-            fill="var(--color-ink)"
-            style={{ animation: 'mouse-dot-scroll 2s ease-in-out infinite' }}/>
+        {/* Mouse scroll icon — 3D */}
+        <svg
+          width="26" height="42" viewBox="0 0 26 42" fill="none"
+          style={{ animation: 'mouse-body-scroll 2s ease-in-out infinite', filter: 'drop-shadow(0 4px 8px rgba(10,33,31,0.18))' }}
+        >
+          <defs>
+            {/* Body gradient — light left → dark right (3D cylinder) */}
+            <linearGradient id="mg-body" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.18)" />
+              <stop offset="30%"  stopColor="rgba(10,33,31,0.28)" />
+              <stop offset="70%"  stopColor="rgba(10,33,31,0.52)" />
+              <stop offset="100%" stopColor="rgba(10,33,31,0.72)" />
+            </linearGradient>
+            {/* Top specular highlight */}
+            <radialGradient id="mg-spec" cx="30%" cy="18%" r="50%">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.35)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+            </radialGradient>
+            {/* Inner rim — subtle inner glow */}
+            <linearGradient id="mg-rim" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.12)" />
+              <stop offset="100%" stopColor="rgba(0,0,0,0.08)" />
+            </linearGradient>
+            {/* Scroll dot — sphere */}
+            <radialGradient id="mg-dot" cx="32%" cy="28%" r="60%">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.95)" />
+              <stop offset="45%"  stopColor="rgba(10,33,31,0.7)" />
+              <stop offset="100%" stopColor="rgba(10,33,31,0.95)" />
+            </radialGradient>
+          </defs>
+
+          {/* Drop shadow shape */}
+          <rect x="2.5" y="3" width="21" height="38" rx="10.5" fill="rgba(10,33,31,0.15)" />
+
+          {/* Body base */}
+          <rect x="1" y="1" width="24" height="40" rx="12" fill="url(#mg-body)" />
+
+          {/* Inner fill tone */}
+          <rect x="1" y="1" width="24" height="40" rx="12" fill="url(#mg-rim)" />
+
+          {/* Outer border */}
+          <rect x="1" y="1" width="24" height="40" rx="12"
+            stroke="rgba(10,33,31,0.45)" strokeWidth="1.2" fill="none" />
+
+          {/* Left edge highlight — thin bright strip */}
+          <rect x="2.2" y="5" width="1.2" height="30" rx="0.6" fill="rgba(255,255,255,0.28)" />
+
+          {/* Right edge shadow */}
+          <rect x="22.6" y="5" width="1.2" height="30" rx="0.6" fill="rgba(0,0,0,0.28)" />
+
+          {/* Center divider line */}
+          <line x1="13" y1="3" x2="13" y2="16"
+            stroke="rgba(10,33,31,0.2)" strokeWidth="0.8" />
+
+          {/* Specular overlay */}
+          <rect x="1" y="1" width="24" height="40" rx="12" fill="url(#mg-spec)" />
+
+          {/* Scroll dot — 3D sphere */}
+          <circle
+            cx="13" cy="11" r="3"
+            fill="url(#mg-dot)"
+            style={{ animation: 'mouse-dot-scroll 2s ease-in-out infinite' }}
+          />
         </svg>
       </div>
 

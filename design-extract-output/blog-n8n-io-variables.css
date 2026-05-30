@@ -1,0 +1,166 @@
+:root {
+  /* Colors — Primary */
+  --color-primary: #ee4f27;
+  --color-secondary: #1f192a;
+  --color-accent: #077ac7;
+
+  /* Colors — Neutrals */
+  --color-neutral-50: #ffffff;
+  --color-neutral-100: #6f6f6f;
+  --color-neutral-200: #c4bbd3;
+  --color-neutral-300: #e4e4e4;
+  --color-neutral-400: #000000;
+  --color-neutral-500: #4b4b4b;
+  --color-neutral-600: #6b7280;
+  --color-neutral-700: #f5f5f5;
+  --color-neutral-800: #545454;
+  --color-neutral-900: #c1c1c1;
+
+  /* Colors — Backgrounds */
+  --color-bg: #0e0918;
+  --color-bg-1: #000000;
+  --color-bg-2: #ffffff;
+  --color-bg-3: #21ace8;
+  --color-bg-4: #1b1728;
+  --color-bg-5: #fefefe;
+
+  /* Colors — Text */
+  --color-text: #000000;
+  --color-text-1: #ffffff;
+  --color-text-2: #c4bbd3;
+  --color-text-3: #6b7280;
+  --color-text-4: #e4e4e4;
+
+  /* Typography — Families */
+  --font-sans: 'Geomanist', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+  --font-body: 'Times New Roman', sans-serif;
+  --font-body: 'Arial', sans-serif;
+  --font-body: 'SF Mono', sans-serif;
+
+  /* Typography — Scale */
+  --font-size-38: 38px;
+  --font-size-32: 32px;
+  --font-size-20: 20px;
+  --font-size-18.4: 18.4px;
+  --font-size-18: 18px;
+  --font-size-16: 16px;
+  --font-size-15.2: 15.2px;
+  --font-size-14: 14px;
+  --font-size-13.3333: 13.3333px;
+  --font-size-12: 12px;
+  --font-size-11: 11px;
+
+  /* Spacing */
+  --spacing-1: 1px;
+  --spacing-14: 14px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-44: 44px;
+  --spacing-48: 48px;
+  --spacing-50: 50px;
+  --spacing-60: 60px;
+  --spacing-64: 64px;
+  --spacing-105: 105px;
+  --spacing-140: 140px;
+  --spacing-160: 160px;
+  --spacing-396: 396px;
+
+  /* Border Radius */
+  --radius-xs: 2px;
+  --radius-md: 7px;
+  --radius-lg: 16px;
+  --radius-full: 1057px;
+
+  /* Box Shadows */
+  --shadow-xs: rgba(255, 255, 255, 0.19) 0px 0px 1.802px 0px, rgba(255, 255, 255, 0.1) 0px 0.451px 0px 0.901px inset;
+  --shadow-md: rgba(0, 0, 0, 0.35) 1px 2px 8px 0px;
+  --shadow-md: rgba(0, 0, 0, 0.15) 0px 4px 12px 0px;
+
+  /* Original Site Variables */
+  /* — colors — */
+  --font-family-primary: var(--ghost-font-family, 'Geomanist', system-ui, -apple-system, sans-serif);
+  --color-white: #FFFFFF;
+  --color-dark-navy: #1B1728;
+  --color-midnight-navy: #0E0918;
+  --color-dark-blue-3: #1f192a;
+  --color-paragraphs: #c4bbd3;
+  --color-lavender-gray: #C4BBD3;
+  --color-darker-gray: #7A7A7A;
+  --color-soft-gray: #E4E4E4;
+  --color-light-gray: #e4e4e4;
+  --color-body: #0E0918;
+  --color-surface: rgba(255, 255, 255, 0.07);
+  --color-surface-border: rgba(255, 255, 255, 0.08);
+  --border-radius: 8px;
+  --border-radius-large: 16px;
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --ghost-accent-color: #FD8925;
+  /* — spacing — */
+  --font-size-h1: 48px;
+  --font-size-h2: 38px;
+  --font-size-h3: 32px;
+  --font-size-h4: 38px;
+  --font-size-sub-headline: 24px;
+  --font-size-body-large: 20px;
+  --font-size-body-small: 16px;
+  --font-size-button-large: 16px;
+  --font-size-button-small: 14px;
+  --font-size-caption-large: 14px;
+  --font-size-caption-small: 12px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  /* — typography — */
+  --font-family-heading: var(--ghost-font-family, var(--font-family-primary));
+  --font-family-body: var(--ghost-font-family, var(--font-family-primary));
+  --font-weight-regular: 400;
+  --font-weight-book: 400;
+  --line-height-h1: 1.1;
+  --line-height-h2: 1.1;
+  --line-height-h3: 1.2;
+  --line-height-h4: 110%;
+  --line-height-sub-headline: 1.5;
+  --line-height-body-large: 1.5;
+  --line-height-body-small: 1.5;
+  --line-height-caption-large: 1.3;
+  --line-height-caption-small: 1.5;
+  --line-height-button: 1;
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+  /* — shadows — */
+  --shadow-button: 0 4px 12px rgba(255, 12, 0, 0.3);
+  /* — other — */
+  --gradient-orange: linear-gradient(141deg, #077ac7, #6b21ef);
+  --gradient-github: linear-gradient(to top, rgba(38, 33, 73, 0), rgba(0, 0, 0, 0.42));
+  --gradient-headline-silver-purple: linear-gradient(96deg, #FFF -10.58%, #7C65A1 123.65%);
+  --max-width-global: 1460px;
+  --max-width-hero: 1286px;
+  --max-width-content: 1120px;
+  --max-width-header: 1432px;
+  --max-width-post: 700px;
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --lightense-z-index: 999999;
+  --lightense-backdrop: var(--bg-color-80, rgba(255, 255, 255, .98));
+  --lightense-duration: 300ms;
+  --lightense-timing-func: cubic-bezier(.2, 0, .1, 1);
+  --fa-style-family-classic: "Font Awesome 6 Free";
+  /* — dependencies — */
+  --font-family-primary: --ghost-font-family;
+  --font-family-heading: --ghost-font-family,--font-family-primary;
+  --font-family-body: --ghost-font-family,--font-family-primary;
+  --lightense-backdrop: --bg-color-80;
+  /* — semantic — */
+  success: [object Object];
+  warning: [object Object];
+  error: [object Object];
+  info: [object Object];
+
+}

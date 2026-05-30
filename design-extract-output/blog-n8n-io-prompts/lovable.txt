@@ -1,0 +1,13 @@
+Clone the design language of this blog-post page and build a fresh equivalent.
+Visual feel: flat. Tone: friendly · Headings: Title Case · CTA verbs: [object Object], [object Object], [object Object]
+Primary palette: #ffffff, #6f6f6f, #c4bbd3, #e4e4e4, #000000.
+Typography: [object Object], [object Object], [object Object], [object Object].
+Corner radius vocabulary: 2, 7, 16, 1057.
+Shadow vocabulary: rgba(255, 255, 255, 0.19) 0px 0px 1.802px 0px, rgba(255, 255, 255, 0.1) 0px 0.451px 0px 0.901px inset | rgba(0, 0, 0, 0.35) 1px 2px 8px 0px | rgba(0, 0, 0, 0.15) 0px 4px 12px 0px.
+Page structure:
+- logo-wall
+- steps — heading: "Build and Update Workflows with n8n's MCP Server"
+- comparison — heading: "ReAct Agent: Architecture, Implementation, and Tradeoffs"
+- footer
+- footer
+- footer

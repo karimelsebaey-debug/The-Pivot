@@ -116,7 +116,7 @@ export function Services() {
                         }}
                         onMouseEnter={e => {
                           const el = e.currentTarget
-                          el.style.backgroundColor = isDark ? '#D8FF85' : '#0A211F'
+                          el.style.backgroundColor = isDark ? '#C9A84C' : '#0A211F'
                           el.style.color = isDark ? '#0A211F' : '#F2F4E7'
                           el.style.borderColor = 'transparent'
                         }}
@@ -141,7 +141,7 @@ export function Services() {
                     className="inline-flex items-center gap-3 px-7 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-300"
                     style={{
                       borderRadius: 'var(--radius-xl)',
-                      backgroundColor: isDark ? '#D8FF85' : '#0A211F',
+                      backgroundColor: isDark ? '#C9A84C' : '#0A211F',
                       color: isDark ? '#0A211F' : '#F2F4E7',
                       letterSpacing: '0.12em',
                     }}

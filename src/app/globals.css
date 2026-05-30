@@ -48,7 +48,7 @@
 :root {
   --color-bg:        #DADECF;
   --color-ink:       #0A211F;
-  --color-accent:    #D8FF85;
+  --color-accent:    #B8943C;
   --color-dark-bg:   #12211D;
   --color-border:    rgba(10, 33, 31, 0.12);
   --color-ink-muted: rgba(10, 33, 31, 0.5);
@@ -117,6 +117,16 @@ html.lenis, html.lenis body { height: auto; }
 @keyframes fade-in {
   0%   { opacity: 0; transform: translateY(5px); }
   100% { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes mouse-body-scroll {
+  0%,  100% { transform: translateY(0px);  opacity: 0.85; }
+  50%        { transform: translateY(10px); opacity: 1;    }
+}
+
+@keyframes mouse-dot-scroll {
+  0%,  100% { transform: translateY(0);    opacity: 0.7; }
+  50%        { transform: translateY(8px);  opacity: 0;   }
 }
 
 @keyframes move-bottom-left {
@@ -347,6 +357,30 @@ html.lenis, html.lenis body { height: auto; }
 .cta-pill:hover .cta-pill-icon .arr-out { transform: translate(14px, -14px); opacity: 0; }
 .cta-pill:hover .cta-pill-icon .arr-in  { transform: translate(0, 0); opacity: 1; }
 
+/* ── Outline variant (dark bg) ── */
+.cta-pill-outline .cta-pill-label {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+.cta-pill-outline .cta-pill-icon {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+@media (hover: hover) {
+  .cta-pill-outline:hover .cta-pill-label {
+    background-color: var(--color-accent);
+    color: var(--color-ink);
+    border-color: var(--color-accent);
+  }
+  .cta-pill-outline:hover .cta-pill-icon {
+    background-color: var(--color-accent);
+    color: var(--color-ink);
+    border-color: var(--color-accent);
+  }
+}
+
 /* ─────────────────────────────────────────
    TEXT-COLOR — 21st.dev cycling gradient (hero h1 only)
 ───────────────────────────────────────── */
@@ -393,3 +427,17 @@ html.lenis, html.lenis body { height: auto; }
 .hero-text-bg-1::before { animation: gradient-background-1 8s infinite; }
 .hero-text-bg-2::before { animation: gradient-background-2 8s infinite; animation-delay: 0.8s; }
 .hero-text-bg-3::before { animation: gradient-background-3 8s infinite; animation-delay: 1.6s; }
+
+/* ─────────────────────────────────────────
+   HERO COLOR CYCLE — 3 colors × 3 lines
+───────────────────────────────────────── */
+@keyframes hero-cycle {
+  0%,   30%  { color: #0A211F; }
+  33%,  63%  { color: #BDD8D9; }
+  66%,  96%  { color: #C4A882; }
+  99%,  100% { color: #0A211F; }
+}
+
+.hero-cycle-1 { animation: hero-cycle 7.5s ease-in-out infinite; animation-delay: 0s; }
+.hero-cycle-2 { animation: hero-cycle 7.5s ease-in-out infinite; animation-delay: -2.5s; }
+.hero-cycle-3 { animation: hero-cycle 7.5s ease-in-out infinite; animation-delay: -5s; }

@@ -1,0 +1,60 @@
+{
+  "materialLanguage": {
+    "label": "flat",
+    "confidence": 0,
+    "signals": [],
+    "metrics": {
+      "saturation": 0.25,
+      "shadowProfile": "soft",
+      "avgShadowBlur": 0,
+      "maxShadowBlur": 0,
+      "insetShadows": 0,
+      "avgRadius": 2768,
+      "maxRadius": 9999,
+      "hasPill": true,
+      "hasBackdropBlur": false,
+      "gradientCount": 5
+    },
+    "alternates": []
+  },
+  "imageryStyle": {
+    "label": "screenshot",
+    "confidence": 0.4,
+    "counts": {
+      "total": 2,
+      "svg": 0,
+      "icon": 0,
+      "hero": 0,
+      "screenshot": 1,
+      "photoLike": 0
+    },
+    "dominantAspect": "square-ish",
+    "radiusProfile": "square",
+    "alternates": [],
+    "signals": [
+      "1 screenshot-like"
+    ]
+  },
+  "backgroundPatterns": {
+    "labels": [
+      "noise"
+    ],
+    "counts": {
+      "noise": 1,
+      "dotGrid": 0,
+      "lineGrid": 0,
+      "meshCount": 0,
+      "svgPattern": 0
+    },
+    "gradientTotals": {
+      "radial": 1,
+      "linear": 12
+    },
+    "samples": [
+      {
+        "tag": "noise",
+        "value": "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'"
+      }
+    ]
+  }
+}

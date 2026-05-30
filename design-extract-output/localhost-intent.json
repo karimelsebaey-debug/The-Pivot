@@ -1,0 +1,220 @@
+{
+  "pageIntent": {
+    "type": "landing",
+    "confidence": 0.45,
+    "path": "/",
+    "title": "THE PIVOT — The Turning Point For Your Creative Ambition",
+    "description": "A full-service creative platform. We deliver impact, not files.",
+    "signals": [
+      {
+        "kind": "url",
+        "type": "landing",
+        "weight": 0.45,
+        "detail": "root-path"
+      }
+    ],
+    "alternates": [],
+    "needsSmart": true
+  },
+  "sectionRoles": {
+    "sections": [
+      {
+        "index": 0,
+        "tag": "header",
+        "role": "nav",
+        "subrole": null,
+        "confidence": 0.4,
+        "heading": null,
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 56
+        },
+        "buttonCount": 2,
+        "cardCount": 3,
+        "slots": {
+          "ctaCount": 2,
+          "lede": "The Pivot\nCapabilities\nSelected Work\nPerspectives\nLet's Talk\nStart a Project"
+        },
+        "needsSmart": true
+      },
+      {
+        "index": 1,
+        "tag": "nav",
+        "role": "nav",
+        "subrole": null,
+        "confidence": 0.9,
+        "heading": null,
+        "bounds": {
+          "x": 394.8125,
+          "y": 17.5,
+          "w": 400,
+          "h": 20
+        },
+        "buttonCount": 1,
+        "cardCount": 1,
+        "slots": {
+          "ctaCount": 1,
+          "lede": "Capabilities\nSelected Work\nPerspectives\nLet's Talk"
+        },
+        "needsSmart": false
+      },
+      {
+        "index": 2,
+        "tag": "main",
+        "role": "testimonial",
+        "subrole": null,
+        "confidence": 0.8,
+        "heading": "The Turning\nPoint For Your\nCreative Ambition.",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 8615.171875
+        },
+        "buttonCount": 0,
+        "cardCount": 23,
+        "slots": {
+          "heading": "The Turning\nPoint For Your\nCreative Ambition.",
+          "subheadings": [
+            "The Turning Point For Your Creative Ambition.",
+            "Creative Design",
+            "Specialized Production",
+            "AI Services"
+          ],
+          "lede": "Creative Collective"
+        },
+        "needsSmart": false
+      },
+      {
+        "index": 3,
+        "tag": "section",
+        "role": "testimonial",
+        "subrole": null,
+        "confidence": 0.8,
+        "heading": "The Turning\nPoint For Your\nCreative Ambition.",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 800
+        },
+        "buttonCount": 0,
+        "cardCount": 0,
+        "slots": {
+          "heading": "The Turning\nPoint For Your\nCreative Ambition.",
+          "subheadings": [
+            "The Turning Point For Your Creative Ambition."
+          ],
+          "lede": "Creative Collective"
+        },
+        "needsSmart": false
+      },
+      {
+        "index": 4,
+        "tag": "section",
+        "role": "content",
+        "subrole": null,
+        "confidence": 0.3,
+        "heading": "Creative Design",
+        "bounds": {
+          "x": 0,
+          "y": 3040,
+          "w": 1280,
+          "h": 800
+        },
+        "buttonCount": 0,
+        "cardCount": 22,
+        "slots": {
+          "heading": "Creative Design",
+          "subheadings": [
+            "Specialized Production",
+            "AI Services",
+            "Marketing"
+          ],
+          "lede": "01 / 04\nSERVICES\nCreative Design"
+        },
+        "needsSmart": true
+      },
+      {
+        "index": 5,
+        "tag": "section",
+        "role": "testimonial",
+        "subrole": null,
+        "confidence": 0.8,
+        "heading": "What Shifted.",
+        "bounds": {
+          "x": 0,
+          "y": 7680,
+          "w": 1280,
+          "h": 935.171875
+        },
+        "buttonCount": 0,
+        "cardCount": 1,
+        "slots": {
+          "heading": "What Shifted.",
+          "lede": "SELECTED WORK"
+        },
+        "needsSmart": false
+      },
+      {
+        "index": 6,
+        "tag": "footer",
+        "role": "footer",
+        "subrole": null,
+        "confidence": 0.95,
+        "heading": "Start your\nturning point.",
+        "bounds": {
+          "x": 0,
+          "y": 8615.171875,
+          "w": 1280,
+          "h": 406.25
+        },
+        "buttonCount": 0,
+        "cardCount": 2,
+        "slots": {
+          "heading": "Start your\nturning point.",
+          "lede": "READY?"
+        },
+        "needsSmart": false
+      },
+      {
+        "index": 7,
+        "tag": "nav",
+        "role": "nav",
+        "subrole": null,
+        "confidence": 0.9,
+        "heading": null,
+        "bounds": {
+          "x": 430.453125,
+          "y": 8913.421875,
+          "w": 312,
+          "h": 20
+        },
+        "buttonCount": 0,
+        "cardCount": 0,
+        "slots": {
+          "lede": "Services\nWork\nProcess\nAbout\nContact"
+        },
+        "needsSmart": false
+      }
+    ],
+    "counts": {
+      "nav": 3,
+      "testimonial": 3,
+      "content": 1,
+      "footer": 1
+    },
+    "readingOrder": [
+      "nav",
+      "testimonial",
+      "testimonial",
+      "nav",
+      "content",
+      "testimonial",
+      "footer",
+      "nav"
+    ]
+  }
+}

@@ -8,12 +8,13 @@ interface PillCTAProps {
   href: string;
   label: string;
   className?: string;
+  variant?: 'solid' | 'outline';
 }
 
-export function PillCTA({ href, label, className = "" }: PillCTAProps) {
+export function PillCTA({ href, label, className = "", variant = "solid" }: PillCTAProps) {
   return (
     <MagneticButton strength={0.22}>
-      <Link href={href} className={`cta-pill ${className}`}>
+      <Link href={href} className={`cta-pill ${variant === 'outline' ? 'cta-pill-outline' : ''} ${className}`}>
         <span className="cta-pill-label">{label}</span>
         <div className="cta-pill-icon">
           <ArrowUpRight className="arr-out" size={15} />

@@ -133,7 +133,7 @@ const COLUMNS = [
   {
     label: 'Consultant',
     href: '/capabilities/consultant',
-    bg: '#D8FF85',
+    bg: '#C9A84C',
     color: '#0A211F',
     services: [
       { slug: 'campaign-strategy',    name: 'Campaign Strategy',    desc: 'Creative strategy · Campaign concepts · Multi-channel', icon: <IconTarget /> },

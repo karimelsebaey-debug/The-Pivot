@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palette Test</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
+
+  .palette {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 10vw;
+    position: relative;
+  }
+
+  .label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0.5;
+  }
+
+  .headline {
+    font-size: clamp(3.5rem, 8vw, 9rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+  }
+
+  .swatches {
+    display: flex;
+    gap: 10px;
+    margin-top: 48px;
+  }
+
+  .swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* ── 1. Champagne Gold ── */
+  .p1 { background: #0A211F; }
+  .p1 .label { color: #C9A84C; }
+  .p1 .line1 { color: #F7F3E8; }
+  .p1 .line2 { color: #C9A84C; }
+  .p1 .line3 { color: #E8D5A3; }
+  .p1 .line4 { color: #F7F3E8; }
+
+  /* ── 2. Platinum Silver ── */
+  .p2 { background: #0A211F; }
+  .p2 .label { color: #C4C4C4; }
+  .p2 .line1 { color: #F5F5F0; }
+  .p2 .line2 { color: #C4C4C4; }
+  .p2 .line3 { color: #E8E8E8; }
+  .p2 .line4 { color: #F5F5F0; }
+
+  /* ── 3. Acid Lime (current Pivot) ── */
+  .p3 { background: #0A211F; }
+  .p3 .label { color: #BDD8D9; }
+  .p3 .line1 { color: #DADECF; }
+  .p3 .line2 { color: #D8FF85; }
+  .p3 .line3 { color: #BDD8D9; }
+  .p3 .line4 { color: #DADECF; }
+
+  /* ── 4. Dusty Rose ── */
+  .p4 { background: #0A211F; }
+  .p4 .label { color: #C4937A; }
+  .p4 .line1 { color: #F2EDE8; }
+  .p4 .line2 { color: #C4937A; }
+  .p4 .line3 { color: #E8C9B8; }
+  .p4 .line4 { color: #F2EDE8; }
+
+  /* ── 5. Deep Burgundy ── */
+  .p5 { background: #0A211F; }
+  .p5 .label { color: #C4A882; }
+  .p5 .line1 { color: #F0EBE0; }
+  .p5 .line2 { color: #C4A882; }
+  .p5 .line3 { color: #6B2737; }
+  .p5 .line4 { color: #F0EBE0; }
+
+  /* ── 6. Light bg variants ── */
+  .p6 { background: #E8D5A3; }
+  .p6 .label { color: #0A211F; opacity: 0.4; }
+  .p6 .line1 { color: #0A211F; }
+  .p6 .line2 { color: #C9A84C; }
+  .p6 .line3 { color: #0A211F; opacity: 0.6; }
+  .p6 .line4 { color: #0A211F; }
+
+  .p7 { background: #DADECF; }
+  .p7 .label { color: #0A211F; opacity: 0.4; }
+  .p7 .line1 { color: #0A211F; }
+  .p7 .line2 { color: #BDD8D9; }
+  .p7 .line3 { color: #0A211F; opacity: 0.55; }
+  .p7 .line4 { color: #0A211F; }
+
+  .divider {
+    position: absolute;
+    bottom: 0;
+    left: 10vw;
+    right: 10vw;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+  .p6 .divider, .p7 .divider { background: rgba(10,33,31,0.1); }
+</style>
+</head>
+<body>
+
+<!-- 1. Champagne Gold -->
+<div class="palette p1">
+  <div class="label">01 — Champagne Gold · Dark bg</div>
+  <h1 class="headline">
+    <span class="line1">The Turning</span><br>
+    <span class="line2"><em>Point For Your</em></span><br>
+    <span class="line3">Creative</span><br>
+    <span class="line4">Ambition.</span>
+  </h1>
+  <div class="swatches">
+    <div class="swatch" style="background:#C9A84C"></div>
+    <div class="swatch" style="background:#E8D5A3"></div>
+    <div class="swatch" style="background:#F7F3E8"></div>
+  </div>
+  <div class="divider"></div>
+</div>
+
+<!-- 2. Platinum Silver -->
+<div class="palette p2">
+  <div class="label">02 — Platinum Silver · Dark bg</div>
+  <h1 class="headline">
+    <span class="line1">The Turning</span><br>
+    <span class="line2"><em>Point For Your</em></span><br>
+    <span class="line3">Creative</span><br>
+    <span class="line4">Ambition.</span>
+  </h1>
+  <div class="swatches">
+    <div class="swatch" style="background:#C4C4C4"></div>
+    <div class="swatch" style="background:#E8E8E8"></div>
+    <div class="swatch" style="background:#F5F5F0"></div>
+  </div>
+  <div class="divider"></div>
+</div>
+
+<!-- 3. Acid Lime -->
+<div class="palette p3">
+  <div class="label">03 — Acid Lime · Current Pivot</div>
+  <h1 class="headline">
+    <span class="line1">The Turning</span><br>
+    <span class="line2"><em>Point For Your</em></span><br>
+    <span class="line3">Creative</span><br>
+    <span class="line4">Ambition.</span>
+  </h1>
+  <div class="swatches">
+    <div class="swatch" style="background:#D8FF85"></div>
+    <div class="swatch" style="background:#BDD8D9"></div>
+    <div class="swatch" style="background:#DADECF"></div>
+  </div>
+  <div class="divider"></div>
+</div>
+
+<!-- 4. Dusty Rose -->
+<div class="palette p4">
+  <div class="label">04 — Dusty Rose · Dark bg</div>
+  <h1 class="headline">
+    <span class="line1">The Turning</span><br>
+    <span class="line2"><em>Point For Your</em></span><br>
+    <span class="line3">Creative</span><br>
+    <span class="line4">Ambition.</span>
+  </h1>
+  <div class="swatches">
+    <div class="swatch" style="background:#C4937A"></div>
+    <div class="swatch" style="background:#E8C9B8"></div>
+    <div class="swatch" style="background:#F2EDE8"></div>
+  </div>
+  <div class="divider"></div>
+</div>
+
+<!-- 5. Deep Burgundy -->
+<div class="palette p5">
+  <div class="label">05 — Burgundy & Gold · Dark bg</div>
+  <h1 class="headline">
+    <span class="line1">The Turning</span><br>
+    <span class="line2"><em>Point For Your</em></span><br>
+    <span class="line3">Creative</span><br>
+    <span class="line4">Ambition.</span>
+  </h1>
+  <div class="swatches">
+    <div class="swatch" style="background:#6B2737"></div>
+    <div class="swatch" style="background:#C4A882"></div>
+    <div class="swatch" style="background:#F0EBE0"></div>
+  </div>
+  <div class="divider"></div>
+</div>
+
+<!-- 6. Gold on cream (light) -->
+<div class="palette p6">
+  <div class="label">06 — Champagne Gold · Light bg</div>
+  <h1 class="headline">
+    <span class="line1">The Turning</span><br>
+    <span class="line2"><em>Point For Your</em></span><br>
+    <span class="line3">Creative</span><br>
+    <span class="line4">Ambition.</span>
+  </h1>
+  <div class="swatches">
+    <div class="swatch" style="background:#0A211F;border-color:rgba(10,33,31,0.2)"></div>
+    <div class="swatch" style="background:#C9A84C;border-color:rgba(10,33,31,0.2)"></div>
+    <div class="swatch" style="background:#E8D5A3;border-color:rgba(10,33,31,0.2)"></div>
+  </div>
+  <div class="divider"></div>
+</div>
+
+<!-- 7. Current Pivot light -->
+<div class="palette p7">
+  <div class="label">07 — Current Pivot · Light bg</div>
+  <h1 class="headline">
+    <span class="line1">The Turning</span><br>
+    <span class="line2"><em>Point For Your</em></span><br>
+    <span class="line3">Creative</span><br>
+    <span class="line4">Ambition.</span>
+  </h1>
+  <div class="swatches">
+    <div class="swatch" style="background:#0A211F;border-color:rgba(10,33,31,0.2)"></div>
+    <div class="swatch" style="background:#BDD8D9;border-color:rgba(10,33,31,0.2)"></div>
+    <div class="swatch" style="background:#DADECF;border-color:rgba(10,33,31,0.2)"></div>
+  </div>
+</div>
+
+</body>
+</html>

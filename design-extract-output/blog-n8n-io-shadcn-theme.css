@@ -1,0 +1,19 @@
+/* shadcn/ui Theme — extracted from https://blog.n8n.io/n8n-mcp-server/ */
+/* Paste into your globals.css */
+
+@layer base {
+  :root {
+    --background: 260 45% 6%;
+    --foreground: 0 0% 0%;
+    --primary: 12 85% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 261 25% 13%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 204 93% 40%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 0 0% 76%;
+    --muted-foreground: 0 0% 100%;
+    --border: 0 0% 0%;
+    --radius: 7px;
+  }
+}

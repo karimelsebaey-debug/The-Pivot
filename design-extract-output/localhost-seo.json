@@ -1,0 +1,35 @@
+{
+  "openGraph": {
+    "title": "THE PIVOT",
+    "description": "The Turning Point For Your Creative Ambition.",
+    "site_name": "THE PIVOT"
+  },
+  "twitter": {
+    "card": "summary",
+    "title": "THE PIVOT",
+    "description": "The Turning Point For Your Creative Ambition."
+  },
+  "description": "A full-service creative platform. We deliver impact, not files.",
+  "canonical": null,
+  "themeColor": null,
+  "viewport": "width=device-width, initial-scale=1",
+  "favicons": [
+    {
+      "rel": "icon",
+      "href": "http://localhost:3001/favicon.ico?favicon.0x3dzn~oxb6tn.ico",
+      "sizes": "256x256",
+      "type": "image/x-icon"
+    }
+  ],
+  "manifest": null,
+  "structuredData": [],
+  "score": {
+    "hasOg": true,
+    "hasTwitter": true,
+    "hasDescription": true,
+    "hasCanonical": false,
+    "hasStructuredData": false,
+    "hasFavicon": true,
+    "hasThemeColor": false
+  }
+}

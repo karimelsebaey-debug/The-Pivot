@@ -95,7 +95,7 @@ export function CategoryServices({ category }: { category: ServiceCategory }) {
               <ArrowUpRight
                 size={20}
                 style={{
-                  color: isDark ? '#D8FF85' : '#0A211F',
+                  color: isDark ? '#C9A84C' : '#0A211F',
                   flexShrink: 0,
                   marginTop: 4,
                   transition: 'transform 0.2s ease',

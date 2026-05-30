@@ -99,7 +99,7 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity }: ColumnPr
             />
             <span
               className="absolute bottom-3 left-3 font-mono uppercase"
-              style={{ fontSize: 9, letterSpacing: '0.22em', color: '#D8FF85', opacity: 0.8 }}
+              style={{ fontSize: 9, letterSpacing: '0.22em', color: '#C9A84C', opacity: 0.8 }}
             >
               {card.label}
             </span>
@@ -209,7 +209,7 @@ export function VerticalLoopHero() {
         </p>
 
         <div ref={ctaRef}>
-          <PillCTA href="/contact" label="Book a Demo" />
+          <PillCTA href="/contact" label="Book a Demo" variant="outline" />
         </div>
       </div>
 

@@ -1,0 +1,199 @@
+:root {
+  /* Colors — Primary */
+  --color-primary: #d8ff85;
+  --color-secondary: #0a211f;
+  --color-accent: #0a1510;
+
+  /* Colors — Neutrals */
+  --color-neutral-50: #000000;
+  --color-neutral-100: #757575;
+  --color-neutral-200: #ffffff;
+
+  /* Colors — Backgrounds */
+  --color-bg: #f2f4e7;
+  --color-bg-1: #0a1510;
+  --color-bg-2: #12211d;
+  --color-bg-3: #f7f9f2;
+
+  /* Colors — Text */
+  --color-text: #000000;
+  --color-text-1: #0a211f;
+  --color-text-2: #f2f4e7;
+  --color-text-3: #12211d;
+  --color-text-4: #d8ff85;
+
+  /* Typography — Families */
+  --font-body: 'Inter Tight', sans-serif;
+  --font-body: 'ui-sans-serif', sans-serif;
+  --font-body: '__nextjs-Geist', sans-serif;
+  --font-font-3: 'Instrument Serif', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  /* Typography — Scale */
+  --font-size-136: 136px;
+  --font-size-89.6: 89.6px;
+  --font-size-76.8: 76.8px;
+  --font-size-71.68: 71.68px;
+  --font-size-64: 64px;
+  --font-size-56: 56px;
+  --font-size-24: 24px;
+  --font-size-20.8: 20.8px;
+  --font-size-19.2: 19.2px;
+  --font-size-18.4: 18.4px;
+  --font-size-18: 18px;
+  --font-size-16.8: 16.8px;
+
+  /* Spacing */
+  --spacing-2: 2px;
+  --spacing-38: 38px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-88: 88px;
+  --spacing-136: 136px;
+
+  /* Border Radius */
+  --radius-xl: 24px;
+  --radius-full: 50px;
+  --radius-full: 999px;
+  --radius-full: 9999px;
+
+  /* Box Shadows */
+  --shadow-sm: rgb(23, 23, 23) 0px 0px 0px 1px, rgba(255, 255, 255, 0.14) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.24) 0px 16px 32px -8px;
+  --shadow-sm: rgb(23, 23, 23) 0px 0px 0px 1px;
+
+  /* Original Site Variables */
+  /* — colors — */
+  --foreground: #0a211f;
+  --card: #f2f4e7;
+  --card-foreground: #0a211f;
+  --popover: #f2f4e7;
+  --popover-foreground: #0a211f;
+  --primary: #e1fcad;
+  --primary-foreground: #0a211f;
+  --secondary: #122023;
+  --secondary-foreground: #f2f4e7;
+  --muted: #0000000a;
+  --muted-foreground: #4a7a76;
+  --accent: #0000000a;
+  --accent-foreground: #0a211f;
+  --destructive: #ef4444;
+  --destructive-foreground: #b91c1c;
+  --border: #0a211f1f;
+  --ring: #4a7a76;
+  --color-bg: #f2f4e7;
+  --color-ink: #0a211f;
+  --color-accent: #d8ff85;
+  --color-dark-bg: #12211d;
+  --color-border: #0a211f1f;
+  --color-ink-muted: #0a211f80;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-inset-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-color: #fff;
+  --color-white: #fff;
+  --tw-border-style: solid;
+  --tw-ring-offset-width: 0px;
+  /* — spacing — */
+  --spacing: .25rem;
+  --tw-space-y-reverse: 0;
+  /* — typography — */
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-body: "Inter Tight", Inter, system-ui, sans-serif;
+  --text-2xl: 1.5rem;
+  --leading-relaxed: 1.625;
+  --tracking-tighter: -.05em;
+  --text-lg: 1.125rem;
+  --text-2xl--line-height: calc(2 / 1.5);
+  --text-base--line-height: calc(1.5 / 1);
+  --tracking-wider: .05em;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+  --font-weight-semibold: 600;
+  --text-sm: .875rem;
+  --text-lg--line-height: calc(1.75 / 1.125);
+  --leading-tight: 1.25;
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --text-4xl: 2.25rem;
+  --text-sm--line-height: calc(1.25 / .875);
+  --font-logo: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback";
+  --text-6xl: 3.75rem;
+  --text-xs: .75rem;
+  --default-font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --tracking-widest: .1em;
+  --text-xs--line-height: calc(1 / .75);
+  --font-weight-medium: 500;
+  --text-6xl--line-height: 1;
+  --text-4xl--line-height: calc(2.5 / 2.25);
+  --text-base: 1rem;
+  --default-mono-font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+  --tracking-tight: -.025em;
+  /* — shadows — */
+  --tw-inset-shadow-alpha: 100%;
+  --tw-drop-shadow-alpha: 100%;
+  --tw-inset-shadow: 0 0 #0000;
+  --tw-shadow-alpha: 100%;
+  --tw-shadow: 0 0 #0000;
+  /* — radii — */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 999px;
+  /* — other — */
+  --background: #f2f4e7;
+  --input: #0a211f1f;
+  --header-height: 56px;
+  --container-max: 1216px;
+  --layout-max: 1920px;
+  --section-py: 88px;
+  --container-px: 16px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+  --ease-out: cubic-bezier(0, 0, .2, 1);
+  --t-micro: .1s;
+  --t-fast: .15s;
+  --t-std: .2s;
+  --t-med: .3s;
+  --t-slow: .5s;
+  --container-md: 28rem;
+  --tw-animation-delay: 0s;
+  --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  --tw-animation-iteration-count: 1;
+  --tw-exit-opacity: 1;
+  --tw-outline-style: solid;
+  --tw-animation-fill-mode: none;
+  --tw-exit-blur: 0;
+  --tw-translate-z: 0;
+  --tw-gradient-via: rgba(0, 0, 0, 0);
+  --tw-enter-scale: 1;
+  --tw-animation-direction: normal;
+  --animate-ping: ping 1s cubic-bezier(0, 0, .2, 1) infinite;
+  --tw-exit-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-enter-translate-x: 0;
+  --tw-content: "";
+  --tw-gradient-from: rgba(0, 0, 0, 0);
+  --tw-gradient-to: rgba(0, 0, 0, 0);
+  --tw-exit-rotate: 0;
+  --tw-exit-scale: 1;
+  --tw-translate-x: 0;
+  --tw-exit-translate-y: 0;
+  --tw-gradient-via-position: 50%;
+  --tw-enter-rotate: 0;
+  --container-lg: 32rem;
+  --tw-enter-translate-y: 0;
+  --tw-gradient-to-position: 100%;
+  --tw-enter-blur: 0;
+  --default-transition-duration: .15s;
+  --container-xs: 20rem;
+  --tw-enter-opacity: 1;
+  --tw-gradient-from-position: 0%;
+  /* — semantic — */
+  success: [object Object];
+  warning: [object Object];
+  error: [object Object];
+  info: [object Object];
+
+}

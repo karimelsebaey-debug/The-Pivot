@@ -44,7 +44,7 @@ export function ServiceHero({ service }: { service: ServiceItem }) {
       {/* Breadcrumb */}
       <p
         className="sh-cat text-sm font-semibold uppercase tracking-widest mb-8"
-        style={{ letterSpacing: '0.14em', opacity: 0.55, color: isDark ? '#D8FF85' : '#0A211F' }}
+        style={{ letterSpacing: '0.14em', opacity: 0.55, color: isDark ? '#C9A84C' : '#0A211F' }}
       >
         <Link href={`/capabilities/${service.categorySlug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
           {service.category}
@@ -83,7 +83,7 @@ export function ServiceHero({ service }: { service: ServiceItem }) {
           className="inline-flex items-center gap-3 px-7 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105"
           style={{
             borderRadius: 'var(--radius-xl)',
-            backgroundColor: isDark ? '#D8FF85' : '#0A211F',
+            backgroundColor: isDark ? '#C9A84C' : '#0A211F',
             color: isDark ? '#0A211F' : '#F2F4E7',
             letterSpacing: '0.12em',
           }}

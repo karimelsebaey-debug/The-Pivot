@@ -1,0 +1,47 @@
+{
+  "tone": "friendly",
+  "pronoun": "you-only",
+  "headingStyle": "Title Case",
+  "headingLengthClass": "balanced",
+  "ctaVerbs": [
+    {
+      "value": "share",
+      "count": 1
+    },
+    {
+      "value": "react",
+      "count": 1
+    },
+    {
+      "value": "human",
+      "count": 1
+    }
+  ],
+  "buttonPatterns": [
+    {
+      "value": "share",
+      "count": 1
+    },
+    {
+      "value": "react agent: architecture, implementation, and tradeoffs\nnewer post",
+      "count": 1
+    },
+    {
+      "value": "human-in-the-loop vs. human-on-the-loop: when to use each system\nolder post",
+      "count": 1
+    }
+  ],
+  "sampleHeadings": [
+    "Build and Update Workflows with n8n's MCP Server",
+    "Using it: a real example",
+    "How it works",
+    "Connecting your MCP client",
+    "Getting the most out of it",
+    "ReAct Agent: Architecture, Implementation, and Tradeoffs",
+    "Human-in-the-Loop vs. Human-on-the-Loop: When To Use Each System"
+  ],
+  "stats": {
+    "buttons": 3,
+    "headings": 7
+  }
+}

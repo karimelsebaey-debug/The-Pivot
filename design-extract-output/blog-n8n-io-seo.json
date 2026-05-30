@@ -1,0 +1,51 @@
+{
+  "openGraph": {
+    "site_name": "n8n Blog",
+    "type": "article",
+    "title": "n8n's MCP server can now build workflows!",
+    "description": "Describe what you want from Claude, ChatGPT, or your IDE, and get a ready-to-run workflow in a few minutes, built directly in n8n. No more copy-paste, no more back-and-forth.",
+    "url": "https://blog.n8n.io/n8n-mcp-server/",
+    "image": "https://storage.ghost.io/c/0d/78/0d78b34c-0c5f-4975-900e-61d00ccb1c2d/content/images/size/w1200/2026/04/mcp_blog_v2.png",
+    "image:width": "1200",
+    "image:height": "900"
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "n8n's MCP server can now build workflows!",
+    "description": "Describe what you want from Claude, ChatGPT, or your IDE, and get a ready-to-run workflow in a few minutes, built directly in n8n. No more copy-paste, no more back-and-forth.",
+    "url": "https://blog.n8n.io/n8n-mcp-server/",
+    "image": "https://storage.ghost.io/c/0d/78/0d78b34c-0c5f-4975-900e-61d00ccb1c2d/content/images/size/w1200/2026/04/mcp_blog_v2.png",
+    "label1": "Written by",
+    "data1": "Ophir Prusak",
+    "site": "@n8n_io"
+  },
+  "description": "Get a ready-to-run workflow in a few minutes, built directly in n8n. No more copy-paste, no more back-and-forth.",
+  "canonical": null,
+  "themeColor": null,
+  "viewport": "width=device-width, initial-scale=1",
+  "favicons": [
+    {
+      "rel": "icon",
+      "href": "https://storage.ghost.io/c/0d/78/0d78b34c-0c5f-4975-900e-61d00ccb1c2d/content/images/size/w256h256/2022/06/logo-n8n-symbol-512x512.png",
+      "sizes": "",
+      "type": "image/png"
+    }
+  ],
+  "manifest": null,
+  "structuredData": [
+    {
+      "type": "Article",
+      "name": "n8n&#x27;s MCP server can now build workflows!",
+      "sample": "{\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"n8n Blog\",\"url\":\"https://blog.n8n.io/\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://storage.ghost.io/c/0d/78/0d78b34c-0c5f-4975-900e-61d00ccb1c2d/content/images/2025/09/n8n-Logo.svg\",\"width\":145,\"height\":26}},\"author\":{\"@type\":\"Person\",\"name\":\"Ophir Prusak\",\"url\":\"https://blog.n8n.io/author/ophir/\",\"same"
+    }
+  ],
+  "score": {
+    "hasOg": true,
+    "hasTwitter": true,
+    "hasDescription": true,
+    "hasCanonical": false,
+    "hasStructuredData": true,
+    "hasFavicon": true,
+    "hasThemeColor": false
+  }
+}

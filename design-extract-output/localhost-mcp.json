@@ -1,0 +1,369 @@
+{
+  "colors": {
+    "all": [
+      {
+        "hex": "#0a211f",
+        "rgb": {
+          "r": 10,
+          "g": 33,
+          "b": 31,
+          "a": 1
+        },
+        "hsl": {
+          "h": 175,
+          "s": 53,
+          "l": 8
+        },
+        "count": 495,
+        "contexts": [
+          "text",
+          "border",
+          "background"
+        ]
+      },
+      {
+        "hex": "#f2f4e7",
+        "rgb": {
+          "r": 242,
+          "g": 244,
+          "b": 231,
+          "a": 1
+        },
+        "hsl": {
+          "h": 69,
+          "s": 37,
+          "l": 93
+        },
+        "count": 173,
+        "contexts": [
+          "background",
+          "text",
+          "border"
+        ]
+      },
+      {
+        "hex": "#000000",
+        "rgb": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 1
+        },
+        "hsl": {
+          "h": 0,
+          "s": 0,
+          "l": 0
+        },
+        "count": 115,
+        "contexts": [
+          "text",
+          "border",
+          "background"
+        ]
+      },
+      {
+        "hex": "#757575",
+        "rgb": {
+          "r": 117,
+          "g": 117,
+          "b": 117,
+          "a": 1
+        },
+        "hsl": {
+          "h": 0,
+          "s": 0,
+          "l": 46
+        },
+        "count": 46,
+        "contexts": [
+          "text",
+          "border"
+        ]
+      },
+      {
+        "hex": "#d8ff85",
+        "rgb": {
+          "r": 216,
+          "g": 255,
+          "b": 133,
+          "a": 1
+        },
+        "hsl": {
+          "h": 79,
+          "s": 100,
+          "l": 76
+        },
+        "count": 22,
+        "contexts": [
+          "background",
+          "text",
+          "border"
+        ]
+      },
+      {
+        "hex": "#0a1510",
+        "rgb": {
+          "r": 10,
+          "g": 21,
+          "b": 16,
+          "a": 1
+        },
+        "hsl": {
+          "h": 153,
+          "s": 35,
+          "l": 6
+        },
+        "count": 1,
+        "contexts": [
+          "background"
+        ]
+      },
+      {
+        "hex": "#ffffff",
+        "rgb": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 1
+        },
+        "hsl": {
+          "h": 0,
+          "s": 0,
+          "l": 100
+        },
+        "count": 1,
+        "contexts": [
+          "background"
+        ]
+      }
+    ]
+  },
+  "regions": [
+    {
+      "role": "nav",
+      "tag": "header",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 56
+      },
+      "heading": null,
+      "buttonCount": 2,
+      "cardCount": 3,
+      "className": "fixed top-0 left-0 right-0 z-50 flex items-center"
+    },
+    {
+      "role": "nav",
+      "tag": "nav",
+      "bounds": {
+        "x": 394.8125,
+        "y": 17.5,
+        "w": 400,
+        "h": 20
+      },
+      "heading": null,
+      "buttonCount": 1,
+      "cardCount": 1,
+      "className": "hidden md:flex items-center gap-8"
+    },
+    {
+      "role": "content",
+      "tag": "main",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 8615.171875
+      },
+      "heading": "The Turning\nPoint For Your\nCreative Ambition.",
+      "buttonCount": 0,
+      "cardCount": 23,
+      "className": null
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 800
+      },
+      "heading": "The Turning\nPoint For Your\nCreative Ambition.",
+      "buttonCount": 0,
+      "cardCount": 0,
+      "className": null
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": 3040,
+        "w": 1280,
+        "h": 800
+      },
+      "heading": "Creative Design",
+      "buttonCount": 0,
+      "cardCount": 22,
+      "className": null
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": 7680,
+        "w": 1280,
+        "h": 935.171875
+      },
+      "heading": "What Shifted.",
+      "buttonCount": 0,
+      "cardCount": 1,
+      "className": "section-py"
+    },
+    {
+      "role": "footer",
+      "tag": "footer",
+      "bounds": {
+        "x": 0,
+        "y": 8615.171875,
+        "w": 1280,
+        "h": 406.25
+      },
+      "heading": "Start your\nturning point.",
+      "buttonCount": 0,
+      "cardCount": 2,
+      "className": "section-py"
+    },
+    {
+      "role": "nav",
+      "tag": "nav",
+      "bounds": {
+        "x": 430.453125,
+        "y": 8913.421875,
+        "w": 312,
+        "h": 20
+      },
+      "heading": null,
+      "buttonCount": 0,
+      "cardCount": 0,
+      "className": "flex flex-wrap gap-6"
+    }
+  ],
+  "componentClusters": [
+    {
+      "kind": "button",
+      "structuralHash": "button>svg",
+      "instanceCount": 1,
+      "variants": [
+        {
+          "css": {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(10, 33, 31)",
+            "padding": "0px 0px 0px 0px",
+            "borderRadius": "0px",
+            "border": "0px solid rgb(10, 33, 31)",
+            "fontSize": "14px",
+            "fontWeight": "400"
+          },
+          "instanceCount": 1
+        }
+      ]
+    }
+  ],
+  "accessibility": {
+    "remediation": [
+      {
+        "fg": "#12211d",
+        "bg": "#0a211f",
+        "ratio": 1.01,
+        "rule": "AA-normal",
+        "suggestion": {
+          "replace": "fg",
+          "color": "#ffffff",
+          "newRatio": 16.8
+        }
+      }
+    ]
+  },
+  "cssHealth": {
+    "sheets": [
+      {
+        "url": "http://localhost:3001/_next/static/chunks/%5Broot-of-the-server%5D__0evh5bf._.css",
+        "totalBytes": 57906,
+        "usedBytes": 33157,
+        "unusedBytes": 24749,
+        "unusedPercent": 43
+      }
+    ],
+    "totalBytes": 57906,
+    "usedBytes": 33157,
+    "unusedBytes": 24749,
+    "unusedPercent": 43,
+    "importantCount": 10,
+    "duplicates": 602,
+    "vendorPrefixes": {
+      "webkit": 27,
+      "moz": 4,
+      "ms": 0,
+      "o": 0
+    },
+    "keyframes": [
+      {
+        "name": "slideDownAppearing",
+        "steps": 2
+      },
+      {
+        "name": "fadeInUp",
+        "steps": 2
+      },
+      {
+        "name": "fade-in",
+        "steps": 2
+      },
+      {
+        "name": "move-bottom-left",
+        "steps": 2
+      },
+      {
+        "name": "up-right-to-center",
+        "steps": 2
+      },
+      {
+        "name": "slide-up-loop",
+        "steps": 5
+      },
+      {
+        "name": "spin",
+        "steps": 1
+      },
+      {
+        "name": "pulse",
+        "steps": 1
+      },
+      {
+        "name": "ping",
+        "steps": 1
+      }
+    ],
+    "specificity": {
+      "max": [
+        1,
+        4,
+        2
+      ],
+      "average": [
+        0.02,
+        1.1,
+        0.18
+      ],
+      "count": 379
+    },
+    "issues": [
+      "10 !important rules",
+      "602 duplicate declarations"
+    ]
+  }
+}

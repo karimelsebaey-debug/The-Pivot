@@ -1,0 +1,34 @@
+{
+  "tone": "friendly",
+  "pronoun": "third-person",
+  "headingStyle": "Title Case",
+  "headingLengthClass": "tight",
+  "ctaVerbs": [
+    {
+      "value": "capabilities",
+      "count": 1
+    }
+  ],
+  "buttonPatterns": [
+    {
+      "value": "capabilities",
+      "count": 1
+    }
+  ],
+  "sampleHeadings": [
+    "The Turning\nPoint For Your\nCreative Ambition.",
+    "The Turning Point For Your Creative Ambition.",
+    "Creative Design",
+    "Specialized Production",
+    "AI Services",
+    "The Turning\nPoint For Your\nCreative Ambition.",
+    "The Turning Point For Your Creative Ambition.",
+    "Creative Design",
+    "Specialized Production",
+    "AI Services"
+  ],
+  "stats": {
+    "buttons": 1,
+    "headings": 13
+  }
+}
