@@ -288,14 +288,14 @@ export function HeroCanvas() {
         <PillCTA href="#work" label="See Our Work" />
       </div>
 
-      {/* ── Mobile: scroll indicator — right of building area ── */}
+      {/* ── Mobile: scroll indicator — left of building area ── */}
       <div
         aria-hidden
         className="md:hidden flex flex-col items-center"
         style={{
           position: 'absolute',
-          right: 14,
-          top: '38%',
+          left: 14,
+          top: '28%',
           transform: 'translateY(-50%)',
           zIndex: 4,
           pointerEvents: 'none',
