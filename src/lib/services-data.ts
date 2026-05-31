@@ -1,4 +1,4 @@
-export type ServiceItem = {
+﻿export type ServiceItem = {
   slug: string
   title: string
   description: string
@@ -39,10 +39,10 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#C9A84C',
         bg: '#0A211F',
         videos: [
-          { src: '/videos/services/motion-design/motion-ads.mp4', label: 'Motion Ads' },
-          { src: '/videos/services/motion-design/explainers.mp4', label: 'Explainers & How-Tos' },
-          { src: '/videos/services/motion-design/campaign-support.mp4', label: 'Campaign Support' },
-          { src: '/videos/services/motion-design/web-animations.mp4', label: 'Web Animations' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/motion-design/motion-ads.mp4', label: 'Motion Ads' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/motion-design/explainers.mp4', label: 'Explainers & How-Tos' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/motion-design/campaign-support.mp4', label: 'Campaign Support' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/motion-design/web-animations.mp4', label: 'Web Animations' },
         ],
       },
       {
@@ -55,7 +55,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#C9A84C',
         bg: '#0A211F',
         videos: [
-          { src: '/videos/services/email-creation/crm-native.mp4', label: 'CRM-Native Development' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/email-creation/crm-native.mp4', label: 'CRM-Native Development' },
         ],
       },
       {
@@ -68,8 +68,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#C9A84C',
         bg: '#0A211F',
         videos: [
-          { src: '/videos/services/web-design/brand-illustrations.mp4', label: 'Brand Illustrations' },
-          { src: '/videos/services/web-design/storyboarding.mp4', label: 'Storyboarding' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/web-design/brand-illustrations.mp4', label: 'Brand Illustrations' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/web-design/storyboarding.mp4', label: 'Storyboarding' },
         ],
       },
       {
@@ -125,8 +125,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#0A211F',
         bg: '#F2F4E7',
         videos: [
-          { src: '/videos/services/ad-creative/motion-graphics.mp4', label: 'Motion Graphics' },
-          { src: '/videos/services/ad-creative/illustration.mp4', label: 'Illustration' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ad-creative/motion-graphics.mp4', label: 'Motion Graphics' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ad-creative/illustration.mp4', label: 'Illustration' },
         ],
       },
       {
@@ -139,7 +139,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#0A211F',
         bg: '#F2F4E7',
         videos: [
-          { src: '/videos/services/social-media-creative/organic-social.mp4', label: 'Organic Social Content' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/social-media-creative/organic-social.mp4', label: 'Organic Social Content' },
         ],
       },
       {
@@ -152,8 +152,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#0A211F',
         bg: '#F2F4E7',
         videos: [
-          { src: '/videos/services/presentation-design/data-visualization.mp4', label: 'Data Visualization' },
-          { src: '/videos/services/presentation-design/motion-slides.mp4', label: 'Motion for Slides' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/presentation-design/data-visualization.mp4', label: 'Data Visualization' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/presentation-design/motion-slides.mp4', label: 'Motion for Slides' },
         ],
       },
       {
@@ -177,8 +177,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#0A211F',
         bg: '#F2F4E7',
         videos: [
-          { src: '/videos/services/branding-services/brand-consistency.mp4', label: 'Brand Consistency' },
-          { src: '/videos/services/branding-services/brand-guidelines.mp4', label: 'Brand Guidelines' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/branding-services/brand-consistency.mp4', label: 'Brand Consistency' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/branding-services/brand-guidelines.mp4', label: 'Brand Guidelines' },
         ],
       },
       {
@@ -191,7 +191,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#0A211F',
         bg: '#F2F4E7',
         videos: [
-          { src: '/videos/services/concept-creation/ad-new-brand.mp4', label: 'New Brand Concept' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/concept-creation/ad-new-brand.mp4', label: 'New Brand Concept' },
         ],
       },
     ],
@@ -214,10 +214,10 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#C9A84C',
         bg: '#0A211F',
         videos: [
-          { src: '/videos/services/ai-powered-creative/ai-video-production.mp4', label: 'AI Video Production' },
-          { src: '/videos/services/ai-powered-creative/brand-imagery.mp4', label: 'Brand Imagery' },
-          { src: '/videos/services/ai-powered-creative/image-enhancements.mp4', label: 'Image Enhancements' },
-          { src: '/videos/services/ai-powered-creative/translation.mp4', label: 'Translation & Transcreation' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ai-powered-creative/ai-video-production.mp4', label: 'AI Video Production' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ai-powered-creative/brand-imagery.mp4', label: 'Brand Imagery' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ai-powered-creative/image-enhancements.mp4', label: 'Image Enhancements' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ai-powered-creative/translation.mp4', label: 'Translation & Transcreation' },
         ],
       },
       {
@@ -273,9 +273,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#0A211F',
         bg: '#F2F4E7',
         videos: [
-          { src: '/videos/services/campaign-strategy/campaign-concepts.mp4', label: 'Campaign Concepts' },
-          { src: '/videos/services/campaign-strategy/graphic-design-concepts.mp4', label: 'Design Concepts' },
-          { src: '/videos/services/campaign-strategy/strategic-storytelling.mp4', label: 'Strategic Storytelling' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/campaign-strategy/campaign-concepts.mp4', label: 'Campaign Concepts' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/campaign-strategy/graphic-design-concepts.mp4', label: 'Design Concepts' },
+          { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/campaign-strategy/strategic-storytelling.mp4', label: 'Strategic Storytelling' },
         ],
       },
       {
