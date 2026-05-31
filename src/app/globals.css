@@ -447,7 +447,9 @@ html.lenis, html.lenis body { height: auto; }
 ───────────────────────────────────────── */
 @media (orientation: landscape) and (max-width: 767px) {
   .hero-mob-text,
-  .hero-mob-scr { display: none !important; }
+  .hero-mob-scr  { display: none !important; }
+  .hero-desktop-text { display: flex !important; }
+  .hero-desktop-scr  { display: flex !important; }
 }
 
 /* ─────────────────────────────────────────

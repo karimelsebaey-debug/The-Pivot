@@ -61,10 +61,9 @@ export function HeroCanvas() {
     ctx.fillStyle = BG
     ctx.fillRect(0, 0, w, h)
 
-    /* Desktop: full height. Mobile portrait: top 60%. Mobile landscape: full height. */
-    const isMob     = w < 768
-    const isLandMob = isMob && w > h
-    const availH    = isLandMob ? h - HEADER_H : isMob ? h * 0.60 - HEADER_H : h - HEADER_H
+    /* isMob = portrait mobile only. Landscape mobile uses desktop layout. */
+    const isMob  = w < 768 && h > w
+    const availH = isMob ? h * 0.60 - HEADER_H : h - HEADER_H
     const scaleW = w / img.naturalWidth
     const scaleH = availH / img.naturalHeight
     // Mobile: height-driven — fills exactly top 60%, no gap, no overflow
@@ -187,7 +186,7 @@ export function HeroCanvas() {
 
       {/* ── Desktop text overlay ── */}
       <div
-        className="hidden md:flex flex-col"
+        className="hero-desktop-text hidden md:flex flex-col"
         style={{
           position: 'absolute',
           top: 0, left: 0, bottom: 0,
@@ -344,7 +343,7 @@ export function HeroCanvas() {
       <div
         ref={scrollIndRef}
         aria-hidden
-        className="hidden md:flex"
+        className="hero-desktop-scr hidden md:flex"
         style={{
           position: 'absolute',
           left: 'calc(44% + 16px)',
