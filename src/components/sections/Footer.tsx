@@ -220,10 +220,8 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
+              className="footer-social-icon"
               style={{
-                width: 34,
-                height: 34,
-                borderRadius: '50%',
                 border: '1px solid rgba(242,244,231,0.25)',
                 display: 'flex',
                 alignItems: 'center',

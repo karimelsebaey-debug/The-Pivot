@@ -31,8 +31,9 @@ export function CategoryHero({ category }: { category: ServiceCategory }) {
   return (
     <section
       ref={sectionRef}
+      className="service-hero-section"
       style={{
-        minHeight: '72vh',
+        minHeight: '72dvh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',

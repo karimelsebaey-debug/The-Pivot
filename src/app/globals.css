@@ -478,3 +478,45 @@ html.lenis, html.lenis body { height: auto; }
     padding-bottom: 20px;
   }
 }
+
+/* ─────────────────────────────────────────
+   HERO CANVAS — mobile: hidden until scroll
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero-canvas-el { opacity: 0; }
+}
+
+/* ─────────────────────────────────────────
+   CONTACT PAGE — mobile single column
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: clamp(32px, 5vh, 48px) !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   FOOTER — social icon touch targets
+───────────────────────────────────────── */
+.footer-social-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+@media (max-width: 767px) {
+  .footer-social-icon {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   SERVICE / CATEGORY HERO — mobile padding
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .service-hero-section {
+    padding-top: clamp(88px, 11dvh, 104px) !important;
+    padding-bottom: 48px !important;
+  }
+}

@@ -12,7 +12,7 @@ const HEADER_H = 56
 const BG       = '#DADECF'
 
 const frameSrc = (i: number) =>
-  `/frames-hero/frame_${String(i).padStart(3, '0')}.jpg`
+  `https://res.cloudinary.com/dn21xgyhb/image/upload/q_auto,f_auto/the-pivot/frames-hero/frame_${String(i).padStart(3, '0')}.jpg`
 
 export function HeroCanvas() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -61,11 +61,14 @@ export function HeroCanvas() {
     ctx.fillStyle = BG
     ctx.fillRect(0, 0, w, h)
 
-    /* Contain: full building visible, no clipping. BG fill blends with sky color. */
-    const availH = h - HEADER_H
+    /* Mobile: draw building inside top 55% only (bottom 45% = text panel).
+       Desktop: use full height minus header. */
+    const isMob  = w < 768
+    const availH = isMob ? h * 0.55 - HEADER_H : h - HEADER_H
     const scaleW = w / img.naturalWidth
     const scaleH = availH / img.naturalHeight
-    const scale  = Math.min(scaleW, scaleH)
+    /* Mobile: 1.2× bigger, centered in top area. Desktop: unchanged. */
+    const scale  = Math.min(scaleW, scaleH) * (isMob ? 1.2 : 1)
 
     const dw = Math.round(img.naturalWidth  * scale)
     const dh = Math.round(img.naturalHeight * scale)
@@ -98,7 +101,11 @@ export function HeroCanvas() {
       .from(subRef.current,     { opacity: 0, y: 16, duration: 0.8 }, '-=0.5')
       .from(ctaRef.current,       { opacity: 0, y: 16, duration: 0.7 }, '-=0.4')
       .from(scrollIndRef.current, { opacity: 0, y: 12, duration: 0.8 }, '-=0.2')
-      .from(canvasRef.current,    { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
+
+    /* Canvas entry: desktop only — mobile hidden via CSS .hero-canvas-el, revealed on scroll */
+    if (window.innerWidth >= 768) {
+      tl.from(canvasRef.current, { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
+    }
 
     /* Scroll-driven frame scrub */
     ScrollTrigger.create({
@@ -114,6 +121,10 @@ export function HeroCanvas() {
         if (fi !== frameIdx.current) {
           frameIdx.current = fi
           drawFrame(fi)
+        }
+        /* Mobile: building fades in as user scrolls (fully visible at 25% progress) */
+        if (window.innerWidth < 768 && canvasRef.current) {
+          canvasRef.current.style.opacity = String(Math.min(self.progress * 4, 1))
         }
       },
     })
@@ -144,6 +155,7 @@ export function HeroCanvas() {
       {/* ── Canvas — scroll-driven 000→119 ── */}
       <canvas
         ref={canvasRef}
+        className="hero-canvas-el"
         style={{
           position: 'absolute',
           inset: 0,
@@ -238,42 +250,92 @@ export function HeroCanvas() {
         </div>
       </div>
 
-      {/* ── Mobile text overlay ── */}
+      {/* ── Mobile: text panel — bottom 45% (always visible) ── */}
       <div
-        className="md:hidden flex flex-col justify-center h-full"
+        className="md:hidden flex flex-col justify-center"
         style={{
-          position: 'relative',
-          padding: `${HEADER_H + 24}px clamp(20px, 5vw, 40px) 48px`,
+          position: 'absolute',
+          bottom: 0, left: 0, right: 0,
+          height: '45%',
+          backgroundColor: BG,
+          padding: '20px clamp(20px, 5vw, 32px) 32px',
           zIndex: 3,
-          background: `linear-gradient(to bottom, ${BG} 0%, rgba(218,222,207,0.75) 60%, rgba(218,222,207,0.4) 100%)`,
         }}
       >
         <h1 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(2.4rem, 9vw, 3.5rem)',
+          fontSize: 'clamp(2rem, 8vw, 3rem)',
           lineHeight: 1.06,
           letterSpacing: '-0.025em',
-          color: 'var(--color-ink)',
-          marginBottom: '1.25rem',
+          color: 'var(--color-accent)',
+          marginBottom: '0.75rem',
         }}>
           The Turning Point For Your{' '}
           <em style={{ fontStyle: 'italic' }}>Creative Ambition.</em>
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '0.95rem',
-          lineHeight: 1.75,
+          fontSize: '0.88rem',
+          lineHeight: 1.65,
           color: 'var(--color-ink)',
-          opacity: 0.7,
-          marginBottom: '1.75rem',
-          maxWidth: '420px',
+          opacity: 0.65,
+          marginBottom: '1.25rem',
         }}>
           We transform ambitious ideas into visual presence and digital
-          solutions —
-          <br />
+          solutions —{' '}
           <em style={{ fontStyle: 'italic', fontWeight: 700 }}>built to last, impossible to ignore.</em>
         </p>
         <PillCTA href="#work" label="See Our Work" />
+      </div>
+
+      {/* ── Mobile: scroll indicator — right of building area ── */}
+      <div
+        aria-hidden
+        className="md:hidden flex flex-col items-center"
+        style={{
+          position: 'absolute',
+          right: 14,
+          top: '38%',
+          transform: 'translateY(-50%)',
+          zIndex: 4,
+          pointerEvents: 'none',
+          gap: 0,
+        }}
+      >
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: '0.52rem',
+          fontWeight: 600,
+          letterSpacing: '0.24em',
+          textTransform: 'uppercase',
+          color: 'var(--color-ink)',
+          opacity: 0.42,
+          writingMode: 'vertical-rl',
+          transform: 'rotate(180deg)',
+          marginBottom: 14,
+          lineHeight: 1,
+        }}>
+          Scroll Down to Pivot
+        </p>
+        <div style={{
+          width: '1px',
+          height: '52px',
+          background: `linear-gradient(to bottom, var(--color-ink), transparent)`,
+          opacity: 0.28,
+          transformOrigin: 'top',
+          animation: 'scroll-line-draw 1.2s ease-out forwards',
+          marginBottom: 6,
+        }} />
+        <svg
+          width="22" height="36" viewBox="0 0 26 42" fill="none"
+          style={{ animation: 'mouse-body-scroll 2s ease-in-out infinite', opacity: 0.65 }}
+        >
+          <rect x="1" y="1" width="24" height="40" rx="12" fill="rgba(10,33,31,0.08)" />
+          <rect x="1" y="1" width="24" height="40" rx="12"
+            stroke="rgba(10,33,31,0.38)" strokeWidth="1.2" fill="none" />
+          <circle cx="13" cy="11" r="3" fill="rgba(10,33,31,0.4)"
+            style={{ animation: 'mouse-dot-scroll 2s ease-in-out infinite' }} />
+        </svg>
       </div>
 
       {/* ── Scroll indicator — desktop only ── */}
@@ -321,66 +383,92 @@ export function HeroCanvas() {
           marginBottom: '6px',
         }} />
 
-        {/* Mouse scroll icon — 3D */}
+        {/* Mouse scroll icon — 3D enhanced */}
         <svg
-          width="26" height="42" viewBox="0 0 26 42" fill="none"
-          style={{ animation: 'mouse-body-scroll 2s ease-in-out infinite', filter: 'drop-shadow(0 4px 8px rgba(10,33,31,0.18))' }}
+          width="32" height="50" viewBox="0 0 32 50" fill="none"
+          style={{ animation: 'mouse-body-scroll 2s ease-in-out infinite', filter: 'drop-shadow(0 6px 14px rgba(10,33,31,0.32)) drop-shadow(0 2px 4px rgba(10,33,31,0.22))' }}
         >
           <defs>
-            {/* Body gradient — light left → dark right (3D cylinder) */}
+            {/* Body — 3D cylinder: bright left rim → lit surface → shadow → dark right */}
             <linearGradient id="mg-body" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.18)" />
-              <stop offset="30%"  stopColor="rgba(10,33,31,0.28)" />
-              <stop offset="70%"  stopColor="rgba(10,33,31,0.52)" />
-              <stop offset="100%" stopColor="rgba(10,33,31,0.72)" />
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.55)" />
+              <stop offset="8%"   stopColor="rgba(10,33,31,0.18)" />
+              <stop offset="35%"  stopColor="rgba(10,33,31,0.30)" />
+              <stop offset="68%"  stopColor="rgba(10,33,31,0.58)" />
+              <stop offset="92%"  stopColor="rgba(10,33,31,0.80)" />
+              <stop offset="100%" stopColor="rgba(0,0,0,0.88)" />
             </linearGradient>
-            {/* Top specular highlight */}
-            <radialGradient id="mg-spec" cx="30%" cy="18%" r="50%">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.35)" />
+            {/* Top-left specular — sharp highlight capsule */}
+            <radialGradient id="mg-spec" cx="28%" cy="16%" r="42%">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.70)" />
+              <stop offset="55%"  stopColor="rgba(255,255,255,0.12)" />
               <stop offset="100%" stopColor="rgba(255,255,255,0)" />
             </radialGradient>
-            {/* Inner rim — subtle inner glow */}
-            <linearGradient id="mg-rim" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.12)" />
-              <stop offset="100%" stopColor="rgba(0,0,0,0.08)" />
+            {/* Bottom ambient fill */}
+            <linearGradient id="mg-amb" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.06)" />
+              <stop offset="60%"  stopColor="rgba(0,0,0,0)" />
+              <stop offset="100%" stopColor="rgba(0,0,0,0.18)" />
             </linearGradient>
-            {/* Scroll dot — sphere */}
-            <radialGradient id="mg-dot" cx="32%" cy="28%" r="60%">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.95)" />
-              <stop offset="45%"  stopColor="rgba(10,33,31,0.7)" />
-              <stop offset="100%" stopColor="rgba(10,33,31,0.95)" />
+            {/* Scroll dot — gold sphere */}
+            <radialGradient id="mg-dot" cx="30%" cy="25%" r="62%">
+              <stop offset="0%"   stopColor="rgba(255,245,180,0.98)" />
+              <stop offset="20%"  stopColor="#E8C060" />
+              <stop offset="50%"  stopColor="#B8943C" />
+              <stop offset="78%"  stopColor="#7A5C1E" />
+              <stop offset="100%" stopColor="#3A2A08" />
+            </radialGradient>
+            {/* Dot glow */}
+            <radialGradient id="mg-dot-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stopColor="rgba(184,148,60,0.55)" />
+              <stop offset="100%" stopColor="rgba(184,148,60,0)" />
+            </radialGradient>
+            {/* Bottom reflection (ground bounce) */}
+            <radialGradient id="mg-floor" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stopColor="rgba(10,33,31,0.22)" />
+              <stop offset="100%" stopColor="rgba(10,33,31,0)" />
             </radialGradient>
           </defs>
 
-          {/* Drop shadow shape */}
-          <rect x="2.5" y="3" width="21" height="38" rx="10.5" fill="rgba(10,33,31,0.15)" />
+          {/* Floor reflection — ellipse below */}
+          <ellipse cx="16" cy="47" rx="9" ry="2.5" fill="url(#mg-floor)" />
 
-          {/* Body base */}
-          <rect x="1" y="1" width="24" height="40" rx="12" fill="url(#mg-body)" />
+          {/* Drop shadow offset shape */}
+          <rect x="3.5" y="4" width="25" height="43" rx="12.5" fill="rgba(10,33,31,0.18)" />
 
-          {/* Inner fill tone */}
-          <rect x="1" y="1" width="24" height="40" rx="12" fill="url(#mg-rim)" />
+          {/* Body base fill */}
+          <rect x="1" y="1" width="28" height="46" rx="14" fill="url(#mg-body)" />
+
+          {/* Ambient top-to-bottom overlay */}
+          <rect x="1" y="1" width="28" height="46" rx="14" fill="url(#mg-amb)" />
 
           {/* Outer border */}
-          <rect x="1" y="1" width="24" height="40" rx="12"
-            stroke="rgba(10,33,31,0.45)" strokeWidth="1.2" fill="none" />
+          <rect x="1" y="1" width="28" height="46" rx="14"
+            stroke="rgba(10,33,31,0.50)" strokeWidth="1.2" fill="none" />
 
-          {/* Left edge highlight — thin bright strip */}
-          <rect x="2.2" y="5" width="1.2" height="30" rx="0.6" fill="rgba(255,255,255,0.28)" />
+          {/* Inner border — subtle inner shadow */}
+          <rect x="2" y="2" width="26" height="44" rx="13"
+            stroke="rgba(255,255,255,0.08)" strokeWidth="0.8" fill="none" />
 
-          {/* Right edge shadow */}
-          <rect x="22.6" y="5" width="1.2" height="30" rx="0.6" fill="rgba(0,0,0,0.28)" />
+          {/* Left edge highlight strip */}
+          <rect x="2.8" y="6" width="1.4" height="34" rx="0.7" fill="rgba(255,255,255,0.40)" />
 
-          {/* Center divider line */}
-          <line x1="13" y1="3" x2="13" y2="16"
-            stroke="rgba(10,33,31,0.2)" strokeWidth="0.8" />
+          {/* Right edge dark shadow strip */}
+          <rect x="27.8" y="6" width="1.4" height="34" rx="0.7" fill="rgba(0,0,0,0.38)" />
+
+          {/* Center divider */}
+          <line x1="15.5" y1="3" x2="15.5" y2="18"
+            stroke="rgba(10,33,31,0.18)" strokeWidth="0.8" />
 
           {/* Specular overlay */}
-          <rect x="1" y="1" width="24" height="40" rx="12" fill="url(#mg-spec)" />
+          <rect x="1" y="1" width="28" height="46" rx="14" fill="url(#mg-spec)" />
 
-          {/* Scroll dot — 3D sphere */}
+          {/* Dot ambient glow */}
+          <circle cx="15.5" cy="13" r="7" fill="url(#mg-dot-glow)" />
+
+          {/* Scroll dot — gold 3D sphere */}
           <circle
-            cx="13" cy="11" r="3"
+            cx="15.5" cy="13" r="3.8"
             fill="url(#mg-dot)"
             style={{ animation: 'mouse-dot-scroll 2s ease-in-out infinite' }}
           />
