@@ -61,21 +61,23 @@ export function HeroCanvas() {
     ctx.fillStyle = BG
     ctx.fillRect(0, 0, w, h)
 
-    /* Mobile: draw building inside top 55% only (bottom 45% = text panel).
-       Desktop: use full height minus header. */
+    /* Desktop: use full height minus header.
+       Mobile: scale so building base lands at text panel top (h*0.55), then top-align. */
     const isMob  = w < 768
     const availH = isMob ? h * 0.55 - HEADER_H : h - HEADER_H
     const scaleW = w / img.naturalWidth
     const scaleH = availH / img.naturalHeight
-    /* Mobile: 1.5× bigger, -15% offset to center building in frame. Desktop: unchanged. */
-    const scale  = Math.min(scaleW, scaleH) * (isMob ? 1.5 : 1)
+    // Mobile: height-driven scale × 1.3 so image overflows into text panel (gap disappears)
+    const scale  = isMob
+      ? (availH / img.naturalHeight) * 1.3
+      : Math.min(scaleW, scaleH)
 
     const dw = Math.round(img.naturalWidth  * scale)
     const dh = Math.round(img.naturalHeight * scale)
     const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.15) : 0)
-    // Mobile: anchor building to bottom of canvas area (no gap above text panel)
+    // Mobile: top-aligned — building overflows down, base hidden under text panel
     const dy = isMob
-      ? Math.round(HEADER_H + availH - dh)
+      ? HEADER_H
       : Math.round(HEADER_H + (availH - dh) / 2)
 
     ctx.drawImage(img, dx, dy, dw, dh)
@@ -253,22 +255,7 @@ export function HeroCanvas() {
         </div>
       </div>
 
-      {/* ── Mobile: bottom fade — dissolves building base into text panel ── */}
-      <div
-        aria-hidden
-        className="md:hidden"
-        style={{
-          position: 'absolute',
-          left: 0, right: 0,
-          bottom: '45%',
-          height: 32,
-          background: `linear-gradient(to bottom, transparent 0%, ${BG} 100%)`,
-          zIndex: 2,
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* ── Mobile: text panel — bottom 45% (always visible) ── */}
+{/* ── Mobile: text panel — bottom 45% (always visible) ── */}
       <div
         className="md:hidden flex flex-col justify-center"
         style={{
