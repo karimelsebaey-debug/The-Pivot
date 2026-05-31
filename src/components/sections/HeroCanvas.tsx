@@ -73,7 +73,10 @@ export function HeroCanvas() {
     const dw = Math.round(img.naturalWidth  * scale)
     const dh = Math.round(img.naturalHeight * scale)
     const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.15) : 0)
-    const dy = Math.round(HEADER_H + (availH - dh) / 2)
+    // Mobile: anchor building to bottom of canvas area (no gap above text panel)
+    const dy = isMob
+      ? Math.round(HEADER_H + availH - dh)
+      : Math.round(HEADER_H + (availH - dh) / 2)
 
     ctx.drawImage(img, dx, dy, dw, dh)
   }
