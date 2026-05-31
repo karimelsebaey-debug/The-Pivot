@@ -67,7 +67,7 @@ export function HeroCanvas() {
     const availH = isMob ? h * 0.55 - HEADER_H : h - HEADER_H
     const scaleW = w / img.naturalWidth
     const scaleH = availH / img.naturalHeight
-    /* Mobile: 1.5× bigger, shift left 10% to position building. Desktop: unchanged. */
+    /* Mobile: 1.5× bigger, -10% offset to center building in frame. Desktop: unchanged. */
     const scale  = Math.min(scaleW, scaleH) * (isMob ? 1.5 : 1)
 
     const dw = Math.round(img.naturalWidth  * scale)
