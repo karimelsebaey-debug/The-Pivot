@@ -253,6 +253,21 @@ export function HeroCanvas() {
         </div>
       </div>
 
+      {/* ── Mobile: bottom fade — dissolves building base into text panel ── */}
+      <div
+        aria-hidden
+        className="md:hidden"
+        style={{
+          position: 'absolute',
+          left: 0, right: 0,
+          bottom: '45%',
+          height: 80,
+          background: `linear-gradient(to bottom, transparent 0%, ${BG} 100%)`,
+          zIndex: 2,
+          pointerEvents: 'none',
+        }}
+      />
+
       {/* ── Mobile: text panel — bottom 45% (always visible) ── */}
       <div
         className="md:hidden flex flex-col justify-center"
