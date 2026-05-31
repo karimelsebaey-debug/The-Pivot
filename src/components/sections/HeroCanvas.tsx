@@ -61,10 +61,10 @@ export function HeroCanvas() {
     ctx.fillStyle = BG
     ctx.fillRect(0, 0, w, h)
 
-    /* Desktop: use full height minus header.
-       Mobile: building fills top 60%, text panel takes bottom 40%. */
-    const isMob  = w < 768
-    const availH = isMob ? h * 0.60 - HEADER_H : h - HEADER_H
+    /* Desktop: full height. Mobile portrait: top 60%. Mobile landscape: full height. */
+    const isMob     = w < 768
+    const isLandMob = isMob && w > h
+    const availH    = isLandMob ? h - HEADER_H : isMob ? h * 0.60 - HEADER_H : h - HEADER_H
     const scaleW = w / img.naturalWidth
     const scaleH = availH / img.naturalHeight
     // Mobile: height-driven — fills exactly top 60%, no gap, no overflow
@@ -254,7 +254,7 @@ export function HeroCanvas() {
 
 {/* ── Mobile: text panel — bottom 45% (always visible) ── */}
       <div
-        className="md:hidden flex flex-col justify-center"
+        className="hero-mob-text md:hidden flex flex-col justify-center"
         style={{
           position: 'absolute',
           bottom: 0, left: 0, right: 0,
@@ -293,7 +293,7 @@ export function HeroCanvas() {
       {/* ── Mobile: scroll indicator — left of building area ── */}
       <div
         aria-hidden
-        className="md:hidden flex flex-col items-center"
+        className="hero-mob-scr md:hidden flex flex-col items-center"
         style={{
           position: 'absolute',
           left: 14,

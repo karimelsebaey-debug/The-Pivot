@@ -443,6 +443,14 @@ html.lenis, html.lenis body { height: auto; }
 .hero-cycle-3 { animation: hero-cycle 7.5s ease-in-out infinite; animation-delay: -5s; }
 
 /* ─────────────────────────────────────────
+   MOBILE LANDSCAPE — hero adjustments
+───────────────────────────────────────── */
+@media (orientation: landscape) and (max-width: 767px) {
+  .hero-mob-text,
+  .hero-mob-scr { display: none !important; }
+}
+
+/* ─────────────────────────────────────────
    VERTICALLOOPHERO — responsive layout
 ───────────────────────────────────────── */
 .vlh-copy {
