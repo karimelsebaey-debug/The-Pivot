@@ -67,12 +67,12 @@ export function HeroCanvas() {
     const availH = isMob ? h * 0.55 - HEADER_H : h - HEADER_H
     const scaleW = w / img.naturalWidth
     const scaleH = availH / img.naturalHeight
-    /* Mobile: 1.5× bigger, -10% offset to center building in frame. Desktop: unchanged. */
+    /* Mobile: 1.5× bigger, -15% offset to center building in frame. Desktop: unchanged. */
     const scale  = Math.min(scaleW, scaleH) * (isMob ? 1.5 : 1)
 
     const dw = Math.round(img.naturalWidth  * scale)
     const dh = Math.round(img.naturalHeight * scale)
-    const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.10) : 0)
+    const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.15) : 0)
     const dy = Math.round(HEADER_H + (availH - dh) / 2)
 
     ctx.drawImage(img, dx, dy, dw, dh)
