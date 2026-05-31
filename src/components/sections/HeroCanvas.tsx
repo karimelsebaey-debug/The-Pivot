@@ -67,12 +67,12 @@ export function HeroCanvas() {
     const availH = isMob ? h * 0.55 - HEADER_H : h - HEADER_H
     const scaleW = w / img.naturalWidth
     const scaleH = availH / img.naturalHeight
-    /* Mobile: 1.2× bigger, centered in top area. Desktop: unchanged. */
-    const scale  = Math.min(scaleW, scaleH) * (isMob ? 1.2 : 1)
+    /* Mobile: 1.35× bigger, shift left 18% to visually center building. Desktop: unchanged. */
+    const scale  = Math.min(scaleW, scaleH) * (isMob ? 1.35 : 1)
 
     const dw = Math.round(img.naturalWidth  * scale)
     const dh = Math.round(img.naturalHeight * scale)
-    const dx = Math.round((w - dw) / 2)
+    const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.18) : 0)
     const dy = Math.round(HEADER_H + (availH - dh) / 2)
 
     ctx.drawImage(img, dx, dy, dw, dh)
@@ -383,95 +383,90 @@ export function HeroCanvas() {
           marginBottom: '6px',
         }} />
 
-        {/* Mouse scroll icon — 3D enhanced */}
+        {/* Mouse scroll icon — elegant 3D */}
         <svg
-          width="32" height="50" viewBox="0 0 32 50" fill="none"
-          style={{ animation: 'mouse-body-scroll 2s ease-in-out infinite', filter: 'drop-shadow(0 6px 14px rgba(10,33,31,0.32)) drop-shadow(0 2px 4px rgba(10,33,31,0.22))' }}
+          width="24" height="42" viewBox="0 0 24 42" fill="none"
+          style={{
+            animation: 'mouse-body-scroll 2s ease-in-out infinite',
+            filter: 'drop-shadow(0 5px 12px rgba(10,33,31,0.28)) drop-shadow(0 1px 3px rgba(10,33,31,0.18))',
+          }}
         >
           <defs>
-            {/* Body — 3D cylinder: bright left rim → lit surface → shadow → dark right */}
-            <linearGradient id="mg-body" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.55)" />
-              <stop offset="8%"   stopColor="rgba(10,33,31,0.18)" />
-              <stop offset="35%"  stopColor="rgba(10,33,31,0.30)" />
-              <stop offset="68%"  stopColor="rgba(10,33,31,0.58)" />
-              <stop offset="92%"  stopColor="rgba(10,33,31,0.80)" />
-              <stop offset="100%" stopColor="rgba(0,0,0,0.88)" />
+            {/* Side-lit metal — bright left rim, mid surface, dark right */}
+            <linearGradient id="em-body" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.62)" />
+              <stop offset="10%"  stopColor="rgba(10,33,31,0.10)" />
+              <stop offset="40%"  stopColor="rgba(10,33,31,0.26)" />
+              <stop offset="72%"  stopColor="rgba(10,33,31,0.52)" />
+              <stop offset="100%" stopColor="rgba(10,33,31,0.78)" />
             </linearGradient>
-            {/* Top-left specular — sharp highlight capsule */}
-            <radialGradient id="mg-spec" cx="28%" cy="16%" r="42%">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.70)" />
-              <stop offset="55%"  stopColor="rgba(255,255,255,0.12)" />
+            {/* Top-to-bottom depth */}
+            <linearGradient id="em-depth" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.20)" />
+              <stop offset="35%"  stopColor="rgba(255,255,255,0)" />
+              <stop offset="100%" stopColor="rgba(0,0,0,0.20)" />
+            </linearGradient>
+            {/* Top-left specular capsule */}
+            <radialGradient id="em-spec" cx="26%" cy="16%" r="36%">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.80)" />
+              <stop offset="60%"  stopColor="rgba(255,255,255,0.10)" />
               <stop offset="100%" stopColor="rgba(255,255,255,0)" />
             </radialGradient>
-            {/* Bottom ambient fill */}
-            <linearGradient id="mg-amb" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.06)" />
-              <stop offset="60%"  stopColor="rgba(0,0,0,0)" />
-              <stop offset="100%" stopColor="rgba(0,0,0,0.18)" />
-            </linearGradient>
-            {/* Scroll dot — gold sphere */}
-            <radialGradient id="mg-dot" cx="30%" cy="25%" r="62%">
-              <stop offset="0%"   stopColor="rgba(255,245,180,0.98)" />
-              <stop offset="20%"  stopColor="#E8C060" />
-              <stop offset="50%"  stopColor="#B8943C" />
-              <stop offset="78%"  stopColor="#7A5C1E" />
-              <stop offset="100%" stopColor="#3A2A08" />
-            </radialGradient>
-            {/* Dot glow */}
-            <radialGradient id="mg-dot-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="rgba(184,148,60,0.55)" />
+            {/* Gold button-split accent */}
+            <linearGradient id="em-gold" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(184,148,60,0)" />
+              <stop offset="25%"  stopColor="rgba(184,148,60,0.60)" />
+              <stop offset="75%"  stopColor="rgba(184,148,60,0.60)" />
               <stop offset="100%" stopColor="rgba(184,148,60,0)" />
-            </radialGradient>
-            {/* Bottom reflection (ground bounce) */}
-            <radialGradient id="mg-floor" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="rgba(10,33,31,0.22)" />
-              <stop offset="100%" stopColor="rgba(10,33,31,0)" />
-            </radialGradient>
+            </linearGradient>
+            {/* Scroll wheel — 3D cylinder */}
+            <linearGradient id="em-wheel" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.55)" />
+              <stop offset="20%"  stopColor="rgba(184,148,60,0.90)" />
+              <stop offset="60%"  stopColor="rgba(140,108,28,0.85)" />
+              <stop offset="100%" stopColor="rgba(80,58,10,0.90)" />
+            </linearGradient>
           </defs>
 
-          {/* Floor reflection — ellipse below */}
-          <ellipse cx="16" cy="47" rx="9" ry="2.5" fill="url(#mg-floor)" />
+          {/* Offset shadow */}
+          <rect x="2.5" y="3.5" width="19" height="37" rx="9.5" fill="rgba(10,33,31,0.16)" />
 
-          {/* Drop shadow offset shape */}
-          <rect x="3.5" y="4" width="25" height="43" rx="12.5" fill="rgba(10,33,31,0.18)" />
+          {/* Body */}
+          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-body)" />
+          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-depth)" />
 
-          {/* Body base fill */}
-          <rect x="1" y="1" width="28" height="46" rx="14" fill="url(#mg-body)" />
+          {/* Outer stroke */}
+          <rect x="1" y="1" width="22" height="40" rx="11"
+            stroke="rgba(10,33,31,0.42)" strokeWidth="0.9" fill="none" />
 
-          {/* Ambient top-to-bottom overlay */}
-          <rect x="1" y="1" width="28" height="46" rx="14" fill="url(#mg-amb)" />
+          {/* Inner stroke — glass inner edge */}
+          <rect x="2" y="2" width="20" height="38" rx="10"
+            stroke="rgba(255,255,255,0.10)" strokeWidth="0.7" fill="none" />
 
-          {/* Outer border */}
-          <rect x="1" y="1" width="28" height="46" rx="14"
-            stroke="rgba(10,33,31,0.50)" strokeWidth="1.2" fill="none" />
+          {/* Left rim highlight */}
+          <rect x="2.4" y="5" width="1.2" height="30" rx="0.6" fill="rgba(255,255,255,0.42)" />
 
-          {/* Inner border — subtle inner shadow */}
-          <rect x="2" y="2" width="26" height="44" rx="13"
-            stroke="rgba(255,255,255,0.08)" strokeWidth="0.8" fill="none" />
+          {/* Right shadow strip */}
+          <rect x="20.4" y="5" width="1.2" height="30" rx="0.6" fill="rgba(0,0,0,0.32)" />
 
-          {/* Left edge highlight strip */}
-          <rect x="2.8" y="6" width="1.4" height="34" rx="0.7" fill="rgba(255,255,255,0.40)" />
+          {/* Button split — gold accent line */}
+          <line x1="2" y1="15" x2="22" y2="15" stroke="url(#em-gold)" strokeWidth="0.7" />
 
-          {/* Right edge dark shadow strip */}
-          <rect x="27.8" y="6" width="1.4" height="34" rx="0.7" fill="rgba(0,0,0,0.38)" />
+          {/* Center divider (top buttons) */}
+          <line x1="12" y1="2" x2="12" y2="14.5"
+            stroke="rgba(10,33,31,0.16)" strokeWidth="0.7" />
 
-          {/* Center divider */}
-          <line x1="15.5" y1="3" x2="15.5" y2="18"
-            stroke="rgba(10,33,31,0.18)" strokeWidth="0.8" />
-
-          {/* Specular overlay */}
-          <rect x="1" y="1" width="28" height="46" rx="14" fill="url(#mg-spec)" />
-
-          {/* Dot ambient glow */}
-          <circle cx="15.5" cy="13" r="7" fill="url(#mg-dot-glow)" />
-
-          {/* Scroll dot — gold 3D sphere */}
-          <circle
-            cx="15.5" cy="13" r="3.8"
-            fill="url(#mg-dot)"
+          {/* Scroll wheel — animated gold cylinder */}
+          <rect
+            x="9.5" y="18" width="5" height="9" rx="2.5"
+            fill="url(#em-wheel)"
             style={{ animation: 'mouse-dot-scroll 2s ease-in-out infinite' }}
           />
+          {/* Wheel top specular */}
+          <rect x="10" y="18.5" width="2" height="3" rx="1" fill="rgba(255,255,255,0.35)" />
+
+          {/* Specular overlay */}
+          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-spec)" />
         </svg>
       </div>
 
