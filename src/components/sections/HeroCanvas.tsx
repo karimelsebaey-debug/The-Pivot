@@ -72,7 +72,7 @@ export function HeroCanvas() {
 
     const dw = Math.round(img.naturalWidth  * scale)
     const dh = Math.round(img.naturalHeight * scale)
-    const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.28) : 0)
+    const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.32) : 0)
     const dy = isMob
       ? HEADER_H
       : Math.round(HEADER_H + (availH - dh) / 2)
