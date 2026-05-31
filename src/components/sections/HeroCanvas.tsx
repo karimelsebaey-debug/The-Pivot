@@ -419,13 +419,6 @@ export function HeroCanvas() {
               <stop offset="75%"  stopColor="rgba(184,148,60,0.60)" />
               <stop offset="100%" stopColor="rgba(184,148,60,0)" />
             </linearGradient>
-            {/* Scroll wheel — 3D cylinder */}
-            <linearGradient id="em-wheel" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.55)" />
-              <stop offset="20%"  stopColor="rgba(184,148,60,0.90)" />
-              <stop offset="60%"  stopColor="rgba(140,108,28,0.85)" />
-              <stop offset="100%" stopColor="rgba(80,58,10,0.90)" />
-            </linearGradient>
           </defs>
 
           {/* Offset shadow */}
@@ -456,14 +449,12 @@ export function HeroCanvas() {
           <line x1="12" y1="2" x2="12" y2="14.5"
             stroke="rgba(10,33,31,0.16)" strokeWidth="0.7" />
 
-          {/* Scroll wheel — animated gold cylinder */}
-          <rect
-            x="9.5" y="18" width="5" height="9" rx="2.5"
-            fill="url(#em-wheel)"
-            style={{ animation: 'mouse-dot-scroll 2s ease-in-out infinite' }}
-          />
-          {/* Wheel top specular */}
-          <rect x="10" y="18.5" width="2" height="3" rx="1" fill="rgba(255,255,255,0.35)" />
+          {/* Scroll wheel — fixed on body, moves with mouse */}
+          <rect x="10" y="11" width="4" height="8" rx="2" fill="rgba(10,33,31,0.38)" />
+          <rect x="10" y="11" width="4" height="8" rx="2"
+            stroke="rgba(255,255,255,0.14)" strokeWidth="0.6" fill="none" />
+          <line x1="10.5" y1="12.5" x2="10.5" y2="17.5"
+            stroke="rgba(255,255,255,0.32)" strokeWidth="0.6" strokeLinecap="round" />
 
           {/* Specular overlay */}
           <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-spec)" />
