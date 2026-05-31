@@ -62,20 +62,17 @@ export function HeroCanvas() {
     ctx.fillRect(0, 0, w, h)
 
     /* Desktop: use full height minus header.
-       Mobile: scale so building base lands at text panel top (h*0.55), then top-align. */
+       Mobile: building fills top 60%, text panel takes bottom 40%. */
     const isMob  = w < 768
-    const availH = isMob ? h * 0.55 - HEADER_H : h - HEADER_H
+    const availH = isMob ? h * 0.60 - HEADER_H : h - HEADER_H
     const scaleW = w / img.naturalWidth
     const scaleH = availH / img.naturalHeight
-    // Mobile: height-driven scale × 1.3 so image overflows into text panel (gap disappears)
-    const scale  = isMob
-      ? (availH / img.naturalHeight) * 1.3
-      : Math.min(scaleW, scaleH)
+    // Mobile: height-driven — fills exactly top 60%, no gap, no overflow
+    const scale  = isMob ? scaleH : Math.min(scaleW, scaleH)
 
     const dw = Math.round(img.naturalWidth  * scale)
     const dh = Math.round(img.naturalHeight * scale)
     const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.15) : 0)
-    // Mobile: top-aligned — building overflows down, base hidden under text panel
     const dy = isMob
       ? HEADER_H
       : Math.round(HEADER_H + (availH - dh) / 2)
@@ -261,7 +258,7 @@ export function HeroCanvas() {
         style={{
           position: 'absolute',
           bottom: 0, left: 0, right: 0,
-          height: '45%',
+          height: '40%',
           backgroundColor: BG,
           padding: '20px clamp(20px, 5vw, 32px) 32px',
           zIndex: 3,
