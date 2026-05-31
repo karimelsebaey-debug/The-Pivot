@@ -261,7 +261,7 @@ export function HeroCanvas() {
           position: 'absolute',
           left: 0, right: 0,
           bottom: '45%',
-          height: 80,
+          height: 32,
           background: `linear-gradient(to bottom, transparent 0%, ${BG} 100%)`,
           zIndex: 2,
           pointerEvents: 'none',
