@@ -62,12 +62,15 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${instrumentSerif.variable} ${interTight.variable} ${plusJakarta.variable} ${cormorant.variable} ${dmMono.variable}`}
+      style={{ background: '#0A211F' }}
     >
       <body>
         <Preloader />
-        <LenisProvider>
-          <PageTransition>{children}</PageTransition>
-        </LenisProvider>
+        <div id="page-content" style={{ visibility: 'hidden' }}>
+          <LenisProvider>
+            <PageTransition>{children}</PageTransition>
+          </LenisProvider>
+        </div>
       </body>
     </html>
   )

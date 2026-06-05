@@ -12,8 +12,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (prevPath.current === pathname) {
-      /* Initial load — fade content in */
-      gsap.from(contentRef.current, { autoAlpha: 0, duration: 0.5, ease: 'power2.out', delay: 0.05 })
+      /* Initial load — preloader handles reveal, just ensure content visible */
+      gsap.set(contentRef.current, { autoAlpha: 1 })
       prevPath.current = pathname
       return
     }
