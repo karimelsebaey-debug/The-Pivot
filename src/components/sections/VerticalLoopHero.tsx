@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
@@ -6,42 +6,92 @@ import { gsap } from '@/lib/gsap'
 import { useLenis } from '@/lib/lenis'
 import { PillCTA } from '@/components/ui/PillCTA'
 
-// ─── Video card data ───────────────────────────────────────────────────────────
+// ─── Card data (local assets only) ───────────────────────────────────────────
 
-const CARDS = [
-  { id: '1',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/app-ad.mp4',       label: 'App Ad' },
-  { id: '2',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/fast-food-ad.mp4', label: 'Fast Food Ad' },
-  { id: '3',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/gourmet-ad.mp4',   label: 'Gourmet Ad' },
-  { id: '4',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/dashboard-ad.mp4', label: 'Dashboard Ad' },
-  { id: '5',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/jewelry-ad.mp4',   label: 'Jewelry Ad' },
-  { id: '6',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/saas-ad.mp4',      label: 'SaaS Ad' },
-  { id: '7',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/sneakers-ad.mp4',  label: 'Sneakers Ad' },
-  { id: '8',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/eyeliner-ad.mp4',  label: 'UGC Eyeliner' },
-  { id: '9',  src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/fashion-ad.mp4',   label: 'Fashion Ad' },
-  { id: '10', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/makeup-ad.mp4',    label: 'Unboxing Ad' },
-  { id: '11', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/website-ad.mp4',   label: 'Website Ad' },
-  { id: '12', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/redesign-ad.mp4',  label: 'Redesign Ad' },
-  { id: '13', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/eyeliner-ad-2.mp4',label: 'UGC Ad' },
-  { id: '14', src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/loop/website-ad-2.mp4', label: 'Website Ad' },
+type Card = {
+  id: string
+  type: 'video' | 'image'
+  src: string
+  label: string
+}
+
+const CARDS: Card[] = [
+  { id: '1',  type: 'video', src: '/videos/loop/app-ad.mp4',        label: 'App Ad' },
+  { id: '2',  type: 'video', src: '/videos/loop/gourmet-ad.mp4',    label: 'Gourmet Ad' },
+  { id: '3',  type: 'video', src: '/videos/loop/dashboard-ad.mp4',  label: 'Dashboard Ad' },
+  { id: '4',  type: 'video', src: '/videos/loop/jewelry-ad.mp4',    label: 'Jewelry Ad' },
+  { id: '5',  type: 'video', src: '/videos/loop/saas-ad.mp4',       label: 'SaaS Ad' },
+  { id: '6',  type: 'video', src: '/videos/loop/sneakers-ad.mp4',   label: 'Sneakers Ad' },
+  { id: '7',  type: 'video', src: '/videos/loop/eyeliner-ad.mp4',   label: 'UGC Eyeliner' },
+  { id: '8',  type: 'video', src: '/videos/loop/fashion-ad.mp4',    label: 'Fashion Ad' },
+  { id: '9',  type: 'video', src: '/videos/loop/makeup-ad.mp4',     label: 'Unboxing Ad' },
+  { id: '10', type: 'video', src: '/videos/loop/website-ad.mp4',    label: 'Website Ad' },
+  { id: '11', type: 'image', src: '/images/loop/copywriting.jpg',       label: 'Copywriting' },
+  { id: '12', type: 'image', src: '/images/loop/product-visuals.jpg',   label: 'Product Visuals' },
 ]
 
 const CARD_H = 280
 const GAP    = 12
 const ITEM_H = CARD_H + GAP
 
-const TOTAL = (cards: typeof CARDS) => cards.length * ITEM_H
+const TOTAL = (cards: Card[]) => cards.length * ITEM_H
 
 const CARD_W  = 130
 const H_GAP   = 10
 const ITEM_W  = CARD_W + H_GAP
-const H_TOTAL = (cards: typeof CARDS) => cards.length * ITEM_W
+const H_TOTAL = (cards: Card[]) => cards.length * ITEM_W
 
 const H_MASK = 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)'
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+// ─── Card renderer ────────────────────────────────────────────────────────────
+
+function CardMedia({ card }: { card: Card }) {
+  const style: React.CSSProperties = {
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  }
+
+  if (card.type === 'image') {
+    return (
+      <img
+        src={card.src}
+        alt={card.label}
+        loading="lazy"
+        decoding="async"
+        style={style}
+      />
+    )
+  }
+
+  return (
+    <video
+      src={card.src}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      style={style}
+    />
+  )
+}
 
 // ─── Infinite column ──────────────────────────────────────────────────────────
 
 interface ColumnProps {
-  cards: typeof CARDS
+  cards: Card[]
   direction: 'up' | 'down'
   speed: number
   getScrollVelocity: () => number
@@ -89,21 +139,10 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity, className 
             className="relative w-full overflow-hidden rounded-2xl group"
             style={{ height: CARD_H, marginBottom: GAP, background: '#0A211F' }}
           >
-            <video
-              src={card.src}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            {/* Bottom label overlay */}
+            <CardMedia card={card} />
             <div
               className="absolute inset-0"
-              style={{
-                background: 'linear-gradient(to top, rgba(10,33,31,0.7) 0%, transparent 50%)',
-              }}
+              style={{ background: 'linear-gradient(to top, rgba(10,33,31,0.7) 0%, transparent 50%)' }}
             />
             <span
               className="absolute bottom-3 left-3 font-mono uppercase"
@@ -121,7 +160,7 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity, className 
 // ─── Horizontal loop (mobile) ─────────────────────────────────────────────────
 
 function HorizontalLoop({ cards, speed, direction = 'left', getScrollVelocity }: {
-  cards: typeof CARDS
+  cards: Card[]
   speed: number
   direction?: 'left' | 'right'
   getScrollVelocity: () => number
@@ -159,11 +198,7 @@ function HorizontalLoop({ cards, speed, direction = 'left', getScrollVelocity }:
             key={`h-${card.id}-${i}`}
             style={{ flexShrink: 0, width: CARD_W, height: '100%', borderRadius: 12, overflow: 'hidden', background: '#0A211F', position: 'relative' }}
           >
-            <video
-              src={card.src}
-              autoPlay muted loop playsInline preload="none"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-            />
+            <CardMedia card={card} />
           </div>
         ))}
       </div>
@@ -171,13 +206,17 @@ function HorizontalLoop({ cards, speed, direction = 'left', getScrollVelocity }:
   )
 }
 
-// ─── Column splits ─────────────────────────────────────────────────────────────
-
-const COL_1 = CARDS.slice(0,  5)
-const COL_2 = CARDS.slice(5,  9)
-const COL_3 = CARDS.slice(9, 14)
-
 const MASK = 'linear-gradient(to bottom, transparent 0%, black 13%, black 87%, transparent 100%)'
+
+function splitCols(cards: Card[]) {
+  return {
+    col1: cards.slice(0,  5),
+    col2: cards.slice(5,  9),
+    col3: cards.slice(9, 12),
+  }
+}
+
+const INITIAL_COLS = splitCols(CARDS)
 
 // ─── VerticalLoopHero ─────────────────────────────────────────────────────────
 
@@ -190,6 +229,11 @@ export function VerticalLoopHero() {
   const velRef = useRef(0)
   const lenis  = useLenis()
   const [isMobile, setIsMobile] = useState(false)
+  const [cols, setCols] = useState(() => splitCols(CARDS))
+
+  useEffect(() => {
+    setCols(splitCols(shuffle(CARDS)))
+  }, [])
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
@@ -210,7 +254,14 @@ export function VerticalLoopHero() {
   const getScrollVelocity = () => velRef.current * 60
 
   useGSAP(() => {
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
+    const tl = gsap.timeline({
+      defaults: { ease: 'power4.out' },
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 85%',
+        once: true,
+      },
+    })
     tl.from(headRef.current!.querySelectorAll('span > span'), {
         yPercent: 110, opacity: 0, stagger: 0.12, duration: 1.1,
       })
@@ -275,12 +326,12 @@ export function VerticalLoopHero() {
         </div>
       </div>
 
-      {/* Right: carousel — dual horizontal rows on mobile, vertical columns on desktop */}
+      {/* Right: carousel */}
       <div className="vlh-carousel" aria-hidden>
         {isMobile ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, height: '100%', justifyContent: 'center' }}>
-            <HorizontalLoop cards={CARDS}                 speed={55} direction="left"  getScrollVelocity={getScrollVelocity} />
-            <HorizontalLoop cards={[...CARDS].reverse()}  speed={45} direction="right" getScrollVelocity={getScrollVelocity} />
+            <HorizontalLoop cards={[...cols.col1, ...cols.col2, ...cols.col3]}                   speed={55} direction="left"  getScrollVelocity={getScrollVelocity} />
+            <HorizontalLoop cards={[...cols.col3, ...cols.col2, ...cols.col1].reverse()}         speed={45} direction="right" getScrollVelocity={getScrollVelocity} />
           </div>
         ) : (
           <div
@@ -293,9 +344,9 @@ export function VerticalLoopHero() {
               WebkitMaskImage: MASK,
             }}
           >
-            <InfiniteColumn cards={COL_1} direction="up"   speed={46} getScrollVelocity={getScrollVelocity} />
-            <InfiniteColumn cards={COL_2} direction="down" speed={34} getScrollVelocity={getScrollVelocity} />
-            <InfiniteColumn cards={COL_3} direction="up"   speed={56} getScrollVelocity={getScrollVelocity} />
+            <InfiniteColumn cards={cols.col1} direction="up"   speed={46} getScrollVelocity={getScrollVelocity} />
+            <InfiniteColumn cards={cols.col2} direction="down" speed={34} getScrollVelocity={getScrollVelocity} />
+            <InfiniteColumn cards={cols.col3} direction="up"   speed={56} getScrollVelocity={getScrollVelocity} />
           </div>
         )}
       </div>

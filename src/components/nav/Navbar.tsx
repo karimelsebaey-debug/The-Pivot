@@ -11,20 +11,23 @@ import { SERVICE_CATEGORIES } from '@/lib/services-data'
 export function Navbar() {
   const pathname  = usePathname()
   const isHome    = pathname === '/'
+  const isLightBg = isHome || pathname === '/selected-work' || pathname === '/perspectives' || pathname === '/contact'
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    // Hero is pinned for ~280% scroll travel; stay transparent until past it
-    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 3.2)
+    const threshold = isHome ? window.innerHeight * 3.2 : 10
+
+    const onScroll = () => setScrolled(window.scrollY > threshold)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
       if (closeTimer.current) clearTimeout(closeTimer.current)
     }
-  }, [])
+  }, [isHome])
 
   function openDropdown() {
     if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -39,12 +42,12 @@ export function Navbar() {
     <header
       style={{
         height: 'var(--header-height)',
-        backgroundColor: '#0A211F',
+        backgroundColor: scrolled ? '#0A211F' : 'transparent',
         backdropFilter: 'none',
         WebkitBackdropFilter: 'none',
         borderBottom: scrolled ? '1px solid rgba(246,249,240,0.12)' : '1px solid transparent',
-        color: '#f6f9f0',
-        transition: `background-color var(--t-std) var(--ease), border-color var(--t-std) var(--ease)`,
+        color: (isLightBg && !scrolled) ? '#0A211F' : '#f6f9f0',
+        transition: `background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out`,
       }}
       className="fixed top-0 left-0 right-0 z-50 flex items-center"
     >
@@ -59,7 +62,7 @@ export function Navbar() {
             alt="The Pivot"
             width={80}
             height={80}
-            style={{ filter: 'brightness(0) invert(1)', opacity: 0.9 }}
+            style={{ filter: (isLightBg && !scrolled) ? 'brightness(0)' : 'brightness(0) invert(1)', opacity: 0.9, transition: 'filter 200ms ease-in-out' }}
             priority
           />
         </Link>

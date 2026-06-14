@@ -1,4 +1,4 @@
-﻿export type ServiceItem = {
+export type ServiceItem = {
   slug: string
   title: string
   description: string
@@ -8,6 +8,7 @@
   categorySlug: string
   accent: string
   bg: string
+  heroImage?: string
 }
 
 export type ServiceCategory = {
@@ -17,6 +18,7 @@ export type ServiceCategory = {
   description: string
   accent: string
   bg: string
+  heroImage?: string
   items: ServiceItem[]
 }
 
@@ -28,6 +30,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: 'End-to-end production for motion, web, copy, and design systems that scale.',
     accent: '#C9A84C',
     bg: '#0A211F',
+    heroImage: '/images/categories/specialized-production-hero.jpg',
     items: [
       {
         slug: 'motion-design',
@@ -38,6 +41,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'specialized-production',
         accent: '#C9A84C',
         bg: '#0A211F',
+        heroImage: '/images/services/motion-design-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/motion-design/motion-ads.mp4', label: 'Motion Ads' },
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/motion-design/explainers.mp4', label: 'Explainers & How-Tos' },
@@ -54,6 +58,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'specialized-production',
         accent: '#C9A84C',
         bg: '#0A211F',
+        heroImage: '/images/services/email-creation-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/email-creation/crm-native.mp4', label: 'CRM-Native Development' },
         ],
@@ -67,6 +72,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'specialized-production',
         accent: '#C9A84C',
         bg: '#0A211F',
+        heroImage: '/images/services/web-design-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/web-design/brand-illustrations.mp4', label: 'Brand Illustrations' },
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/web-design/storyboarding.mp4', label: 'Storyboarding' },
@@ -81,6 +87,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'specialized-production',
         accent: '#C9A84C',
         bg: '#0A211F',
+        heroImage: '/images/services/copywriting-hero.jpg',
         videos: [],
       },
       {
@@ -92,6 +99,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'specialized-production',
         accent: '#C9A84C',
         bg: '#0A211F',
+        heroImage: '/images/services/design-systems-hero.jpg',
         videos: [],
       },
       {
@@ -103,6 +111,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'specialized-production',
         accent: '#C9A84C',
         bg: '#0A211F',
+        heroImage: '/images/services/product-design-hero.jpg',
         videos: [],
       },
     ],
@@ -114,6 +123,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: 'Ads, branding, presentations, and visual concepts that make your brand impossible to ignore.',
     accent: '#0A211F',
     bg: '#F2F4E7',
+    heroImage: '/images/categories/creative-design-hero.jpg',
     items: [
       {
         slug: 'ad-creative',
@@ -124,6 +134,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'creative-design',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/ad-creative-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ad-creative/motion-graphics.mp4', label: 'Motion Graphics' },
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ad-creative/illustration.mp4', label: 'Illustration' },
@@ -138,6 +149,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'creative-design',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/social-media-creative-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/social-media-creative/organic-social.mp4', label: 'Organic Social Content' },
         ],
@@ -151,6 +163,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'creative-design',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/presentation-design-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/presentation-design/data-visualization.mp4', label: 'Data Visualization' },
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/presentation-design/motion-slides.mp4', label: 'Motion for Slides' },
@@ -165,6 +178,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'creative-design',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/illustration-design-hero.jpg',
         videos: [],
       },
       {
@@ -176,6 +190,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'creative-design',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/branding-services-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/branding-services/brand-consistency.mp4', label: 'Brand Consistency' },
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/branding-services/brand-guidelines.mp4', label: 'Brand Guidelines' },
@@ -190,6 +205,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'creative-design',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/concept-creation-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/concept-creation/ad-new-brand.mp4', label: 'New Brand Concept' },
         ],
@@ -203,6 +219,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: 'AI-powered creative, automation, data visualization, and consulting for the next era.',
     accent: '#C9A84C',
     bg: '#0A211F',
+    heroImage: '/images/categories/ai-services-hero.jpg',
     items: [
       {
         slug: 'ai-powered-creative',
@@ -213,6 +230,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'ai-services',
         accent: '#C9A84C',
         bg: '#0A211F',
+        heroImage: '/images/services/ai-powered-creative-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ai-powered-creative/ai-video-production.mp4', label: 'AI Video Production' },
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/ai-powered-creative/brand-imagery.mp4', label: 'Brand Imagery' },
@@ -240,6 +258,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'ai-services',
         accent: '#C9A84C',
         bg: '#0A211F',
+        heroImage: '/images/services/automation-hero.jpg',
         videos: [],
       },
       {
@@ -262,6 +281,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: 'Expert advisory across strategy, finance, and business recovery for ambitious organizations.',
     accent: '#0A211F',
     bg: '#F2F4E7',
+    heroImage: '/images/categories/consultant-hero.jpg',
     items: [
       {
         slug: 'campaign-strategy',
@@ -272,6 +292,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'consultant',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/campaign-strategy-hero.jpg',
         videos: [
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/campaign-strategy/campaign-concepts.mp4', label: 'Campaign Concepts' },
           { src: 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/the-pivot/videos/services/campaign-strategy/graphic-design-concepts.mp4', label: 'Design Concepts' },
@@ -287,6 +308,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'consultant',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/finance-expert-hero.jpg',
         videos: [],
       },
       {
@@ -298,6 +320,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'consultant',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/business-strategist-hero.jpg',
         videos: [],
       },
       {
@@ -320,6 +343,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         categorySlug: 'consultant',
         accent: '#0A211F',
         bg: '#F2F4E7',
+        heroImage: '/images/services/early-stage-recovery-hero.jpg',
         videos: [],
       },
       {

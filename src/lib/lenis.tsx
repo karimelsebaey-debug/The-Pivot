@@ -29,6 +29,11 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     gsap.ticker.add(rafCb)
     gsap.ticker.lagSmoothing(0)
 
+    /* Children (HeroCanvas, VerticalLoopHero) run useGSAP before this parent
+       effect fires. Without refresh(), pin spacer sits at wrong offset and
+       the hero pin never releases, blocking sections below. */
+    ScrollTrigger.refresh()
+
     return () => {
       instance.off('scroll', ScrollTrigger.update as () => void)
       instance.destroy()
