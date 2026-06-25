@@ -66,11 +66,11 @@ export default function RootLayout({
     >
       <body>
         <Preloader />
-        <div id="page-content" style={{ visibility: 'hidden' }}>
+        <main id="page-content" style={{ visibility: 'hidden' }}>
           <LenisProvider>
             <PageTransition>{children}</PageTransition>
           </LenisProvider>
-        </div>
+        </main>
       </body>
     </html>
   )
