@@ -15,6 +15,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [capOpen, setCapOpen] = useState(false)
+  const [openCat, setOpenCat] = useState<string | null>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -121,7 +123,23 @@ export function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <PillCTA href="/contact" label="Start a Project" />
+          <Link
+            href="/contact"
+            style={{
+              display: 'inline-block',
+              backgroundColor: 'var(--color-accent)',
+              color: '#0A211F',
+              borderRadius: '999px',
+              padding: '10px 16px',
+              fontSize: '0.9rem',
+              fontWeight: 500,
+              letterSpacing: '0.01em',
+              textDecoration: 'none',
+              transition: 'opacity 0.2s ease',
+            }}
+          >
+            Start a Project
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -200,67 +218,108 @@ export function Navbar() {
           {/* Scrollable body */}
           <div style={{ padding: '28px var(--container-px) 56px' }}>
 
-            {/* Capabilities label */}
-            <p style={{
-              fontFamily: 'var(--font-body)', fontSize: '0.65rem', fontWeight: 600,
-              letterSpacing: '0.22em', textTransform: 'uppercase',
-              color: 'var(--color-ink)', opacity: 0.4, marginBottom: 20,
-            }}>
-              Capabilities
-            </p>
+            {/* Capabilities toggle header */}
+            <button
+              onClick={() => { setCapOpen(!capOpen); if (capOpen) setOpenCat(null) }}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                width: '100%', padding: '16px 0',
+                borderBottom: '1px solid var(--color-border)',
+                background: 'none', border: 'none', cursor: 'pointer',
+              }}
+            >
+              <span style={{
+                fontFamily: 'var(--font-display)', fontSize: '1.4rem',
+                letterSpacing: '-0.01em', color: 'var(--color-ink)',
+              }}>
+                Capabilities
+              </span>
+              <svg
+                width="16" height="16" viewBox="0 0 16 16" fill="none"
+                style={{ transform: capOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease', opacity: 0.28 }}
+              >
+                <path d="M2 5L7 10L12 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
 
-            {/* Service categories */}
-            {SERVICE_CATEGORIES.map((cat) => (
-              <div key={cat.slug} style={{ marginBottom: 32 }}>
-                {/* Category pill */}
-                <Link
-                  href={`/capabilities/${cat.slug}`}
-                  onClick={() => setMenuOpen(false)}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 8,
-                    padding: '10px 20px', borderRadius: 999,
-                    backgroundColor: cat.accent, color: cat.bg,
-                    fontFamily: 'var(--font-body)', fontSize: '0.88rem', fontWeight: 600,
-                    letterSpacing: '-0.01em', textDecoration: 'none', marginBottom: 12,
-                  }}
-                >
-                  {cat.title}
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                    <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </Link>
-
-                {/* Service items */}
-                <div style={{ borderTop: '1px solid var(--color-border)' }}>
-                  {cat.items.map((item) => (
+            {/* Service categories — accordion */}
+            {capOpen && SERVICE_CATEGORIES.map((cat) => {
+              const isOpen = openCat === cat.slug
+              return (
+                <div key={cat.slug} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  {/* Accordion header */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 0' }}>
                     <Link
-                      key={item.slug}
-                      href={`/services/${item.slug}`}
+                      href={`/capabilities/${cat.slug}`}
                       onClick={() => setMenuOpen(false)}
                       style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                        padding: '13px 0', borderBottom: '1px solid var(--color-border)',
-                        textDecoration: 'none', color: 'var(--color-ink)',
+                        display: 'inline-flex', alignItems: 'center', gap: 8,
+                        padding: '8px 16px', borderRadius: 999,
+                        backgroundColor: cat.accent, color: cat.bg,
+                        fontFamily: 'var(--font-body)', fontSize: '0.85rem', fontWeight: 600,
+                        letterSpacing: '-0.01em', textDecoration: 'none',
                       }}
                     >
-                      <div>
-                        <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.93rem', fontWeight: 600, marginBottom: 2 }}>
-                          {item.title}
-                        </div>
-                        <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', opacity: 0.48, lineHeight: 1.3 }}>
-                          {item.description}
-                        </div>
-                      </div>
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, opacity: 0.28, marginLeft: 12 }}>
-                        <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                      {cat.title}
+                      <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                        <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </Link>
-                  ))}
+                    <button
+                      onClick={() => setOpenCat(isOpen ? null : cat.slug)}
+                      aria-expanded={isOpen}
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        width: 36, height: 36, borderRadius: '50%',
+                        border: '1px solid var(--color-border)',
+                        background: 'none', cursor: 'pointer',
+                        color: 'var(--color-ink)', flexShrink: 0,
+                      }}
+                    >
+                      <svg
+                        width="14" height="14" viewBox="0 0 14 14" fill="none"
+                        style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }}
+                      >
+                        <path d="M2 5L7 10L12 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Service items — shown when open */}
+                  {isOpen && (
+                    <div style={{ paddingBottom: 8 }}>
+                      {cat.items.map((item) => (
+                        <Link
+                          key={item.slug}
+                          href={`/services/${item.slug}`}
+                          onClick={() => setMenuOpen(false)}
+                          style={{
+                            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                            padding: '11px 0 11px 8px', borderTop: '1px solid var(--color-border)',
+                            textDecoration: 'none', color: 'var(--color-ink)',
+                          }}
+                        >
+                          <div>
+                            <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', fontWeight: 600, marginBottom: 2 }}>
+                              {item.title}
+                            </div>
+                            <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.73rem', opacity: 0.48, lineHeight: 1.3 }}>
+                              {item.description}
+                            </div>
+                          </div>
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, opacity: 0.28, marginLeft: 12 }}>
+                            <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              )
+            })}
 
             {/* Nav links */}
+
             <div style={{ borderTop: '1px solid rgba(10,33,31,0.15)', paddingTop: 8, marginTop: 8 }}>
               {[
                 { label: 'Selected Work', href: '/selected-work' },
@@ -288,12 +347,23 @@ export function Navbar() {
 
             {/* CTA */}
             <div style={{ paddingTop: 32 }}>
-              <Link href="/contact" className="cta-pill" onClick={() => setMenuOpen(false)}>
-                <span className="cta-pill-label">Start a Project</span>
-                <div className="cta-pill-icon">
-                  <svg className="arr-out" width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 12L12 3M12 3H5M12 3V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                  <svg className="arr-in"  width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 12L12 3M12 3H5M12 3V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                </div>
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  display: 'block',
+                  textAlign: 'center',
+                  backgroundColor: 'var(--color-accent)',
+                  color: '#0A211F',
+                  borderRadius: '999px',
+                  padding: '12px 20px',
+                  fontSize: '0.9rem',
+                  fontWeight: 500,
+                  letterSpacing: '0.01em',
+                  textDecoration: 'none',
+                }}
+              >
+                Start a Project
               </Link>
             </div>
           </div>

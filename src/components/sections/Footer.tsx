@@ -118,7 +118,23 @@ export function Footer() {
         </div>
 
         <div ref={ctaRef} style={{ marginBottom: 'clamp(64px,10vh,120px)' }}>
-          <PillCTA href="/contact" label="Get in Touch" />
+          <Link
+            href="/contact"
+            style={{
+              display: 'inline-block',
+              backgroundColor: 'var(--color-accent)',
+              color: '#0A211F',
+              borderRadius: '999px',
+              padding: '10px 16px',
+              fontSize: '0.9rem',
+              fontWeight: 500,
+              letterSpacing: '0.01em',
+              textDecoration: 'none',
+              transition: 'opacity 0.2s ease',
+            }}
+          >
+            Get in Touch
+          </Link>
         </div>
       </div>
 

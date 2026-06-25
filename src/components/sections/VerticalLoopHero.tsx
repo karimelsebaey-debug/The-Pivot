@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import { useLenis } from '@/lib/lenis'
@@ -236,10 +236,11 @@ export function VerticalLoopHero() {
   }, [])
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check, { passive: true })
-    return () => window.removeEventListener('resize', check)
+    const mq = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
   }, [])
 
   useEffect(() => {
@@ -251,7 +252,7 @@ export function VerticalLoopHero() {
     return () => lenis.off('scroll', onScroll)
   }, [lenis])
 
-  const getScrollVelocity = () => velRef.current * 60
+  const getScrollVelocity = useCallback(() => velRef.current * 60, [])
 
   useGSAP(() => {
     const tl = gsap.timeline({

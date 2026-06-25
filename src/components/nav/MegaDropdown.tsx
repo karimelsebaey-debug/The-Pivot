@@ -125,9 +125,7 @@ const COLUMNS = [
     color: '#0A211F',
     services: [
       { slug: 'ai-powered-creative', name: 'AI-Powered Creative', desc: 'Brand image library · AI character development · Key art', icon: <IconStar /> },
-      { slug: 'ai-consulting',       name: 'AI Consulting',       desc: 'AI tool stack audit · Workflow redesign · Team training', icon: <IconChat /> },
       { slug: 'automation',          name: 'Automation',          desc: 'Content automation · Reporting pipelines · Repurposing', icon: <IconBolt /> },
-      { slug: 'data-services',       name: 'Data Services',       desc: 'Data visualization · AI data analysis · Performance reports', icon: <IconGraph /> },
     ],
   },
   {
@@ -139,9 +137,7 @@ const COLUMNS = [
       { slug: 'campaign-strategy',    name: 'Campaign Strategy',    desc: 'Creative strategy · Campaign concepts · Multi-channel', icon: <IconTarget /> },
       { slug: 'finance-expert',       name: 'Finance Expert',       desc: 'P&L analysis · Cash flow · Financial health assessment', icon: <IconGraph /> },
       { slug: 'business-strategist',  name: 'Business Strategist',  desc: 'Growth strategy · Investment readiness · Cost optimization', icon: <IconBolt /> },
-      { slug: 'pl-expert',            name: 'P&L Expert',           desc: 'Revenue stream analysis · Margin optimization', icon: <IconLayers /> },
-      { slug: 'early-stage-recovery', name: 'Early Stage Recovery', desc: 'Pre-legal collection · Payment negotiation strategy', icon: <IconChat /> },
-      { slug: 'write-off-recovery',   name: 'Write-off Recovery',   desc: 'Vintage portfolio management · Written-off account strategy', icon: <IconStar /> },
+      { slug: 'early-stage-recovery', name: 'Debt Recovery', desc: 'Distressed debt · Recovery planning · Stabilization', icon: <IconChat /> },
     ],
   },
 ]

@@ -506,6 +506,32 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
 }
 
 /* ─────────────────────────────────────────
+   SERVICE / CATEGORY HERO — responsive
+───────────────────────────────────────── */
+.hero-visual {
+  position: absolute;
+  inset: 0;
+}
+
+@media (max-width: 767px) {
+  .service-hero-section {
+    padding: 0 !important;
+    justify-content: flex-start !important;
+  }
+  .hero-visual {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 55dvh;
+    flex-shrink: 0;
+  }
+  .hero-content {
+    padding: clamp(24px, 3.5dvh, 40px) clamp(20px, 5vw, 32px) clamp(32px, 5dvh, 56px);
+    max-width: 100% !important;
+  }
+}
+
+/* ─────────────────────────────────────────
    HERO CANVAS — mobile: hidden until scroll
 ───────────────────────────────────────── */
 @media (max-width: 767px) {
