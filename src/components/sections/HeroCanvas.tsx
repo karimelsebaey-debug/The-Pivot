@@ -54,6 +54,8 @@ export function HeroCanvas() {
     if (!canvas || !img?.complete) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
+    // Ensure dimensions are set — sync from DOM if missing (resizeCanvas calls drawFrame internally)
+    if (!logical.current.w || !logical.current.h) { resizeCanvas(); return }
     const { w, h } = logical.current
     if (!w || !h) return
 
