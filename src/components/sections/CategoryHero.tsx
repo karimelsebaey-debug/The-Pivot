@@ -144,7 +144,7 @@ export function CategoryHero({ category }: { category: ServiceCategory }) {
             >
               Start a Project
             </Link>
-          )}
+          ) : null}
         </div>
       </div>
     </section>
