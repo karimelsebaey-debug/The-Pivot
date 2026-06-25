@@ -20,7 +20,6 @@ export function HeroCanvas() {
   const line1Ref   = useRef<HTMLHeadingElement>(null)
   const subRef     = useRef<HTMLParagraphElement>(null)
   const ctaRef          = useRef<HTMLDivElement>(null)
-  const eyebrowRef      = useRef<HTMLParagraphElement>(null)
   const scrollIndRef    = useRef<HTMLDivElement>(null)
 
   const imgs     = useRef<HTMLImageElement[]>([])
@@ -97,8 +96,7 @@ export function HeroCanvas() {
 
     /* Entry animation */
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-    tl.from(eyebrowRef.current, { opacity: 0, y: 12, duration: 0.8 })
-      .from(line1Ref.current,   { opacity: 0, y: 30, duration: 1.1 }, '-=0.5')
+    tl.from(line1Ref.current,   { opacity: 0, y: 30, duration: 1.1 })
       .from(subRef.current,     { opacity: 0, y: 16, duration: 0.8 }, '-=0.5')
       .from(ctaRef.current,       { opacity: 0, y: 16, duration: 0.7 }, '-=0.4')
       .from(scrollIndRef.current, { opacity: 0, y: 12, duration: 0.8 }, '-=0.2')

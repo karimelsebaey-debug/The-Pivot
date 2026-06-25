@@ -34,7 +34,17 @@ export function LenisProvider({ children }: { children: ReactNode }) {
        the hero pin never releases, blocking sections below. */
     ScrollTrigger.refresh()
 
+    // Debounced resize — avoids forced reflow on every pixel of resize
+    let resizeTimer: ReturnType<typeof setTimeout>
+    const onResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200)
+    }
+    window.addEventListener('resize', onResize, { passive: true })
+
     return () => {
+      clearTimeout(resizeTimer)
+      window.removeEventListener('resize', onResize)
       instance.off('scroll', ScrollTrigger.update as () => void)
       instance.destroy()
       gsap.ticker.remove(rafCb)
