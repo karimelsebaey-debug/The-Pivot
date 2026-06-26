@@ -72,6 +72,7 @@ function shuffle<T>(arr: T[]): T[] {
 // ─── Card renderer ────────────────────────────────────────────────────────────
 
 function CardMedia({ card }: { card: Card }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
   const style: React.CSSProperties = {
     position: 'absolute',
     inset: 0,
@@ -79,6 +80,23 @@ function CardMedia({ card }: { card: Card }) {
     height: '100%',
     objectFit: 'cover',
   }
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
+      },
+      { rootMargin: '200px' }
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
 
   if (card.type === 'image') {
     return (
@@ -94,12 +112,12 @@ function CardMedia({ card }: { card: Card }) {
 
   return (
     <video
+      ref={videoRef}
       src={card.src}
-      autoPlay
       muted
       loop
       playsInline
-      preload="metadata"
+      preload="none"
       style={style}
     />
   )
@@ -284,7 +302,7 @@ export function VerticalLoopHero() {
     >
       {/* Left: copy */}
       <div className="vlh-copy relative z-10 flex flex-col justify-center">
-        <h1
+        <h2
           ref={headRef}
           style={{
             fontFamily: 'var(--font-display)',
@@ -303,7 +321,7 @@ export function VerticalLoopHero() {
               Become Presence
             </span>
           </span>
-        </h1>
+        </h2>
 
         <p
           ref={bodyRef}
