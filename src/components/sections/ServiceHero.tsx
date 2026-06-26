@@ -5,7 +5,6 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import type { ServiceItem } from '@/lib/services-data'
-import { PillCTA } from '@/components/ui/PillCTA'
 
 export function ServiceHero({ service }: { service: ServiceItem }) {
   const sectionRef = useRef<HTMLElement>(null)

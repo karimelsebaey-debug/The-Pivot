@@ -162,7 +162,7 @@ export function ContactPage() {
       ref={sectionRef}
       style={{
         minHeight: '100dvh',
-        background: '#F2F4E7',
+        background: 'var(--color-bg)',
         color: 'var(--color-ink)',
         display: 'flex',
         alignItems: 'stretch',
@@ -478,14 +478,12 @@ export function ContactPage() {
       </div>
 
       <style>{`
-        @keyframes spin { to { transform: rotate(360deg); } }
-
         .contact-grid input::placeholder,
         .contact-grid textarea::placeholder {
           color: rgba(10,33,31,0.3);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
           .contact-grid {
             grid-template-columns: 1fr !important;
           }

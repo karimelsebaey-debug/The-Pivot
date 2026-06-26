@@ -5,7 +5,6 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import type { ServiceCategory } from '@/lib/services-data'
-import { PillCTA } from '@/components/ui/PillCTA'
 
 export function CategoryHero({ category }: { category: ServiceCategory }) {
   const sectionRef = useRef<HTMLElement>(null)
@@ -124,27 +123,25 @@ export function CategoryHero({ category }: { category: ServiceCategory }) {
         </p>
 
         <div className="ch-cta">
-          {true ? (
-            <Link
-              href="/contact"
-              style={{
-                display: isMobile ? 'block' : 'inline-block',
-                width: isMobile ? '100%' : 'auto',
-                textAlign: 'center',
-                backgroundColor: 'var(--color-accent)',
-                color: '#0A211F',
-                borderRadius: '999px',
-                padding: isMobile ? '12px 20px' : '10px 16px',
-                fontSize: '0.9rem',
-                fontWeight: 500,
-                letterSpacing: '0.01em',
-                textDecoration: 'none',
-                transition: 'opacity 0.2s ease',
-              }}
-            >
-              Start a Project
-            </Link>
-          ) : null}
+          <Link
+            href="/contact"
+            style={{
+              display: isMobile ? 'block' : 'inline-block',
+              width: isMobile ? '100%' : 'auto',
+              textAlign: 'center',
+              backgroundColor: 'var(--color-accent)',
+              color: '#0A211F',
+              borderRadius: '999px',
+              padding: isMobile ? '12px 20px' : '10px 16px',
+              fontSize: '0.9rem',
+              fontWeight: 500,
+              letterSpacing: '0.01em',
+              textDecoration: 'none',
+              transition: 'opacity 0.2s ease',
+            }}
+          >
+            Start a Project
+          </Link>
         </div>
       </div>
     </section>

@@ -153,7 +153,7 @@ export function HeroCanvas() {
         }} />
       )}
 
-      {/* ── Canvas — scroll-driven 000→119 ── */}
+      {/* ── Canvas — scroll-driven 000→029 ── */}
       <canvas
         ref={canvasRef}
         className="hero-canvas-el"

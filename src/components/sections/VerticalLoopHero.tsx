@@ -272,6 +272,7 @@ export function VerticalLoopHero() {
 
   return (
     <section
+      id="work"
       ref={sectionRef}
       className="relative flex flex-col md:flex-row overflow-hidden"
       style={{ minHeight: '100dvh', background: 'var(--color-dark-bg)' }}

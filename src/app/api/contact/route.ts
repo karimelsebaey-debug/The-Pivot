@@ -25,8 +25,6 @@ export async function POST(req: NextRequest) {
     //     text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nIntent: ${intent}\n\n${message}`,
     //   })
 
-    console.log('[contact]', { name, email, company: company || '—', intent, message })
-
     return NextResponse.json({ ok: true })
   } catch {
     return NextResponse.json({ error: 'Server error. Please try again.' }, { status: 500 })
