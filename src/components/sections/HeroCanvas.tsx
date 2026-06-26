@@ -93,6 +93,7 @@ export function HeroCanvas() {
   }
 
   useGSAP(() => {
+    window.scrollTo(0, 0)
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas, { passive: true })
 

@@ -26,6 +26,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     const content = contentRef.current
     if (!overlay || !content) return
 
+    window.scrollTo(0, 0)
     lenis?.scrollTo(0, { immediate: true })
 
     const tl = gsap.timeline({
@@ -33,7 +34,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     })
     tl.set(overlay, { autoAlpha: 1, yPercent: 0 })
       .to(overlay, { yPercent: -100, duration: 0.7, ease: 'power4.inOut', delay: 0.05 })
-      .from(content, { autoAlpha: 0, y: 24, duration: 0.6, ease: 'power3.out' }, '-=0.25')
+      .from(content, { autoAlpha: 0, duration: 0.6, ease: 'power3.out' }, '-=0.25')
       .set(overlay, { autoAlpha: 0 })
   }, [pathname, lenis])
 
