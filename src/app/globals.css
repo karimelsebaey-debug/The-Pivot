@@ -224,7 +224,6 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
   border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.18s var(--ease), transform 0.18s var(--ease);
-  will-change: transform;
 }
 .dropdown-row:hover {
   background-color: rgba(10,33,31,0.05);
@@ -283,7 +282,6 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
     color            0.22s var(--ease),
     border-color     0.22s var(--ease),
     transform        0.18s var(--ease);
-  will-change: transform;
   cursor: pointer;
 }
 .pill-tag:hover { transform: translateY(-1px); }
