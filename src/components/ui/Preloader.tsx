@@ -2,9 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-
-gsap.registerPlugin(useGSAP)
+import { gsap } from '@/lib/gsap'
 
 // Survives StrictMode double-mount, resets on hard refresh
 let _hasPlayed = false

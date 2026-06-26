@@ -43,6 +43,23 @@ const H_TOTAL = (cards: Card[]) => cards.length * ITEM_W
 
 const H_MASK = 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)'
 
+// ─── Shared RAF manager — one tick loop drives all columns ───────────────────
+
+type RafCallback = (now: number) => void
+const _rafCallbacks = new Set<RafCallback>()
+let _rafHandle = 0
+
+function _rafTick(now: number) {
+  _rafCallbacks.forEach(fn => fn(now))
+  if (_rafCallbacks.size > 0) _rafHandle = requestAnimationFrame(_rafTick)
+}
+
+function registerRaf(fn: RafCallback): () => void {
+  _rafCallbacks.add(fn)
+  if (_rafCallbacks.size === 1) _rafHandle = requestAnimationFrame(_rafTick)
+  return () => { _rafCallbacks.delete(fn) }
+}
+
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {
@@ -101,31 +118,22 @@ interface ColumnProps {
 function InfiniteColumn({ cards, direction, speed, getScrollVelocity, className = '' }: ColumnProps) {
   const wrapRef   = useRef<HTMLDivElement>(null)
   const offsetRef = useRef(direction === 'down' ? -TOTAL(cards) : 0)
-  const rafRef    = useRef<number>(0)
   const lastRef   = useRef<number | null>(null)
 
   useEffect(() => {
     const T = TOTAL(cards)
-
-    function tick(now: number) {
+    const tick = (now: number) => {
       const delta = lastRef.current == null ? 16 : now - lastRef.current
       lastRef.current = now
-
       const boost = Math.abs(getScrollVelocity()) * 0.0018
       const sign  = direction === 'up' ? -1 : 1
       let next    = offsetRef.current + sign * (speed + boost) * (delta / 1000)
-
       if (next < -T) next += T
       if (next > 0)  next -= T
-
       offsetRef.current = next
       if (wrapRef.current) wrapRef.current.style.transform = `translateY(${next}px)`
-
-      rafRef.current = requestAnimationFrame(tick)
     }
-
-    rafRef.current = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(rafRef.current)
+    return registerRaf(tick)
   }, [cards, direction, speed, getScrollVelocity])
 
   const repeated = [...cards, ...cards]
@@ -167,13 +175,12 @@ function HorizontalLoop({ cards, speed, direction = 'left', getScrollVelocity }:
 }) {
   const wrapRef   = useRef<HTMLDivElement>(null)
   const offsetRef = useRef(direction === 'right' ? -H_TOTAL(cards) : 0)
-  const rafRef    = useRef<number>(0)
   const lastRef   = useRef<number | null>(null)
 
   useEffect(() => {
     const T = H_TOTAL(cards)
     const sign = direction === 'left' ? -1 : 1
-    function tick(now: number) {
+    const tick = (now: number) => {
       const delta = lastRef.current == null ? 16 : now - lastRef.current
       lastRef.current = now
       const boost = Math.abs(getScrollVelocity()) * 0.001
@@ -182,10 +189,8 @@ function HorizontalLoop({ cards, speed, direction = 'left', getScrollVelocity }:
       if (next > 0)  next -= T
       offsetRef.current = next
       if (wrapRef.current) wrapRef.current.style.transform = `translateX(${next}px)`
-      rafRef.current = requestAnimationFrame(tick)
     }
-    rafRef.current = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(rafRef.current)
+    return registerRaf(tick)
   }, [cards, speed, direction, getScrollVelocity])
 
   const repeated = [...cards, ...cards]

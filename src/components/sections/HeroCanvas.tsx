@@ -11,8 +11,8 @@ const TOTAL    = 30
 const HEADER_H = 56
 const BG       = '#DADECF'
 
-const frameSrc = (i: number) =>
-  `https://res.cloudinary.com/dn21xgyhb/image/upload/q_auto,f_auto/the-pivot/frames-hero/frame_${String(i).padStart(3, '0')}.jpg`
+const frameSrc = (i: number, w = 1280) =>
+  `https://res.cloudinary.com/dn21xgyhb/image/upload/q_auto,f_auto,w_${w}/the-pivot/frames-hero/frame_${String(i).padStart(3, '0')}.jpg`
 
 export function HeroCanvas() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -29,23 +29,37 @@ export function HeroCanvas() {
   const [loadProgress, setLoadProgress] = useState(0)
   const [loaded, setLoaded] = useState(false)
 
-  /* ── Preload all frames with progress ── */
+  /* ── Preload frames: frame 0 immediately, rest deferred to idle ── */
   useEffect(() => {
+    const displayW = Math.min(window.innerWidth, 1920)
     let loadedCount = 0
-    const images: HTMLImageElement[] = Array.from({ length: TOTAL }, (_, i) => {
-      const img = new Image()
-      img.src = frameSrc(i)
-      const onDone = () => {
-        loadedCount++
-        setLoadProgress(loadedCount / TOTAL)
-        if (loadedCount === TOTAL) setLoaded(true)
-        if (i === 0 && img.complete && img.naturalWidth > 0) drawFrame(0)
-      }
-      img.onload = onDone
-      img.onerror = onDone
-      return img
-    })
+    const images: HTMLImageElement[] = Array.from({ length: TOTAL }, () => new Image())
     imgs.current = images
+
+    const onEach = () => {
+      loadedCount++
+      setLoadProgress(loadedCount / TOTAL)
+      if (loadedCount === TOTAL) setLoaded(true)
+    }
+
+    const img0 = images[0]
+    img0.src = frameSrc(0, displayW)
+    img0.onload = img0.onerror = () => {
+      onEach()
+      if (img0.complete && img0.naturalWidth > 0) drawFrame(0)
+      const loadRest = () => {
+        for (let i = 1; i < TOTAL; i++) {
+          const img = images[i]
+          img.src = frameSrc(i, displayW)
+          img.onload = img.onerror = onEach
+        }
+      }
+      if (typeof requestIdleCallback !== 'undefined') {
+        requestIdleCallback(loadRest, { timeout: 2000 })
+      } else {
+        setTimeout(loadRest, 200)
+      }
+    }
   }, [])
 
   function drawFrame(idx: number) {
