@@ -2,13 +2,15 @@
 
 import { useRef, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { gsap } from '@/lib/gsap'
+import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { useLenis } from '@/lib/lenis'
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const overlayRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const prevPath = useRef<string>(pathname)
+  const lenis = useLenis()
 
   useEffect(() => {
     if (prevPath.current === pathname) {
@@ -18,18 +20,22 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       return
     }
 
-    /* Route change — curtain wipe */
+    /* Route change — reset scroll first so new page always starts at top */
     prevPath.current = pathname
     const overlay = overlayRef.current
     const content = contentRef.current
     if (!overlay || !content) return
 
-    const tl = gsap.timeline()
+    lenis?.scrollTo(0, { immediate: true })
+
+    const tl = gsap.timeline({
+      onComplete: () => ScrollTrigger.refresh(),
+    })
     tl.set(overlay, { autoAlpha: 1, yPercent: 0 })
       .to(overlay, { yPercent: -100, duration: 0.7, ease: 'power4.inOut', delay: 0.05 })
       .from(content, { autoAlpha: 0, y: 24, duration: 0.6, ease: 'power3.out' }, '-=0.25')
       .set(overlay, { autoAlpha: 0 })
-  }, [pathname])
+  }, [pathname, lenis])
 
   return (
     <>
