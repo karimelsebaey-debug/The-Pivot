@@ -53,7 +53,7 @@ export function Preloader() {
       video.addEventListener('canplay', startPlay, { once: true })
     }
 
-    const hardTimer = setTimeout(exit, 8000)
+    const hardTimer = setTimeout(exit, 4500)
 
     return () => {
       video.removeEventListener('canplay', startPlay)
