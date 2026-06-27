@@ -11,8 +11,8 @@ const TOTAL    = 30
 const HEADER_H = 56
 const BG       = '#DADECF'
 
-const frameSrc = (i: number, w = 1280) =>
-  `https://res.cloudinary.com/dn21xgyhb/image/upload/q_auto,f_auto,w_${w}/the-pivot/frames-hero/frame_${String(i).padStart(3, '0')}.jpg`
+const frameSrc = (i: number) =>
+  `/frames-hero/frame_${String(i).padStart(3, '0')}.jpg`
 
 export function HeroCanvas() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -31,7 +31,6 @@ export function HeroCanvas() {
 
   /* ── Preload frames: frame 0 immediately, rest deferred to idle ── */
   useEffect(() => {
-    const displayW = Math.min(window.innerWidth, 1920)
     let loadedCount = 0
     const images: HTMLImageElement[] = Array.from({ length: TOTAL }, () => new Image())
     imgs.current = images
@@ -43,14 +42,14 @@ export function HeroCanvas() {
     }
 
     const img0 = images[0]
-    img0.src = frameSrc(0, displayW)
+    img0.src = frameSrc(0)
     img0.onload = img0.onerror = () => {
       onEach()
       if (img0.complete && img0.naturalWidth > 0) drawFrame(0)
       const loadRest = () => {
         for (let i = 1; i < TOTAL; i++) {
           const img = images[i]
-          img.src = frameSrc(i, displayW)
+          img.src = frameSrc(i)
           img.onload = img.onerror = onEach
         }
       }
@@ -65,7 +64,7 @@ export function HeroCanvas() {
   function drawFrame(idx: number) {
     const canvas = canvasRef.current
     const img    = imgs.current[idx]
-    if (!canvas || !img?.complete) return
+    if (!canvas || !img?.complete || img.naturalWidth === 0) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     // Ensure dimensions are set — sync from DOM if missing (resizeCanvas calls drawFrame internally)
@@ -107,7 +106,6 @@ export function HeroCanvas() {
   }
 
   useGSAP(() => {
-    window.scrollTo(0, 0)
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas, { passive: true })
 

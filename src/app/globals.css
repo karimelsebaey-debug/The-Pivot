@@ -48,7 +48,7 @@
 :root {
   --color-bg:        #DADECF;
   --color-ink:       #0A211F;
-  --color-accent:    #A8885A;
+  --color-accent:    #C9A84C;
   --color-dark-bg:   #12211D;
   --color-border:    rgba(10, 33, 31, 0.12);
   --color-ink-muted: rgba(10, 33, 31, 0.5);
@@ -320,75 +320,96 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
    CTA PILL — primary action button
 ───────────────────────────────────────── */
 .cta-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
+  position: relative;
+  overflow: hidden;
+  clip-path: inset(0 round 999px);
+  display: inline-block;
+  border-radius: 999px;
   text-decoration: none;
   cursor: pointer;
-}
-.cta-pill-label {
-  border-radius: 999px;
-  padding: 12px 24px;
+  background-color: var(--color-accent);
+  color: var(--color-ink);
+  padding: 12px 28px;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  background-color: var(--color-accent);
-  color: var(--color-ink);
-  transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
+  transform: translateZ(0);
 }
-.cta-pill:hover .cta-pill-label {
-  background-color: var(--color-ink);
-  color: var(--color-accent);
+.cta-pill-text {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.cta-pill-icon {
+.cta-pill-text-hover {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
+  transform: translateY(110%);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cta-pill:hover .cta-pill-text {
+  transform: translateY(-110%);
+  opacity: 0;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 1, 1), opacity 0.15s ease;
+}
+.cta-pill:hover .cta-pill-text-hover {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, opacity 0.15s ease 0.12s;
+}
+
+/* ── Outline variant ── */
+.cta-pill-outline {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+/* ── Navbar gold button ── */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  clip-path: inset(0 round 999px);
+  display: inline-block;
   background-color: var(--color-accent);
   color: var(--color-ink);
-  overflow: hidden;
-  position: relative;
-  transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transform: translateZ(0);
 }
-.cta-pill:hover .cta-pill-icon {
-  background-color: var(--color-ink);
-  color: var(--color-accent);
+.btn-gold-text {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.cta-pill-icon .arr-out,
-.cta-pill-icon .arr-in {
+.btn-gold-hover {
   position: absolute;
-  transition: transform 0.28s var(--ease), opacity 0.28s var(--ease);
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(110%);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.cta-pill-icon .arr-out { transform: translate(0, 0); opacity: 1; }
-.cta-pill-icon .arr-in  { transform: translate(-14px, 14px); opacity: 0; }
-.cta-pill:hover .cta-pill-icon .arr-out { transform: translate(14px, -14px); opacity: 0; }
-.cta-pill:hover .cta-pill-icon .arr-in  { transform: translate(0, 0); opacity: 1; }
-
-/* ── Outline variant (dark bg) ── */
-.cta-pill-outline .cta-pill-label {
-  background-color: transparent;
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent);
+.btn-gold:hover .btn-gold-text {
+  transform: translateY(-110%);
+  opacity: 0;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 1, 1), opacity 0.15s ease;
 }
-.cta-pill-outline .cta-pill-icon {
-  background-color: transparent;
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent);
-}
-@media (hover: hover) {
-  .cta-pill-outline:hover .cta-pill-label {
-    background-color: var(--color-accent);
-    color: var(--color-ink);
-    border-color: var(--color-accent);
-  }
-  .cta-pill-outline:hover .cta-pill-icon {
-    background-color: var(--color-accent);
-    color: var(--color-ink);
-    border-color: var(--color-accent);
-  }
+.btn-gold:hover .btn-gold-hover {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, opacity 0.15s ease 0.12s;
 }
 
 /* ─────────────────────────────────────────
@@ -462,8 +483,7 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
   .hero-desktop-scr  { display: flex !important; }
   .hero-desktop-text h1  { font-size: clamp(1.2rem, 3.2vw, 1.7rem) !important; line-height: 1.1 !important; }
   .hero-desktop-text p   { font-size: 0.78rem !important; }
-  .hero-desktop-text .cta-pill-label { padding: 8px 16px !important; font-size: 0.75rem !important; }
-  .hero-desktop-text .cta-pill-icon  { width: 32px !important; height: 32px !important; }
+  .hero-desktop-text .cta-pill { padding: 8px 16px !important; font-size: 0.75rem !important; }
 }
 
 /* ─────────────────────────────────────────
