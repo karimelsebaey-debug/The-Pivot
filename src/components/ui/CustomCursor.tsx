@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
@@ -103,7 +103,7 @@ export function CustomCursor() {
           {/* Scroll dot sphere */}
           <radialGradient id="cc-dot" cx="35%" cy="30%" r="60%">
             <stop offset="0%"   stopColor="rgba(255,255,255,0.95)" />
-            <stop offset="45%"  stopColor="#B8943C" />
+            <stop offset="45%"  stopColor="#A8885A" />
             <stop offset="100%" stopColor="#6B4A10" />
           </radialGradient>
           {/* Inner rim */}

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 
@@ -131,7 +131,7 @@ const COLUMNS = [
   {
     label: 'Consultant',
     href: '/capabilities/consultant',
-    bg: '#C9A84C',
+    bg: '#A8885A',
     color: '#0A211F',
     services: [
       { slug: 'campaign-strategy',    name: 'Campaign Strategy',    desc: 'Creative strategy · Campaign concepts · Multi-channel', icon: <IconTarget /> },

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
@@ -172,7 +172,7 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity, className 
             />
             <span
               className="absolute bottom-3 left-3 font-mono uppercase"
-              style={{ fontSize: 9, letterSpacing: '0.22em', color: '#C9A84C', opacity: 0.8 }}
+              style={{ fontSize: 9, letterSpacing: '0.22em', color: '#A8885A', opacity: 0.8 }}
             >
               {card.label}
             </span>

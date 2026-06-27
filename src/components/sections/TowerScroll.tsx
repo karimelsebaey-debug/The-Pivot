@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -103,7 +103,7 @@ function SpecCard({ a }: { a: Annotation }) {
               >
                 <span
                   className="h-1 w-1 rounded-full"
-                  style={{ backgroundColor: "#C9A84C" }}
+                  style={{ backgroundColor: "#A8885A" }}
                 />
                 {row.label}
               </div>
@@ -125,7 +125,7 @@ function SpecCard({ a }: { a: Annotation }) {
                 >
                   <span
                     className="rounded-full px-1.5 py-0.5 font-mono text-[8.5px] font-semibold uppercase tracking-wider"
-                    style={{ backgroundColor: "#C9A84C", color: "#0A211F" }}
+                    style={{ backgroundColor: "#A8885A", color: "#0A211F" }}
                   >
                     {row.pill.tag}
                   </span>
@@ -292,7 +292,7 @@ export function TowerScroll() {
             ref={progressBarRef}
             className="h-full origin-left"
             style={{
-              background: "linear-gradient(to right, #C9A84C, #A8885A)",
+              background: "linear-gradient(to right, #A8885A, #A8885A)",
               transform: "scaleX(0)",
             }}
           />
@@ -331,7 +331,7 @@ export function TowerScroll() {
           >
             The anatomy
             <br />
-            <span style={{ color: "#C9A84C" }}>of ambition.</span>
+            <span style={{ color: "#A8885A" }}>of ambition.</span>
           </h2>
           <p
             className="mt-6 max-w-[48ch] text-base leading-relaxed md:text-lg"
@@ -386,7 +386,7 @@ export function TowerScroll() {
                     className="relative rounded-full"
                     style={{
                       width: 8, height: 8,
-                      backgroundColor: "#C9A84C",
+                      backgroundColor: "#A8885A",
                       boxShadow: "0 0 0 2px rgba(216,255,133,0.3), 0 0 12px rgba(216,255,133,0.6)",
                     }}
                   />

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 
 @theme inline {
@@ -48,7 +48,7 @@
 :root {
   --color-bg:        #DADECF;
   --color-ink:       #0A211F;
-  --color-accent:    #B8943C;
+  --color-accent:    #A8885A;
   --color-dark-bg:   #12211D;
   --color-border:    rgba(10, 33, 31, 0.12);
   --color-ink-muted: rgba(10, 33, 31, 0.5);
@@ -110,7 +110,7 @@ html.lenis, html.lenis body { height: auto; }
   border-radius: 999px;
   opacity: 0.5;
 }
-::-webkit-scrollbar-thumb:hover { background: #B8943C; }
+::-webkit-scrollbar-thumb:hover { background: #A8885A; }
 html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
 
 /* ─────────────────────────────────────────
@@ -444,7 +444,7 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
 @keyframes hero-cycle {
   0%,   30%  { color: #0A211F; }
   33%,  63%  { color: #BDD8D9; }
-  66%,  96%  { color: #C4A882; }
+  66%,  96%  { color: #A8885A; }
   99%,  100% { color: #0A211F; }
 }
 

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { useRef, type CSSProperties } from 'react'
@@ -95,7 +95,7 @@ export function CategoryServices({ category }: { category: ServiceCategory }) {
               <ArrowUpRight
                 size={20}
                 style={{
-                  color: isDark ? '#C9A84C' : '#0A211F',
+                  color: isDark ? '#A8885A' : '#0A211F',
                   flexShrink: 0,
                   marginTop: 4,
                   transition: 'transform 0.2s ease',

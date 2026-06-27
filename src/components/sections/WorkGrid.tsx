@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useRef } from 'react'
 import Image from 'next/image'
@@ -13,7 +13,7 @@ const WORK = [
     quote: 'The numbers were always there. The Pivot taught me how to see them.',
     role: 'CEO, Private Investment Firm',
     bg: '#0A211F',
-    accent: '#C9A84C',
+    accent: '#A8885A',
     placeholder: 'https://placehold.co/720x720/0A211F/D8FF85?text=P%26L+Dashboard',
   },
   {

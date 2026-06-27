@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
@@ -88,7 +88,7 @@ export function CategoryHero({ category }: { category: ServiceCategory }) {
               display: 'inline-flex', alignItems: 'center',
               padding: '4px 12px', borderRadius: 999,
               border: '1px solid rgba(201,168,76,0.55)',
-              color: '#C9A84C',
+              color: '#A8885A',
               fontFamily: 'var(--font-body)',
               fontSize: '0.68rem', fontWeight: 600,
               letterSpacing: '0.12em', textTransform: 'uppercase',
