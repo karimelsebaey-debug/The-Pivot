@@ -14,7 +14,8 @@ export function Footer() {
   const barRef    = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    const lines = headRef.current!.querySelectorAll('.line-inner')
+    if (!headRef.current || !ctaRef.current || !barRef.current) return
+    const lines = headRef.current.querySelectorAll('.line-inner')
 
     gsap.from(lines, {
       scrollTrigger: {
@@ -118,23 +119,7 @@ export function Footer() {
         </div>
 
         <div ref={ctaRef} style={{ marginBottom: 'clamp(64px,10vh,120px)' }}>
-          <Link
-            href="/contact"
-            style={{
-              display: 'inline-block',
-              backgroundColor: 'var(--color-accent)',
-              color: '#0A211F',
-              borderRadius: '999px',
-              padding: '10px 16px',
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-              textDecoration: 'none',
-              transition: 'opacity 0.2s ease',
-            }}
-          >
-            Get in Touch
-          </Link>
+          <PillCTA href="/contact" label="Get in Touch" />
         </div>
       </div>
 
@@ -196,6 +181,7 @@ export function Footer() {
               <Link
                 key={item.label}
                 href={item.href}
+                className="footer-nav-link"
                 style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: '0.9rem',
@@ -204,16 +190,6 @@ export function Footer() {
                   textUnderlineOffset: '4px',
                   textDecorationColor: 'rgba(242,244,231,0.2)',
                   transition: 'color 0.2s ease, text-decoration-color 0.2s ease',
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.color = '#F2F4E7'
-                  el.style.textDecorationColor = 'rgba(242,244,231,0.6)'
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.color = 'rgba(242,244,231,0.5)'
-                  el.style.textDecorationColor = 'rgba(242,244,231,0.2)'
                 }}
               >
                 {item.label}
@@ -246,16 +222,6 @@ export function Footer() {
                 transition: 'border-color 0.2s ease, color 0.2s ease',
                 textDecoration: 'none',
               }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderColor = 'rgba(242,244,231,0.8)'
-                el.style.color = '#F2F4E7'
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderColor = 'rgba(242,244,231,0.25)'
-                el.style.color = 'rgba(242,244,231,0.55)'
-              }}
             >
               {icon}
             </a>
@@ -264,6 +230,19 @@ export function Footer() {
 
         </div>{/* end bottom row */}
       </div>{/* end barRef */}
+
+      <style>{`
+        @media (hover: hover) {
+          .footer-nav-link:hover {
+            color: #F2F4E7 !important;
+            text-decoration-color: rgba(242,244,231,0.6) !important;
+          }
+          .footer-social-icon:hover {
+            border-color: rgba(242,244,231,0.8) !important;
+            color: #F2F4E7 !important;
+          }
+        }
+      `}</style>
     </footer>
   )
 }

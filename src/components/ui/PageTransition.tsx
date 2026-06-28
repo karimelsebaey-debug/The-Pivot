@@ -26,7 +26,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     const content = contentRef.current
     if (!overlay || !content) return
 
-    window.scrollTo(0, 0)
     lenis?.scrollTo(0, { immediate: true })
 
     const tl = gsap.timeline({

@@ -8,10 +8,12 @@ import { MegaDropdown } from './MegaDropdown'
 import { PillCTA } from '@/components/ui/PillCTA'
 import { SERVICE_CATEGORIES } from '@/lib/services-data'
 
+const LIGHT_BG_PAGES = ['/', '/selected-work', '/perspectives', '/contact']
+
 export function Navbar() {
   const pathname  = usePathname()
   const isHome    = pathname === '/'
-  const isLightBg = isHome || pathname === '/selected-work' || pathname === '/perspectives' || pathname === '/contact'
+  const isLightBg = LIGHT_BG_PAGES.includes(pathname)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -123,22 +125,9 @@ export function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <Link
-            href="/contact"
-            style={{
-              display: 'inline-block',
-              backgroundColor: 'var(--color-accent)',
-              color: '#0A211F',
-              borderRadius: '999px',
-              padding: '10px 16px',
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-              textDecoration: 'none',
-              transition: 'opacity 0.2s ease',
-            }}
-          >
-            Start a Project
+          <Link href="/contact" className="btn-gold">
+            <span className="btn-gold-text">Start a Project</span>
+            <span className="btn-gold-hover" aria-hidden="true">Start a Project</span>
           </Link>
         </div>
 
@@ -350,20 +339,11 @@ export function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMenuOpen(false)}
-                style={{
-                  display: 'block',
-                  textAlign: 'center',
-                  backgroundColor: 'var(--color-accent)',
-                  color: '#0A211F',
-                  borderRadius: '999px',
-                  padding: '12px 20px',
-                  fontSize: '0.9rem',
-                  fontWeight: 500,
-                  letterSpacing: '0.01em',
-                  textDecoration: 'none',
-                }}
+                className="btn-gold"
+                style={{ display: 'block', textAlign: 'center' }}
               >
-                Start a Project
+                <span className="btn-gold-text">Start a Project</span>
+                <span className="btn-gold-hover" aria-hidden="true">Start a Project</span>
               </Link>
             </div>
           </div>

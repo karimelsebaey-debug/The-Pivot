@@ -57,6 +57,15 @@ export function Services() {
 
   return (
     <section id="services" ref={wrapperRef} style={{ overflow: 'hidden' }}>
+      <style>{`
+        @media (hover: hover) {
+          .srv-pill:hover {
+            background-color: var(--pill-hover-bg) !important;
+            color: var(--pill-hover-color) !important;
+            border-color: transparent !important;
+          }
+        }
+      `}</style>
       <div
         ref={trackRef}
         className="flex"
@@ -106,26 +115,17 @@ export function Services() {
                   {cat.items.map((item) => (
                     <li key={item.slug}>
                       <Link
-                        href={`/capabilities/${item.slug}`}
-                        className="group inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold uppercase tracking-wider transition-all duration-200"
+                        href={`/services/${item.slug}`}
+                        className="group inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold uppercase tracking-wider srv-pill"
                         style={{
                           borderRadius: 'var(--radius-xl)',
                           border: `1.5px solid ${isDark ? 'rgba(242,244,231,0.2)' : 'rgba(10,33,31,0.15)'}`,
                           letterSpacing: '0.1em',
                           backgroundColor: 'transparent',
-                        }}
-                        onMouseEnter={e => {
-                          const el = e.currentTarget
-                          el.style.backgroundColor = isDark ? '#C9A84C' : '#0A211F'
-                          el.style.color = isDark ? '#0A211F' : '#F2F4E7'
-                          el.style.borderColor = 'transparent'
-                        }}
-                        onMouseLeave={e => {
-                          const el = e.currentTarget
-                          el.style.backgroundColor = 'transparent'
-                          el.style.color = ''
-                          el.style.borderColor = isDark ? 'rgba(242,244,231,0.2)' : 'rgba(10,33,31,0.15)'
-                        }}
+                          transition: 'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
+                          '--pill-hover-bg': isDark ? '#C9A84C' : '#0A211F',
+                          '--pill-hover-color': isDark ? '#0A211F' : '#F2F4E7',
+                        } as React.CSSProperties}
                       >
                         {item.title}
                         <ArrowUpRight size={13} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -138,16 +138,18 @@ export function Services() {
                 <div className="mt-16">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-3 px-7 py-4 text-sm font-semibold uppercase tracking-widest transition-all duration-300"
+                    className="btn-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest"
                     style={{
-                      borderRadius: 'var(--radius-xl)',
                       backgroundColor: isDark ? '#C9A84C' : '#0A211F',
                       color: isDark ? '#0A211F' : '#F2F4E7',
                       letterSpacing: '0.12em',
                     }}
                   >
-                    Get Started
-                    <ArrowUpRight size={15} />
+                    <span className="btn-gold-text" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      Get Started
+                      <ArrowUpRight size={15} />
+                    </span>
+                    <span className="btn-gold-hover" aria-hidden="true">Get Started</span>
                   </Link>
                 </div>
 

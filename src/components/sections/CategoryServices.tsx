@@ -61,7 +61,7 @@ export function CategoryServices({ category }: { category: ServiceCategory }) {
         {category.items.map((item) => (
           <Link
             key={item.slug}
-            href={`/capabilities/${item.slug}`}
+            href={`/services/${item.slug}`}
             className="cs-card group block"
             style={{
               backgroundColor: cardBg,
@@ -70,15 +70,8 @@ export function CategoryServices({ category }: { category: ServiceCategory }) {
               borderBottom: `1px solid ${borderColor}`,
               transition: 'background-color 0.25s ease',
               textDecoration: 'none',
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = isDark
-                ? 'rgba(216,255,133,0.07)'
-                : 'rgba(10,33,31,0.04)'
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = cardBg
-            }}
+              '--card-hover-bg': isDark ? 'rgba(216,255,133,0.07)' : 'rgba(10,33,31,0.04)',
+            } as React.CSSProperties}
           >
             <div className="flex items-start justify-between gap-4 mb-5">
               <h2
@@ -109,6 +102,14 @@ export function CategoryServices({ category }: { category: ServiceCategory }) {
           </Link>
         ))}
       </div>
+
+      <style>{`
+        @media (hover: hover) {
+          .cs-card:hover {
+            background-color: var(--card-hover-bg) !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

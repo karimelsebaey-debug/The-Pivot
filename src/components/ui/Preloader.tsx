@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
+import { PAGE_CONTENT_ID } from '@/lib/utils'
 
 // Survives StrictMode double-mount, resets on hard refresh
 let _hasPlayed = false
@@ -16,7 +17,7 @@ export function Preloader() {
     const video = videoRef.current
     if (_hasPlayed) {
       // Already played — reveal page content immediately
-      const el = document.getElementById('page-content')
+      const el = document.getElementById(PAGE_CONTENT_ID)
       if (el) el.style.visibility = 'visible'
       return
     }
@@ -29,7 +30,7 @@ export function Preloader() {
         duration: 0.9,
         ease: 'power4.inOut',
         onComplete: () => {
-          const el = document.getElementById('page-content')
+          const el = document.getElementById(PAGE_CONTENT_ID)
           if (el) el.style.visibility = 'visible'
           setDone(true)
         },

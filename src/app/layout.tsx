@@ -3,6 +3,7 @@ import { Instrument_Serif, Inter_Tight, DM_Mono } from 'next/font/google'
 import { LenisProvider } from '@/lib/lenis'
 import { Preloader } from '@/components/ui/Preloader'
 import { PageTransition } from '@/components/ui/PageTransition'
+import { PAGE_CONTENT_ID } from '@/lib/utils'
 import './globals.css'
 
 const instrumentSerif = Instrument_Serif({
@@ -51,7 +52,7 @@ export default function RootLayout({
     >
       <body>
         <Preloader />
-        <main id="page-content" style={{ visibility: 'hidden' }}>
+        <main id={PAGE_CONTENT_ID} style={{ visibility: 'hidden' }}>
           <LenisProvider>
             <PageTransition>{children}</PageTransition>
           </LenisProvider>

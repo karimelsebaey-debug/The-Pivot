@@ -57,7 +57,13 @@ function _rafTick(now: number) {
 function registerRaf(fn: RafCallback): () => void {
   _rafCallbacks.add(fn)
   if (_rafCallbacks.size === 1) _rafHandle = requestAnimationFrame(_rafTick)
-  return () => { _rafCallbacks.delete(fn) }
+  return () => {
+    _rafCallbacks.delete(fn)
+    if (_rafCallbacks.size === 0 && _rafHandle !== 0) {
+      cancelAnimationFrame(_rafHandle)
+      _rafHandle = 0
+    }
+  }
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -232,10 +238,11 @@ function HorizontalLoop({ cards, speed, direction = 'left', getScrollVelocity }:
 const MASK = 'linear-gradient(to bottom, transparent 0%, black 13%, black 87%, transparent 100%)'
 
 function splitCols(cards: Card[]) {
+  const third = Math.ceil(cards.length / 3)
   return {
-    col1: cards.slice(0,  5),
-    col2: cards.slice(5,  9),
-    col3: cards.slice(9, 12),
+    col1: cards.slice(0, third),
+    col2: cards.slice(third, third * 2),
+    col3: cards.slice(third * 2),
   }
 }
 
@@ -278,6 +285,7 @@ export function VerticalLoopHero() {
   const getScrollVelocity = useCallback(() => velRef.current * 60, [])
 
   useGSAP(() => {
+    if (!headRef.current || !bodyRef.current || !ctaRef.current) return
     const tl = gsap.timeline({
       defaults: { ease: 'power4.out' },
       scrollTrigger: {
@@ -286,7 +294,7 @@ export function VerticalLoopHero() {
         once: true,
       },
     })
-    tl.from(headRef.current!.querySelectorAll('span > span'), {
+    tl.from(headRef.current.querySelectorAll('span > span'), {
         yPercent: 110, opacity: 0, stagger: 0.12, duration: 1.1,
       })
       .from(bodyRef.current,  { opacity: 0, y: 14, duration: 0.8 }, '-=0.5')
@@ -347,7 +355,7 @@ export function VerticalLoopHero() {
         </p>
 
         <div ref={ctaRef}>
-          <PillCTA href="/contact" label="Book a Demo" variant="outline" />
+          <PillCTA href="/contact" label="Book a Demo" />
         </div>
       </div>
 

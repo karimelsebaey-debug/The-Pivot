@@ -125,22 +125,18 @@ export function CategoryHero({ category }: { category: ServiceCategory }) {
         <div className="ch-cta">
           <Link
             href="/contact"
+            className="btn-gold"
             style={{
               display: isMobile ? 'block' : 'inline-block',
               width: isMobile ? '100%' : 'auto',
               textAlign: 'center',
-              backgroundColor: 'var(--color-accent)',
-              color: '#0A211F',
-              borderRadius: '999px',
               padding: isMobile ? '12px 20px' : '10px 16px',
               fontSize: '0.9rem',
               fontWeight: 500,
-              letterSpacing: '0.01em',
-              textDecoration: 'none',
-              transition: 'opacity 0.2s ease',
             }}
           >
-            Start a Project
+            <span className="btn-gold-text">Start a Project</span>
+            <span className="btn-gold-hover" aria-hidden="true">Start a Project</span>
           </Link>
         </div>
       </div>

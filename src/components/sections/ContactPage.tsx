@@ -111,33 +111,41 @@ export function ContactPage() {
   const [intent,    setIntent]    = useState<Intent>('project')
   const [submitted, setSubmitted] = useState(false)
   const [sending,   setSending]   = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
 
   useGSAP(() => {
+    if (!headRef.current || !leftRef.current || !rightRef.current) return
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-    tl.from(headRef.current!.querySelectorAll('span > span'), {
+    tl.from(headRef.current.querySelectorAll('span > span'), {
         yPercent: 110, opacity: 0, stagger: 0.1, duration: 1.0,
       })
-      .from(leftRef.current!.querySelectorAll('.intent-pill'), {
+      .from(leftRef.current.querySelectorAll('.intent-pill'), {
         opacity: 0, y: 16, stagger: 0.08, duration: 0.7,
       }, '-=0.5')
-      .from(rightRef.current!.querySelectorAll('.form-field'), {
+      .from(rightRef.current.querySelectorAll('.form-field'), {
         opacity: 0, y: 20, stagger: 0.07, duration: 0.7,
       }, '-=0.6')
   }, { scope: sectionRef })
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSending(true)
+    setFormError(null)
 
     const form = e.currentTarget
     const data = {
       intent,
-      name:    (form.elements.namedItem('name')    as HTMLInputElement).value,
-      email:   (form.elements.namedItem('email')   as HTMLInputElement).value,
+      name:    (form.elements.namedItem('name')    as HTMLInputElement).value.trim(),
+      email:   (form.elements.namedItem('email')   as HTMLInputElement).value.trim(),
       company: (form.elements.namedItem('company') as HTMLInputElement).value,
-      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value.trim(),
     }
 
+    if (!data.name || !data.email || !data.message) {
+      setFormError('Name, email, and message are required.')
+      return
+    }
+
+    setSending(true)
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -146,12 +154,12 @@ export function ContactPage() {
       })
       if (!res.ok) {
         const { error } = await res.json()
-        alert(error || 'Something went wrong. Please try again.')
+        setFormError(error || 'Something went wrong. Please try again.')
         return
       }
       setSubmitted(true)
     } catch {
-      alert('Network error. Please try again.')
+      setFormError('Network error. Please try again.')
     } finally {
       setSending(false)
     }
@@ -385,7 +393,6 @@ export function ContactPage() {
             <form
               onSubmit={handleSubmit}
               style={{ display: 'flex', flexDirection: 'column', gap: 36 }}
-              noValidate
             >
               <input type="hidden" name="intent" value={intent} />
 
@@ -411,10 +418,24 @@ export function ContactPage() {
               </div>
 
               {/* Submit */}
-              <div className="form-field" style={{ paddingTop: 8 }}>
+              <div className="form-field" style={{ paddingTop: 8, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {formError && (
+                  <p
+                    role="alert"
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.85rem',
+                      color: '#c0392b',
+                      margin: 0,
+                    }}
+                  >
+                    {formError}
+                  </p>
+                )}
                 <button
                   type="submit"
                   disabled={sending}
+                  className="contact-submit"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -431,20 +452,6 @@ export function ContactPage() {
                     transition: 'background 0.25s ease, color 0.25s ease, transform 0.15s ease',
                     letterSpacing: '-0.01em',
                   }}
-                  onMouseEnter={e => {
-                    if (!sending) {
-                      const el = e.currentTarget as HTMLElement
-                      el.style.background = 'var(--color-ink)'
-                      el.style.color = 'var(--color-accent)'
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.background = sending ? 'rgba(216,255,133,0.5)' : 'var(--color-accent)'
-                    el.style.color = 'var(--color-ink)'
-                  }}
-                  onMouseDown={e => { if (!sending) (e.currentTarget as HTMLElement).style.transform = 'scale(0.97)' }}
-                  onMouseUp={e => { if (!sending) (e.currentTarget as HTMLElement).style.transform = 'scale(1)' }}
                 >
                   {sending ? (
                     <>
@@ -481,6 +488,17 @@ export function ContactPage() {
         .contact-grid input::placeholder,
         .contact-grid textarea::placeholder {
           color: rgba(10,33,31,0.3);
+        }
+
+        @media (hover: hover) {
+          .contact-submit:not(:disabled):hover {
+            background: var(--color-ink) !important;
+            color: var(--color-accent) !important;
+          }
+        }
+
+        .contact-submit:not(:disabled):active {
+          transform: scale(0.97);
         }
 
         @media (max-width: 767px) {

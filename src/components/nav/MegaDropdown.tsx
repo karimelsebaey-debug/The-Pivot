@@ -1,6 +1,7 @@
 ﻿'use client'
 
 import Link from 'next/link'
+import { SERVICE_CATEGORIES } from '@/lib/services-data'
 
 /* ─── Icons (inline SVG — superside style) ─── */
 function IconTarget() {
@@ -88,59 +89,68 @@ function IconCursor() {
   )
 }
 
-/* ─── Column Data — order & sub-services from services_table.xlsx ─── */
-const COLUMNS = [
-  {
-    label: 'Specialized production',
-    href: '/capabilities/specialized-production',
-    bg: '#0A211F',
-    color: '#F7F9F2',
-    services: [
-      { slug: 'motion-design',    name: 'Motion Design',    desc: 'Animated social ads · Explainer animations · UI micro-animations', icon: <IconBolt /> },
-      { slug: 'email-creation',   name: 'Email Creation',   desc: 'Email templates · Sequences · Newsletter design', icon: <IconMail /> },
-      { slug: 'web-design',       name: 'Web Design',       desc: 'Portfolio · Landing page · E-commerce design', icon: <IconCursor /> },
-      { slug: 'copywriting',      name: 'Copywriting',      desc: 'Ad copy · Web & landing page copy · SEO blog articles', icon: <IconPen /> },
-      { slug: 'design-systems',   name: 'Design Systems',   desc: 'Design token system · Component library · UI kit', icon: <IconGrid /> },
-      { slug: 'product-design',   name: 'Product Design',   desc: 'UX/UI design · Prototypes · MVP design', icon: <IconPhone /> },
-    ],
-  },
-  {
-    label: 'Creative design',
-    href: '/capabilities/creative-design',
-    bg: '#1A4A40',
-    color: '#F7F9F2',
-    services: [
-      { slug: 'ad-creative',            name: 'Ad Creative',            desc: 'Static ads · Motion ads · Ad copy & hooks', icon: <IconTarget /> },
-      { slug: 'social-media-creative',  name: 'Social Media Creative',  desc: 'Organic content · Paid social ads · Campaign concepts', icon: <IconGraph /> },
-      { slug: 'presentation-design',    name: 'Presentation Design',    desc: 'Custom decks · Templates · Infographics', icon: <IconGrid /> },
-      { slug: 'illustration-design',    name: 'Illustration Design',    desc: 'Brand illustrations · Iconography · Storyboarding', icon: <IconPen /> },
-      { slug: 'branding-services',      name: 'Branding Services',      desc: 'Logo design · Brand identity kit · Guidelines', icon: <IconStar /> },
-      { slug: 'concept-creation',       name: 'Concept Creation',       desc: 'Campaign concepts · Big ideas · Creative briefs', icon: <IconBolt /> },
-    ],
-  },
-  {
-    label: 'AI services',
-    href: '/capabilities/ai-services',
-    bg: '#8FCCA8',
-    color: '#0A211F',
-    services: [
-      { slug: 'ai-powered-creative', name: 'AI-Powered Creative', desc: 'Brand image library · AI character development · Key art', icon: <IconStar /> },
-      { slug: 'automation',          name: 'Automation',          desc: 'Content automation · Reporting pipelines · Repurposing', icon: <IconBolt /> },
-    ],
-  },
-  {
-    label: 'Consultant',
-    href: '/capabilities/consultant',
-    bg: '#A8885A',
-    color: '#0A211F',
-    services: [
-      { slug: 'campaign-strategy',    name: 'Campaign Strategy',    desc: 'Creative strategy · Campaign concepts · Multi-channel', icon: <IconTarget /> },
-      { slug: 'finance-expert',       name: 'Finance Expert',       desc: 'P&L analysis · Cash flow · Financial health assessment', icon: <IconGraph /> },
-      { slug: 'business-strategist',  name: 'Business Strategist',  desc: 'Growth strategy · Investment readiness · Cost optimization', icon: <IconBolt /> },
-      { slug: 'early-stage-recovery', name: 'Debt Recovery', desc: 'Distressed debt · Recovery planning · Stabilization', icon: <IconChat /> },
-    ],
-  },
-]
+/* ─── Dropdown-specific icon and description maps ─── */
+const ICON_MAP: Record<string, React.ReactNode> = {
+  'motion-design':         <IconBolt />,
+  'email-creation':        <IconMail />,
+  'web-design':            <IconCursor />,
+  'copywriting':           <IconPen />,
+  'design-systems':        <IconGrid />,
+  'product-design':        <IconPhone />,
+  'ad-creative':           <IconTarget />,
+  'social-media-creative': <IconGraph />,
+  'presentation-design':   <IconGrid />,
+  'illustration-design':   <IconPen />,
+  'branding-services':     <IconStar />,
+  'concept-creation':      <IconBolt />,
+  'ai-powered-creative':   <IconStar />,
+  'automation':            <IconBolt />,
+  'campaign-strategy':     <IconTarget />,
+  'finance-expert':        <IconGraph />,
+  'business-strategist':   <IconBolt />,
+  'early-stage-recovery':  <IconChat />,
+}
+
+const DESC_MAP: Record<string, string> = {
+  'motion-design':         'Animated social ads · Explainer animations · UI micro-animations',
+  'email-creation':        'Email templates · Sequences · Newsletter design',
+  'web-design':            'Portfolio · Landing page · E-commerce design',
+  'copywriting':           'Ad copy · Web & landing page copy · SEO blog articles',
+  'design-systems':        'Design token system · Component library · UI kit',
+  'product-design':        'UX/UI design · Prototypes · MVP design',
+  'ad-creative':           'Static ads · Motion ads · Ad copy & hooks',
+  'social-media-creative': 'Organic content · Paid social ads · Campaign concepts',
+  'presentation-design':   'Custom decks · Templates · Infographics',
+  'illustration-design':   'Brand illustrations · Iconography · Storyboarding',
+  'branding-services':     'Logo design · Brand identity kit · Guidelines',
+  'concept-creation':      'Campaign concepts · Big ideas · Creative briefs',
+  'ai-powered-creative':   'Brand image library · AI character development · Key art',
+  'automation':            'Content automation · Reporting pipelines · Repurposing',
+  'campaign-strategy':     'Creative strategy · Campaign concepts · Multi-channel',
+  'finance-expert':        'P&L analysis · Cash flow · Financial health assessment',
+  'business-strategist':   'Growth strategy · Investment readiness · Cost optimization',
+  'early-stage-recovery':  'Distressed debt · Recovery planning · Stabilization',
+}
+
+const COL_STYLE: Record<string, { bg: string; color: string }> = {
+  'specialized-production': { bg: '#0A211F', color: '#F7F9F2' },
+  'creative-design':        { bg: '#1A4A40', color: '#F7F9F2' },
+  'ai-services':            { bg: '#8FCCA8', color: '#0A211F' },
+  'consultant':             { bg: '#A8885A', color: '#0A211F' },
+}
+
+const COLUMNS = SERVICE_CATEGORIES.map(cat => ({
+  label:    cat.title,
+  href:     `/capabilities/${cat.slug}`,
+  bg:       COL_STYLE[cat.slug]?.bg    ?? '#0A211F',
+  color:    COL_STYLE[cat.slug]?.color ?? '#F7F9F2',
+  services: cat.items.map(item => ({
+    slug: item.slug,
+    name: item.title,
+    desc: DESC_MAP[item.slug] ?? item.description,
+    icon: ICON_MAP[item.slug],
+  })),
+}))
 
 interface Props {
   onMouseEnter: () => void
