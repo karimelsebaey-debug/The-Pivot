@@ -281,7 +281,7 @@ export function HeroCanvas() {
           fontSize: 'clamp(2rem, 8vw, 3rem)',
           lineHeight: 1.06,
           letterSpacing: '-0.025em',
-          color: 'var(--color-accent)',
+          color: '#A8885A',
           marginBottom: '0.75rem',
         }}>
           The Turning Point For Your{' '}
@@ -299,7 +299,9 @@ export function HeroCanvas() {
           solutions —{' '}
           <em style={{ fontStyle: 'italic', fontWeight: 700 }}>built to last, impossible to ignore.</em>
         </p>
-        <PillCTA href="#work" label="See Our Work" />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <PillCTA href="#work" label="See Our Work" />
+        </div>
       </div>
 
       {/* ── Mobile: scroll indicator — left of building area ── */}
@@ -341,14 +343,55 @@ export function HeroCanvas() {
           marginBottom: 6,
         }} />
         <svg
-          width="22" height="36" viewBox="0 0 26 42" fill="none"
-          style={{ animation: 'mouse-body-scroll 2s ease-in-out infinite', opacity: 0.65 }}
+          width="24" height="42" viewBox="0 0 24 42" fill="none"
+          style={{
+            animation: 'mouse-body-scroll 2s ease-in-out infinite',
+            filter: 'drop-shadow(0 5px 12px rgba(10,33,31,0.28)) drop-shadow(0 1px 3px rgba(10,33,31,0.18))',
+          }}
         >
-          <rect x="1" y="1" width="24" height="40" rx="12" fill="rgba(10,33,31,0.08)" />
-          <rect x="1" y="1" width="24" height="40" rx="12"
-            stroke="rgba(10,33,31,0.38)" strokeWidth="1.2" fill="none" />
-          <circle cx="13" cy="11" r="3" fill="rgba(10,33,31,0.4)"
-            style={{ animation: 'mouse-dot-scroll 2s ease-in-out infinite' }} />
+          <defs>
+            <linearGradient id="em-body-mob" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.62)" />
+              <stop offset="10%"  stopColor="rgba(10,33,31,0.10)" />
+              <stop offset="40%"  stopColor="rgba(10,33,31,0.26)" />
+              <stop offset="72%"  stopColor="rgba(10,33,31,0.52)" />
+              <stop offset="100%" stopColor="rgba(10,33,31,0.78)" />
+            </linearGradient>
+            <linearGradient id="em-depth-mob" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.20)" />
+              <stop offset="35%"  stopColor="rgba(255,255,255,0)" />
+              <stop offset="100%" stopColor="rgba(0,0,0,0.20)" />
+            </linearGradient>
+            <radialGradient id="em-spec-mob" cx="26%" cy="16%" r="36%">
+              <stop offset="0%"   stopColor="rgba(255,255,255,0.80)" />
+              <stop offset="60%"  stopColor="rgba(255,255,255,0.10)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+            </radialGradient>
+            <linearGradient id="em-gold-mob" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stopColor="rgba(184,148,60,0)" />
+              <stop offset="25%"  stopColor="rgba(184,148,60,0.60)" />
+              <stop offset="75%"  stopColor="rgba(184,148,60,0.60)" />
+              <stop offset="100%" stopColor="rgba(184,148,60,0)" />
+            </linearGradient>
+          </defs>
+          <rect x="2.5" y="3.5" width="19" height="37" rx="9.5" fill="rgba(10,33,31,0.16)" />
+          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-body-mob)" />
+          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-depth-mob)" />
+          <rect x="1" y="1" width="22" height="40" rx="11"
+            stroke="rgba(10,33,31,0.42)" strokeWidth="0.9" fill="none" />
+          <rect x="2" y="2" width="20" height="38" rx="10"
+            stroke="rgba(255,255,255,0.10)" strokeWidth="0.7" fill="none" />
+          <rect x="2.4" y="5" width="1.2" height="30" rx="0.6" fill="rgba(255,255,255,0.42)" />
+          <rect x="20.4" y="5" width="1.2" height="30" rx="0.6" fill="rgba(0,0,0,0.32)" />
+          <line x1="2" y1="15" x2="22" y2="15" stroke="url(#em-gold-mob)" strokeWidth="0.7" />
+          <line x1="12" y1="2" x2="12" y2="14.5"
+            stroke="rgba(10,33,31,0.16)" strokeWidth="0.7" />
+          <rect x="10" y="11" width="4" height="8" rx="2" fill="rgba(10,33,31,0.38)" />
+          <rect x="10" y="11" width="4" height="8" rx="2"
+            stroke="rgba(255,255,255,0.14)" strokeWidth="0.6" fill="none" />
+          <line x1="10.5" y1="12.5" x2="10.5" y2="17.5"
+            stroke="rgba(255,255,255,0.32)" strokeWidth="0.6" strokeLinecap="round" />
+          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-spec-mob)" />
         </svg>
       </div>
 
