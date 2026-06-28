@@ -136,7 +136,7 @@ const COL_STYLE: Record<string, { bg: string; color: string }> = {
   'specialized-production': { bg: '#0A211F', color: '#F7F9F2' },
   'creative-design':        { bg: '#1A4A40', color: '#F7F9F2' },
   'ai-services':            { bg: '#8FCCA8', color: '#0A211F' },
-  'consultant':             { bg: '#A8885A', color: '#0A211F' },
+  'consultant':             { bg: '#C9A84C', color: '#0A211F' },
 }
 
 const COLUMNS = SERVICE_CATEGORIES.map(cat => ({
