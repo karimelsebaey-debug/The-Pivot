@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import type { ServiceItem } from '@/lib/services-data'
+import { renderInlineHeading } from '@/lib/inline-heading'
 
 export function ServiceHero({ service }: { service: ServiceItem }) {
   const sectionRef = useRef<HTMLElement>(null)
@@ -34,9 +35,11 @@ export function ServiceHero({ service }: { service: ServiceItem }) {
         'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 45%)',
       ].join(', ')
 
+  const hasLongHeadline = !!service.heroHeadline
+
   const contentStyle: CSSProperties = isMobile
     ? { position: 'relative', zIndex: 2, maxWidth: '100%', padding: '0 clamp(20px, 5vw, 32px) clamp(40px, 6dvh, 64px)' }
-    : { position: 'relative', zIndex: 2, maxWidth: 'clamp(320px, 48%, 680px)' }
+    : { position: 'relative', zIndex: 2, maxWidth: hasLongHeadline ? 'clamp(320px, 58%, 820px)' : 'clamp(320px, 48%, 680px)' }
 
   return (
     <section
@@ -104,14 +107,14 @@ export function ServiceHero({ service }: { service: ServiceItem }) {
             className="sh-title"
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(3rem, 7vw, 8rem)',
-              lineHeight: 0.95,
+              fontSize: hasLongHeadline ? 'clamp(2.25rem, 4.4vw, 4.5rem)' : 'clamp(3rem, 7vw, 8rem)',
+              lineHeight: hasLongHeadline ? 1.05 : 0.95,
               letterSpacing: '-0.03em',
               color: '#F2F4E7',
               paddingBottom: '0.15em',
             }}
           >
-            {service.title}
+            {service.heroHeadline ? renderInlineHeading(service.heroHeadline) : service.title}
           </h1>
         </div>
 

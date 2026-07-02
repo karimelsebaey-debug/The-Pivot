@@ -103,12 +103,14 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   'illustration-design':   <IconPen />,
   'branding-services':     <IconStar />,
   'concept-creation':      <IconBolt />,
+  'packaging-merchandise-design': <IconLayers />,
+  'video-production':      <IconPlay />,
   'ai-powered-creative':   <IconStar />,
   'automation':            <IconBolt />,
   'campaign-strategy':     <IconTarget />,
   'finance-expert':        <IconGraph />,
   'business-strategist':   <IconBolt />,
-  'early-stage-recovery':  <IconChat />,
+  'debt-recovery':         <IconChat />,
 }
 
 const DESC_MAP: Record<string, string> = {
