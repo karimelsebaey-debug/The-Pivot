@@ -167,6 +167,7 @@ export function ServiceWorkGrid({ service }: { service: ServiceItem }) {
           {rows.map(({ items: rowItems, count, cardAspectRatio, columns }, rowIdx) => (
             <div
               key={rowIdx}
+              className="swg-grid-row"
               style={{
                 display: 'grid',
                 gridTemplateColumns: columns,

@@ -590,3 +590,15 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
     padding-bottom: 48px !important;
   }
 }
+
+/* ─────────────────────────────────────────
+   SERVICE WORK GRID — mobile: stack cards, uniform size
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .swg-grid-row {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+  }
+}
