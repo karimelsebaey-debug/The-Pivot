@@ -574,6 +574,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         accent: '#0A211F',
         bg: '#F2F4E7',
         heroImage: img('packaging-merchandise-design', 'Main%20Page.jpg'),
+        mobileHeroImage: `${CDN}/image/upload/q_auto,f_auto/the-pivot/mobile/packaging-merchandise-design.jpg`,
         videos: [],
         images: [
           { src: img('packaging-merchandise-design', 'Apparel%20design.jpg'), label: 'Apparel Design' },
