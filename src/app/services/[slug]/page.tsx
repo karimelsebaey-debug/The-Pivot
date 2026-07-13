@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { ServiceHero } from '@/components/sections/ServiceHero'
+import { ServiceStorySection } from '@/components/sections/ServiceStorySection'
 import { ServiceIntro } from '@/components/sections/ServiceIntro'
 import { ServiceWorkGrid } from '@/components/sections/ServiceWorkGrid'
 import { getServiceBySlug, ALL_SERVICES } from '@/lib/services-data'
@@ -30,6 +31,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <Navbar />
       <main>
         <ServiceHero service={service} />
+        {service.storyHeadingLine1 && <ServiceStorySection service={service} />}
         {service.intro && <ServiceIntro service={service} />}
         {(service.videos.length > 0 || (service.images?.length ?? 0) > 0) && <ServiceWorkGrid service={service} />}
       </main>

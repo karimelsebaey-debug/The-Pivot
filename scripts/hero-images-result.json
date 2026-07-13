@@ -1,0 +1,50 @@
+[
+  {
+    "filename": "1_Sunrise.jpeg",
+    "public_id": "the-pivot/hero/day-1-sunrise",
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1783881953/the-pivot/hero/day-1-sunrise.jpg",
+    "bytes": 2547838,
+    "width": 2752,
+    "height": 1536
+  },
+  {
+    "filename": "2_Morning.jpeg",
+    "public_id": "the-pivot/hero/day-2-morning",
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1783881954/the-pivot/hero/day-2-morning.jpg",
+    "bytes": 2714542,
+    "width": 2752,
+    "height": 1536
+  },
+  {
+    "filename": "3_Afternoon.jpeg",
+    "public_id": "the-pivot/hero/day-3-afternoon",
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1783881955/the-pivot/hero/day-3-afternoon.jpg",
+    "bytes": 2625967,
+    "width": 2752,
+    "height": 1536
+  },
+  {
+    "filename": "4_Sunset.jpeg",
+    "public_id": "the-pivot/hero/day-4-sunset",
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1783881956/the-pivot/hero/day-4-sunset.jpg",
+    "bytes": 2585181,
+    "width": 2752,
+    "height": 1536
+  },
+  {
+    "filename": "5_Blue Hour.jpeg",
+    "public_id": "the-pivot/hero/day-5-bluehour",
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1783881957/the-pivot/hero/day-5-bluehour.jpg",
+    "bytes": 2564062,
+    "width": 2752,
+    "height": 1536
+  },
+  {
+    "filename": "6_Night.jpeg",
+    "public_id": "the-pivot/hero/day-6-night",
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1783882010/the-pivot/hero/day-6-night.jpg",
+    "bytes": 2528982,
+    "width": 2752,
+    "height": 1536
+  }
+]

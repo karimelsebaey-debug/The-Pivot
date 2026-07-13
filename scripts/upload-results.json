@@ -1,0 +1,596 @@
+{
+  "ai-powered-creative": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643700/the-pivot/services/ai-powered-creative/AI%20Video%20Production.mp4",
+      "type": "video",
+      "filename": "AI Video Production.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643703/the-pivot/services/ai-powered-creative/Avatar%20and%20voice%20cloning.jpg",
+      "type": "image",
+      "filename": "Avatar and voice cloning.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643703/the-pivot/services/ai-powered-creative/Avatar%20and%20voice%20cloning.jpg",
+      "type": "image",
+      "filename": "Avatar and voice cloning.png"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643705/the-pivot/services/ai-powered-creative/Brand%20imagery.mp4",
+      "type": "video",
+      "filename": "Brand imagery.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643707/the-pivot/services/ai-powered-creative/Character%20development.jpg",
+      "type": "image",
+      "filename": "Character development.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643709/the-pivot/services/ai-powered-creative/Image%20enhancements.mp4",
+      "type": "video",
+      "filename": "Image enhancements.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643711/the-pivot/services/ai-powered-creative/Main%20Page%20Star.jpg",
+      "type": "image",
+      "filename": "Main Page Star.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643712/the-pivot/services/ai-powered-creative/Product%20visuals.jpg",
+      "type": "image",
+      "filename": "Product visuals.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643713/the-pivot/services/ai-powered-creative/Production%20at%20scale.jpg",
+      "type": "image",
+      "filename": "Production at scale.png"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643715/the-pivot/services/ai-powered-creative/Translation%20and%20transcreation.mp4",
+      "type": "video",
+      "filename": "Translation and transcreation.mp4"
+    }
+  ],
+  "automation": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643716/the-pivot/services/automation/AI-enhanced%20automation.jpg",
+      "type": "image",
+      "filename": "AI-enhanced automation.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643717/the-pivot/services/automation/Email%20templates.jpg",
+      "type": "image",
+      "filename": "Email templates.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643719/the-pivot/services/automation/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "error": "public_id (the-pivot/services/automation/Motion & video automation) is invalid",
+      "filename": "Motion & video automation.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643720/the-pivot/services/automation/Print%20automation.jpg",
+      "type": "image",
+      "filename": "Print automation.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643724/the-pivot/services/automation/production%20workflows.png",
+      "type": "image",
+      "filename": "production workflows.png"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643725/the-pivot/services/automation/Web%20templates.jpg",
+      "type": "image",
+      "filename": "Web templates.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643920/the-pivot/services/automation/Motion%20and%20video%20automation.mp4",
+      "type": "video",
+      "filename": "Motion & video automation.mp4"
+    }
+  ],
+  "business-strategist": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643726/the-pivot/services/business-strategist/Cost%20Optimization.jpg",
+      "type": "image",
+      "filename": "Cost Optimization.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643727/the-pivot/services/business-strategist/Growth%20Strategy.jpg",
+      "type": "image",
+      "filename": "Growth Strategy.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643728/the-pivot/services/business-strategist/Investment%20Readiness.jpg",
+      "type": "image",
+      "filename": "Investment Readiness.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643729/the-pivot/services/business-strategist/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    }
+  ],
+  "campaign-strategy": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643730/the-pivot/services/campaign-strategy/Ad%20copywriting.jpg",
+      "type": "image",
+      "filename": "Ad copywriting.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643733/the-pivot/services/campaign-strategy/Campaign%20concepts.mp4",
+      "type": "video",
+      "filename": "Campaign concepts.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643734/the-pivot/services/campaign-strategy/Creative%20strategy.jpg",
+      "type": "image",
+      "filename": "Creative strategy.png"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643736/the-pivot/services/campaign-strategy/Graphic%20design%20concepts.mp4",
+      "type": "video",
+      "filename": "Graphic design concepts.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643738/the-pivot/services/campaign-strategy/main%20Page.jpg",
+      "type": "image",
+      "filename": "main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643739/the-pivot/services/campaign-strategy/Storyboarding.jpg",
+      "type": "image",
+      "filename": "Storyboarding.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643741/the-pivot/services/campaign-strategy/Strategic%20storytelling.mp4",
+      "type": "video",
+      "filename": "Strategic storytelling.mp4"
+    }
+  ],
+  "debt-recovery": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643742/the-pivot/services/debt-recovery/Credit%20Management.jpg",
+      "type": "image",
+      "filename": "Credit Management.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643743/the-pivot/services/debt-recovery/Debt%20Collection.jpg",
+      "type": "image",
+      "filename": "Debt Collection.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643744/the-pivot/services/debt-recovery/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643745/the-pivot/services/debt-recovery/Receivables%20Management.jpg",
+      "type": "image",
+      "filename": "Receivables Management.jpg"
+    }
+  ],
+  "finance-expert": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643747/the-pivot/services/finance-expert/Cash%20Flow.jpg",
+      "type": "image",
+      "filename": "Cash Flow.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643748/the-pivot/services/finance-expert/Financial%20Health%20Assessment.jpg",
+      "type": "image",
+      "filename": "Financial Health Assessment.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643749/the-pivot/services/finance-expert/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "error": "public_id (the-pivot/services/finance-expert/P&L Analysis) is invalid",
+      "filename": "P&L Analysis.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643922/the-pivot/services/finance-expert/PandL%20Analysis.jpg",
+      "type": "image",
+      "filename": "P&L Analysis.jpg"
+    }
+  ],
+  "ad-creative": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643751/the-pivot/services/ad-creative/Illustration-.mp4",
+      "type": "video",
+      "filename": "Illustration-.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643752/the-pivot/services/ad-creative/Main%20Page%20star.jpg",
+      "type": "image",
+      "filename": "Main Page star.png"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643753/the-pivot/services/ad-creative/Motion%20graphics.jpg",
+      "type": "image",
+      "filename": "Motion graphics.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643755/the-pivot/services/ad-creative/Motion%20graphics.mp4",
+      "type": "video",
+      "filename": "Motion graphics.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643756/the-pivot/services/ad-creative/Static%20design.jpg",
+      "type": "image",
+      "filename": "Static design.jpg"
+    }
+  ],
+  "branding-services": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643758/the-pivot/services/branding-services/Brand%20consistency.mp4",
+      "type": "video",
+      "filename": "Brand consistency.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643759/the-pivot/services/branding-services/Brand%20design.jpg",
+      "type": "image",
+      "filename": "Brand design.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643760/the-pivot/services/branding-services/Brand%20development.jpg",
+      "type": "image",
+      "filename": "Brand development.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643761/the-pivot/services/branding-services/Brand%20guidelines.jpg",
+      "type": "image",
+      "filename": "Brand guidelines.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643763/the-pivot/services/branding-services/Brand%20guidelines.mp4",
+      "type": "video",
+      "filename": "Brand guidelines.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643764/the-pivot/services/branding-services/Logo%20design.jpg",
+      "type": "image",
+      "filename": "Logo design.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643765/the-pivot/services/branding-services/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.png"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643766/the-pivot/services/branding-services/Rebranding%20services.jpg",
+      "type": "image",
+      "filename": "Rebranding services.jpg"
+    }
+  ],
+  "concept-creation": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643768/the-pivot/services/concept-creation/Ad%20New%20Brand%20%282%29.mp4",
+      "type": "video",
+      "filename": "Ad New Brand (2).mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643770/the-pivot/services/concept-creation/digital%20billboard%20kiosk.jpg",
+      "type": "image",
+      "filename": "digital billboard kiosk.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643771/the-pivot/services/concept-creation/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643773/the-pivot/services/concept-creation/Sub%20Main.jpg",
+      "type": "image",
+      "filename": "Sub Main.jpeg"
+    }
+  ],
+  "illustration-design": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643774/the-pivot/services/illustration-design/Brand%20illustrations.jpg",
+      "type": "image",
+      "filename": "Brand illustrations.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643775/the-pivot/services/illustration-design/Data%20visualization.jpg",
+      "type": "image",
+      "filename": "Data visualization.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643776/the-pivot/services/illustration-design/Iconography.jpg",
+      "type": "image",
+      "filename": "Iconography.jpeg"
+    },
+    {
+      "error": "public_id must not end with a whitespace.",
+      "filename": "Main Page .jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643925/the-pivot/services/illustration-design/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page .jpeg"
+    }
+  ],
+  "presentation-design": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643778/the-pivot/services/presentation-design/Custom%20presentation%20design.jpg",
+      "type": "image",
+      "filename": "Custom presentation design.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643779/the-pivot/services/presentation-design/Data%20visualization.jpg",
+      "type": "image",
+      "filename": "Data visualization.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643780/the-pivot/services/presentation-design/Data%20visualization.mp4",
+      "type": "video",
+      "filename": "Data visualization.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643782/the-pivot/services/presentation-design/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643782/the-pivot/services/presentation-design/Motion%20for%20slides.jpg",
+      "type": "image",
+      "filename": "Motion for slides.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643784/the-pivot/services/presentation-design/Motion%20for%20slides.mp4",
+      "type": "video",
+      "filename": "Motion for slides.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643785/the-pivot/services/presentation-design/Presentation%20templates.jpg",
+      "type": "image",
+      "filename": "Presentation templates.jpg"
+    }
+  ],
+  "social-media-creative": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643786/the-pivot/services/social-media-creative/Campaign%20concepts.jpg",
+      "type": "image",
+      "filename": "Campaign concepts.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643787/the-pivot/services/social-media-creative/Immersive%20experiences.jpg",
+      "type": "image",
+      "filename": "Immersive experiences.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643788/the-pivot/services/social-media-creative/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643789/the-pivot/services/social-media-creative/Organic%20social%20content.jpg",
+      "type": "image",
+      "filename": "Organic social content.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643791/the-pivot/services/social-media-creative/Organic%20social%20content.mp4",
+      "type": "video",
+      "filename": "Organic social content.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643792/the-pivot/services/social-media-creative/Paid%20social%20ads.jpg",
+      "type": "image",
+      "filename": "Paid social ads.jpg"
+    }
+  ],
+  "copywriting": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643793/the-pivot/services/copywriting/Brand%20messaging%20frameworks.jpg",
+      "type": "image",
+      "filename": "Brand messaging frameworks.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643794/the-pivot/services/copywriting/Email%20and%20lifecycle%20campaigns.jpg",
+      "type": "image",
+      "filename": "Email and lifecycle campaigns.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643795/the-pivot/services/copywriting/Long-form%20content.jpg",
+      "type": "image",
+      "filename": "Long-form content.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643797/the-pivot/services/copywriting/main%20page.jpg",
+      "type": "image",
+      "filename": "main page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643798/the-pivot/services/copywriting/Paid%20and%20social%20ads.jpg",
+      "type": "image",
+      "filename": "Paid and social ads.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643799/the-pivot/services/copywriting/Product%20marketing.jpg",
+      "type": "image",
+      "filename": "Product marketing.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643800/the-pivot/services/copywriting/Sub%20Main%20page.jpg",
+      "type": "image",
+      "filename": "Sub Main page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643801/the-pivot/services/copywriting/Web%20and%20landing%20pages.jpg",
+      "type": "image",
+      "filename": "Web and landing pages.jpg"
+    }
+  ],
+  "design-systems": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643803/the-pivot/services/design-systems/Design%20system%20audit.jpg",
+      "type": "image",
+      "filename": "Design system audit.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643804/the-pivot/services/design-systems/Design%20system%20creation.jpg",
+      "type": "image",
+      "filename": "Design system creation.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643806/the-pivot/services/design-systems/main%20page.jpg",
+      "type": "image",
+      "filename": "main page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643807/the-pivot/services/design-systems/System%20maintenance.jpg",
+      "type": "image",
+      "filename": "System maintenance.jpeg"
+    }
+  ],
+  "email-creation": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643808/the-pivot/services/email-creation/CRM-native%20development.mp4",
+      "type": "video",
+      "filename": "CRM-native development.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643809/the-pivot/services/email-creation/Email%20performance%20optimization.jpg",
+      "type": "image",
+      "filename": "Email performance optimization.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643810/the-pivot/services/email-creation/Growth%20and%20lifecycle%20flows.jpg",
+      "type": "image",
+      "filename": "Growth and lifecycle flows.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643812/the-pivot/services/email-creation/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643813/the-pivot/services/email-creation/Modular%20templates.jpg",
+      "type": "image",
+      "filename": "Modular templates.jpg"
+    }
+  ],
+  "motion-design": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643815/the-pivot/services/motion-design/Campaign%20support.mp4",
+      "type": "video",
+      "filename": "Campaign support.mp4"
+    },
+    {
+      "error": "public_id (the-pivot/services/motion-design/Explainers & how-tos) is invalid",
+      "filename": "Explainers & how-tos.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643818/the-pivot/services/motion-design/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643819/the-pivot/services/motion-design/Motion%20ads.mp4",
+      "type": "video",
+      "filename": "Motion ads.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643821/the-pivot/services/motion-design/Web%20animations.mp4",
+      "type": "video",
+      "filename": "Web animations.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643927/the-pivot/services/motion-design/Explainers%20and%20how-tos.mp4",
+      "type": "video",
+      "filename": "Explainers & how-tos.mp4"
+    }
+  ],
+  "product-design": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643822/the-pivot/services/product-design/End-to-end%20product%20design.jpg",
+      "type": "image",
+      "filename": "End-to-end product design.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643823/the-pivot/services/product-design/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643824/the-pivot/services/product-design/Product%20design%20audit.jpg",
+      "type": "image",
+      "filename": "Product design audit.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643825/the-pivot/services/product-design/UX%20enhancements%20and%20iteration.jpg",
+      "type": "image",
+      "filename": "UX enhancements and iteration.jpg"
+    }
+  ],
+  "video-production": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643827/the-pivot/services/video-production/Enhanced%20video%20creation.mp4",
+      "type": "video",
+      "filename": "Enhanced video creation.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643829/the-pivot/services/video-production/Full-service%20commercial.mp4",
+      "type": "video",
+      "filename": "Full-service commercial.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643830/the-pivot/services/video-production/Just%20the%20concept.mp4",
+      "type": "video",
+      "filename": "Just the concept.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643832/the-pivot/services/video-production/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643833/the-pivot/services/video-production/Video%20specialists.jpg",
+      "type": "image",
+      "filename": "Video specialists.jpg"
+    }
+  ],
+  "web-design": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643834/the-pivot/services/web-design/Brand%20illustrations.mp4",
+      "type": "video",
+      "filename": "Brand illustrations.mp4"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643835/the-pivot/services/web-design/Data%20visualization.jpg",
+      "type": "image",
+      "filename": "Data visualization.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643836/the-pivot/services/web-design/Iconography.jpg",
+      "type": "image",
+      "filename": "Iconography.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643837/the-pivot/services/web-design/Infographic%20design.jpg",
+      "type": "image",
+      "filename": "Infographic design.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643838/the-pivot/services/web-design/Main%20Page.jpg",
+      "type": "image",
+      "filename": "Main Page.jpeg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1782643839/the-pivot/services/web-design/Storyboarding.jpg",
+      "type": "image",
+      "filename": "Storyboarding.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1782643841/the-pivot/services/web-design/Storyboarding.mp4",
+      "type": "video",
+      "filename": "Storyboarding.mp4"
+    }
+  ]
+}

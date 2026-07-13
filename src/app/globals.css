@@ -49,7 +49,7 @@
   --color-bg:        #DADECF;
   --color-ink:       #0A211F;
   --color-accent:    #C9A84C;
-  --color-dark-bg:   #12211D;
+  --color-dark-bg:   #0A211F;
   --color-border:    rgba(10, 33, 31, 0.12);
   --color-ink-muted: rgba(10, 33, 31, 0.5);
 
@@ -199,6 +199,19 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
   transition: background-size var(--t-slow) var(--ease);
 }
 .link-underline:hover { background-size: 100% 1px; }
+
+/* Hover dot — desktop nav */
+.link-dot { position: relative; }
+.link-dot::before {
+  content: '•';
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  opacity: 0;
+  transform: translate(-4px, -50%);
+  transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.link-dot:hover::before { opacity: 1; transform: translate(0, -50%); }
 
 /* Arrow-swap CTA — superside pattern */
 .arrow-btn { position: relative; display: inline-flex; align-items: center; gap: 8px; overflow: hidden; }
@@ -550,10 +563,11 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
 }
 
 /* ─────────────────────────────────────────
-   HERO CANVAS — mobile: hidden until scroll
+   HERO CANVAS — mobile: keep billboard + duo in frame
 ───────────────────────────────────────── */
 @media (max-width: 767px) {
-  .hero-canvas-el { opacity: 0; }
+  .hero-canvas-el img,
+  .hero-canvas-el video { object-position: 79% 28% !important; }
 }
 
 /* ─────────────────────────────────────────

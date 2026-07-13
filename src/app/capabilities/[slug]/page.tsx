@@ -4,7 +4,7 @@ import { Footer } from '@/components/sections/Footer'
 import { ServiceHero } from '@/components/sections/ServiceHero'
 import { ServiceWorkGrid } from '@/components/sections/ServiceWorkGrid'
 import { CategoryHero } from '@/components/sections/CategoryHero'
-import { CategoryServices } from '@/components/sections/CategoryServices'
+import { CategoryIntro } from '@/components/sections/CategoryIntro'
 import {
   getServiceBySlug,
   getCategoryBySlug,
@@ -50,7 +50,7 @@ export default async function CapabilitiesPage({ params }: { params: Promise<{ s
         <Navbar />
         <main>
           <CategoryHero category={category} />
-          <CategoryServices category={category} />
+          <CategoryIntro category={category} />
         </main>
         <Footer />
       </>

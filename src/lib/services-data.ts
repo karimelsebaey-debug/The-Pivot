@@ -31,6 +31,14 @@ export type ServiceItem = {
   heroHeadline?: string
   mobileHeroImage?: string
   mobileObjectPosition?: string
+  storyLabel?: string
+  storyHeadingLine1?: string
+  storySubtitle?: string
+  storyBody?: string
+  storyMediaSrc?: string
+  storyMediaType?: 'video' | 'image'
+  storyAspectRatio?: string
+  storyMaxWidth?: string
 }
 
 export type ServiceCategory = {
@@ -43,6 +51,9 @@ export type ServiceCategory = {
   heroImage?: string
   mobileHeroImage?: string
   mobileObjectPosition?: string
+  introHeading?: string
+  introBody?: string
+  introBg?: string
   items: ServiceItem[]
 }
 
@@ -58,6 +69,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     number: '01',
     title: 'Specialized Production',
     description: 'End-to-end production for motion, web, copy, and design systems that scale.',
+    introHeading: 'Get motion, web, copy, and full-scale production *and more*',
+    introBody: 'Whether you need motion that stops the scroll, a site that earns attention and not just visits, or copy and systems built to grow with you — our production team ships work built to last, impossible to ignore.',
     accent: '#A8885A',
     bg: '#0A211F',
     heroImage: '/images/categories/specialized-production-hero.jpg',
@@ -331,6 +344,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     number: '02',
     title: 'Creative Design',
     description: 'Ads, branding, presentations, and visual concepts that make your brand impossible to ignore.',
+    introHeading: 'Get branding, illustration, and creative direction *and more*',
+    introBody: 'Whether you need a full brand identity, scroll-stopping social creative, or a pitch deck that closes the room — our designers turn ambitious ideas into visual presence that gets remembered.',
     accent: '#0A211F',
     bg: '#F2F4E7',
     heroImage: '/images/categories/creative-design-hero.jpg',
@@ -606,6 +621,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     number: '03',
     title: 'AI Services',
     description: 'AI-powered creative, automation, data visualization, and consulting for the next era.',
+    introHeading: 'Your shortcut to *AI’s* creative advantage',
+    introBody: 'You’re under pressure to do more: faster, cheaper, and with fewer resources, while figuring out how to use AI safely and effectively. That’s where we come in.',
+    introBg: '#F2F4E7',
     accent: '#A8885A',
     bg: '#0A211F',
     heroImage: '/images/categories/ai-services-hero.jpg',
@@ -663,6 +681,11 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         title: 'Automation',
         description: 'Remove the work that removes focus.',
         longDescription: 'End-to-end workflow automation for marketing and creative teams. Less manual work. More time for what actually matters.',
+        intro: 'End-to-end workflow automation for marketing and creative teams. Less manual work. More time for what actually matters.',
+        introLabel: 'Engineered for Consistency',
+        headingLine1: 'We automate what slows you down, never *what sets you apart*',
+        introSubtitle: "Speed alone isn't the goal — it's getting more out the door without losing what makes your brand yours. Our systems remove the repetitive work so your creative standards stay intact.",
+        introBg: '#DADECF',
         category: 'AI Services',
         categorySlug: 'ai-services',
         accent: '#A8885A',
@@ -670,16 +693,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         heroImage: img('automation', 'Main%20Page.jpg'),
         mobileHeroImage: `${CDN}/image/upload/q_auto,f_auto/the-pivot/mobile/automation.jpg`,
         mobileObjectPosition: '65% 45%',
-        videos: [
-          { src: vid('automation', 'Motion%20and%20video%20automation.mp4'), label: 'Motion & Video Automation' },
-        ],
+        videos: [],
         images: [
           { src: img('automation', 'AI-enhanced%20automation.jpg'), label: 'AI-Enhanced Automation' },
           { src: img('automation', 'Email%20templates.jpg'), label: 'Email Templates' },
+          { src: img('automation', 'Motion%20and%20video%20automation.jpg'), label: 'Motion & Video Automation' },
           { src: img('automation', 'Print%20automation.jpg'), label: 'Print Automation' },
           { src: img('automation', 'production%20workflows.png'), label: 'Production Workflows' },
           { src: img('automation', 'Web%20templates.jpg'), label: 'Web Templates' },
         ],
+        mediaItems: [
+          { src: img('automation', 'AI-enhanced%20automation.jpg'),        label: 'AI-Enhanced Automation',    type: 'image', aspectRatio: '4/3' },
+          { src: img('automation', 'Email%20templates.jpg'),               label: 'Email Templates',            type: 'image', aspectRatio: '2/3' },
+          { src: img('automation', 'Web%20templates.jpg'),                 label: 'Web Templates',              type: 'image', aspectRatio: '2/3' },
+          { src: img('automation', 'Motion%20and%20video%20automation.jpg'), label: 'Motion & Video Automation', type: 'image', aspectRatio: '3/4' },
+          { src: img('automation', 'Print%20automation.jpg'),               label: 'Print Automation',           type: 'image', aspectRatio: '3/4' },
+          { src: img('automation', 'production%20workflows.png'),          label: 'Production Workflows',       type: 'image', aspectRatio: '16/9' },
+        ],
+        gridRows: [
+          { count: 3, cardAspectRatio: '4/3', columns: '2fr 1fr 1fr' },
+          { count: 3, cardAspectRatio: '4/3', columns: '3fr 3fr 7fr' },
+        ],
+        gridMaxWidth: '1100px',
       },
     ],
   },
@@ -688,6 +723,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     number: '04',
     title: 'Consultant',
     description: 'Expert advisory across strategy, finance, and business recovery for ambitious organizations.',
+    introHeading: 'Get strategy, finance, and growth counsel *and more*',
+    introBody: 'Whether you need a campaign strategy that holds up under pressure, financial clarity, or hands-on operational guidance — our consultants turn hard problems into clear next steps.',
     accent: '#0A211F',
     bg: '#F2F4E7',
     heroImage: '/images/categories/consultant-hero.jpg',
@@ -699,6 +736,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         title: 'Campaign Strategy',
         description: 'Creative ambition meets measurable results.',
         longDescription: 'End-to-end campaign planning from the first brief to where your budget goes, how your message reads, and what success looks like.',
+        intro: 'End-to-end campaign planning from the first brief to where your budget goes, how your message reads, and what success looks like.',
+        storyLabel: 'Strategic Storytelling',
+        storyHeadingLine1: "In a noisy world, *fragmented ads* don't stand a chance",
+        storySubtitle: "We're here to help you shape unified creative that speaks clearly and scales effortlessly.",
+        storyBody: "Our creative concept services set campaign directions that are both distinctive and true to your brand. Whether you're building awareness, driving conversion, or deepening loyalty, we help define and shape the idea that leads it all.",
+        storyMediaSrc: vid('campaign-strategy', 'Strategic%20storytelling.mp4'),
+        storyMediaType: 'video',
+        storyAspectRatio: '1/1',
+        introLabel: 'Creative Expertise',
+        headingLine1: 'Strategy, concept, and campaign services *you can trust*',
+        introSubtitle: "What makes creative 'good'? We focus on strategy that engages, persuades, and propels your brand forward.",
+        introBg: '#DADECF',
         category: 'Consultant',
         categorySlug: 'consultant',
         accent: '#0A211F',
@@ -716,12 +765,29 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           { src: img('campaign-strategy', 'Creative%20strategy.jpg'), label: 'Creative Strategy' },
           { src: img('campaign-strategy', 'Storyboarding.jpg'), label: 'Storyboarding' },
         ],
+        mediaItems: [
+          { src: img('campaign-strategy', 'Ad%20copywriting.jpg'),               label: 'Ad Copywriting',           type: 'image', aspectRatio: '3/4' },
+          { src: vid('campaign-strategy', 'Campaign%20concepts.mp4'),            label: 'Campaign Concepts',        type: 'video', aspectRatio: '3/4' },
+          { src: img('campaign-strategy', 'Creative%20strategy.jpg'),            label: 'Creative Strategy',        type: 'image', aspectRatio: '3/4' },
+          { src: vid('campaign-strategy', 'Graphic%20design%20concepts.mp4'),    label: 'Graphic Design Concepts',  type: 'video', aspectRatio: '4/3' },
+          { src: img('campaign-strategy', 'Storyboarding.jpg'),                  label: 'Storyboarding',            type: 'image', aspectRatio: '3/4' },
+        ],
+        gridRows: [
+          { count: 3, cardAspectRatio: '3/4', columns: 'repeat(3, 1fr)' },
+          { count: 2, cardAspectRatio: '4/3', columns: '16fr 9fr' },
+        ],
+        gridMaxWidth: '1000px',
       },
       {
         slug: 'finance-expert',
         title: 'Finance Expert',
         description: 'Financial clarity that drives decisions.',
         longDescription: 'Financial modeling, scenario planning, and advisory for founders and executives navigating complexity.',
+        intro: 'Financial modeling, scenario planning, and advisory for founders and executives navigating complexity.',
+        introLabel: "Let's Talk Finance",
+        headingLine1: 'Our approach: *clarity, strategy,* and confident decisions',
+        introSubtitle: 'We help ambitious teams navigate cash flow, financial health, and P&L complexity, combining modeling, analysis, and hands-on advisory to turn financial data into decisions you can act on.',
+        introBg: '#DADECF',
         category: 'Consultant',
         categorySlug: 'consultant',
         accent: '#0A211F',
@@ -731,16 +797,30 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         mobileObjectPosition: '60% 38%',
         videos: [],
         images: [
-          { src: img('finance-expert', 'Cash%20Flow.jpg'), label: 'Cash Flow' },
+          { src: img('finance-expert', 'Cash%20Flow%20Updated.jpg'), label: 'Cash Flow Updated' },
           { src: img('finance-expert', 'Financial%20Health%20Assessment.jpg'), label: 'Financial Health Assessment' },
           { src: img('finance-expert', 'PandL%20Analysis.jpg'), label: 'P&L Analysis' },
         ],
+        mediaItems: [
+          { src: img('finance-expert', 'Cash%20Flow%20Updated.jpg'),              label: 'Cash Flow Updated',            type: 'image', aspectRatio: '3/4' },
+          { src: img('finance-expert', 'Financial%20Health%20Assessment.jpg'),    label: 'Financial Health Assessment',  type: 'image', aspectRatio: '3/4' },
+          { src: img('finance-expert', 'PandL%20Analysis.jpg'),                   label: 'P&L Analysis',                 type: 'image', aspectRatio: '3/4' },
+        ],
+        gridRows: [
+          { count: 3, cardAspectRatio: '3/4', columns: 'repeat(3, 1fr)' },
+        ],
+        gridMaxWidth: '1000px',
       },
       {
         slug: 'business-strategist',
         title: 'Business Strategist',
         description: 'Strategy that survives contact with reality.',
         longDescription: 'Market positioning, growth planning, and operational strategy. Built for execution, not decks.',
+        intro: 'Market positioning, growth planning, and operational strategy. Built for execution, not decks.',
+        introLabel: "Let's Talk Process",
+        headingLine1: 'Our recipe: *strategy, execution,* and growth',
+        introSubtitle: 'We help ambitious teams build market positioning, growth plans, and operational strategy that hold up under real-world pressure, combining strategic thinking with hands-on execution to turn plans into results.',
+        introBg: '#DADECF',
         category: 'Consultant',
         categorySlug: 'consultant',
         accent: '#0A211F',
@@ -754,12 +834,26 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           { src: img('business-strategist', 'Growth%20Strategy.jpg'), label: 'Growth Strategy' },
           { src: img('business-strategist', 'Investment%20Readiness.jpg'), label: 'Investment Readiness' },
         ],
+        mediaItems: [
+          { src: img('business-strategist', 'Cost%20Optimization.jpg'),     label: 'Cost Optimization',     type: 'image', aspectRatio: '3/4' },
+          { src: img('business-strategist', 'Growth%20Strategy.jpg'),       label: 'Growth Strategy',       type: 'image', aspectRatio: '1/1' },
+          { src: img('business-strategist', 'Investment%20Readiness.jpg'),  label: 'Investment Readiness',  type: 'image', aspectRatio: '3/4' },
+        ],
+        gridRows: [
+          { count: 3, cardAspectRatio: '3/4', columns: '3fr 4fr 3fr' },
+        ],
+        gridMaxWidth: '1000px',
       },
       {
         slug: 'debt-recovery',
         title: 'Debt Recovery',
         description: 'Turn distressed debt into recovered value.',
         longDescription: 'Recovery planning and financial stabilization for businesses under pressure. We diagnose the problem first. Then we fix it.',
+        intro: 'Recovery planning and financial stabilization for businesses under pressure. We diagnose the problem first. Then we fix it.',
+        introLabel: "Let's Talk Recovery",
+        headingLine1: 'Our approach: *diagnosis, negotiation,* and recovery',
+        introSubtitle: 'We help businesses under financial pressure recoup outstanding receivables through structured negotiation, debt collection, and credit management, diagnosing the problem first, then fixing it.',
+        introBg: '#DADECF',
         category: 'Consultant',
         categorySlug: 'consultant',
         accent: '#0A211F',
@@ -769,10 +863,19 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         mobileObjectPosition: '60% 40%',
         videos: [],
         images: [
-          { src: img('debt-recovery', 'Credit%20Management.jpg'), label: 'Credit Management' },
-          { src: img('debt-recovery', 'Debt%20Collection.jpg'), label: 'Debt Collection' },
-          { src: img('debt-recovery', 'Receivables%20Management.jpg'), label: 'Receivables Management' },
+          { src: img('debt-recovery', 'Credit%20Management%20updated.jpg'), label: 'Credit Management' },
+          { src: img('debt-recovery', 'Debt%20Collection%20updated.jpg'), label: 'Debt Collection' },
+          { src: img('debt-recovery', 'Receivables%20Management%20updated.jpg'), label: 'Receivables Management' },
         ],
+        mediaItems: [
+          { src: img('debt-recovery', 'Credit%20Management%20updated.jpg'),      label: 'Credit Management',      type: 'image', aspectRatio: '3/4' },
+          { src: img('debt-recovery', 'Debt%20Collection%20updated.jpg'),        label: 'Debt Collection',        type: 'image', aspectRatio: '3/4' },
+          { src: img('debt-recovery', 'Receivables%20Management%20updated.jpg'), label: 'Receivables Management', type: 'image', aspectRatio: '3/4' },
+        ],
+        gridRows: [
+          { count: 3, cardAspectRatio: '3/4', columns: 'repeat(3, 1fr)' },
+        ],
+        gridMaxWidth: '1000px',
       },
     ],
   },

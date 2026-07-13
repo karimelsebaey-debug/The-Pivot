@@ -8,7 +8,7 @@ import { MegaDropdown } from './MegaDropdown'
 import { PillCTA } from '@/components/ui/PillCTA'
 import { SERVICE_CATEGORIES } from '@/lib/services-data'
 
-const LIGHT_BG_PAGES = ['/', '/selected-work', '/perspectives', '/contact']
+const LIGHT_BG_PAGES = ['/selected-work', '/perspectives', '/contact']
 
 const MOB_CAT_STYLE: Record<string, { bg: string; color: string }> = {
   'specialized-production': { bg: '#0A211F', color: '#F7F9F2' },
@@ -19,17 +19,16 @@ const MOB_CAT_STYLE: Record<string, { bg: string; color: string }> = {
 
 export function Navbar() {
   const pathname  = usePathname()
-  const isHome    = pathname === '/'
   const isLightBg = LIGHT_BG_PAGES.includes(pathname)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [capOpen, setCapOpen] = useState(false)
-  const [openCat, setOpenCat] = useState<string | null>(null)
+  const [openCats, setOpenCats] = useState<string[]>([])
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    const threshold = isHome ? window.innerHeight * 3.2 : 10
+    const threshold = 10
 
     const onScroll = () => setScrolled(window.scrollY > threshold)
     onScroll()
@@ -38,7 +37,7 @@ export function Navbar() {
       window.removeEventListener('scroll', onScroll)
       if (closeTimer.current) clearTimeout(closeTimer.current)
     }
-  }, [isHome])
+  }, [])
 
   function openDropdown() {
     if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -48,6 +47,8 @@ export function Navbar() {
   function closeDropdown() {
     closeTimer.current = setTimeout(() => setDropdownOpen(false), 120)
   }
+
+  const showTopScrim = !scrolled && !isLightBg
 
   return (
     <header
@@ -62,17 +63,31 @@ export function Navbar() {
       }}
       className="fixed top-0 left-0 right-0 z-50 flex items-center"
     >
+      {/* Top scrim — keeps logo/nav legible over bright hero media, taller than the header's own short box */}
+      {showTopScrim && (
+        <div
+          aria-hidden
+          style={{
+            position: 'fixed',
+            top: 0, left: 0, right: 0,
+            height: 'clamp(120px, 16vh, 200px)',
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.28) 55%, transparent 100%)',
+            pointerEvents: 'none',
+            zIndex: -1,
+          }}
+        />
+      )}
       <div
         className="container flex items-center justify-between"
         style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: '0 var(--container-px)' }}
       >
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', textDecoration: 'none', userSelect: 'none' }}>
+        <Link href="/" style={{ display: 'flex', textDecoration: 'none', userSelect: 'none', position: 'relative', top: '-6px' }}>
           <Image
             src="/logo.png"
             alt="The Pivot"
-            width={80}
-            height={80}
+            width={110}
+            height={110}
             style={{ filter: (isLightBg && !scrolled) ? 'brightness(0)' : 'brightness(0) invert(1)', opacity: 0.9, transition: 'filter 200ms ease-in-out' }}
             priority
           />
@@ -87,7 +102,7 @@ export function Navbar() {
             onMouseLeave={closeDropdown}
           >
             <button
-              className="flex items-center gap-1 text-sm link-underline"
+              className="flex items-center gap-1 text-sm link-underline link-dot"
               style={{ transition: `color var(--t-fast) var(--ease)` }}
               aria-expanded={dropdownOpen}
             >
@@ -122,7 +137,7 @@ export function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-sm link-underline"
+              className="text-sm link-underline link-dot"
               style={{ transition: `color var(--t-fast) var(--ease)` }}
             >
               {item.label}
@@ -216,7 +231,11 @@ export function Navbar() {
 
             {/* Capabilities toggle header */}
             <button
-              onClick={() => { setCapOpen(!capOpen); if (capOpen) setOpenCat(null) }}
+              onClick={() => {
+                const next = !capOpen
+                setCapOpen(next)
+                setOpenCats(next ? SERVICE_CATEGORIES.map((c) => c.slug) : [])
+              }}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 width: '100%', padding: '16px 0',
@@ -240,7 +259,7 @@ export function Navbar() {
 
             {/* Service categories — accordion */}
             {capOpen && SERVICE_CATEGORIES.map((cat) => {
-              const isOpen = openCat === cat.slug
+              const isOpen = openCats.includes(cat.slug)
               return (
                 <div key={cat.slug} style={{ borderBottom: '1px solid var(--color-border)' }}>
                   {/* Accordion header */}
@@ -263,7 +282,9 @@ export function Navbar() {
                       </svg>
                     </Link>
                     <button
-                      onClick={() => setOpenCat(isOpen ? null : cat.slug)}
+                      onClick={() => setOpenCats((prev) =>
+                        isOpen ? prev.filter((s) => s !== cat.slug) : [...prev, cat.slug]
+                      )}
                       aria-expanded={isOpen}
                       style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center',

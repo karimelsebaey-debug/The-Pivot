@@ -3,196 +3,79 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useGSAP } from '@gsap/react'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
 import { PillCTA } from '@/components/ui/PillCTA'
 import { TextColor } from '@/components/ui/text-color'
+import { HeroMobileDayCycle } from './HeroMobileDayCycle'
 
-const TOTAL    = 30
 const HEADER_H = 56
 const BG       = '#DADECF'
 
-const frameSrc = (i: number) =>
-  `/frames-hero/frame_${String(i).padStart(3, '0')}.jpg`
+/* One frozen NYC corner, sunrise → night — 14s dissolve loop */
+const HERO_VIDEO = 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/v1783926102/the-pivot/hero/hero-day-cycle.mp4'
 
 export function HeroCanvas() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const canvasRef  = useRef<HTMLCanvasElement>(null)
+  const sectionRef   = useRef<HTMLElement>(null)
+  const mediaWrapRef = useRef<HTMLDivElement>(null)
   const line1Ref   = useRef<HTMLHeadingElement>(null)
   const subRef     = useRef<HTMLParagraphElement>(null)
   const ctaRef          = useRef<HTMLDivElement>(null)
-  const scrollIndRef    = useRef<HTMLDivElement>(null)
 
-  const imgs     = useRef<HTMLImageElement[]>([])
-  const frameIdx = useRef(0)
-  const logical  = useRef({ w: 0, h: 0 })
+  const [isMobile, setIsMobile] = useState(false)
 
-  const [loadProgress, setLoadProgress] = useState(0)
-  const [loaded, setLoaded] = useState(false)
-
-  /* ── Preload frames: frame 0 immediately, rest deferred to idle ── */
   useEffect(() => {
-    let loadedCount = 0
-    const images: HTMLImageElement[] = Array.from({ length: TOTAL }, () => new Image())
-    imgs.current = images
-
-    const onEach = () => {
-      loadedCount++
-      setLoadProgress(loadedCount / TOTAL)
-      if (loadedCount === TOTAL) setLoaded(true)
-    }
-
-    const img0 = images[0]
-    img0.src = frameSrc(0)
-    img0.onload = img0.onerror = () => {
-      onEach()
-      if (img0.complete && img0.naturalWidth > 0) drawFrame(0)
-      const loadRest = () => {
-        for (let i = 1; i < TOTAL; i++) {
-          const img = images[i]
-          img.src = frameSrc(i)
-          img.onload = img.onerror = onEach
-        }
-      }
-      if (typeof requestIdleCallback !== 'undefined') {
-        requestIdleCallback(loadRest, { timeout: 2000 })
-      } else {
-        setTimeout(loadRest, 200)
-      }
-    }
+    const mq = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
   }, [])
 
-  function drawFrame(idx: number) {
-    const canvas = canvasRef.current
-    const img    = imgs.current[idx]
-    if (!canvas || !img?.complete || img.naturalWidth === 0) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-    // Ensure dimensions are set — sync from DOM if missing (resizeCanvas calls drawFrame internally)
-    if (!logical.current.w || !logical.current.h) { resizeCanvas(); return }
-    const { w, h } = logical.current
-    if (!w || !h) return
-
-    ctx.fillStyle = BG
-    ctx.fillRect(0, 0, w, h)
-
-    /* isMob = portrait mobile only. Landscape mobile uses desktop layout. */
-    const isMob  = w < 768 && h > w
-    const availH = isMob ? h * 0.60 - HEADER_H : h - HEADER_H
-    const scaleW = w / img.naturalWidth
-    const scaleH = availH / img.naturalHeight
-    // Mobile: height-driven — fills exactly top 60%, no gap, no overflow
-    const scale  = isMob ? scaleH : Math.min(scaleW, scaleH)
-
-    const dw = Math.round(img.naturalWidth  * scale)
-    const dh = Math.round(img.naturalHeight * scale)
-    const dx = Math.round((w - dw) / 2) - (isMob ? Math.round(w * 0.32) : 0)
-    const dy = isMob
-      ? HEADER_H
-      : Math.round(HEADER_H + (availH - dh) / 2)
-
-    ctx.drawImage(img, dx, dy, dw, dh)
-  }
-
-  function resizeCanvas() {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const rect = canvas.getBoundingClientRect()
-    const dpr  = window.devicePixelRatio || 1
-    logical.current = { w: rect.width, h: rect.height }
-    canvas.width  = rect.width  * dpr
-    canvas.height = rect.height * dpr
-    canvas.getContext('2d')?.setTransform(dpr, 0, 0, dpr, 0, 0)
-    drawFrame(frameIdx.current)
-  }
-
   useGSAP(() => {
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas, { passive: true })
-
     /* Entry animation */
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
     tl.from(line1Ref.current,   { opacity: 0, y: 30, duration: 1.1 })
       .from(subRef.current,     { opacity: 0, y: 16, duration: 0.8 }, '-=0.5')
       .from(ctaRef.current,       { opacity: 0, y: 16, duration: 0.7 }, '-=0.4')
-      .from(scrollIndRef.current, { opacity: 0, y: 12, duration: 0.8 }, '-=0.2')
-
-    /* Canvas entry: desktop only — mobile hidden via CSS .hero-canvas-el, revealed on scroll */
-    if (window.innerWidth >= 768) {
-      tl.from(canvasRef.current, { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
-    }
-
-    /* Scroll-driven frame scrub */
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top top',
-      end: '+=280%',
-      pin: true,
-      scrub: 1.2,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const fi = Math.min(Math.round(self.progress * (TOTAL - 1)), TOTAL - 1)
-        if (fi !== frameIdx.current) {
-          frameIdx.current = fi
-          drawFrame(fi)
-        }
-        /* Mobile: building fades in as user scrolls (fully visible at 25% progress) */
-        if (window.innerWidth < 768 && canvasRef.current) {
-          canvasRef.current.style.opacity = String(Math.min(self.progress * 4, 1))
-        }
-      },
-    })
-
-    return () => window.removeEventListener('resize', resizeCanvas)
+      .from(mediaWrapRef.current, { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
   }, { scope: sectionRef })
 
   return (
     <section
       ref={sectionRef}
-      style={{ position: 'relative', height: '100vh', overflow: 'hidden', backgroundColor: BG }}
+      style={{ position: 'relative', height: '100dvh', overflow: 'hidden', backgroundColor: BG }}
     >
-      {/* ── Loading bar ── */}
-      {!loaded && (
-        <div style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          height: '3px',
-          width: `${loadProgress * 100}%`,
-          backgroundColor: 'var(--color-accent)',
-          zIndex: 10,
-          transition: 'width 0.1s linear',
-          pointerEvents: 'none',
-        }} />
-      )}
+      {/* ── Day-cycle media — sunrise → night, autoplay ── */}
+      <div ref={mediaWrapRef} className="hero-canvas-el" style={{ position: 'absolute', inset: 0 }}>
+        {isMobile ? (
+          <HeroMobileDayCycle />
+        ) : (
+          <video
+            src={HERO_VIDEO}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: '62% 16%',
+              transform: 'scale(1.06) translate(-1%, 2%)',
+            }}
+          />
+        )}
+      </div>
 
-      {/* ── Canvas — scroll-driven 000→029 ── */}
-      <canvas
-        ref={canvasRef}
-        className="hero-canvas-el"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          display: 'block',
-        }}
-      />
-
-      {/* Left gradient — text readability on desktop */}
+      {/* Left scrim — subtle, image stays fully visible, just enough for text legibility */}
       <div aria-hidden className="hidden md:block" style={{
         position: 'absolute',
         inset: 0,
-        background: `linear-gradient(to right, ${BG} 0%, ${BG} 32%, rgba(218,222,207,0.88) 46%, rgba(218,222,207,0.4) 58%, transparent 70%)`,
-        pointerEvents: 'none',
-        zIndex: 1,
-      }} />
-
-      {/* Right gradient — blends frame sky into page BG */}
-      <div aria-hidden style={{
-        position: 'absolute',
-        inset: 0,
-        background: `linear-gradient(to left, ${BG} 0%, rgba(218,222,207,0.7) 15%, transparent 35%)`,
+        background: `linear-gradient(to right, rgba(10,33,31,0.5) 0%, rgba(10,33,31,0.3) 30%, rgba(10,33,31,0.1) 52%, transparent 68%)`,
         pointerEvents: 'none',
         zIndex: 1,
       }} />
@@ -217,10 +100,10 @@ export function HeroCanvas() {
             fontSize: 'clamp(3rem, 5.6vw, 7rem)',
             lineHeight: 1.05,
             letterSpacing: '-0.02em',
-            color: 'var(--color-ink)',
             marginBottom: '1.5rem',
+            textShadow: '0 2px 5px rgba(10,33,31,0.9), 0 10px 34px rgba(10,33,31,0.55)',
           }}>
-            <TextColor words={['The Turning', 'Point For Your', 'Creative Ambition.']} />
+            <TextColor words={['The Turning', 'Point For Your', 'Creative Ambition.']} color="#FAF8F1" />
           </h1>
 
           <p ref={subRef} style={{
@@ -230,15 +113,13 @@ export function HeroCanvas() {
             lineHeight: 1.7,
             letterSpacing: '-0.01em',
             maxWidth: '480px',
-            background: 'linear-gradient(to right, #082010 0%, #173F35 50%, #546D5D 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            color: 'rgba(250,248,241,0.95)',
+            textShadow: '0 1px 4px rgba(10,33,31,0.9), 0 6px 22px rgba(10,33,31,0.5)',
           }}>
             We transform ambitious ideas and needs into visual presence,
             specialized services, and digital solutions —
             <br />
-            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.3rem' }}>
+            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.3rem', color: 'var(--color-accent)' }}>
               built to last, impossible to ignore.
             </em>
           </p>
@@ -253,26 +134,37 @@ export function HeroCanvas() {
               fontFamily: 'var(--font-body)',
               fontSize: '0.9rem',
               fontWeight: 600,
-              color: '#A8885A',
+              color: '#FAF8F1',
               letterSpacing: '-0.01em',
               textDecoration: 'none',
+              textShadow: '0 2px 12px rgba(10,33,31,0.4)',
             }}
             className="link-underline"
           >
-            Start a Project →
+            Start a Project <span style={{ color: 'var(--color-accent)' }}>→</span>
           </Link>
         </div>
       </div>
 
-{/* ── Mobile: text panel — bottom 45% (always visible) ── */}
+{/* ── Mobile: bottom scrim — image stays full-bleed, text floats on top ── */}
       <div
-        className="hero-mob-text md:hidden flex flex-col justify-center"
+        aria-hidden
+        className="md:hidden"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.2) 70%, transparent 100%)',
+          zIndex: 2,
+        }}
+      />
+
+      {/* ── Mobile: text — bottom, floating over the image ── */}
+      <div
+        className="hero-mob-text md:hidden flex flex-col justify-end"
         style={{
           position: 'absolute',
           bottom: 0, left: 0, right: 0,
-          height: '40%',
-          backgroundColor: BG,
-          padding: '20px clamp(20px, 5vw, 32px) 32px',
+          padding: '20px clamp(20px, 5vw, 32px) clamp(32px, 6dvh, 56px)',
           zIndex: 3,
         }}
       >
@@ -281,241 +173,28 @@ export function HeroCanvas() {
           fontSize: 'clamp(2rem, 8vw, 3rem)',
           lineHeight: 1.06,
           letterSpacing: '-0.025em',
-          color: '#A8885A',
+          color: '#FAF8F1',
+          textShadow: '0 2px 5px rgba(10,33,31,0.9), 0 10px 34px rgba(10,33,31,0.55)',
           marginBottom: '0.75rem',
         }}>
           The Turning Point For Your{' '}
-          <em style={{ fontStyle: 'italic' }}>Creative Ambition.</em>
+          <em style={{ fontStyle: 'italic', color: 'var(--color-accent)' }}>Creative Ambition.</em>
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
           fontSize: '0.88rem',
           lineHeight: 1.65,
-          color: 'var(--color-ink)',
-          opacity: 0.65,
+          color: 'rgba(250,248,241,0.92)',
+          textShadow: '0 1px 4px rgba(10,33,31,0.9), 0 6px 22px rgba(10,33,31,0.5)',
           marginBottom: '1.25rem',
         }}>
           We transform ambitious ideas into visual presence and digital
           solutions —{' '}
-          <em style={{ fontStyle: 'italic', fontWeight: 700 }}>built to last, impossible to ignore.</em>
+          <em style={{ fontStyle: 'italic', fontWeight: 700, color: 'var(--color-accent)' }}>built to last, impossible to ignore.</em>
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <PillCTA href="#work" label="See Our Work" />
         </div>
-      </div>
-
-      {/* ── Mobile: scroll indicator — left of building area ── */}
-      <div
-        aria-hidden
-        className="hero-mob-scr md:hidden flex flex-col items-center"
-        style={{
-          position: 'absolute',
-          left: 14,
-          top: '28%',
-          transform: 'translateY(-50%)',
-          zIndex: 4,
-          pointerEvents: 'none',
-          gap: 0,
-        }}
-      >
-        <p style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: '0.52rem',
-          fontWeight: 600,
-          letterSpacing: '0.24em',
-          textTransform: 'uppercase',
-          color: 'var(--color-ink)',
-          opacity: 0.42,
-          writingMode: 'vertical-rl',
-          transform: 'rotate(180deg)',
-          marginBottom: 14,
-          lineHeight: 1,
-        }}>
-          Scroll Down to Pivot
-        </p>
-        <div style={{
-          width: '1px',
-          height: '52px',
-          background: `linear-gradient(to bottom, var(--color-ink), transparent)`,
-          opacity: 0.28,
-          transformOrigin: 'top',
-          animation: 'scroll-line-draw 1.2s ease-out forwards',
-          marginBottom: 6,
-        }} />
-        <svg
-          width="24" height="42" viewBox="0 0 24 42" fill="none"
-          style={{
-            animation: 'mouse-body-scroll 2s ease-in-out infinite',
-            filter: 'drop-shadow(0 5px 12px rgba(10,33,31,0.28)) drop-shadow(0 1px 3px rgba(10,33,31,0.18))',
-          }}
-        >
-          <defs>
-            <linearGradient id="em-body-mob" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.62)" />
-              <stop offset="10%"  stopColor="rgba(10,33,31,0.10)" />
-              <stop offset="40%"  stopColor="rgba(10,33,31,0.26)" />
-              <stop offset="72%"  stopColor="rgba(10,33,31,0.52)" />
-              <stop offset="100%" stopColor="rgba(10,33,31,0.78)" />
-            </linearGradient>
-            <linearGradient id="em-depth-mob" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.20)" />
-              <stop offset="35%"  stopColor="rgba(255,255,255,0)" />
-              <stop offset="100%" stopColor="rgba(0,0,0,0.20)" />
-            </linearGradient>
-            <radialGradient id="em-spec-mob" cx="26%" cy="16%" r="36%">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.80)" />
-              <stop offset="60%"  stopColor="rgba(255,255,255,0.10)" />
-              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-            </radialGradient>
-            <linearGradient id="em-gold-mob" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="rgba(184,148,60,0)" />
-              <stop offset="25%"  stopColor="rgba(184,148,60,0.60)" />
-              <stop offset="75%"  stopColor="rgba(184,148,60,0.60)" />
-              <stop offset="100%" stopColor="rgba(184,148,60,0)" />
-            </linearGradient>
-          </defs>
-          <rect x="2.5" y="3.5" width="19" height="37" rx="9.5" fill="rgba(10,33,31,0.16)" />
-          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-body-mob)" />
-          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-depth-mob)" />
-          <rect x="1" y="1" width="22" height="40" rx="11"
-            stroke="rgba(10,33,31,0.42)" strokeWidth="0.9" fill="none" />
-          <rect x="2" y="2" width="20" height="38" rx="10"
-            stroke="rgba(255,255,255,0.10)" strokeWidth="0.7" fill="none" />
-          <rect x="2.4" y="5" width="1.2" height="30" rx="0.6" fill="rgba(255,255,255,0.42)" />
-          <rect x="20.4" y="5" width="1.2" height="30" rx="0.6" fill="rgba(0,0,0,0.32)" />
-          <line x1="2" y1="15" x2="22" y2="15" stroke="url(#em-gold-mob)" strokeWidth="0.7" />
-          <line x1="12" y1="2" x2="12" y2="14.5"
-            stroke="rgba(10,33,31,0.16)" strokeWidth="0.7" />
-          <rect x="10" y="11" width="4" height="8" rx="2" fill="rgba(10,33,31,0.38)" />
-          <rect x="10" y="11" width="4" height="8" rx="2"
-            stroke="rgba(255,255,255,0.14)" strokeWidth="0.6" fill="none" />
-          <line x1="10.5" y1="12.5" x2="10.5" y2="17.5"
-            stroke="rgba(255,255,255,0.32)" strokeWidth="0.6" strokeLinecap="round" />
-          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-spec-mob)" />
-        </svg>
-      </div>
-
-      {/* ── Scroll indicator — desktop only ── */}
-      <div
-        ref={scrollIndRef}
-        aria-hidden
-        className="hero-desktop-scr hidden md:flex"
-        style={{
-          position: 'absolute',
-          left: 'calc(44% + 16px)',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          zIndex: 4,
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 0,
-          pointerEvents: 'none',
-        }}
-      >
-        {/* Vertical label */}
-        <p style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: '0.58rem',
-          fontWeight: 600,
-          letterSpacing: '0.24em',
-          textTransform: 'uppercase',
-          color: 'var(--color-ink)',
-          opacity: 0.45,
-          writingMode: 'vertical-rl',
-          transform: 'rotate(180deg)',
-          marginBottom: '14px',
-          lineHeight: 1,
-        }}>
-          Scroll Down to Pivot
-        </p>
-
-        {/* Animated line */}
-        <div style={{
-          width: '1px',
-          height: '52px',
-          background: `linear-gradient(to bottom, var(--color-ink), transparent)`,
-          opacity: 0.3,
-          transformOrigin: 'top',
-          animation: 'scroll-line-draw 1.2s ease-out forwards',
-          marginBottom: '6px',
-        }} />
-
-        {/* Mouse scroll icon — elegant 3D */}
-        <svg
-          width="24" height="42" viewBox="0 0 24 42" fill="none"
-          style={{
-            animation: 'mouse-body-scroll 2s ease-in-out infinite',
-            filter: 'drop-shadow(0 5px 12px rgba(10,33,31,0.28)) drop-shadow(0 1px 3px rgba(10,33,31,0.18))',
-          }}
-        >
-          <defs>
-            {/* Side-lit metal — bright left rim, mid surface, dark right */}
-            <linearGradient id="em-body" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.62)" />
-              <stop offset="10%"  stopColor="rgba(10,33,31,0.10)" />
-              <stop offset="40%"  stopColor="rgba(10,33,31,0.26)" />
-              <stop offset="72%"  stopColor="rgba(10,33,31,0.52)" />
-              <stop offset="100%" stopColor="rgba(10,33,31,0.78)" />
-            </linearGradient>
-            {/* Top-to-bottom depth */}
-            <linearGradient id="em-depth" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.20)" />
-              <stop offset="35%"  stopColor="rgba(255,255,255,0)" />
-              <stop offset="100%" stopColor="rgba(0,0,0,0.20)" />
-            </linearGradient>
-            {/* Top-left specular capsule */}
-            <radialGradient id="em-spec" cx="26%" cy="16%" r="36%">
-              <stop offset="0%"   stopColor="rgba(255,255,255,0.80)" />
-              <stop offset="60%"  stopColor="rgba(255,255,255,0.10)" />
-              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-            </radialGradient>
-            {/* Gold button-split accent */}
-            <linearGradient id="em-gold" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor="rgba(184,148,60,0)" />
-              <stop offset="25%"  stopColor="rgba(184,148,60,0.60)" />
-              <stop offset="75%"  stopColor="rgba(184,148,60,0.60)" />
-              <stop offset="100%" stopColor="rgba(184,148,60,0)" />
-            </linearGradient>
-          </defs>
-
-          {/* Offset shadow */}
-          <rect x="2.5" y="3.5" width="19" height="37" rx="9.5" fill="rgba(10,33,31,0.16)" />
-
-          {/* Body */}
-          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-body)" />
-          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-depth)" />
-
-          {/* Outer stroke */}
-          <rect x="1" y="1" width="22" height="40" rx="11"
-            stroke="rgba(10,33,31,0.42)" strokeWidth="0.9" fill="none" />
-
-          {/* Inner stroke — glass inner edge */}
-          <rect x="2" y="2" width="20" height="38" rx="10"
-            stroke="rgba(255,255,255,0.10)" strokeWidth="0.7" fill="none" />
-
-          {/* Left rim highlight */}
-          <rect x="2.4" y="5" width="1.2" height="30" rx="0.6" fill="rgba(255,255,255,0.42)" />
-
-          {/* Right shadow strip */}
-          <rect x="20.4" y="5" width="1.2" height="30" rx="0.6" fill="rgba(0,0,0,0.32)" />
-
-          {/* Button split — gold accent line */}
-          <line x1="2" y1="15" x2="22" y2="15" stroke="url(#em-gold)" strokeWidth="0.7" />
-
-          {/* Center divider (top buttons) */}
-          <line x1="12" y1="2" x2="12" y2="14.5"
-            stroke="rgba(10,33,31,0.16)" strokeWidth="0.7" />
-
-          {/* Scroll wheel — fixed on body, moves with mouse */}
-          <rect x="10" y="11" width="4" height="8" rx="2" fill="rgba(10,33,31,0.38)" />
-          <rect x="10" y="11" width="4" height="8" rx="2"
-            stroke="rgba(255,255,255,0.14)" strokeWidth="0.6" fill="none" />
-          <line x1="10.5" y1="12.5" x2="10.5" y2="17.5"
-            stroke="rgba(255,255,255,0.32)" strokeWidth="0.6" strokeLinecap="round" />
-
-          {/* Specular overlay */}
-          <rect x="1" y="1" width="22" height="40" rx="11" fill="url(#em-spec)" />
-        </svg>
       </div>
 
     </section>
