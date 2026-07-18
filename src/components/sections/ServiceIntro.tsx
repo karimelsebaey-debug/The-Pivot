@@ -10,7 +10,7 @@ export function ServiceIntro({ service }: { service: ServiceItem }) {
   const ref = useRef<HTMLElement>(null)
   const isDark = service.bg === '#0A211F'
 
-  const bgColor = service.introBg ?? (isDark ? '#0A211F' : '#F2F4E7')
+  const bgColor = service.introBg ?? (isDark ? '#0A211F' : '#DADECF')
   const isBgDark = bgColor === '#0A211F'
   const textColor = isBgDark ? '#F2F4E7' : '#0A211F'
   const mutedColor = isBgDark ? 'rgba(242,244,231,0.38)' : 'rgba(10,33,31,0.38)'

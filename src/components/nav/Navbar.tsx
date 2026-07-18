@@ -8,7 +8,7 @@ import { MegaDropdown } from './MegaDropdown'
 import { PillCTA } from '@/components/ui/PillCTA'
 import { SERVICE_CATEGORIES } from '@/lib/services-data'
 
-const LIGHT_BG_PAGES = ['/selected-work', '/perspectives', '/contact']
+const LIGHT_BG_PAGES = ['/selected-work', '/contact']
 
 const MOB_CAT_STYLE: Record<string, { bg: string; color: string }> = {
   'specialized-production': { bg: '#0A211F', color: '#F7F9F2' },

@@ -302,7 +302,7 @@ export function ContactPage() {
           >
             {[
               { label: 'Email',    value: 'hello@thepivot.co' },
-              { label: 'Response', value: 'Within 24 hours'   },
+              { label: 'Response', value: '3-5 business days'   },
             ].map(({ label, value }) => (
               <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <span
@@ -385,7 +385,7 @@ export function ContactPage() {
                   lineHeight: 1.7,
                 }}
               >
-                Expect a reply within 24 hours. We review every message personally.
+                Expect a reply within 3-5 business days. We review every message personally.
               </p>
             </div>
           ) : (
@@ -438,6 +438,7 @@ export function ContactPage() {
                   className="contact-submit"
                   style={{
                     display: 'inline-flex',
+                    alignSelf: 'flex-start',
                     alignItems: 'center',
                     gap: 12,
                     padding: '14px 28px',

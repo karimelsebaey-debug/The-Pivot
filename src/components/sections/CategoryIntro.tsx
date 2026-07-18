@@ -9,7 +9,7 @@ import { CategoryServiceSelector } from './CategoryServiceSelector'
 
 export function CategoryIntro({ category }: { category: ServiceCategory }) {
   const ref = useRef<HTMLElement>(null)
-  const bg = category.introBg ?? '#F2F4E7'
+  const bg = category.introBg ?? '#DADECF'
   const isDark = bg === '#0A211F'
 
   const textColor   = isDark ? '#F2F4E7' : '#0A211F'

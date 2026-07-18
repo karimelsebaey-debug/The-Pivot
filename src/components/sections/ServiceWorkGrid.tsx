@@ -136,7 +136,7 @@ export function ServiceWorkGrid({ service }: { service: ServiceItem }) {
   }, { scope: sectionRef })
 
   const introBg = service.introBg
-  const bg = introBg ?? (isDark ? '#0A211F' : '#F2F4E7')
+  const bg = introBg ?? (isDark ? '#0A211F' : '#DADECF')
   const sectionStyle: React.CSSProperties = {
     backgroundColor: bg,
     padding: introBg
