@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: NextRequest) {
   try {
@@ -14,16 +17,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 })
     }
 
-    // TODO: wire up an email service (e.g. Resend, Nodemailer, SendGrid)
-    // Example with Resend:
-    //   import { Resend } from 'resend'
-    //   const resend = new Resend(process.env.RESEND_API_KEY)
-    //   await resend.emails.send({
-    //     from: 'contact@thepivot.co',
-    //     to: 'hello@thepivot.co',
-    //     subject: `[The Pivot] ${intent} — ${name}`,
-    //     text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nIntent: ${intent}\n\n${message}`,
-    //   })
+    await resend.emails.send({
+      from: 'The Pivot <onboarding@resend.dev>',
+      to: 'kareemelsebaey@gmail.com',
+      replyTo: email,
+      subject: `[The Pivot] ${intent} — ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nIntent: ${intent}\n\n${message}`,
+    })
 
     return NextResponse.json({ ok: true })
   } catch {

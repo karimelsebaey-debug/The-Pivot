@@ -15,11 +15,16 @@ const vid = (path: string) => ({ url: `${CDN}/video/upload/${path}`, type: 'vide
 const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'app-design',
-    title: 'NEXSUS',
+    title: 'NEXUS',
     tags: 'Product Design, UX/UI',
-    description: 'A mobile-first app experience for NEXSUS, designed to engage, convert, and scale.',
-    main: img('v1784240782/the-pivot/card-grid/app_design/main-card.jpg'),
-    gallery: [img('v1784240780/the-pivot/card-grid/app_design/1.jpg')],
+    description: 'A mobile-first app experience for NEXUS Fit, designed to engage, convert, and scale.',
+    main: img('v1784387146/the-pivot/card-grid/app_design/main-card.jpg'),
+    gallery: [
+      img('v1784387128/the-pivot/card-grid/app_design/1.jpg'),
+      img('v1784387134/the-pivot/card-grid/app_design/2.jpg'),
+      img('v1784387139/the-pivot/card-grid/app_design/3.jpg'),
+      img('v1784387143/the-pivot/card-grid/app_design/4.jpg'),
+    ],
   },
   {
     slug: 'fast-food',
@@ -101,6 +106,7 @@ const CASE_STUDIES: CaseStudy[] = [
       img('v1784335398/the-pivot/card-grid/website/3.jpg'),
       img('v1784335400/the-pivot/card-grid/website/4.jpg'),
     ],
+    galleryAspects: ['4/3', '3/4', '3/4', '3/4'],
   },
   {
     slug: 'yogurt',

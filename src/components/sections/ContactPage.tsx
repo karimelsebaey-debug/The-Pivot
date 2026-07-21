@@ -301,7 +301,7 @@ export function ContactPage() {
             }}
           >
             {[
-              { label: 'Email',    value: 'hello@thepivot.co' },
+              { label: 'Email',    value: 'hello.thepivot@proton.me' },
               { label: 'Response', value: '3-5 business days'   },
             ].map(({ label, value }) => (
               <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>

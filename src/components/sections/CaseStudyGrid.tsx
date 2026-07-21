@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ArrowLeft, ArrowRight } from 'lucide-react'
+import { X } from 'lucide-react'
 
 type MediaItem = { url: string; type: 'image' | 'video' }
 
@@ -13,6 +13,10 @@ export type CaseStudy = {
   description: string
   main: MediaItem
   gallery: MediaItem[]
+  /** Optional per-tile aspect-ratio override (raw CSS ratio, e.g. '4/3'), one per gallery item. Defaults to '3/2'. */
+  galleryAspects?: string[]
+  /** Optional custom column layout: each inner array is a column of gallery indices, stacked top to bottom. Overrides the default single-row layout. */
+  galleryLayout?: number[][]
 }
 
 function Media({ item, className }: { item: MediaItem; className?: string }) {
@@ -22,41 +26,49 @@ function Media({ item, className }: { item: MediaItem; className?: string }) {
   return <img src={item.url} alt="" className={className} />
 }
 
-// Every 3rd tile spans both rows (tall); the rest are half-height and pair up
-// via dense packing — same rhythm as superside.com's two-row mosaic.
-function tileRowSpan(i: number): 1 | 2 {
-  return i % 3 === 0 ? 2 : 1
+type ModalZone = 'close' | 'media'
+
+// Native scrollbars aren't real DOM nodes — detect them by checking whether the
+// cursor sits inside the scrollbar-thickness band of a scrollable ancestor.
+function isOverScrollbar(e: React.MouseEvent): boolean {
+  let node = e.target as HTMLElement | null
+  while (node) {
+    const scrollbarW = node.offsetWidth - node.clientWidth
+    const scrollbarH = node.offsetHeight - node.clientHeight
+    if (scrollbarW > 0 || scrollbarH > 0) {
+      const rect = node.getBoundingClientRect()
+      const onVerticalTrack = scrollbarW > 0 && e.clientX >= rect.right - scrollbarW
+      const onHorizontalTrack = scrollbarH > 0 && e.clientY >= rect.bottom - scrollbarH
+      if (onVerticalTrack || onHorizontalTrack) return true
+    }
+    node = node.parentElement
+  }
+  return false
 }
 
-type ModalZone = 'left' | 'right' | 'close' | 'media'
-
-function CaseModal({ study, onClose }: { study: CaseStudy; onClose: () => void }) {
-  const scrollRef = useRef<HTMLDivElement>(null)
+function CaseModal({ study, onClose, initialPos }: { study: CaseStudy; onClose: () => void; initialPos: { x: number; y: number } | null }) {
   const badgeRef = useRef<HTMLDivElement>(null)
   const [zone, setZone] = useState<ModalZone>('close')
-  const canScroll = study.gallery.length > 3
 
-  const scrollBy = (dir: 1 | -1) => {
-    scrollRef.current?.scrollBy({ left: dir * 420, behavior: 'smooth' })
-  }
+  // Seed the badge at the click position immediately — otherwise it sits at
+  // (0,0) and the OS cursor stays visible until the user's first mousemove.
+  useEffect(() => {
+    if (!initialPos) return
+    const el = badgeRef.current
+    if (el) el.style.transform = `translate(${initialPos.x}px, ${initialPos.y}px) translate(-50%, -50%)`
+    const hitEl = document.elementFromPoint(initialPos.x, initialPos.y)
+    setZone(hitEl?.closest('[data-media]') ? 'media' : 'close')
+  }, [initialPos])
 
   const handleMove = (e: React.MouseEvent) => {
     const el = badgeRef.current
     if (el) el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
-
-    const w = window.innerWidth
-    let next: ModalZone
-    if (canScroll && e.clientX > w * 0.85) next = 'right'
-    else if (canScroll && e.clientX < w * 0.15) next = 'left'
-    else if ((e.target as Element).closest('[data-media]')) next = 'media'
-    else next = 'close'
-    if (next !== zone) setZone(next)
+    const isMedia = (e.target as Element).closest('[data-media]')
+    setZone(isMedia && !isOverScrollbar(e) ? 'media' : 'close')
   }
 
   const handleClick = (e: React.MouseEvent) => {
-    if (zone === 'right') scrollBy(1)
-    else if (zone === 'left') scrollBy(-1)
-    else if (zone === 'close' && !(e.target as Element).closest('[data-media]')) onClose()
+    if (zone === 'close') onClose()
   }
 
   return (
@@ -94,51 +106,64 @@ function CaseModal({ study, onClose }: { study: CaseStudy; onClose: () => void }
         <X size={16} />
       </button>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px]" style={{ padding: 'clamp(48px,6vw,96px) clamp(32px,5vw,64px) 0' }}>
-        <div
-          ref={scrollRef}
-          className="grid gap-3 overflow-x-auto"
-          style={{
-            gridAutoFlow: 'column dense',
-            gridTemplateRows: 'repeat(2, minmax(0, 1fr))',
-            gridAutoColumns: 'minmax(220px, 320px)',
-            height: 'min(58vh, 520px)',
-          }}
-        >
-          {study.gallery.map((item, i) => (
-            <div
-              key={i}
-              data-media
-              className="relative overflow-hidden rounded-lg"
-              style={{ gridRow: `span ${tileRowSpan(i)}` }}
-            >
-              <Media item={item} className="absolute inset-0 h-full w-full object-cover" />
-            </div>
-          ))}
-        </div>
+      <div
+        className="relative z-10 order-2 mx-auto w-full max-w-[1800px] overflow-y-auto md:order-1"
+        style={{ padding: 'clamp(48px,6vw,96px) clamp(32px,5vw,64px) 0', maxHeight: '64vh' }}
+      >
+        {study.galleryLayout ? (
+          // Custom column layout: each column stacks its listed gallery indices top to bottom.
+          <div className="flex items-start gap-3 overflow-x-auto">
+            {study.galleryLayout.map((column, colIdx) => (
+              <div key={colIdx} className="flex shrink-0 flex-col gap-3" style={{ width: 320 }}>
+                {column.map((itemIdx) => (
+                  <div
+                    key={itemIdx}
+                    data-media
+                    className="relative w-full overflow-hidden rounded-lg"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.04)', aspectRatio: study.galleryAspects?.[itemIdx] ?? '3/2' }}
+                  >
+                    <Media item={study.gallery[itemIdx]} className="absolute inset-0 h-full w-full object-cover" />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : (
+          // Single row, fixed-size tiles — overflows and scrolls horizontally rather than shrinking
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:overflow-x-auto">
+            {study.gallery.map((item, i) => (
+              <div
+                key={i}
+                data-media
+                className="relative w-full overflow-hidden rounded-lg md:w-auto md:shrink-0 md:h-[280px]"
+                style={{ backgroundColor: 'rgba(255,255,255,0.04)', aspectRatio: study.galleryAspects?.[i] ?? '3/2' }}
+              >
+                <Media item={item} className="absolute inset-0 h-full w-full object-cover" />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Zoned cursor badge: green scroll arrows at the edges, white Close over the backdrop */}
+      {/* Cursor badge: white Close bubble over the backdrop, hidden over media tiles */}
       <div
         ref={badgeRef}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[110] flex items-center justify-center rounded-full text-xs font-medium"
+        className="pointer-events-none fixed left-0 top-0 z-[110] flex h-18 w-18 items-center justify-center rounded-full text-xs font-medium"
         style={{
-          width: zone === 'close' ? 72 : 64,
-          height: zone === 'close' ? 72 : 64,
-          backgroundColor: zone === 'close' ? '#F2F4E7' : 'var(--color-accent)',
+          width: 72,
+          height: 72,
+          backgroundColor: '#F2F4E7',
           color: '#0A211F',
           opacity: zone === 'media' ? 0 : 1,
-          transition: 'opacity 0.2s ease, background-color 0.2s ease',
+          transition: 'opacity 0.2s ease',
           willChange: 'transform',
         }}
       >
-        {zone === 'left' && <ArrowLeft size={18} />}
-        {zone === 'right' && <ArrowRight size={18} />}
-        {zone === 'close' && 'Close'}
+        Close
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px]" style={{ padding: '0 clamp(32px,5vw,64px) clamp(16px,2vw,24px)' }}>
+      <div className="relative z-10 order-1 mx-auto w-full max-w-[1400px] md:order-2" style={{ padding: '0 clamp(32px,5vw,64px) clamp(16px,2vw,24px)' }}>
         <h2
           style={{
             fontFamily: 'var(--font-display)',
@@ -172,6 +197,7 @@ function CaseModal({ study, onClose }: { study: CaseStudy; onClose: () => void }
 
 export function CaseStudyGrid({ items }: { items: CaseStudy[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [openAt, setOpenAt] = useState<{ x: number; y: number } | null>(null)
   const active = activeIndex !== null ? items[activeIndex] : null
   const badgeRef = useRef<HTMLDivElement>(null)
 
@@ -194,12 +220,13 @@ export function CaseStudyGrid({ items }: { items: CaseStudy[] }) {
       {items.map((study, i) => (
         <button
           key={study.slug}
-          onClick={() => setActiveIndex(i)}
+          onClick={(e) => { setActiveIndex(i); setOpenAt({ x: e.clientX, y: e.clientY }) }}
           onMouseEnter={showBadge}
           onMouseMove={moveBadge}
           onMouseLeave={hideBadge}
           className="group relative aspect-[4/3] w-full cursor-none select-none overflow-hidden text-left md:aspect-square"
         >
+          <Media item={study.main} className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl brightness-75" />
           <Media item={study.main} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
           <div
             className="pointer-events-none absolute inset-0"
@@ -221,9 +248,11 @@ export function CaseStudyGrid({ items }: { items: CaseStudy[] }) {
       <div
         ref={badgeRef}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[90] flex h-16 w-16 items-center justify-center rounded-full text-[11px] font-medium text-white backdrop-blur-sm"
+        className="pointer-events-none fixed left-0 top-0 z-[90] flex h-18 w-18 items-center justify-center rounded-full text-xs font-medium text-white backdrop-blur-sm"
         style={{
-          backgroundColor: 'rgba(10,33,31,0.6)',
+          width: 72,
+          height: 72,
+          backgroundColor: 'rgba(10,33,31,0.4)',
           opacity: 0,
           transition: 'opacity 0.25s ease',
           willChange: 'transform',
@@ -233,7 +262,7 @@ export function CaseStudyGrid({ items }: { items: CaseStudy[] }) {
       </div>
 
       <AnimatePresence>
-        {active && <CaseModal study={active} onClose={() => setActiveIndex(null)} />}
+        {active && <CaseModal study={active} onClose={() => setActiveIndex(null)} initialPos={openAt} />}
       </AnimatePresence>
     </div>
   )

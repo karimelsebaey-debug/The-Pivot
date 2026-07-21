@@ -7,6 +7,61 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import { PillCTA } from '@/components/ui/PillCTA'
 
+const FOOTER_SERVICE_GROUPS = [
+  {
+    title: 'Creative design services',
+    href: '/capabilities/creative-design',
+    items: [
+      { label: 'Ad Creative', href: '/services/ad-creative' },
+      { label: 'Social Media Creative', href: '/services/social-media-creative' },
+      { label: 'Presentation Design', href: '/services/presentation-design' },
+      { label: 'Illustration Design', href: '/services/illustration-design' },
+      { label: 'Branding Services', href: '/services/branding-services' },
+      { label: 'Concept Creation', href: '/services/concept-creation' },
+      { label: 'Packaging & Merchandise Design', href: '/services/packaging-merchandise-design' },
+    ],
+  },
+  {
+    title: 'Specialized production services',
+    href: '/capabilities/specialized-production',
+    items: [
+      { label: 'Motion Design', href: '/services/motion-design' },
+      { label: 'Email Creation', href: '/services/email-creation' },
+      { label: 'Web Design', href: '/services/web-design' },
+      { label: 'Copywriting', href: '/services/copywriting' },
+      { label: 'Design Systems', href: '/services/design-systems' },
+      { label: 'Product Design', href: '/services/product-design' },
+      { label: 'Video Production', href: '/services/video-production' },
+    ],
+  },
+  {
+    title: 'AI services',
+    href: '/capabilities/ai-services',
+    items: [
+      { label: 'AI-Powered Creative', href: '/services/ai-powered-creative' },
+      { label: 'Automation', href: '/services/automation' },
+    ],
+    sub: {
+      title: 'Consultant services',
+      href: '/capabilities/consultant',
+      items: [
+        { label: 'Campaign Strategy', href: '/services/campaign-strategy' },
+        { label: 'Finance Expert', href: '/services/finance-expert' },
+        { label: 'Business Strategist', href: '/services/business-strategist' },
+        { label: 'Debt Recovery', href: '/services/debt-recovery' },
+      ],
+    },
+  },
+]
+
+const FOOTER_NAV_LINKS = [
+  { label: 'Home', href: '/' },
+  { label: 'Capabilities', href: '/capabilities/specialized-production' },
+  { label: 'Selected Work', href: '/selected-work' },
+  { label: 'Perspectives', href: '/perspectives' },
+  { label: 'Contact', href: '/contact' },
+]
+
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null)
   const headRef   = useRef<HTMLDivElement>(null)
@@ -138,6 +193,90 @@ export function Footer() {
           gap: 16,
         }}
       >
+        {/* Link columns — Services / Navigation, desktop only */}
+        <div
+          className="hidden md:grid"
+          style={{ width: '100%', gridTemplateColumns: '3fr 1.4fr', gap: 48, marginBottom: 56 }}
+        >
+          <div>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.15rem', color: '#F2F4E7', marginBottom: 32 }}>
+              Services
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+              {FOOTER_SERVICE_GROUPS.map((group) => (
+                <div key={group.title}>
+                  <Link
+                    href={group.href}
+                    className="footer-nav-link"
+                    style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: '#F2F4E7', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 16, textDecoration: 'none' }}
+                  >
+                    {group.title} <span aria-hidden>↗</span>
+                  </Link>
+                  <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {group.items.map((item) => (
+                      <li key={item.label}>
+                        <Link
+                          href={item.href}
+                          className="footer-nav-link"
+                          style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'rgba(242,244,231,0.55)', textDecoration: 'none' }}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  {group.sub && (
+                    <div style={{ marginTop: 28 }}>
+                      <Link
+                        href={group.sub.href}
+                        className="footer-nav-link"
+                        style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: '#F2F4E7', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 16, textDecoration: 'none' }}
+                      >
+                        {group.sub.title} <span aria-hidden>↗</span>
+                      </Link>
+                      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                        {group.sub.items.map((item) => (
+                          <li key={item.label}>
+                            <Link
+                              href={item.href}
+                              className="footer-nav-link"
+                              style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'rgba(242,244,231,0.55)', textDecoration: 'none' }}
+                            >
+                              {item.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.15rem', color: '#F2F4E7', marginBottom: 32 }}>
+              Navigation
+            </p>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: '#F2F4E7', marginBottom: 16 }}>
+              Main
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {FOOTER_NAV_LINKS.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="footer-nav-link"
+                    style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'rgba(242,244,231,0.55)', textDecoration: 'none' }}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         {/* Left: logo */}
         <div style={{ width: '100%', marginBottom: 16 }}>
           <Image
@@ -173,10 +312,10 @@ export function Footer() {
           {/* Nav links */}
           <nav style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 24 }}>
             {[
-              { label: 'Capabilities', href: '/capabilities/specialized-production' },
-              { label: 'Selected Work', href: '/selected-work' },
-              { label: 'Perspectives', href: '/perspectives' },
-              { label: 'Contact', href: '/contact' },
+              { label: 'Privacy policy', href: '/privacy-policy' },
+              { label: 'Terms of use', href: '/terms-of-use' },
+              { label: 'Status page', href: '/status' },
+              { label: 'DMCA', href: '/terms-of-use#dmca' },
             ].map((item) => (
               <Link
                 key={item.label}
