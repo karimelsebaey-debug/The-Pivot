@@ -30,11 +30,18 @@ const CARDS: Card[] = [
   { id: '12', type: 'image', src: '/images/loop/product-visuals.jpg',   label: 'Product Visuals' },
 ]
 
-const CARD_H = 280
-const GAP    = 12
-const ITEM_H = CARD_H + GAP
+const GAP = 12
 
-const TOTAL = (cards: Card[]) => cards.length * ITEM_H
+// Desktop columns mix square and tall-rectangle cards instead of a uniform
+// height — every 3rd card (index 1, 4, 7…) renders square.
+const SQUARE_H = 200
+const RECT_H   = 320
+function cardHeight(i: number) {
+  return i % 3 === 1 ? SQUARE_H : RECT_H
+}
+
+const TOTAL_MIXED = (cards: Card[]) =>
+  cards.reduce((sum, _, i) => sum + cardHeight(i) + GAP, 0)
 
 const CARD_W  = 130
 const H_GAP   = 10
@@ -141,11 +148,11 @@ interface ColumnProps {
 
 function InfiniteColumn({ cards, direction, speed, getScrollVelocity, className = '' }: ColumnProps) {
   const wrapRef   = useRef<HTMLDivElement>(null)
-  const offsetRef = useRef(direction === 'down' ? -TOTAL(cards) : 0)
+  const offsetRef = useRef(direction === 'down' ? -TOTAL_MIXED(cards) : 0)
   const lastRef   = useRef<number | null>(null)
 
   useEffect(() => {
-    const T = TOTAL(cards)
+    const T = TOTAL_MIXED(cards)
     const tick = (now: number) => {
       const delta = lastRef.current == null ? 16 : now - lastRef.current
       lastRef.current = now
@@ -169,19 +176,9 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity, className 
           <div
             key={`${card.id}-${i}`}
             className="relative w-full overflow-hidden rounded-2xl group"
-            style={{ height: CARD_H, marginBottom: GAP, background: '#0A211F' }}
+            style={{ height: cardHeight(i % cards.length), marginBottom: GAP, background: '#0A211F' }}
           >
             <CardMedia card={card} />
-            <div
-              className="absolute inset-0"
-              style={{ background: 'linear-gradient(to top, rgba(10,33,31,0.7) 0%, transparent 50%)' }}
-            />
-            <span
-              className="absolute bottom-3 left-3 font-mono uppercase"
-              style={{ fontSize: 9, letterSpacing: '0.22em', color: '#A8885A', opacity: 0.8 }}
-            >
-              {card.label}
-            </span>
           </div>
         ))}
       </div>
