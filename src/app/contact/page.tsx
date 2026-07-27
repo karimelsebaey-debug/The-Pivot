@@ -11,10 +11,9 @@ export default function Contact() {
   return (
     <>
       <Navbar />
-      <main>
-        <ContactPage />
-      </main>
+      <main style={{ minHeight: '100dvh' }} />
       <Footer />
+      <ContactPage />
     </>
   )
 }

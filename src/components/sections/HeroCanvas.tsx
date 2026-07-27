@@ -6,13 +6,20 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import { PillCTA } from '@/components/ui/PillCTA'
 import { TextColor } from '@/components/ui/text-color'
-import { HeroMobileDayCycle } from './HeroMobileDayCycle'
+import { HeroCanvasFrames } from './HeroCanvasFrames'
+import {
+  HERO_FRAME_URLS,
+  HERO_FRAME_COUNT,
+  HERO_MOBILE_URLS,
+  HERO_MOBILE_COUNT,
+  HERO_POSTER,
+} from '@/lib/hero-frames'
 
 const HEADER_H = 56
 const BG       = '#DADECF'
 
-/* One frozen NYC corner, sunrise → night — 14s dissolve loop */
-const HERO_VIDEO = 'https://res.cloudinary.com/dn21xgyhb/video/upload/q_auto,f_auto/v1783926102/the-pivot/hero/hero-day-cycle.mp4'
+/** Scroll runway height — spreads the frame sequence over ~3 screens. */
+const RUNWAY_VH = 300
 
 export function HeroCanvas() {
   const sectionRef   = useRef<HTMLElement>(null)
@@ -41,34 +48,17 @@ export function HeroCanvas() {
   }, { scope: sectionRef })
 
   return (
-    <section
-      ref={sectionRef}
-      style={{ position: 'relative', height: '100dvh', overflow: 'hidden', backgroundColor: BG }}
-    >
-      {/* ── Day-cycle media — sunrise → night, autoplay ── */}
+    <section ref={sectionRef} style={{ position: 'relative', height: `${RUNWAY_VH}vh` }}>
+    <div style={{ position: 'sticky', top: 0, height: '100dvh', overflow: 'hidden', backgroundColor: BG }}>
+      {/* ── Day-cycle media — sunrise → night, scroll-driven canvas frames ── */}
       <div ref={mediaWrapRef} className="hero-canvas-el" style={{ position: 'absolute', inset: 0 }}>
-        {isMobile ? (
-          <HeroMobileDayCycle />
-        ) : (
-          <video
-            src={HERO_VIDEO}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: '62% 16%',
-              transform: 'scale(1.06) translate(-1%, 2%)',
-            }}
-          />
-        )}
+        <HeroCanvasFrames
+          triggerRef={sectionRef}
+          frameUrls={isMobile ? HERO_MOBILE_URLS : HERO_FRAME_URLS}
+          frameCount={isMobile ? HERO_MOBILE_COUNT : HERO_FRAME_COUNT}
+          poster={HERO_POSTER}
+          focalX={isMobile ? 0.88 : 0.5}
+        />
       </div>
 
       {/* Left scrim — subtle, image stays fully visible, just enough for text legibility */}
@@ -127,7 +117,7 @@ export function HeroCanvas() {
         </div>
 
         <div ref={ctaRef} style={{ display: 'flex', alignItems: 'center', gap: '28px', flexShrink: 0 }}>
-          <PillCTA href="#work" label="See Our Work" />
+          <PillCTA href="/selected-work" label="See Our Work" />
           <Link
             href="/contact"
             style={{
@@ -193,10 +183,11 @@ export function HeroCanvas() {
           <em style={{ fontStyle: 'italic', fontWeight: 700, color: 'var(--color-accent)' }}>built to last, impossible to ignore.</em>
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <PillCTA href="#work" label="See Our Work" />
+          <PillCTA href="/selected-work" label="See Our Work" />
         </div>
       </div>
 
+    </div>
     </section>
   )
 }

@@ -14,7 +14,7 @@ const MOB_CAT_STYLE: Record<string, { bg: string; color: string }> = {
   'specialized-production': { bg: '#0A211F', color: '#F7F9F2' },
   'creative-design':        { bg: '#1A4A40', color: '#F7F9F2' },
   'ai-services':            { bg: '#8FCCA8', color: '#0A211F' },
-  'consultant':             { bg: '#C9A84C', color: '#0A211F' },
+  'consultant':             { bg: '#EAB840', color: '#0A211F' },
 }
 
 export function Navbar() {

@@ -123,7 +123,7 @@ export function Services() {
                           letterSpacing: '0.1em',
                           backgroundColor: 'transparent',
                           transition: 'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
-                          '--pill-hover-bg': isDark ? '#C9A84C' : '#0A211F',
+                          '--pill-hover-bg': isDark ? '#B98A55' : '#0A211F',
                           '--pill-hover-color': isDark ? '#0A211F' : '#F2F4E7',
                         } as React.CSSProperties}
                       >
@@ -140,7 +140,7 @@ export function Services() {
                     href="/contact"
                     className="btn-gold px-7 py-4 text-sm font-semibold uppercase tracking-widest"
                     style={{
-                      backgroundColor: isDark ? '#C9A84C' : '#0A211F',
+                      backgroundColor: isDark ? '#B98A55' : '#0A211F',
                       color: isDark ? '#0A211F' : '#F2F4E7',
                       letterSpacing: '0.12em',
                     }}

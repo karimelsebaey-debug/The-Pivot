@@ -87,7 +87,7 @@ export function CategoryHero({ category }: { category: ServiceCategory }) {
             style={{
               display: 'inline-flex', alignItems: 'center',
               padding: '4px 12px', borderRadius: 999,
-              border: '1px solid rgba(201,168,76,0.55)',
+              border: '1px solid rgba(185,138,85,0.55)',
               color: '#A8885A',
               fontFamily: 'var(--font-body)',
               fontSize: '0.68rem', fontWeight: 600,

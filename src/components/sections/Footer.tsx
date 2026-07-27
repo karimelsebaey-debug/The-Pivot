@@ -193,6 +193,84 @@ export function Footer() {
           gap: 16,
         }}
       >
+        {/* Link accordions — Services / Navigation, mobile only */}
+        <div className="md:hidden" style={{ width: '100%', marginBottom: 20 }}>
+          <details className="footer-accordion">
+            <summary style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: '#F2F4E7', padding: '12px 0', borderBottom: '1px solid rgba(242,244,231,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
+              Services <span aria-hidden className="chevron" style={{ transition: 'transform 0.2s ease' }}>⌄</span>
+            </summary>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: '14px 0 6px' }}>
+              {FOOTER_SERVICE_GROUPS.map((group) => (
+                <div key={group.title}>
+                  <Link
+                    href={group.href}
+                    className="footer-nav-link"
+                    style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: '#F2F4E7', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 12, textDecoration: 'none' }}
+                  >
+                    {group.title} <span aria-hidden>↗</span>
+                  </Link>
+                  <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    {group.items.map((item) => (
+                      <li key={item.label}>
+                        <Link
+                          href={item.href}
+                          className="footer-nav-link"
+                          style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'rgba(242,244,231,0.55)', textDecoration: 'none' }}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  {group.sub && (
+                    <div style={{ marginTop: 20 }}>
+                      <Link
+                        href={group.sub.href}
+                        className="footer-nav-link"
+                        style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: '#F2F4E7', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 12, textDecoration: 'none' }}
+                      >
+                        {group.sub.title} <span aria-hidden>↗</span>
+                      </Link>
+                      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                        {group.sub.items.map((item) => (
+                          <li key={item.label}>
+                            <Link
+                              href={item.href}
+                              className="footer-nav-link"
+                              style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'rgba(242,244,231,0.55)', textDecoration: 'none' }}
+                            >
+                              {item.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </details>
+
+          <details className="footer-accordion">
+            <summary style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', color: '#F2F4E7', padding: '12px 0', borderBottom: '1px solid rgba(242,244,231,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
+              Navigation <span aria-hidden className="chevron" style={{ transition: 'transform 0.2s ease' }}>⌄</span>
+            </summary>
+            <ul style={{ listStyle: 'none', padding: '14px 0 6px', margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
+              {FOOTER_NAV_LINKS.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="footer-nav-link"
+                    style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'rgba(242,244,231,0.55)', textDecoration: 'none' }}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </div>
+
         {/* Link columns — Services / Navigation, desktop only */}
         <div
           className="hidden md:grid"
@@ -278,29 +356,42 @@ export function Footer() {
         </div>
 
         {/* Left: logo */}
-        <div style={{ width: '100%', marginBottom: 16 }}>
+        <div className="flex justify-center md:justify-start mb-2 md:mb-4" style={{ width: '100%' }}>
           <Image
             src="/logo.png"
             alt="The Pivot"
             width={100}
             height={100}
+            className="w-[150px] h-[150px] md:w-[100px] md:h-[100px]"
             style={{ filter: 'brightness(0) invert(1)', opacity: 0.85 }}
           />
         </div>
 
-        {/* Bottom row: copyright + nav + icons */}
-        <div style={{
+        {/* Copyright — mobile only, tight under the logo (desktop keeps it in the bottom row) */}
+        <span className="md:hidden" style={{
+          display: 'block',
+          textAlign: 'center',
           width: '100%',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 16,
-          borderTop: '1px solid rgba(242,244,231,0.08)',
-          paddingTop: 16,
+          marginBottom: 12,
+          fontFamily: 'var(--font-body)',
+          fontSize: '0.9rem',
+          color: 'rgba(242,244,231,0.4)',
+          letterSpacing: '0.01em',
         }}>
-          {/* Copyright */}
-          <span style={{
+          © {new Date().getFullYear()} The Pivot. All rights reserved.
+        </span>
+
+        {/* Bottom row: copyright + nav + icons */}
+        <div
+          className="flex flex-col md:flex-row items-center text-center md:text-left justify-center md:justify-between gap-2.5 md:gap-4 pt-2.5 md:pt-4"
+          style={{
+            width: '100%',
+            flexWrap: 'wrap',
+            borderTop: '1px solid rgba(242,244,231,0.08)',
+          }}
+        >
+          {/* Copyright — desktop only here */}
+          <span className="hidden md:block" style={{
             fontFamily: 'var(--font-body)',
             fontSize: '0.9rem',
             color: 'rgba(242,244,231,0.4)',
@@ -310,7 +401,7 @@ export function Footer() {
           </span>
 
           {/* Nav links */}
-          <nav style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 24 }}>
+          <nav className="justify-center md:justify-start" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 24 }}>
             {[
               { label: 'Privacy policy', href: '/privacy-policy' },
               { label: 'Terms of use', href: '/terms-of-use' },
@@ -337,23 +428,24 @@ export function Footer() {
           </nav>
 
           {/* Social icons */}
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <div className="justify-center md:justify-start" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           {[
             { label: 'LinkedIn',  href: 'https://linkedin.com',  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
             { label: 'Facebook',  href: 'https://facebook.com',  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> },
             { label: 'Instagram', href: 'https://instagram.com', icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> },
             { label: 'YouTube',   href: 'https://youtube.com',   icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg> },
             { label: 'TikTok',    href: 'https://tiktok.com',    icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg> },
-          ].map(({ label, href, icon }) => (
+            { label: 'The Pivot', href: '/', bare: true, icon: <Image src="/pivot-icon.png" alt="" width={38} height={38} style={{ borderRadius: 8, display: 'block' }} /> },
+          ].map(({ label, href, icon, bare }) => (
             <a
               key={label}
               href={href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={href.startsWith('/') ? undefined : '_blank'}
+              rel={href.startsWith('/') ? undefined : 'noopener noreferrer'}
               aria-label={label}
-              className="footer-social-icon"
+              className={bare ? undefined : 'footer-social-icon'}
               style={{
-                border: '1px solid rgba(242,244,231,0.25)',
+                border: bare ? 'none' : '1px solid rgba(242,244,231,0.25)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -379,6 +471,24 @@ export function Footer() {
           .footer-social-icon:hover {
             border-color: rgba(242,244,231,0.8) !important;
             color: #F2F4E7 !important;
+          }
+        }
+        .footer-accordion summary {
+          list-style: none;
+        }
+        .footer-accordion summary::-webkit-details-marker {
+          display: none;
+        }
+        .footer-accordion[open] summary .chevron {
+          transform: rotate(180deg);
+        }
+        @media (max-width: 767px) {
+          .footer-social-icon {
+            color: #F2F4E7 !important;
+          }
+          .footer-social-icon svg {
+            width: 1.05rem !important;
+            height: 1.05rem !important;
           }
         }
       `}</style>
