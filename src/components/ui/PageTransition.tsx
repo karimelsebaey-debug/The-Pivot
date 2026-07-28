@@ -14,7 +14,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (prevPath.current === pathname) {
-      /* Initial load — preloader handles reveal, just ensure content visible */
+      /* Initial load — just ensure content is visible, no transition to run */
       gsap.set(contentRef.current, { autoAlpha: 1 })
       prevPath.current = pathname
       return

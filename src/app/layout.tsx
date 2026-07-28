@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
 import { Instrument_Serif, Inter_Tight, DM_Mono } from 'next/font/google'
 import { LenisProvider } from '@/lib/lenis'
-import { Preloader } from '@/components/ui/Preloader'
 import { PageTransition } from '@/components/ui/PageTransition'
-import { PAGE_CONTENT_ID } from '@/lib/utils'
 import './globals.css'
 
 const instrumentSerif = Instrument_Serif({
@@ -50,13 +48,10 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${interTight.variable} ${dmMono.variable}`}
       style={{ background: '#0A211F' }}
     >
-      <body>
-        <Preloader />
-        <main id={PAGE_CONTENT_ID} style={{ visibility: 'hidden' }}>
-          <LenisProvider>
-            <PageTransition>{children}</PageTransition>
-          </LenisProvider>
-        </main>
+      <body style={{ background: '#0A211F' }}>
+        <LenisProvider>
+          <PageTransition>{children}</PageTransition>
+        </LenisProvider>
       </body>
     </html>
   )
