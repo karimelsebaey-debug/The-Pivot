@@ -16,28 +16,32 @@ type Card = {
 }
 
 const CARDS: Card[] = [
-  { id: '1',  type: 'video', src: '/videos/loop/app-ad.mp4',        label: 'App Ad' },
-  { id: '2',  type: 'video', src: '/videos/loop/gourmet-ad.mp4',    label: 'Gourmet Ad' },
-  { id: '3',  type: 'video', src: '/videos/loop/dashboard-ad.mp4',  label: 'Dashboard Ad' },
-  { id: '4',  type: 'video', src: '/videos/loop/jewelry-ad.mp4',    label: 'Jewelry Ad' },
-  { id: '5',  type: 'video', src: '/videos/loop/saas-ad.mp4',       label: 'SaaS Ad' },
-  { id: '6',  type: 'video', src: '/videos/loop/sneakers-ad.mp4',   label: 'Sneakers Ad' },
-  { id: '7',  type: 'video', src: '/videos/loop/eyeliner-ad.mp4',   label: 'UGC Eyeliner' },
-  { id: '8',  type: 'video', src: '/videos/loop/fashion-ad.mp4',    label: 'Fashion Ad' },
-  { id: '9',  type: 'video', src: '/videos/loop/makeup-ad.mp4',     label: 'Unboxing Ad' },
-  { id: '10', type: 'video', src: '/videos/loop/website-ad.mp4',    label: 'Website Ad' },
-  { id: '11', type: 'image', src: '/images/loop/copywriting.jpg',       label: 'Copywriting' },
+  { id: '1',  type: 'image', src: '/images/loop/app-design-main.jpg',   label: 'App Design' },
+  { id: '2',  type: 'video', src: '/videos/loop/fast-food-2.mp4',       label: 'Fast Food Ad' },
+  { id: '3',  type: 'image', src: '/images/loop/ugc-unboxing-main.jpg', label: 'Unboxing' },
+  { id: '4',  type: 'image', src: '/images/loop/jewelry-brand-main.jpg', label: 'Jewelry Ad' },
+  { id: '5',  type: 'image', src: '/images/loop/saas-main.jpg',         label: 'SaaS Ad' },
+  { id: '6',  type: 'video', src: '/videos/loop/sneakers-ad.mp4',       label: 'Sneakers Ad' },
+  { id: '7',  type: 'video', src: '/videos/loop/eyeliner-ad.mp4',       label: 'UGC Eyeliner' },
+  { id: '8',  type: 'video', src: '/videos/loop/fashion-ad.mp4',        label: 'Fashion Ad' },
+  { id: '9',  type: 'video', src: '/videos/loop/makeup-ad.mp4',         label: 'Unboxing Ad' },
+  { id: '10', type: 'video', src: '/videos/loop/yogurt-1.mp4',          label: 'Yogurt Ad' },
+  { id: '11', type: 'video', src: '/videos/loop/illustration-3.mp4',    label: 'Illustration' },
   { id: '12', type: 'image', src: '/images/loop/product-visuals.jpg',   label: 'Product Visuals' },
 ]
 
 const GAP = 12
 
-// Desktop columns mix square and tall-rectangle cards instead of a uniform
-// height — every 3rd card (index 1, 4, 7…) renders square.
+// Desktop columns mix tall-rectangle and square-ish cards by SLOT position
+// (not by card identity), so a square never lands directly above/below
+// another square once cards are shuffled into columns — a tall RECT always
+// separates every square-class slot.
 const SQUARE_H = 200
 const RECT_H   = 320
+const SMALL_H  = 160
+const HEIGHT_PATTERN = [RECT_H, SQUARE_H, RECT_H, SMALL_H]
 function cardHeight(i: number) {
-  return i % 3 === 1 ? SQUARE_H : RECT_H
+  return HEIGHT_PATTERN[i % HEIGHT_PATTERN.length]
 }
 
 const TOTAL_MIXED = (cards: Card[]) =>
@@ -176,7 +180,11 @@ function InfiniteColumn({ cards, direction, speed, getScrollVelocity, className 
           <div
             key={`${card.id}-${i}`}
             className="relative w-full overflow-hidden rounded-2xl group"
-            style={{ height: cardHeight(i % cards.length), marginBottom: GAP, background: '#0A211F' }}
+            style={{
+              height: cardHeight(i % cards.length),
+              marginBottom: GAP,
+              background: '#0A211F',
+            }}
           >
             <CardMedia card={card} />
           </div>
@@ -332,11 +340,11 @@ export function VerticalLoopHero() {
           ref={bodyRef}
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(1.5rem, 2.6vw, 3rem)',
-            lineHeight: 1.25,
-            letterSpacing: '-0.02em',
+            fontSize: 'clamp(1.5rem, 2.4vw, 2.6rem)',
+            lineHeight: 1.35,
+            letterSpacing: '-0.015em',
             color: '#F2F4E7',
-            maxWidth: '20ch',
+            maxWidth: '30ch',
             marginBottom: '2.5rem',
           }}
         >
@@ -358,12 +366,18 @@ export function VerticalLoopHero() {
 
       {/* Right: carousel */}
       <div className="vlh-carousel" aria-hidden>
-        {isMobile ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, height: '100%', justifyContent: 'center' }}>
-            <HorizontalLoop cards={[...cols.col1, ...cols.col2, ...cols.col3]}                   speed={55} direction="left"  getScrollVelocity={getScrollVelocity} />
-            <HorizontalLoop cards={[...cols.col3, ...cols.col2, ...cols.col1].reverse()}         speed={45} direction="right" getScrollVelocity={getScrollVelocity} />
-          </div>
-        ) : (
+        {isMobile ? (() => {
+          // Disjoint halves — each card appears in exactly one row, so the
+          // two marquee rows never show the same image at the same time.
+          const allMobile = [...cols.col1, ...cols.col2, ...cols.col3]
+          const half = Math.ceil(allMobile.length / 2)
+          return (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, height: '100%', justifyContent: 'center' }}>
+              <HorizontalLoop cards={allMobile.slice(0, half)} speed={55} direction="left"  getScrollVelocity={getScrollVelocity} />
+              <HorizontalLoop cards={allMobile.slice(half)}    speed={45} direction="right" getScrollVelocity={getScrollVelocity} />
+            </div>
+          )
+        })() : (
           <div
             className="vlh-columns"
             style={{
