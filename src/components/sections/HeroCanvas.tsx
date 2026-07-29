@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '@/lib/gsap'
 import { PillCTA } from '@/components/ui/PillCTA'
-import { TextColor } from '@/components/ui/text-color'
 import { HeroCanvasFrames } from './HeroCanvasFrames'
 import {
   HERO_FRAME_URLS,
@@ -91,9 +90,12 @@ export function HeroCanvas() {
             lineHeight: 1.05,
             letterSpacing: '-0.02em',
             marginBottom: '1.5rem',
+            color: '#FAF8F1',
             textShadow: '0 2px 5px rgba(10,33,31,0.9), 0 10px 34px rgba(10,33,31,0.55)',
           }}>
-            <TextColor words={['The Turning', 'Point For Your', 'Creative Ambition.']} color="#FAF8F1" />
+            Built to last.
+            <br />
+            <em style={{ fontStyle: 'italic', color: 'var(--color-accent)' }}>Impossible to ignore.</em>
           </h1>
 
           <p ref={subRef} style={{
@@ -106,12 +108,11 @@ export function HeroCanvas() {
             color: 'rgba(250,248,241,0.95)',
             textShadow: '0 1px 4px rgba(10,33,31,0.9), 0 6px 22px rgba(10,33,31,0.5)',
           }}>
-            We transform ambitious ideas and needs into visual presence,
-            specialized services, and digital solutions —
+            Brand systems, digital products, and motion
             <br />
-            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontWeight: 700, fontSize: '1.3rem', color: 'var(--color-accent)' }}>
-              built to last, impossible to ignore.
-            </em>
+            for founders and modern brand teams building what&apos;s next.
+            <br />
+            Modular by design and elevated by AI.
           </p>
 
         </div>
@@ -167,8 +168,8 @@ export function HeroCanvas() {
           textShadow: '0 2px 5px rgba(10,33,31,0.9), 0 10px 34px rgba(10,33,31,0.55)',
           marginBottom: '0.75rem',
         }}>
-          The Turning Point For Your{' '}
-          <em style={{ fontStyle: 'italic', color: 'var(--color-accent)' }}>Creative Ambition.</em>
+          Built to last.{' '}
+          <em style={{ fontStyle: 'italic', color: 'var(--color-accent)' }}>Impossible to ignore.</em>
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
@@ -178,9 +179,10 @@ export function HeroCanvas() {
           textShadow: '0 1px 4px rgba(10,33,31,0.9), 0 6px 22px rgba(10,33,31,0.5)',
           marginBottom: '1.25rem',
         }}>
-          We transform ambitious ideas into visual presence and digital
-          solutions —{' '}
-          <em style={{ fontStyle: 'italic', fontWeight: 700, color: 'var(--color-accent)' }}>built to last, impossible to ignore.</em>
+          Brand systems, digital products, and motion
+          <br />
+          for founders and modern brand teams building what&apos;s next. Modular by design
+          and elevated by AI.
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <PillCTA href="/selected-work" label="See Our Work" />

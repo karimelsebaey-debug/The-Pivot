@@ -19,6 +19,7 @@ const FOOTER_SERVICE_GROUPS = [
       { label: 'Branding Services', href: '/services/branding-services' },
       { label: 'Concept Creation', href: '/services/concept-creation' },
       { label: 'Packaging & Merchandise Design', href: '/services/packaging-merchandise-design' },
+      { label: 'Campaign Strategy', href: '/services/campaign-strategy' },
     ],
   },
   {
@@ -45,7 +46,6 @@ const FOOTER_SERVICE_GROUPS = [
       title: 'Consultant services',
       href: '/capabilities/consultant',
       items: [
-        { label: 'Campaign Strategy', href: '/services/campaign-strategy' },
         { label: 'Finance Expert', href: '/services/finance-expert' },
         { label: 'Business Strategist', href: '/services/business-strategist' },
         { label: 'Debt Recovery', href: '/services/debt-recovery' },
@@ -57,7 +57,7 @@ const FOOTER_SERVICE_GROUPS = [
 const FOOTER_NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Capabilities', href: '/capabilities/specialized-production' },
-  { label: 'Selected Work', href: '/selected-work' },
+  { label: 'Concept Work', href: '/selected-work' },
   { label: 'Perspectives', href: '/perspectives' },
   { label: 'Contact', href: '/contact' },
 ]

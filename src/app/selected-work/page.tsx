@@ -4,7 +4,7 @@ import { CaseStudyGrid, type CaseStudy } from '@/components/sections/CaseStudyGr
 import { italicHeadingStyle } from '@/lib/inline-heading'
 
 export const metadata = {
-  title: 'Selected Work — THE PIVOT',
+  title: 'Concept Work — THE PIVOT',
   description: 'A curated view of our best work across motion, branding, web, and AI.',
 }
 
@@ -130,21 +130,35 @@ export default function SelectedWork() {
       <main style={{ minHeight: '100vh', backgroundColor: 'var(--color-bg)', paddingTop: '120px' }}>
         <div style={{ maxWidth: '1216px', margin: '0 auto', padding: '0 clamp(20px, 4vw, 64px)' }}>
 
-          <h2 style={{
-            fontFamily: 'var(--font-body)',
+          <h1 style={{
+            fontFamily: 'var(--font-display)',
             fontWeight: 400,
-            fontSize: 'clamp(1.5rem, 2.8vw, 2.5rem)',
-            lineHeight: 1.3,
+            fontSize: 'clamp(2rem, 4.5vw, 3.75rem)',
+            lineHeight: 1.1,
             letterSpacing: '-0.02em',
             color: 'var(--color-ink)',
+            textAlign: 'center',
+            maxWidth: '900px',
+            margin: '0 auto 1.5rem',
+          }}>
+            We help brands create standout brands, websites, apps, and campaigns
+          </h1>
+
+          <p style={{
+            fontFamily: 'var(--font-body)',
+            fontWeight: 400,
+            fontSize: 'clamp(1.1rem, 1.8vw, 1.375rem)',
+            lineHeight: 1.4,
+            letterSpacing: '-0.01em',
+            color: 'var(--color-ink-muted)',
             textAlign: 'center',
             maxWidth: '1100px',
             margin: '0 auto 4rem',
           }}>
-            We help the world&apos;s leading brands create standout brands, websites, apps, and campaigns
+            Self-initiated branding, web, and creative explorations created to demonstrate our thinking and capabilities.
             <br />
             <em style={italicHeadingStyle}>from strategy and design to motion, AI, and everything in between</em>
-          </h2>
+          </p>
 
         </div>
 
