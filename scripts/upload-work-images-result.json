@@ -1,0 +1,50 @@
+{
+  "ai-video-production": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026040/the-pivot/work/ai-video-production.jpg",
+    "publicId": "the-pivot/work/ai-video-production"
+  },
+  "brand-guidelines": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026041/the-pivot/work/brand-guidelines.jpg",
+    "publicId": "the-pivot/work/brand-guidelines"
+  },
+  "brand-illustrations": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026042/the-pivot/work/brand-illustrations.jpg",
+    "publicId": "the-pivot/work/brand-illustrations"
+  },
+  "brand-imagery": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026043/the-pivot/work/brand-imagery.jpg",
+    "publicId": "the-pivot/work/brand-imagery"
+  },
+  "campaign-concepts": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026044/the-pivot/work/campaign-concepts.jpg",
+    "publicId": "the-pivot/work/campaign-concepts"
+  },
+  "concept-creation": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026045/the-pivot/work/concept-creation.jpg",
+    "publicId": "the-pivot/work/concept-creation"
+  },
+  "data-visualization": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026045/the-pivot/work/data-visualization.jpg",
+    "publicId": "the-pivot/work/data-visualization"
+  },
+  "full-service-commercial": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026046/the-pivot/work/full-service-commercial.jpg",
+    "publicId": "the-pivot/work/full-service-commercial"
+  },
+  "motion-graphics": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026047/the-pivot/work/motion-graphics.jpg",
+    "publicId": "the-pivot/work/motion-graphics"
+  },
+  "social-content": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026048/the-pivot/work/social-content.jpg",
+    "publicId": "the-pivot/work/social-content"
+  },
+  "strategic-storytelling": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026049/the-pivot/work/strategic-storytelling.jpg",
+    "publicId": "the-pivot/work/strategic-storytelling"
+  },
+  "web-animations": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784026050/the-pivot/work/web-animations.jpg",
+    "publicId": "the-pivot/work/web-animations"
+  }
+}

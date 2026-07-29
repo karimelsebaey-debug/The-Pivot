@@ -1,0 +1,58 @@
+{
+  "website": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784335021/the-pivot/card-grid/website/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784335395/the-pivot/card-grid/website/1.jpg",
+        "type": "image",
+        "filename": "1.jpeg"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784335396/the-pivot/card-grid/website/2.jpg",
+        "type": "image",
+        "filename": "2.jpeg"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784335398/the-pivot/card-grid/website/3.jpg",
+        "type": "image",
+        "filename": "3.jpeg"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784335400/the-pivot/card-grid/website/4.jpg",
+        "type": "image",
+        "filename": "4.jpeg"
+      }
+    ]
+  },
+  "ugc_unboxing": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784288914/the-pivot/card-grid/ugc_unboxing/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240817/the-pivot/card-grid/ugc_unboxing/1.jpg",
+        "type": "image",
+        "filename": "1.jpeg"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1784288910/the-pivot/card-grid/ugc_unboxing/2.mp4",
+        "type": "video",
+        "filename": "2.mp4"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240820/the-pivot/card-grid/ugc_unboxing/3.jpg",
+        "type": "image",
+        "filename": "3.jpeg"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240821/the-pivot/card-grid/ugc_unboxing/4.jpg",
+        "type": "image",
+        "filename": "4.jpeg"
+      }
+    ]
+  }
+}

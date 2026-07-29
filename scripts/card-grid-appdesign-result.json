@@ -1,0 +1,23 @@
+{
+  "main": {
+    "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784387146/the-pivot/card-grid/app_design/main-card.jpg"
+  },
+  "gallery": [
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784387128/the-pivot/card-grid/app_design/1.jpg",
+      "name": "1"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784387134/the-pivot/card-grid/app_design/2.jpg",
+      "name": "2"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784387139/the-pivot/card-grid/app_design/3.jpg",
+      "name": "3"
+    },
+    {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784387143/the-pivot/card-grid/app_design/4.jpg",
+      "name": "4"
+    }
+  ]
+}

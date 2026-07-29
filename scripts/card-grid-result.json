@@ -1,0 +1,190 @@
+{
+  "app_design": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240782/the-pivot/card-grid/app_design/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240780/the-pivot/card-grid/app_design/1.jpg",
+        "type": "image"
+      }
+    ]
+  },
+  "fast_food": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240791/the-pivot/card-grid/fast_food/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240783/the-pivot/card-grid/fast_food/1.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1784240785/the-pivot/card-grid/fast_food/2.mp4",
+        "type": "video"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240789/the-pivot/card-grid/fast_food/3.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240790/the-pivot/card-grid/fast_food/4.jpg",
+        "type": "image"
+      }
+    ]
+  },
+  "illustration-design": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240801/the-pivot/card-grid/illustration-design/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240792/the-pivot/card-grid/illustration-design/1.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240793/the-pivot/card-grid/illustration-design/2.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1784240794/the-pivot/card-grid/illustration-design/3.mp4",
+        "type": "video"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240795/the-pivot/card-grid/illustration-design/4.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240796/the-pivot/card-grid/illustration-design/5.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240798/the-pivot/card-grid/illustration-design/6.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240799/the-pivot/card-grid/illustration-design/7.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240800/the-pivot/card-grid/illustration-design/8.jpg",
+        "type": "image"
+      }
+    ]
+  },
+  "jewelry_brand": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240810/the-pivot/card-grid/jewelry_brand/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240803/the-pivot/card-grid/jewelry_brand/1.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240804/the-pivot/card-grid/jewelry_brand/2.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240806/the-pivot/card-grid/jewelry_brand/3.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1784240808/the-pivot/card-grid/jewelry_brand/4.mp4",
+        "type": "video"
+      }
+    ]
+  },
+  "saas": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240816/the-pivot/card-grid/saas/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240812/the-pivot/card-grid/saas/1.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240813/the-pivot/card-grid/saas/2.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240815/the-pivot/card-grid/saas/3.jpg",
+        "type": "image"
+      }
+    ]
+  },
+  "ugc_unboxing": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240822/the-pivot/card-grid/ugc_unboxing/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240817/the-pivot/card-grid/ugc_unboxing/1.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1784240818/the-pivot/card-grid/ugc_unboxing/2.mp4",
+        "type": "video"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240820/the-pivot/card-grid/ugc_unboxing/3.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240821/the-pivot/card-grid/ugc_unboxing/4.jpg",
+        "type": "image"
+      }
+    ]
+  },
+  "website": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240827/the-pivot/card-grid/website/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240823/the-pivot/card-grid/website/1.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240825/the-pivot/card-grid/website/2.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240826/the-pivot/card-grid/website/3.jpg",
+        "type": "image"
+      }
+    ]
+  },
+  "yogurt": {
+    "main": {
+      "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240833/the-pivot/card-grid/yogurt/main-card.jpg",
+      "type": "image"
+    },
+    "gallery": [
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/video/upload/v1784240828/the-pivot/card-grid/yogurt/1.mp4",
+        "type": "video"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240830/the-pivot/card-grid/yogurt/2.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240831/the-pivot/card-grid/yogurt/3.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://res.cloudinary.com/dn21xgyhb/image/upload/v1784240832/the-pivot/card-grid/yogurt/4.jpg",
+        "type": "image"
+      }
+    ]
+  }
+}

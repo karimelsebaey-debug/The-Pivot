@@ -44,3 +44,7 @@ next-env.d.ts
 screenshot_*.png
 screenshot_*.jpg
 public/tower_reference.jpg
+
+# local tooling state (Serena LSP config, graphify analysis cache)
+/.serena/
+/graphify-out/
