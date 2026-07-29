@@ -27,9 +27,13 @@ const dmMono = DM_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.thepivot.online'),
   title: 'THE PIVOT — The Turning Point For Your Creative Ambition',
   description:
     'A full-service creative platform. We deliver impact, not files.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'THE PIVOT',
     description: 'The Turning Point For Your Creative Ambition.',
