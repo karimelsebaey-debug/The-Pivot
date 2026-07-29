@@ -28,7 +28,7 @@ const FOOTER_SERVICE_GROUPS = [
     items: [
       { label: 'Motion Design', href: '/services/motion-design' },
       { label: 'Email Creation', href: '/services/email-creation' },
-      { label: 'Web Design', href: '/services/web-design' },
+      { label: 'Web Design and Development', href: '/services/web-design' },
       { label: 'Copywriting', href: '/services/copywriting' },
       { label: 'Design Systems', href: '/services/design-systems' },
       { label: 'Product Design', href: '/services/product-design' },

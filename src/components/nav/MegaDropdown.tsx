@@ -116,7 +116,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 const DESC_MAP: Record<string, string> = {
   'motion-design':         'Animated social ads · Explainer animations · UI micro-animations',
   'email-creation':        'Email templates · Sequences · Newsletter design',
-  'web-design':            'Portfolio · Landing page · E-commerce design',
+  'web-design':            'Landing pages · E-commerce · Performance-tuned interactive builds',
   'copywriting':           'Ad copy · Web & landing page copy · SEO blog articles',
   'design-systems':        'Design token system · Component library · UI kit',
   'product-design':        'UX/UI design · Prototypes · MVP design',
@@ -126,7 +126,7 @@ const DESC_MAP: Record<string, string> = {
   'illustration-design':   'Brand illustrations · Iconography · Storyboarding',
   'branding-services':     'Logo design · Brand identity kit · Guidelines',
   'concept-creation':      'Campaign concepts · Big ideas · Creative briefs',
-  'ai-powered-creative':   'Brand image library · AI character development · Key art',
+  'ai-powered-creative':   'UGC & AI Avatar Content · Multilingual voiceover · Brand image library',
   'automation':            'Content automation · Reporting pipelines · Repurposing',
   'campaign-strategy':     'Creative strategy · Campaign concepts · Multi-channel',
   'finance-expert':        'P&L analysis · Cash flow · Financial health assessment',

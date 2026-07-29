@@ -59,7 +59,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'jewelry-brand',
     title: 'Luminaire',
-    tags: 'Video Production',
+    tags: 'Video Production, AI-Powered Creative',
     description: 'Elevated brand identity and video production for the Luminaire jewelry label.',
     main: img('v1784240810/the-pivot/card-grid/jewelry_brand/main-card.jpg'),
     gallery: [
@@ -84,7 +84,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'ugc-unboxing',
     title: 'Lumière Collection',
-    tags: 'Video Production, Social Media Creative',
+    tags: 'Video Production, Social Media Creative, AI-Powered Creative',
     description: 'Authentic unboxing content for the Lumière Collection, built for organic reach.',
     main: img('v1784288914/the-pivot/card-grid/ugc_unboxing/main-card.jpg'),
     gallery: [
@@ -111,7 +111,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'yogurt',
     title: 'Field & Forage',
-    tags: 'Branding Services, Motion Design',
+    tags: 'Branding Services, Motion Design, AI-Powered Creative',
     description: 'Fresh brand identity and motion for the Field & Forage yogurt line.',
     main: img('v1784240833/the-pivot/card-grid/yogurt/main-card.jpg'),
     gallery: [
