@@ -54,9 +54,11 @@ export function Navbar() {
     <header
       style={{
         height: 'var(--header-height)',
-        backgroundColor: scrolled ? '#0A211F' : 'transparent',
-        backdropFilter: 'none',
-        WebkitBackdropFilter: 'none',
+        backgroundColor: dropdownOpen ? 'rgba(10,33,31,0.55)' : scrolled ? '#0A211F' : 'transparent',
+        backdropFilter: dropdownOpen ? 'blur(12px)' : 'none',
+        WebkitBackdropFilter: dropdownOpen ? 'blur(12px)' : 'none',
+        transform: 'translateZ(0)',
+        willChange: 'backdrop-filter',
         borderBottom: scrolled ? '1px solid rgba(246,249,240,0.12)' : '1px solid transparent',
         color: (isLightBg && !scrolled) ? '#0A211F' : '#f6f9f0',
         transition: `background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out`,
@@ -103,7 +105,7 @@ export function Navbar() {
           >
             <button
               className="flex items-center gap-1 text-sm link-underline link-dot"
-              style={{ transition: `color var(--t-fast) var(--ease)` }}
+              style={{ transition: `color var(--t-fast) var(--ease)`, fontWeight: 700 }}
               aria-expanded={dropdownOpen}
             >
               Capabilities
@@ -130,7 +132,8 @@ export function Navbar() {
           </div>
 
           {[
-            { label: 'Selected Work', href: '/selected-work' },
+            { label: 'Concept Work', href: '/selected-work' },
+            { label: 'Consultant', href: '/capabilities/consultant' },
             { label: 'Perspectives', href: '/perspectives' },
             { label: "Let's Talk", href: '/contact' },
           ].map((item) => (
@@ -138,7 +141,7 @@ export function Navbar() {
               key={item.label}
               href={item.href}
               className="text-sm link-underline link-dot"
-              style={{ transition: `color var(--t-fast) var(--ease)` }}
+              style={{ transition: `color var(--t-fast) var(--ease)`, fontWeight: 700 }}
             >
               {item.label}
             </Link>
@@ -189,7 +192,7 @@ export function Navbar() {
         <div
           className="md:hidden fixed inset-0 overflow-y-auto"
           style={{
-            backgroundColor: 'var(--color-bg)',
+            backgroundColor: '#F5F4EE',
             color: 'var(--color-ink)',
             zIndex: 200,
             animation: 'fade-in 0.22s var(--ease) forwards',
@@ -198,7 +201,7 @@ export function Navbar() {
           {/* Sticky header row */}
           <div style={{
             position: 'sticky', top: 0,
-            backgroundColor: 'var(--color-bg)',
+            backgroundColor: '#F5F4EE',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             height: 'var(--header-height)',
             padding: '0 var(--container-px)',
@@ -244,7 +247,7 @@ export function Navbar() {
               }}
             >
               <span style={{
-                fontFamily: 'var(--font-display)', fontSize: '1.4rem',
+                fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 700,
                 letterSpacing: '-0.01em', color: 'var(--color-ink)',
               }}>
                 Capabilities
@@ -258,7 +261,7 @@ export function Navbar() {
             </button>
 
             {/* Service categories — accordion */}
-            {capOpen && SERVICE_CATEGORIES.map((cat) => {
+            {capOpen && SERVICE_CATEGORIES.filter((cat) => cat.slug !== 'consultant').map((cat) => {
               const isOpen = openCats.includes(cat.slug)
               return (
                 <div key={cat.slug} style={{ borderBottom: '1px solid var(--color-border)' }}>
@@ -340,7 +343,8 @@ export function Navbar() {
 
             <div style={{ borderTop: '1px solid rgba(10,33,31,0.15)', paddingTop: 8, marginTop: 8 }}>
               {[
-                { label: 'Selected Work', href: '/selected-work' },
+                { label: 'Concept Work', href: '/selected-work' },
+                { label: 'Consultant', href: '/capabilities/consultant' },
                 { label: 'Perspectives', href: '/perspectives' },
                 { label: "Let's Talk", href: '/contact' },
               ].map((item) => (
@@ -352,7 +356,7 @@ export function Navbar() {
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                     padding: '16px 0', borderBottom: '1px solid var(--color-border)',
                     textDecoration: 'none', color: 'var(--color-ink)',
-                    fontFamily: 'var(--font-display)', fontSize: '1.4rem', letterSpacing: '-0.01em',
+                    fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 700, letterSpacing: '-0.01em',
                   }}
                 >
                   {item.label}

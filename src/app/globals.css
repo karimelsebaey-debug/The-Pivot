@@ -233,7 +233,7 @@ html { scrollbar-width: thin; scrollbar-color: #0A211F transparent; }
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 7px 6px;
+  padding: 12px 10px;
   border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.18s var(--ease), transform 0.18s var(--ease);

@@ -141,7 +141,8 @@ const COL_STYLE: Record<string, { bg: string; color: string }> = {
   'consultant':             { bg: '#EAB840', color: '#0A211F' },
 }
 
-const COLUMNS = SERVICE_CATEGORIES.map(cat => ({
+const COLUMNS = SERVICE_CATEGORIES.filter(cat => cat.slug !== 'consultant').map(cat => ({
+  slug:     cat.slug,
   label:    cat.title,
   href:     `/capabilities/${cat.slug}`,
   bg:       COL_STYLE[cat.slug]?.bg    ?? '#0A211F',
@@ -172,15 +173,16 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
     >
       <div
         style={{
-          backgroundColor: 'var(--color-bg)',
+          backgroundColor: '#F5F4EE',
           borderBottom: '1px solid var(--color-border)',
           boxShadow: '0 32px 64px rgba(10,33,31,0.10)',
+          minHeight: 'calc(100vh - var(--header-height))',
           maxHeight: 'calc(100vh - var(--header-height))',
           overflowY: 'auto',
         }}
       >
         <div
-          className="grid grid-cols-4"
+          className="grid grid-cols-3"
           style={{
             maxWidth: '1440px',
             margin: '0 auto',
@@ -191,7 +193,7 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
             <div
               key={col.label}
               style={{
-                padding: '4px 16px 12px',
+                padding: '8px 20px 16px',
                 borderRight: '1px solid var(--color-border)',
               }}
               className="last:border-r-0"
@@ -204,10 +206,10 @@ export function MegaDropdown({ onMouseEnter, onMouseLeave }: Props) {
                   backgroundColor: col.bg,
                   color: col.color,
                   borderColor: 'transparent',
-                  fontFamily: 'var(--font-body)',
-                  fontStyle: 'normal',
-                  fontWeight: 600,
-                  fontSize: '0.8rem',
+                  fontFamily: 'var(--font-display)',
+                  fontStyle: 'italic',
+                  fontWeight: 400,
+                  fontSize: '0.95rem',
                   padding: '6px 14px',
                   whiteSpace: 'nowrap',
                 }}

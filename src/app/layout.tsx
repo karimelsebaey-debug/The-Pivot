@@ -38,7 +38,31 @@ export const metadata: Metadata = {
     title: 'THE PIVOT',
     description: 'The Turning Point For Your Creative Ambition.',
     siteName: 'THE PIVOT',
+    url: '/',
+    type: 'website',
+    images: [
+      {
+        url: '/preloader-bg.jpg',
+        width: 2752,
+        height: 1536,
+        alt: 'THE PIVOT — creative agency',
+      },
+    ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'THE PIVOT',
+    description: 'The Turning Point For Your Creative Ambition.',
+    images: ['/preloader-bg.jpg'],
+  },
+}
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'THE PIVOT',
+  url: 'https://www.thepivot.online',
+  logo: 'https://www.thepivot.online/logo.png',
 }
 
 export default function RootLayout({
@@ -53,6 +77,10 @@ export default function RootLayout({
       style={{ background: '#0A211F' }}
     >
       <body style={{ background: '#0A211F' }}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <LenisProvider>
           <PageTransition>{children}</PageTransition>
         </LenisProvider>
