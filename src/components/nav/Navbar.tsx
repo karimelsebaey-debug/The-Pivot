@@ -57,8 +57,6 @@ export function Navbar() {
         backgroundColor: dropdownOpen ? 'rgba(10,33,31,0.55)' : scrolled ? '#0A211F' : 'transparent',
         backdropFilter: dropdownOpen ? 'blur(12px)' : 'none',
         WebkitBackdropFilter: dropdownOpen ? 'blur(12px)' : 'none',
-        transform: 'translateZ(0)',
-        willChange: 'backdrop-filter',
         borderBottom: scrolled ? '1px solid rgba(246,249,240,0.12)' : '1px solid transparent',
         color: (isLightBg && !scrolled) ? '#0A211F' : '#f6f9f0',
         transition: `background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out`,
