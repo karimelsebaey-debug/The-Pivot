@@ -694,12 +694,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         heroImage: img('ai-powered-creative', 'Main%20Page%20Star.jpg'),
         mobileHeroImage: `${CDN}/image/upload/q_auto,f_auto/the-pivot/mobile/ai-powered-creative.jpg`,
         mobileObjectPosition: '75% 45%',
-        videos: [
-          { src: vid('ai-powered-creative', 'AI%20Video%20Production.mp4'), label: 'AI Video Production' },
-          { src: vid('ai-powered-creative', 'Brand%20imagery.mp4'), label: 'Brand Imagery' },
-          { src: vid('ai-powered-creative', 'Image%20enhancements.mp4'), label: 'Image Enhancements' },
-          { src: vid('ai-powered-creative', 'Translation%20and%20transcreation.mp4'), label: 'Translation & Transcreation' },
-        ],
         images: [
           { src: img('ai-powered-creative', 'Avatar%20and%20voice%20cloning.jpg'), label: 'Avatar & Voice Cloning' },
           { src: img('ai-powered-creative', 'Character%20development.jpg'), label: 'Character Development' },
